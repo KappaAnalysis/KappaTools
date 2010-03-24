@@ -2,3 +2,5 @@
 #include "CutGroup.h"
 #include "NoneCut.h"
 #include "ExistenceCut.h"
+#include "PtCut.h"
+#include "EtaCut.h"
