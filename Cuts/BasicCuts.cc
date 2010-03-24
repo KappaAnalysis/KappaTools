@@ -5,3 +5,4 @@
 #include "PtCut.h"
 #include "EtaCut.h"
 #include "InvariantMassCut.h"
+#include "DeltaRCut.h"
