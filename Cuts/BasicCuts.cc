@@ -7,3 +7,4 @@
 #include "InvariantMassCut.h"
 #include "DeltaRCut.h"
 #include "ChargeCut.h"
+#include "GoodTracksFractionCut.h"
