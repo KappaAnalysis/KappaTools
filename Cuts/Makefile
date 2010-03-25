@@ -27,7 +27,7 @@ SOFLAGS       = -shared
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-default : CutFlow.o BasicCuts.o EventSelectionCuts.o
+default : CutFlow.o BasicCuts.o EventSelectionCuts.o VariousCuts.o
 #MuonCuts.o KinematicCuts.o TriggerCuts.o BalancePtCut.o BalancePhiCut.o L1Cut.o GoodTracksFractionCut.o VertexNdofCut.o METoverEtCut.o
 #default : BaseCut.o CutFlow.o MuonCuts.o KinematicCuts.o TriggerCuts.o BalancePtCut.o BalancePhiCut.o L1Cut.o GoodTracksFractionCut.o VertexNdofCut.o METoverEtCut.o
 debug   :
