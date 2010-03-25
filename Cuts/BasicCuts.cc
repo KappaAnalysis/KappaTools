@@ -6,3 +6,4 @@
 #include "EtaCut.h"
 #include "InvariantMassCut.h"
 #include "DeltaRCut.h"
+#include "ChargeCut.h"
