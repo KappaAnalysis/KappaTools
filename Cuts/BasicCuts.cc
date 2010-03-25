@@ -8,3 +8,4 @@
 #include "DeltaRCut.h"
 #include "ChargeCut.h"
 #include "GoodTracksFractionCut.h"
+#include "L1TriggerCut.h"
