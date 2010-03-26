@@ -28,7 +28,7 @@ SOFLAGS       = -shared
 #------------------------------------------------------------------------------
 
 #default : BasePlots.o StandardPlots.o MuonPlots.o TauPlots.o ZtautauMuJetPlots.o JetPlots.o
-default : BasePlot.o
+default : BasePlot.o StandardP4Plots.o
 debug   :
 
 all     : default
