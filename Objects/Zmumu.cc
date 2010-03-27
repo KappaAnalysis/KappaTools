@@ -5,7 +5,7 @@ RMLV KappaTools::ZmumuObjects<JetType>::getDiMuP4()
 {
 	if (!muon1 || !muon2)
 		return RMLV();
-	return (muon1->p4+muon2->p4);
+	return ((RMLV)(muon1->p4)+(RMLV)(muon2->p4));
 }
 
 template <typename JetType>
@@ -53,13 +53,13 @@ void KappaTools::ZmumuObjects<JetType>::setMuons(KDataMuon * muon1_, KDataMuon *
 	recalcP4();
 }
 
-/*
 template <typename JetType>
 void KappaTools::ZmumuObjects<JetType>::setRJet(JetType * rjet_)
 {
 	rjet = rjet_;
 }
 
+/*
 template <typename JetType>
 void KappaTools::ZmumuObjects<JetType>::setMET(MTAPFMET * met_)
 {
@@ -91,13 +91,11 @@ KDataMuon * KappaTools::ZmumuObjects<JetType>::getMuon2()
 	return muon2;
 }
 
-/*
 template <typename JetType>
 JetType * KappaTools::ZmumuObjects<JetType>::getRJet()
 {
 	return rjet;
 }
-*/
 
 template <typename JetType>
 KDataVertex * KappaTools::ZmumuObjects<JetType>::getPV()
@@ -106,3 +104,4 @@ KDataVertex * KappaTools::ZmumuObjects<JetType>::getPV()
 }
 
 //template class KappaTools::ZmumuObjects<MTAPFJet>;
+template class KappaTools::ZmumuObjects<KDataJet>;

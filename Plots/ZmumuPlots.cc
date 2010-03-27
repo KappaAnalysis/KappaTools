@@ -25,7 +25,7 @@ KappaTools::ZmumuPlots<JetType>::ZmumuPlots(TDirectory * tmpFile, TString direct
 	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1", "");
 	muon2_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon2", "");
 
-	//jet_plots				= new MTA::StandardJetPlots<MTAPFJet>(tmpDirectory, "jet", "");
+	jet_plots					= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet", "");
 }
 
 template <typename JetType>
@@ -44,20 +44,18 @@ void KappaTools::ZmumuPlots<JetType>::process(KappaTools::ZmumuObjects<JetType> 
 	muons_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
 	muons_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
 
-	/*
 	if (zmumu->getRJet())
 	{
 		zjet_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->p4, zmumu->getRJet()->p4), weight);
 		zjet_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4, zmumu->getRJet()->p4), weight);
 	}
-	*/
 	
 	muons_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
 	muons_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
 	muon1_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
 	muon2_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
 
-	//jet_plots->process(zmumu->getRJet(), zmumu->getPV(), weight);
+	jet_plots->process(zmumu->getRJet(), zmumu->getPV(), weight);
 }
 
 template <typename JetType>
@@ -67,4 +65,4 @@ void KappaTools::ZmumuPlots<JetType>::final()
 }
 
 //template class KappaTools::ZmumuPlots<MTAPFJet>;
-
+template class KappaTools::ZmumuPlots<KDataJet>;

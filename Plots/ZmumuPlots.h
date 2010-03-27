@@ -6,7 +6,7 @@
 #include "TDirectory.h"
 #include "BasePlot.h"
 #include "MuonPlots.h"
-//#include "JetPlots.h"
+#include "JetPlots.h"
 
 #include "DataFormats/interface/KMuon.h"
 #include "../Objects/Zmumu.h"
@@ -27,7 +27,7 @@ namespace KappaTools
 			StandardMuonPlots * muon1_plots;
 			StandardMuonPlots * muon2_plots;
 
-			//StandardJetPlots<JetType> * jet_plots;
+			StandardJetPlots<JetType> * jet_plots;
 		public:
 			ZmumuPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
 

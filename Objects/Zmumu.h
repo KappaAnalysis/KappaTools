@@ -14,7 +14,7 @@ namespace KappaTools
 		private:
 			void printMuonInformation(KDataMuon * muon);
 			KDataMuon * muon1, * muon2;
-			//JetType * rjet;	// recoil jet
+			JetType * rjet;	// recoil jet
 			//MTAPFMET * met;
 			//MTATrigger * trigger;
 			KDataVertex * primaryvertex;
@@ -26,18 +26,18 @@ namespace KappaTools
 			RMLV getDiMu() { return getDiMuP4(); };
 			
 			void setMuons(KDataMuon * muon1, KDataMuon * muon2);
-			//void setRJet(JetType * rjet);
+			void setRJet(JetType * rjet);
 			//void setMET(MTAPFMET * met);
 			//void setTrigger(MTATrigger * trigger);
 			void setPV(KDataVertex * primaryvertex);
 			
 			KDataMuon * getMuon1();
 			KDataMuon * getMuon2();
-			//JetType * getRJet();
+			JetType * getRJet();
 			KDataVertex * getPV();
 			
 			//ZmumuObjects() : muon1(0), muon2(0), rjet(0), met(0), trigger(0), primaryvertex(0) {};
-			ZmumuObjects() : muon1(0), muon2(0), primaryvertex(0) {};
+			ZmumuObjects() : muon1(0), muon2(0), rjet(0), primaryvertex(0) {};
 	};
 }
 
