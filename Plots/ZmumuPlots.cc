@@ -66,3 +66,4 @@ void KappaTools::ZmumuPlots<JetType>::final()
 
 //template class KappaTools::ZmumuPlots<MTAPFJet>;
 template class KappaTools::ZmumuPlots<KDataJet>;
+template class KappaTools::ZmumuPlots<KDataPFJet>;

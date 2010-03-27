@@ -17,7 +17,6 @@ namespace KappaTools
 			TH1D * jet_pt, * jet_pt_low, * jet_pt_full;
 			TH1D * jet_eta, * jet_eta_zoom, * jet_phi;
 
-			TH1D * charge;
 			TH1D * n90;
 			TH1D * nConstituents;
 			TH1D * emFraction, * hadFraction;
