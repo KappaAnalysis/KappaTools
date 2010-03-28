@@ -16,19 +16,20 @@ namespace KappaTools
 		public:
 			EtaCut();
 			EtaCut(T * tmpObj);
-			
+
 			void setPointer(T * tmpObj);
-				
+
+			void setCut(double eta_max_);
 			void setMinCut(double eta_min_);
 			void setMaxCut(double eta_max_);
-			
+
 			virtual bool getInternalDecision();
 			double getDecisionValue();
 	};
 
 	template <typename T>
 	EtaCut<T>::EtaCut()	: BaseCut("eta cut"), obj(0), eta_min(0.), eta_max(1e6) {}
-	
+
 	template <typename T>
 	EtaCut<T>::EtaCut(T * tmpObj) : BaseCut("eta cut"), obj(tmpObj), eta_min(0.), eta_max(1e6) {}
 
@@ -37,13 +38,20 @@ namespace KappaTools
 	{
 		obj = tmpObj;
 	}
-	
+
+	template <typename T>
+	void EtaCut<T>::setCut(double eta_max_)
+	{
+		eta_min = -1. * std::abs(eta_max_);
+		eta_max = std::abs(eta_max_);
+	}
+
 	template <typename T>
 	void EtaCut<T>::setMinCut(double eta_min_)
 	{
 		eta_min = eta_min_;
 	}
-	
+
 	template <typename T>
 	void EtaCut<T>::setMaxCut(double eta_max_)
 	{
@@ -55,7 +63,7 @@ namespace KappaTools
 	{
 		if (!obj)
 			return false;
-		
+
 		double val = getDecisionValue();
 		return (val>eta_min && val<eta_max);
 	};
