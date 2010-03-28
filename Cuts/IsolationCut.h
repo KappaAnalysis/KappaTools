@@ -13,18 +13,20 @@ namespace KappaTools
 			double min;
 			double max;
 			double coneSize;
-			char isoType;
+			unsigned char isoType;
 		public:
-			const static char TRACKISO = 0;
-			const static char ECALISO  = 1;
-			const static char HCALISO  = 2;
+			const static unsigned char TRACKISO = 0;
+			const static unsigned char ECALISO  = 1;
+			const static unsigned char HCALISO  = 2;
 
 			IsolationCut();
 			IsolationCut(T * tmpObj);
+			IsolationCut(unsigned char isoType_, double coneSize_);
 
 			void setPointer(T * tmpObj);
 
-			void setConeSize(double min_);
+			void setType(unsigned char isoType_);
+			void setConeSize(double coneSize_);
 			void setMinCut(double min_);
 			void setMaxCut(double max_);
 
@@ -40,10 +42,20 @@ namespace KappaTools
 	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(TRACKISO) {}
 
 	template <typename T>
+	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_) {}
+
+	template <typename T>
 	void IsolationCut<T>::setPointer(T * tmpObj)
 	{
 		obj = tmpObj;
 	}
+
+	template <typename T>
+	void IsolationCut<T>::setType(unsigned char isoType_)
+	{
+		isoType = isoType_;
+	}
+
 
 	template <typename T>
 	void IsolationCut<T>::setConeSize(double coneSize_)
