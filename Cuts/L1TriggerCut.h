@@ -4,6 +4,7 @@
 #include "BaseCut.h"
 #include <stdlib.h>
 #include <stack>
+#include "DataFormats/interface/KMetadata.h"
 
 namespace KappaTools
 {
@@ -18,33 +19,41 @@ namespace KappaTools
 	class L1TriggerCut : public BaseCut
 	{
 		private:
-			long long * l1;
+			unsigned long long * l1;
 			std::vector<int> commands;
+			bool debug;
 		public:
 			static const int NOT = -1;
 			static const int AND = -2;
-			static const int OR	 = -3;
+			static const int OR  = -3;
 			static const int XOR = -4;
-				
+
 			L1TriggerCut();
-			void setPointer(long long * tmpObj);
+			void setPointer(unsigned long long * tmpObj);
+			void setPointer(KEventMetadata * tmpObj);
 			void addCommand(int cmd);
 			void clearCommands();
 			void testBit(int cmd);
-			
-			virtual bool getInternalDecision();		
-			
+			void setDebug(bool debug_);
+
+			virtual bool getInternalDecision();
+
 			double getDecisionValue();
 	};
 
-	L1TriggerCut::L1TriggerCut() : BaseCut("L1 cut"), l1(0)
+	L1TriggerCut::L1TriggerCut() : BaseCut("L1 cut"), l1(0), debug(false)
 	{
 		commands.clear();
 	}
 
-	void L1TriggerCut::setPointer(long long * tmpObj)
+	void L1TriggerCut::setPointer(unsigned long long * tmpObj)
 	{
 		l1 = tmpObj;
+	}
+
+	void L1TriggerCut::setPointer(KEventMetadata * tmpObj)
+	{
+		l1 = &(tmpObj->bitsL1);
 	}
 
 	void L1TriggerCut::clearCommands()
@@ -63,24 +72,24 @@ namespace KappaTools
 		commands.push_back(cmd);
 	}
 
+	void L1TriggerCut::setDebug(bool debug_)
+	{
+		debug = debug_;
+	}
+
 	bool L1TriggerCut::getInternalDecision()
 	{
-		return (getDecisionValue() == 1);
-	}	
-
-	double L1TriggerCut::getDecisionValue()
-	{
-	
 		if (!l1)
-			return -1;
-	
+			return false;
+
 		std::stack<bool> calc;
 		for (std::vector<int>::iterator it = commands.begin(); it != commands.end(); it++)
 		{
 			int cmd = (*it);
-			//std::cout << cmd << " " << calc.size() << "  push\n";
+			if (debug)
+				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << "\n";
 			if (cmd>=0)
-				calc.push( (*l1 & ((long long)1 << cmd)) );
+				calc.push( (*l1 & ((unsigned long long)1 << cmd)) );
 			if (cmd == L1TriggerCut::NOT)
 			{
 				int arg1 = calc.top(); calc.pop();
@@ -110,7 +119,12 @@ namespace KappaTools
 		if (calc.size()>0)
 			return calc.top();
 		else
-			return 0.;
+			return false;
+	}
+
+	double L1TriggerCut::getDecisionValue()
+	{
+		return getInternalDecision();
 	}
 }
 #endif
