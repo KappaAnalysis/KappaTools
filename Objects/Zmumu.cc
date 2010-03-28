@@ -65,13 +65,13 @@ void KappaTools::ZmumuObjects<JetType>::setMET(MTAPFMET * met_)
 {
 	met = met_;
 }
+*/
 
 template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setTrigger(MTATrigger * trigger_)
+void KappaTools::ZmumuObjects<JetType>::setMetadata(KEventMetadata * eventMetadata_)
 {
-	trigger = trigger_;
+	eventMetadata = eventMetadata_;
 }
-*/
 
 template <typename JetType>
 void KappaTools::ZmumuObjects<JetType>::setPV(KDataVertex * primaryvertex_)

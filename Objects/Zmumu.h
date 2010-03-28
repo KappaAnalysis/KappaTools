@@ -1,8 +1,9 @@
 #ifndef KZmumuObjects_h
 #define KZmumuObjects_h
 
-#include "DataFormats/interface/KMuon.h"
 #include "DataFormats/interface/KBasic.h"
+#include "DataFormats/interface/KMuon.h"
+#include "DataFormats/interface/KMetadata.h"
 #include "DataFormats/interface/KLorentzVector.h"
 #include <stdlib.h>
 
@@ -16,7 +17,7 @@ namespace KappaTools
 			KDataMuon * muon1, * muon2;
 			JetType * rjet;	// recoil jet
 			//MTAPFMET * met;
-			//MTATrigger * trigger;
+			KEventMetadata * eventMetadata;
 			KDataVertex * primaryvertex;
 			void recalcP4();
 		public:
@@ -28,7 +29,7 @@ namespace KappaTools
 			void setMuons(KDataMuon * muon1, KDataMuon * muon2);
 			void setRJet(JetType * rjet);
 			//void setMET(MTAPFMET * met);
-			//void setTrigger(MTATrigger * trigger);
+			void setMetadata(KEventMetadata * eventMetadata_);
 			void setPV(KDataVertex * primaryvertex);
 			
 			KDataMuon * getMuon1();
