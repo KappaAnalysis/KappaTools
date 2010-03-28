@@ -117,4 +117,61 @@ namespace KappaTools
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 			(*it)->evaluate();
 	}
+
+	// -------------------------------------------------------
+
+	KappaTools::CutflowTable::CutflowTable()
+	{
+		cutflow = 0;
+	}
+
+	KappaTools::CutflowTable::CutflowTable(CutFlow * cutflow_)
+	{
+		cutflow = cutflow_;
+
+		tmpResult = cutflow->getAccDecisionVector();
+		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+			tmpResult[idx]=0;
+		tmpResult[0]=1;
+
+		cutflowTable = std::vector<unsigned long>(cutflow->size());
+	}
+
+	void KappaTools::CutflowTable::collect()
+	{
+		if (!cutflow)
+			return;
+
+		boost::dynamic_bitset<> tempCollect = cutflow->getAccDecisionVector();
+		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+			tmpResult[idx] |= tempCollect[idx];
+	}
+
+	void KappaTools::CutflowTable::nextEvent()
+	{
+		if (!cutflow)
+			return;
+
+		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		{
+			cutflowTable[idx]+=tmpResult[idx];
+			tmpResult[idx]=0;
+		}
+		tmpResult[0]=1;
+	}
+
+	void KappaTools::CutflowTable::printTable()
+	{
+		if (!cutflow)
+			return;
+
+		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		{
+			std::cout << idx << ".:\t" << cutflow->getCutName(idx) << "\t";
+			std::cout << cutflowTable[idx] << "\t";
+			std::cout <<  cutflowTable[idx]/(double)cutflowTable[0] << "\t";
+			std::cout << ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << "\n";
+		}
+		std::cout << "\n";
+	}
 }
