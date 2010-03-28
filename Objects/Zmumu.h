@@ -9,14 +9,14 @@
 
 namespace KappaTools
 {
-	template <typename JetType>
+	template <typename JetType, typename METType>
 	class ZmumuObjects
 	{
 		private:
 			void printMuonInformation(KDataMuon * muon);
 			KDataMuon * muon1, * muon2;
 			JetType * rjet;	// recoil jet
-			//MTAPFMET * met;
+			METType * met;
 			KEventMetadata * eventMetadata;
 			KDataVertex * primaryvertex;
 			void recalcP4();
@@ -28,7 +28,7 @@ namespace KappaTools
 			
 			void setMuons(KDataMuon * muon1, KDataMuon * muon2);
 			void setRJet(JetType * rjet);
-			//void setMET(MTAPFMET * met);
+			void setMET(METType * met);
 			void setMetadata(KEventMetadata * eventMetadata_);
 			void setPV(KDataVertex * primaryvertex);
 			

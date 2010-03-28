@@ -1,15 +1,15 @@
 #include "Zmumu.h"
 
-template <typename JetType>
-RMLV KappaTools::ZmumuObjects<JetType>::getDiMuP4()
+template <typename JetType, typename METType>
+RMLV KappaTools::ZmumuObjects<JetType, METType>::getDiMuP4()
 {
 	if (!muon1 || !muon2)
 		return RMLV();
 	return ((RMLV)(muon1->p4)+(RMLV)(muon2->p4));
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::printInformation()
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 {
 	RMLV z = getDiMuP4();
 	std::cout << "di-muon candidate:\n";
@@ -25,8 +25,8 @@ void KappaTools::ZmumuObjects<JetType>::printInformation()
 	printMuonInformation(muon2);		
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::printMuonInformation(KDataMuon * muon)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon * muon)
 {
 	std::cout << "\t\t #chambers:    " << muon->numberOfChambers << "\n";
 	std::cout << "\t\t #track hits:  " << muon->trackHits << "\n";
@@ -36,8 +36,8 @@ void KappaTools::ZmumuObjects<JetType>::printMuonInformation(KDataMuon * muon)
 	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::recalcP4()
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::recalcP4()
 {
 	if (!muon1 || !muon2)
 		p4 = RMLV();
@@ -45,63 +45,61 @@ void KappaTools::ZmumuObjects<JetType>::recalcP4()
 		p4 = muon1->p4 + muon2->p4;
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setMuons(KDataMuon * muon1_, KDataMuon * muon2_)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setMuons(KDataMuon * muon1_, KDataMuon * muon2_)
 {
 	muon1 = muon1_;
 	muon2 = muon2_;
 	recalcP4();
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setRJet(JetType * rjet_)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setRJet(JetType * rjet_)
 {
 	rjet = rjet_;
 }
 
-/*
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setMET(MTAPFMET * met_)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setMET(METType * met_)
 {
 	met = met_;
 }
-*/
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setMetadata(KEventMetadata * eventMetadata_)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setMetadata(KEventMetadata * eventMetadata_)
 {
 	eventMetadata = eventMetadata_;
 }
 
-template <typename JetType>
-void KappaTools::ZmumuObjects<JetType>::setPV(KDataVertex * primaryvertex_)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setPV(KDataVertex * primaryvertex_)
 {
 	primaryvertex = primaryvertex_;
 }
 
-template <typename JetType>
-KDataMuon * KappaTools::ZmumuObjects<JetType>::getMuon1()
+template <typename JetType, typename METType>
+KDataMuon * KappaTools::ZmumuObjects<JetType, METType>::getMuon1()
 {
 	return muon1;
 }
 
-template <typename JetType>
-KDataMuon * KappaTools::ZmumuObjects<JetType>::getMuon2()
+template <typename JetType, typename METType>
+KDataMuon * KappaTools::ZmumuObjects<JetType, METType>::getMuon2()
 {
 	return muon2;
 }
 
-template <typename JetType>
-JetType * KappaTools::ZmumuObjects<JetType>::getRJet()
+template <typename JetType, typename METType>
+JetType * KappaTools::ZmumuObjects<JetType, METType>::getRJet()
 {
 	return rjet;
 }
 
-template <typename JetType>
-KDataVertex * KappaTools::ZmumuObjects<JetType>::getPV()
+template <typename JetType, typename METType>
+KDataVertex * KappaTools::ZmumuObjects<JetType, METType>::getPV()
 {
 	return primaryvertex;
 }
 
 //template class KappaTools::ZmumuObjects<MTAPFJet>;
-template class KappaTools::ZmumuObjects<KDataJet>;
+template class KappaTools::ZmumuObjects<KDataJet, KDataPFMET>;

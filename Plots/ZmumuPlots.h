@@ -13,7 +13,7 @@
 #include "Math/GenVector/VectorUtil.h"
 namespace KappaTools
 {
-	template <typename JetType>
+	template <typename JetType, typename METType>
 	class ZmumuPlots : public BasePlot
 	{
 		private:
@@ -32,7 +32,7 @@ namespace KappaTools
 			ZmumuPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
 
 			// TDirectory
-			void process(KappaTools::ZmumuObjects<JetType> * zmumu, double weight = 1.0);
+			void process(KappaTools::ZmumuObjects<JetType, METType> * zmumu, double weight = 1.0);
 			void final();
 	};
 }

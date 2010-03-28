@@ -1,7 +1,7 @@
 #include "ZmumuPlots.h"
 
-template <typename JetType>
-KappaTools::ZmumuPlots<JetType>::ZmumuPlots(TDirectory * tmpFile, TString directory, TString subDirectory)
+template <typename JetType, typename METType>
+KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TString directory, TString subDirectory)
 {
 	TDirectory * tmpDirectory = getDirectory(tmpFile, directory, subDirectory);
 
@@ -28,8 +28,8 @@ KappaTools::ZmumuPlots<JetType>::ZmumuPlots(TDirectory * tmpFile, TString direct
 	jet_plots					= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet", "");
 }
 
-template <typename JetType>
-void KappaTools::ZmumuPlots<JetType>::process(KappaTools::ZmumuObjects<JetType> * zmumu, double weight)
+template <typename JetType, typename METType>
+void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<JetType, METType> * zmumu, double weight)
 {
 	RMLV z = zmumu->getDiMu();
 	Z_mass->Fill(z.mass(), weight);
@@ -58,12 +58,12 @@ void KappaTools::ZmumuPlots<JetType>::process(KappaTools::ZmumuObjects<JetType> 
 	jet_plots->process(zmumu->getRJet(), zmumu->getPV(), weight);
 }
 
-template <typename JetType>
-void KappaTools::ZmumuPlots<JetType>::final()
+template <typename JetType, typename METType>
+void KappaTools::ZmumuPlots<JetType, METType>::final()
 {
 
 }
 
 //template class KappaTools::ZmumuPlots<MTAPFJet>;
-template class KappaTools::ZmumuPlots<KDataJet>;
-template class KappaTools::ZmumuPlots<KDataPFJet>;
+template class KappaTools::ZmumuPlots<KDataJet, KDataMET>;
+template class KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>;
