@@ -10,7 +10,7 @@ namespace KappaTools
 	{
 		private:
 			KDataMuon * obj;
-			char type;
+			unsigned char type;
 		public:
 			static const char TRACKER    = 1;
 			static const char CALO       = 2;
@@ -19,8 +19,9 @@ namespace KappaTools
 			
 			MuonTypeCut();
 			MuonTypeCut(KDataMuon * tempObj);
+			MuonTypeCut(unsigned char type_);
 
-			void setType(char type);
+			void setType(unsigned char type);
 			void setPointer(KDataMuon * tmpObj);
 
 			bool getInternalDecision();
@@ -29,8 +30,9 @@ namespace KappaTools
 
 	MuonTypeCut::MuonTypeCut() : BaseCut("muon type cut"), obj(0), type(GLOBAL) {}
 	MuonTypeCut::MuonTypeCut(KDataMuon * tempObj) : BaseCut("muon type cut"), obj(tempObj), type(GLOBAL) {}
+	MuonTypeCut::MuonTypeCut(unsigned char type_) : BaseCut("muon type cut"), obj(0), type(type_) {}
 
-	void MuonTypeCut::setType(char type_)
+	void MuonTypeCut::setType(unsigned char type_)
 	{
 		type = type_;
 	}
