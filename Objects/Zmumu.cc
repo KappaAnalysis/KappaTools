@@ -102,4 +102,5 @@ KDataVertex * KappaTools::ZmumuObjects<JetType, METType>::getPV()
 }
 
 //template class KappaTools::ZmumuObjects<MTAPFJet>;
-template class KappaTools::ZmumuObjects<KDataJet, KDataPFMET>;
+template class KappaTools::ZmumuObjects<KDataJet, KDataMET>;
+template class KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>;
