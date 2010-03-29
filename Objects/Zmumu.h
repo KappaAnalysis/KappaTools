@@ -35,10 +35,10 @@ namespace KappaTools
 			KDataMuon * getMuon1();
 			KDataMuon * getMuon2();
 			JetType * getRJet();
+			METType * getMET();
 			KDataVertex * getPV();
 			
-			//ZmumuObjects() : muon1(0), muon2(0), rjet(0), met(0), trigger(0), primaryvertex(0) {};
-			ZmumuObjects() : muon1(0), muon2(0), rjet(0), primaryvertex(0) {};
+			ZmumuObjects() : muon1(0), muon2(0), rjet(0), met(0), eventMetadata(0), primaryvertex(0) {};
 	};
 }
 

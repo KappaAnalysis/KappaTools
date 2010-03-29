@@ -22,7 +22,7 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 	printMuonInformation(muon1);
 	std::cout << "\n";
 	std::cout << "\t Muon 2: " << muon2->p4 << "\n";
-	printMuonInformation(muon2);		
+	printMuonInformation(muon2);
 }
 
 template <typename JetType, typename METType>
@@ -30,7 +30,7 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 {
 	std::cout << "\t\t #chambers:    " << muon->numberOfChambers << "\n";
 	std::cout << "\t\t #track hits:  " << muon->trackHits << "\n";
-	std::cout << "\t\t vertex:       " << muon->vertex.position << "\n";												
+	std::cout << "\t\t vertex:       " << muon->vertex.position << "\n";
 	std::cout << "\t\t ecal iso 03:  " << muon->ecalIso03 << "\n";
 	std::cout << "\t\t hcal iso 03:  " << muon->hcalIso03 << "\n";
 	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
@@ -96,11 +96,16 @@ JetType * KappaTools::ZmumuObjects<JetType, METType>::getRJet()
 }
 
 template <typename JetType, typename METType>
+METType * KappaTools::ZmumuObjects<JetType, METType>::getMET()
+{
+	return met;
+}
+
+template <typename JetType, typename METType>
 KDataVertex * KappaTools::ZmumuObjects<JetType, METType>::getPV()
 {
 	return primaryvertex;
 }
 
-//template class KappaTools::ZmumuObjects<MTAPFJet>;
 template class KappaTools::ZmumuObjects<KDataJet, KDataMET>;
 template class KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>;
