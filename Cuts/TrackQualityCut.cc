@@ -1,5 +1,9 @@
 #include "TrackQualityCut.h"
 
+// note:
+//  TrackQualityBitmask is already a bit mask!!
+//  (in contrast to reco::TrackBase::TrackQuality which is only
+//   the bit position)
 namespace KappaTools
 {
 	template <typename T>

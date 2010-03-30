@@ -4,6 +4,10 @@
 #include "BaseCut.h"
 #include "DataFormats/interface/KBasic.h"
 
+// note:
+//  TrackQualityBitmask is already a bit mask!!
+//  (in contrast to reco::TrackBase::TrackQuality which is only
+//   the bit position)
 namespace KappaTools
 {
 	template <typename T>
@@ -13,7 +17,14 @@ namespace KappaTools
 			T * obj;
 			int mask;
 		public:
-			enum TrackQuality { undefQuality=-1, loose=0, tight=1, highPurity=2, confirmed=3, goodIterative=4, qualitySize=5};
+			enum TrackQualityBitmask {
+				loose = 1 << 0,
+				tight = 1 << 1,
+				highPurity = 1 << 2,
+				confirmed = 1 << 3,
+				goodIterative = 1 << 4,
+				qualitySize = 1 << 5
+				};
 
 			TrackQualityCut();
 			TrackQualityCut(T * tmpObj);
