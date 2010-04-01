@@ -28,7 +28,7 @@ SOFLAGS       = -shared
 #------------------------------------------------------------------------------
 
 #default : BasePlots.o StandardPlots.o MuonPlots.o TauPlots.o ZtautauMuJetPlots.o JetPlots.o
-default : ProgressMonitor.o
+default : LumiMetadataProvider.o ProgressMonitor.o
 debug   :
 
 all     : default
