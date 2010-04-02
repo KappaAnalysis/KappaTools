@@ -46,10 +46,7 @@ void ProgressMonitor::Reset()
 
 struct SecTime
 {
-	SecTime(const long _sec)
-	{
-		sec = _sec;
-	}
+	SecTime(const long _sec) : sec(_sec) {}
 	long sec;
 };
 
@@ -75,4 +72,3 @@ ostream &operator<<(ostream &os, const ProgressMonitor &pm)
 	else
 		return os << "100%    ";
 }
-
