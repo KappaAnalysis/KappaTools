@@ -41,6 +41,9 @@ namespace KappaTools
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
+		if (!muon)
+			return;
+
 		muon_pt->Fill(muon->p4.pt(), weight);
 		muon_pt_low->Fill(muon->p4.pt(), weight);
 		muon_eta->Fill(muon->p4.eta(), weight);
@@ -86,6 +89,37 @@ namespace KappaTools
 			muon_type->Fill(4., weight);
 	}
 	void StandardMuonPlots::final()
+	{
+	}
+
+
+	MuonPlotsByType::MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	{
+		TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+
+		allMuons = new KappaTools::StandardMuonPlots(curDirectory, "all", "");
+		trackerMuons = new KappaTools::StandardMuonPlots(curDirectory, "tracker", "");
+		caloMuons = new KappaTools::StandardMuonPlots(curDirectory, "calo", "");
+		standaloneMuons = new KappaTools::StandardMuonPlots(curDirectory, "standalone", "");
+		globalMuons = new KappaTools::StandardMuonPlots(curDirectory, "global", "");
+	}
+
+	void MuonPlotsByType::process(KDataMuon * muon, KDataVertex * pv, double weight)
+	{
+		if (!muon)
+			return;
+
+		allMuons->process(muon, pv, weight);
+		if (muon->type & (1<<0))
+			trackerMuons->process(muon, pv, weight);
+		if (muon->type & (1<<1))
+			caloMuons->process(muon, pv, weight);
+		if (muon->type & (1<<2))
+			standaloneMuons->process(muon, pv, weight);
+		if (muon->type & (1<<3))
+			globalMuons->process(muon, pv, weight);
+	}
+	void MuonPlotsByType::final()
 	{
 	}
 }

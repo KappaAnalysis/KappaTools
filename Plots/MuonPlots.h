@@ -90,6 +90,20 @@ namespace KappaTools
 			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
 			void final();
 	};
+
+	class MuonPlotsByType : public BasePlot
+	{
+		private:
+			StandardMuonPlots * allMuons;
+			StandardMuonPlots * trackerMuons;
+			StandardMuonPlots * standaloneMuons;
+			StandardMuonPlots * caloMuons;
+			StandardMuonPlots * globalMuons;
+		public:
+			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
+			void final();
+	};
 }
 #endif
 
