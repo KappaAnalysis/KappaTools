@@ -15,33 +15,8 @@ namespace KappaTools
 			unsigned long nLumiMax;
 			unsigned long nBX;
 		public:
-			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, unsigned long nBX_ = 0) :
-				nRun(nRun_),
-				nLumiMin(nLumiMin_),
-				nLumiMax(nLumiMax_),
-				nBX(nBX_)
-				{};
-			bool contains(KEventMetadata * evt)
-			{
-				if (evt->nRun != nRun)
-					return false;
-				if (evt->nBX != nBX)
-					return false;
-				
-				if (nLumiMin==0 && nLumiMax == 0)
-					return true;
-					
-				if (nLumiMin==0 && evt->nLumi<=nLumiMax)
-					return true;
-
-				if (nLumiMin<=evt->nLumi && nLumiMax == 0)
-					return true;
-
-				if (nLumiMin<=evt->nLumi && evt->nLumi<=nLumiMax)
-					return true;
-					
-				return false;
-			}
+			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_, unsigned long nLumiMax_, unsigned long nBX_);
+			bool contains(KEventMetadata * evt);
 	};
 	
 	class EventFilterCut : public BaseCut
