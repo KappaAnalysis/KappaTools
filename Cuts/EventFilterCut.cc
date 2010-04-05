@@ -2,7 +2,7 @@
 
 namespace KappaTools
 {
-	RunLumiEvtBXRange::RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, unsigned long nBX_ = 0) :
+	RunLumiEvtBXRange::RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_, unsigned long nLumiMax_, unsigned long nBX_) :
 		nRun(nRun_),
 		nLumiMin(nLumiMin_),
 		nLumiMax(nLumiMax_),
