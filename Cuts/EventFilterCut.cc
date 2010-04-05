@@ -14,7 +14,7 @@ namespace KappaTools
 
 		if (evt->nRun != nRun)
 			return false;
-		if (evt->nBX != nBX)
+		if (nBX != 0 && evt->nBX != nBX)
 			return false;
 
 		if (nLumiMin==0 && nLumiMax == 0)

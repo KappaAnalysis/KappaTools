@@ -108,7 +108,7 @@ namespace KappaTools
 			if (hltMap.find(*it) == hltMap.end())
 				continue;
 
-			if ( ( obj->bitsHLT & ( 1 << hltMap[*it] ) ) != 0 )
+			if ( ( obj->bitsHLT & ( (unsigned long long)1 << hltMap[*it] ) ) != 0 )
 				fired++;
 		}
 		firedTriggers=fired;
