@@ -6,6 +6,8 @@
 #include "TMath.h"
 #include "TDirectory.h"
 #include "BasePlot.h"
+#include "TrackPlots.h"
+
 #include "DataFormats/interface/KMuon.h"
 /*
 #include "TFile.h"
@@ -57,12 +59,12 @@ namespace KappaTools
 
 			TH1D * muon_type;
 
-			TH1D * track_chi2;
-			TH1D * track_ndof;
-			TH1D * track_chi2norm;
-			TH1D * track_chi2prob;
 			TH1D * caloComp;
 			TH1D * segComp;
+
+			KappaTools::StandardTrackPlots * track;
+			KappaTools::StandardTrackPlots * innerTrack;
+			KappaTools::StandardTrackPlots * globalTrack;
 
 			/*
 				MTAPoint vertex;

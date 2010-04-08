@@ -2,9 +2,9 @@
 
 namespace KappaTools
 {
-	StandardMuonPlots::StandardMuonPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	StandardMuonPlots::StandardMuonPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString tmpSubDirectory_)
 	{
-		getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_, tmpSubDirectory_);
 
 		muon_pt 					= new TH1D("pt","p_{T} of muon", 75, 0., 150.);
 		muon_pt_low		 		= new TH1D("pt_low","p_{T} of muon", 50, 0., 25.);
@@ -34,12 +34,12 @@ namespace KappaTools
 		IPSig							= new TH1D("IPSig","impact parameter of muon track over uncertainty of track and PV", 50, -10, 10);
 		IPvsIPSig					= new TH2D("IPvsIPSig","impact parameter of muon track vs. sign. version of IP", 50, -0.1, 0.1, 50, -10, 10);
 
-		track_chi2					= new TH1D("track_chi2","#chi^{2} of muon track", 50, 0., 50.);
-		track_ndof					= new TH1D("track_ndof","ndof of muon track", 50, 0., 50.);
-		track_chi2norm			= new TH1D("track_chi2norm","norm. #chi^{2} of muon track", 50, 0., 25.);
-		track_chi2prob			= new TH1D("track_chi2prob","prob(#chi^{2}) of muon track", 50, 0., 1.);
 		caloComp	= new TH1D("caloComp","calo compatibility of the muon", 100, 0., 1.);
 		segComp		= new TH1D("segComp","segment compatibility of the muon", 100, 0., 1.);
+
+		track = new KappaTools::StandardTrackPlots(tmpDirectory, "track", "");
+		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "innerTrack", "");
+		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "globalTrack", "");
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
@@ -72,11 +72,6 @@ namespace KappaTools
 		vertex_chi2norm->Fill(muon->vertex.chi2/muon->vertex.nDOF, weight);
 		vertex_chi2prob->Fill(TMath::Prob(muon->vertex.chi2, muon->vertex.nDOF), weight);
 
-		track_chi2->Fill(muon->track.chi2, weight);
-		track_ndof->Fill(muon->track.nDOF, weight);
-		track_chi2norm->Fill(muon->track.chi2/muon->track.nDOF, weight);
-		track_chi2prob->Fill(TMath::Prob(muon->track.chi2, muon->track.nDOF), weight);
-
 		muon_trackHits->Fill(muon->trackHits, weight);
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);
 
@@ -92,6 +87,10 @@ namespace KappaTools
 
 		caloComp->Fill(muon->caloComp, weight);
 		segComp->Fill(muon->segComp, weight);
+
+		track->process(&muon->track, pv, weight);
+		innerTrack->process(&muon->innerTrack, pv, weight);
+		globalTrack->process(&muon->globalTrack, pv, weight);
 	}
 	void StandardMuonPlots::final()
 	{
