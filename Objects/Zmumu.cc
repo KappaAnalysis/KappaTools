@@ -13,6 +13,8 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 {
 	RMLV z = getDiMuP4();
 	std::cout << "di-muon candidate:\n";
+	std::cout << "\t run=" << eventMetadata->nRun << " AND lumi=" << eventMetadata->nLumi << "\n";
+	std::cout << "\t event=" << eventMetadata->nEvent << "\n";
 	std::cout << "\t mass: " << z.mass() << "\n";
 	std::cout << "\t pT = " << z.pt() << "\t";
 	std::cout << "\t eta = " << z.eta() << "\t";
@@ -23,6 +25,17 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 	std::cout << "\n";
 	std::cout << "\t Muon 2: " << muon2->p4 << "\n";
 	printMuonInformation(muon2);
+	std::cout << "\n\t Primaryvertex:\n";
+	if (!primaryvertex)
+		std::cout << "\t\t not present!\n";
+	else
+	{
+		std::cout << "\t\t fake = " << primaryvertex->fake << "\n";
+		std::cout << "\t\t pos = " << primaryvertex->position << "\n";
+		std::cout << "\t\t nTracks = " << primaryvertex->nTracks << "\n";
+		std::cout << "\t\t ndof = " << primaryvertex->nDOF << "\n";
+		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "\n";
+	}
 }
 
 template <typename JetType, typename METType>
@@ -33,7 +46,17 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	std::cout << "\t\t vertex:       " << muon->vertex.position << "\n";
 	std::cout << "\t\t ecal iso 03:  " << muon->ecalIso03 << "\n";
 	std::cout << "\t\t hcal iso 03:  " << muon->hcalIso03 << "\n";
-	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
+	//std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
+
+	std::cout << "\t\t track:        " << muon->track.p4 << "\n";
+	std::cout << "\t\t inner track:  " << muon->innerTrack.p4 << "\n";
+	std::cout << "\t\t global track: " << muon->globalTrack.p4 << "\n";
+	std::cout << "\t\t IP:           " << muon->track.getIP(primaryvertex,0) << "\n";
+	std::cout << "\t\t IPsignf.:     " << muon->track.getIP(primaryvertex,2) << "\n";
+	std::cout << "\t\t IP:           " << muon->globalTrack.getIP(primaryvertex,0) << "\n";
+	std::cout << "\t\t IPsignf.:     " << muon->globalTrack.getIP(primaryvertex,2) << "\n";
+	std::cout << "\t\t IP:           " << muon->innerTrack.getIP(primaryvertex,0) << "\n";
+	std::cout << "\t\t IPsignf.:     " << muon->innerTrack.getIP(primaryvertex,2) << "\n";
 }
 
 template <typename JetType, typename METType>
