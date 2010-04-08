@@ -7,12 +7,12 @@ namespace KappaTools
 		obj=tmpObj;
 	}
 
-	void VertexNdofCut::setMinCut(double min_)
+	void VertexNdofCut::setMinCut(int min_)
 	{
 		min=min_;
 	}
 
-	void VertexNdofCut::setMaxCut(double max_)
+	void VertexNdofCut::setMaxCut(int max_)
 	{
 		max=max_;
 	}
@@ -24,7 +24,13 @@ namespace KappaTools
 	
 		double val = getDecisionValue();
 	
-		return (val>min && val<max);
+		if (max == -1)
+			if (val>min)
+				return true;
+			else
+				return false;
+		else
+			return (val>min && val<max);
 	};
 
 	double VertexNdofCut::getDecisionValue()

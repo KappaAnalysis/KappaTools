@@ -11,16 +11,16 @@ namespace KappaTools
 	{
 		private:
 			KDataVertex * obj;
-			double min;
-			double max;
+			int min;
+			int max;
 		public:
-			VertexNdofCut() : BaseCut("pv ndof cut"), obj(0), min(0.), max(1.) {};
-			VertexNdofCut(KDataVertex * tmpObj) : BaseCut("pv ndof cut"), obj(tmpObj), min(0.), max(1.) {};
+			VertexNdofCut() : BaseCut("pv ndof cut"), obj(0), min(0), max(-1) {};
+			VertexNdofCut(KDataVertex * tmpObj) : BaseCut("pv ndof cut"), obj(tmpObj), min(0), max(-1) {};
 		
 			void setPointer(KDataVertex * tmpObj);
 			
-			void setMinCut(double min_);
-			void setMaxCut(double max_);
+			void setMinCut(int min_);
+			void setMaxCut(int max_);
 		
 			virtual bool getInternalDecision();
 			double getDecisionValue();
