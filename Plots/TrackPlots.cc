@@ -16,6 +16,7 @@ namespace KappaTools
 		ref_x					= new TH1D("ref_x","reference point: x", 100, -3., 3.);
 		ref_y					= new TH1D("ref_y","reference point: y", 100, -3., 3.);
 		ref_z					= new TH1D("ref_z","reference point: z", 100, -15., 15.);
+		ref_rho				= new TH1D("ref_rho","reference point: rho", 100, -15., 15.);
 
 		chi2					= new TH1D("chi2","#chi^{2} of track", 50, 0., 50.);
 		ndof					= new TH1D("ndof","ndof of track", 50, 0., 50.);
@@ -49,6 +50,7 @@ namespace KappaTools
 		ref_x->Fill(track->ref.x(), weight);
 		ref_y->Fill(track->ref.y(), weight);
 		ref_z->Fill(track->ref.z(), weight);
+		ref_rho->Fill(track->ref.rho(), weight);
 
 		chi2->Fill(track->chi2, weight);
 		ndof->Fill(track->nDOF, weight);

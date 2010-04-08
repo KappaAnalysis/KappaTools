@@ -17,6 +17,8 @@ namespace KappaTools
 			TH1D * ref_y;
 			TH1D * ref_z;
 
+			TH1D * ref_rho;
+
 			TH1D * pt, * pt_low, * pt_full;
 			TH1D * eta, * eta_zoom;
 			TH1D * phi;
