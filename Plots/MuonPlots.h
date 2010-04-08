@@ -61,6 +61,9 @@ namespace KappaTools
 			TH1D * track_ndof;
 			TH1D * track_chi2norm;
 			TH1D * track_chi2prob;
+			TH1D * caloComp;
+			TH1D * segComp;
+
 			/*
 				MTAPoint vertex;
 				double vertex_chi2;

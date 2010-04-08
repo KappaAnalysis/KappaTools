@@ -38,6 +38,8 @@ namespace KappaTools
 		track_ndof					= new TH1D("track_ndof","ndof of muon track", 50, 0., 50.);
 		track_chi2norm			= new TH1D("track_chi2norm","norm. #chi^{2} of muon track", 50, 0., 25.);
 		track_chi2prob			= new TH1D("track_chi2prob","prob(#chi^{2}) of muon track", 50, 0., 1.);
+		caloComp	= new TH1D("caloComp","calo compatibility of the muon", 100, 0., 1.);
+		segComp		= new TH1D("segComp","segment compatibility of the muon", 100, 0., 1.);
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
@@ -87,6 +89,9 @@ namespace KappaTools
 			muon_type->Fill(3., weight);
 		if (muon->isGlobalMuon)
 			muon_type->Fill(4., weight);
+
+		caloComp->Fill(muon->caloComp, weight);
+		segComp->Fill(muon->segComp, weight);
 	}
 	void StandardMuonPlots::final()
 	{
