@@ -92,8 +92,8 @@ namespace KappaTools
 	{
 	}
 
-
-	MuonPlotsByType::MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	template <typename T>
+	MuonPlotsByType<T>::MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
 	{
 		TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
 
@@ -104,7 +104,8 @@ namespace KappaTools
 		globalMuons = new KappaTools::StandardMuonPlots(curDirectory, "global", "");
 	}
 
-	void MuonPlotsByType::process(KDataMuon * muon, KDataVertex * pv, double weight)
+	template <typename T>
+	void MuonPlotsByType<T>::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
 		if (!muon)
 			return;
@@ -119,8 +120,12 @@ namespace KappaTools
 		if (muon->type & (1<<3))
 			globalMuons->process(muon, pv, weight);
 	}
-	void MuonPlotsByType::final()
+
+	template <typename T>
+	void MuonPlotsByType<T>::final()
 	{
 	}
+
+	template class MuonPlotsByType<StandardMuonPlots>;
 }
 

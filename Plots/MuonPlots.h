@@ -91,14 +91,15 @@ namespace KappaTools
 			void final();
 	};
 
+	template <typename T>
 	class MuonPlotsByType : public BasePlot
 	{
 		private:
-			StandardMuonPlots * allMuons;
-			StandardMuonPlots * trackerMuons;
-			StandardMuonPlots * standaloneMuons;
-			StandardMuonPlots * caloMuons;
-			StandardMuonPlots * globalMuons;
+			T * allMuons;
+			T * trackerMuons;
+			T * standaloneMuons;
+			T * caloMuons;
+			T * globalMuons;
 		public:
 			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
 			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
