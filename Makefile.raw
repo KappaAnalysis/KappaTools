@@ -1,6 +1,6 @@
 COPTS    = -g -O
 CXX      = g++
-CXXFLAGS = $(COPTS) -Wall -fPIC -I..
+CXXFLAGS = $(COPTS) -Wall -fPIC -I.. -I../../Kappa
 # gcc 4.3 disallows static in template specializations
 CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -v 2>&1 | grep "version 4.3"),"","static")
 

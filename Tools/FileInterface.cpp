@@ -1,17 +1,18 @@
 #include "FileInterface.h"
 
-FileInterface::FileInterface(ivector<std::string> args, bool shuffle, int verbose) :
-	eventdata("Events"), isMC(false), lumidata("Lumis"),
-	verbosity(verbose), old_run(-1), old_lumi(-1)
+using namespace std;
+
+FileInterface::FileInterface(vector<string> &files, bool shuffle, int verbose) :
+	eventdata("Events"), isMC(false), lumidata("Lumis"), verbosity(verbose)
 {
 	if (shuffle)
-		random_shuffle(args.begin(), args.end());
-	for (size_t i = 0; i < args.size(); ++i)
+		random_shuffle(files.begin(), files.end());
+	for (size_t i = 0; i < files.size(); ++i)
 	{
 		if (verbosity)
-			cout << "Loading ... " << args[i] << endl;
-		eventdata.Add(args[i].c_str());
-		lumidata.Add(args[i].c_str());
+			cout << "Loading ... " << files[i] << endl;
+		eventdata.Add(files[i].c_str());
+		lumidata.Add(files[i].c_str());
 	}
 
 	TBranch *b = lumidata.GetBranch("KLumiMetadata");
@@ -66,9 +67,11 @@ void FileInterface::AssignLumiPtr(run_id run, lumi_id lumi,
 	}
 }
 
-void FileInterface::SpeedupTree(TTree *tree)
+void FileInterface::SpeedupTree()
 {
-	TObjArray *branches = tree->GetListOfBranches();
+	TObjArray *branches = eventdata.GetListOfBranches();
+	if (branches == 0)
+		return;
 	for (int i = 0; i < branches->GetEntries(); ++i)
 	{
 		TBranch *b = (TBranch*)branches->At(i);
@@ -77,9 +80,12 @@ void FileInterface::SpeedupTree(TTree *tree)
 			UInt_t found = 0;
 			string btype = b->GetClassName();
 			if (btype.find("vector") == 0)
-				tree->SetBranchStatus(_S(b->GetName()) + ".*", 0, &found);
+			{
+				string bname = string(b->GetName()) + ".*";
+				eventdata.SetBranchStatus(bname.c_str(), 0, &found);
+			}
 			else
-				tree->SetBranchStatus(b->GetName(), 0, &found);
+				eventdata.SetBranchStatus(b->GetName(), 0, &found);
 		}
 	}
 }
