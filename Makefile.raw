@@ -1,0 +1,32 @@
+COPTS    = -g -O
+CXX      = g++
+CXXFLAGS = $(COPTS) -Wall -fPIC -I.. -I../../Kappa
+# gcc 4.3 disallows static in template specializations
+CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -v 2>&1 | grep "version 4.3"),"","static")
+
+LD       = g++
+LDFLAGS  = -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
+
+all: $(PROGRAM)
+
+%.o: %.cc %.cpp %.hxx %.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+%.so: $(LIBFILES)
+	$(LD) -shared $(LDFLAGS) -o $@ $^
+
+%.a: $(LIBFILES)
+	ar rcs $@ $^
+
+install: $(PROGRAM)
+	test -d "$(MYPREFIX)/lib"
+	[ -n "$(filter %.a %.so, $(PROGRAM))" ] && \
+		cp $(filter %.a %.so, $(PROGRAM)) "$(MYPREFIX)/lib" \
+		|| true
+#	test -d "$(MYPREFIX)/bin"
+#	[ -n "$(filter %.exe %.bin %.ana, $(PROGRAM))" ] && \
+#		cp $(filter %.exe %.bin %.ana, $(PROGRAM)) "$(MYPREFIX)/bin" \
+#		|| true
+
+clean:
+	@rm -f *.o *.so *.a *.exe *.bin *.ana

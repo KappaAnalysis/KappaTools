@@ -1,6 +1,7 @@
 #------------------------------------------------------------------------------
-PROGRAM  = libKTools.so libKTools.a
-LIBFILES = FileInterface.o LumiMetadataProvider.o MinimalParser.o
+PROGRAM  = libKToolbox.so libKToolbox.a
+LIBFILES = toolbox.o ProgressMonitor.o IOHelper.o StringTools.o
 #------------------------------------------------------------------------------
 
-include ../Makefile.root
+include ../Makefile.raw
+COPTS += -pedantic
