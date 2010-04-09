@@ -1,26 +1,19 @@
-CUTS=./Cuts
-OBJECTS=./Objects
-PLOTS=./Plots
-TOOLS=./Tools
+SUBDIR = Cuts Objects Plots Tools Toolbox
 
-# command for documentation generation
-DOXYGEN=doxygen
+all: $(SUBDIR)
+	for DIR in $(SUBDIR); do \
+		$(MAKE) $(MFLAGS) -C $$DIR || exit 1; \
+	done
 
-.PHONY: all clean
+install: $(SUBDIR)
+	for DIR in $(SUBDIR); do \
+		$(MAKE) $(MFLAGS) -C $$DIR install || exit 1; \
+	done
 
-all:
-	$(MAKE) -C $(CUTS)
-	$(MAKE) -C $(OBJECTS)
-	$(MAKE) -C $(PLOTS)
-	$(MAKE) -C $(TOOLS)
+clean: $(SUBDIR)
+	for DIR in $(SUBDIR); do \
+		$(MAKE) $(MFLAGS) -C $$DIR clean || exit 1; \
+	done
 
-clean:
-
-	$(MAKE) -C $(CUTS) clean
-	$(MAKE) -C $(OBJECTS) clean
-	$(MAKE) -C $(PLOTS) clean
-	$(MAKE) -C $(TOOLS) clean
-
-# if one day we want to...
-# doc:
-# 	$(DOXYGEN) scripts/Doxygen.cfg
+doc:
+	doxygen doxygen.cfg
