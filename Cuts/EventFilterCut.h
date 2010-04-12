@@ -17,6 +17,7 @@ namespace KappaTools
 		public:
 			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, unsigned long nBX_ = 0);
 			bool contains(KEventMetadata * evt);
+			unsigned long getRun();
 	};
 	
 	class EventFilterCut : public BaseCut
@@ -32,6 +33,7 @@ namespace KappaTools
 
 			void addRange(RunLumiEvtBXRange range_);
 			void clearList();
+			std::vector<unsigned long> getRuns();
 			bool getInternalDecision();
 			double getDecisionValue();
 	};

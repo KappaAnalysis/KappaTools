@@ -31,7 +31,10 @@ namespace KappaTools
 
 		return false;
 	}
-
+	unsigned long RunLumiEvtBXRange::getRun()
+	{
+		return nRun;
+	}
 
 
 	EventFilterCut::EventFilterCut() :
@@ -57,6 +60,17 @@ namespace KappaTools
 	void EventFilterCut::clearList()
 	{
 		whitelist.clear();
+	}
+
+	std::vector<unsigned long> EventFilterCut::getRuns()
+	{
+		std::vector<unsigned long> usedRuns;
+		for (std::vector<RunLumiEvtBXRange>::iterator it = whitelist.begin(); it != whitelist.end(); ++it)
+			if (find(usedRuns.begin(), usedRuns.end(), it->getRun()) == usedRuns.end())
+				usedRuns.push_back(it->getRun());
+
+		stable_sort (usedRuns.begin(), usedRuns.end());
+		return usedRuns;
 	}
 
 	bool EventFilterCut::getInternalDecision()
