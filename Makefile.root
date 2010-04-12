@@ -1,0 +1,5 @@
+include ../Makefile.raw
+
+CXXFLAGS += $(shell ${ROOTSYS}/bin/root-config --cflags)
+LDFLAGS += $(shell ${ROOTSYS}/bin/root-config --libs) \
+	-lGenVector -lReflex -lMathMore -lMathCore -lReflexDict
