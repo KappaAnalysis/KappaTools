@@ -1,4 +1,5 @@
 #include "EventFilterCut.h"
+#include <algorithm>
 
 namespace KappaTools
 {

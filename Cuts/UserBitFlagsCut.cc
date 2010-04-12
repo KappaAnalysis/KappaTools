@@ -88,7 +88,7 @@ namespace KappaTools
 		int fired=0;
 		for (std::vector<unsigned long>::iterator it = selected.begin(); it != selected.end() ; it++)
 		{
-			if ( obj->bitsUserFlags & (*it) != 0 )
+			if ( (obj->bitsUserFlags & (*it)) != 0 )
 				fired++;
 		}
 		firedTriggers=fired;
