@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-PROGRAM  = libKROOTTools.so libKROOTTools.a
+PROGRAM  = libKRootTools.so libKRootTools.a
 LIBFILES = FileInterface.o LumiMetadataProvider.o Directory.o
 #------------------------------------------------------------------------------
 
