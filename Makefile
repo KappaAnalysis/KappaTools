@@ -1,4 +1,4 @@
-SUBDIR = Cuts Objects Plots Tools Toolbox
+SUBDIR = Toolbox RootTools RooFitTools Cuts Objects Plots
 
 all: $(SUBDIR)
 	for DIR in $(SUBDIR); do \

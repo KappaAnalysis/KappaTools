@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
-PROGRAM  = libKTools.so libKTools.a
-LIBFILES = FileInterface.o LumiMetadataProvider.o MinimalParser.o
+PROGRAM  = libKROOTTools.so libKROOTTools.a
+LIBFILES = FileInterface.o LumiMetadataProvider.o Directory.o
 #------------------------------------------------------------------------------
 
 include ../Makefile.root
