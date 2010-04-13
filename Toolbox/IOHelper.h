@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <iomanip>
+#include "VectorTools.h"
+#include <set>
+#include <map>
 
 class OStreamGuard
 {
@@ -17,16 +20,15 @@ private:
 };
 
 template<typename T>
-void printMatrix(T **matrix, const size_t x, const size_t y, const size_t width = 10)
-{
-	OStreamGuard guard(std::cout);
-	for (size_t i = 0; i < x; ++i)
-	{
-		for (size_t j = 0; j < y; ++j)
-			std::cout << std::setw(width) << matrix[i][j] << " ";
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-}
+void printMatrix(T **matrix, const size_t x, const size_t y, const size_t width = 10);
+
+template<typename T1, typename T2>
+std::ostream &operator<<(std::ostream &os, const std::map<T1, T2> &m);
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const std::set<T> &s);
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const std::vector<T> &v);
+
+#include "IOHelper.hxx"
 
 #endif
