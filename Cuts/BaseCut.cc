@@ -1,11 +1,26 @@
 #include "BaseCut.h"
 namespace KappaTools
 {
-	BaseCut::BaseCut(std::string tmpCutName) : cutName(tmpCutName), eval_tuple(0) {}
+	BaseCut::BaseCut(std::string tmpCutName) : cutName(tmpCutName), mode(NORMAL), eval_tuple(0) {}
 
 	bool BaseCut::getDecision()
 	{
-		return getInternalDecision();
+		switch (mode)
+		{
+			case ALWAYSTRUE:
+				return true;
+			case ALWAYSFALSE:
+				return false;
+			case INVERTED:
+				return !getInternalDecision();
+			default:
+				return getInternalDecision();
+		}
+	}
+
+	void BaseCut::setDecisionMode(char mode_)
+	{
+		mode = mode_;
 	}
 
 	void BaseCut::setName(std::string tmpCutName)
