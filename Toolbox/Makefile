@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 PROGRAM  = libKToolbox.so libKToolbox.a
-LIBFILES = toolbox.o ProgressMonitor.o IOHelper.o StringTools.o
+LIBFILES = toolbox.o ProgressMonitor.o IOHelper.o StringTools.o EventLogger.o
 #------------------------------------------------------------------------------
 
 include ../Makefile.base
