@@ -5,6 +5,7 @@
 #include "BaseCut.h"
 #include <iostream>
 #include <boost/dynamic_bitset.hpp>
+#include "TH1F.h"
 
 namespace KappaTools
 {
@@ -49,6 +50,7 @@ namespace KappaTools
 			void collect();
 			void nextEvent();
 			void printTable();
+			void writeHistogram(std::string histoname);
 	};
 }
 #endif
