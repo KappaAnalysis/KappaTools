@@ -1,23 +1,14 @@
 #ifndef TBIOHELPER_H
 #define TBIOHELPER_H
 
+#include <boost/io/ios_state.hpp>
 #include <iostream>
 #include <iomanip>
 #include "VectorTools.h"
 #include <set>
 #include <map>
 
-class OStreamGuard
-{
-public:
-	OStreamGuard(std::ostream &_os);
-	~OStreamGuard();
-private:
-	std::ostream &os;
-	std::streamsize p, w;
-	std::ios_base::fmtflags flags;
-	char f;
-};
+typedef boost::io::ios_all_saver OStreamGuard;
 
 template<typename T>
 void printMatrix(T **matrix, const size_t x, const size_t y, const size_t width = 10);
