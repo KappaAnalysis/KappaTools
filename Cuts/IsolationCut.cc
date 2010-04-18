@@ -88,6 +88,16 @@ namespace KappaTools
 			if (coneSize == 0.6)
 				return obj->ecalIso06;
 		}
+
+		if (isoType == RELCOMBISO)
+		{
+			if (coneSize == 0.3)
+				return (obj->sumPtIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
+			if (coneSize == 0.5)
+				return (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
+			if (coneSize == 0.6)
+				return (obj->sumPtIso06 + obj->hcalIso06 + obj->ecalIso06) / obj->p4.pt();
+		}
 		return -1;
 	}
 }

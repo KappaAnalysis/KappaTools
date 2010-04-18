@@ -19,6 +19,7 @@ namespace KappaTools
 			const static unsigned char TRACKISO = 0;
 			const static unsigned char ECALISO  = 1;
 			const static unsigned char HCALISO  = 2;
+			const static unsigned char RELCOMBISO  = 3;
 
 			IsolationCut();
 			IsolationCut(T * tmpObj);
