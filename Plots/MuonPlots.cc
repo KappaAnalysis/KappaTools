@@ -6,36 +6,36 @@ namespace KappaTools
 	{
 		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_, tmpSubDirectory_);
 
-		muon_pt 					= new TH1D("pt","p_{T} of muon", 75, 0., 150.);
-		muon_pt_low		 		= new TH1D("pt_low","p_{T} of muon", 50, 0., 25.);
-		muon_eta 					= new TH1D("eta","#eta of muon", 50, -5., 5.);
-		muon_eta_zoom			= new TH1D("eta_zoom","#eta of muon", 50, -2.5, 2.5);
-		muon_phi					= new TH1D("phi","#phi of muon", 50, -3.5, 3.5);
+		muon_pt 					= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 150.);
+		muon_pt_low		 		= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
+		muon_eta 					= new TH1D("eta","#eta", 50, -5., 5.);
+		muon_eta_zoom			= new TH1D("eta_zoom","#eta", 50, -2.5, 2.5);
+		muon_phi					= new TH1D("phi","#phi", 50, -3.5, 3.5);
 
-		muon_ecalIso03		= new TH1D("ecalIso03","ecal isolation 0.3 of muon", 50, 0, 5.);
-		muon_hcalIso03		= new TH1D("hcalIso03","hcal isolation 0.3 of muon", 50, 0, 5.);
-		muon_trackIso03		= new TH1D("trackIso03","track isolation 0.3 of muon", 50, 0, 5.);
+		muon_ecalIso03		= new TH1D("ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 5.);
+		muon_hcalIso03		= new TH1D("hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 5.);
+		muon_trackIso03		= new TH1D("trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 5.);
 
-		muon_ecalIso06		= new TH1D("ecalIso06","ecal isolation 0.6 of muon", 50, 0, 5.);
-		muon_hcalIso06		= new TH1D("hcalIso06","hcal isolation 0.6 of muon", 50, 0, 5.);
-		muon_trackIso06		= new TH1D("trackIso06","track isolation 0.6 of muon", 50, 0, 5.0);
+		muon_ecalIso06		= new TH1D("ecalIso06","\\mathrm{iso}_{\\mathrm{ecal}}(0.6)", 50, 0, 5.);
+		muon_hcalIso06		= new TH1D("hcalIso06","\\mathrm{iso}_{\\mathrm{hcal}}(0.6)", 50, 0, 5.);
+		muon_trackIso06		= new TH1D("trackIso06","\\mathrm{iso}_{\\mathrm{trk.}}(0.6)", 50, 0, 5.0);
 
-		muon_type					= new TH1D("type","type of muon (is, tracker, calo, sta, global)", 10, 0, 5);
+		muon_type					= new TH1D("type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
 
 		muon_trackHits					= new TH1D("trackHits","number of muon track hits", 50, 0., 50.);
 		muon_numberOfChambers		= new TH1D("numberOfChambers","number of muon chambers", 20, 0., 20.);
 
-		vertex_chi2					= new TH1D("vertex_chi2","#chi^{2} of muon vertex", 50, 0., 50.);
-		vertex_ndof					= new TH1D("vertex_ndof","ndof of muon vertex", 25, 0., 25.);
-		vertex_chi2norm			= new TH1D("vertex_chi2norm","norm. #chi^{2} of muon vertex", 10, 0., 10.);
-		vertex_chi2prob			= new TH1D("vertex_chi2prob","prob(#chi^{2}) of muon vertex", 50, 0., 1.);
+		vertex_chi2					= new TH1D("vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
+		vertex_ndof					= new TH1D("vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
+		vertex_chi2norm			= new TH1D("vertex_chi2norm","#chi^{2} / \\mathrm{ndof}", 10, 0., 10.);
+		vertex_chi2prob			= new TH1D("vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
 
-		IP								= new TH1D("IP","impact parameter of muon track", 50, -0.1, 0.1);
-		IPSig							= new TH1D("IPSig","impact parameter of muon track over uncertainty of track and PV", 50, -10, 10);
-		IPvsIPSig					= new TH2D("IPvsIPSig","impact parameter of muon track vs. sign. version of IP", 50, -0.1, 0.1, 50, -10, 10);
+		IP								= new TH1D("IP","\\mathrm{IP}", 50, -0.1, 0.1);
+		IPSig							= new TH1D("IPSig","\\mathrm{IP}_\\mathrm{signif.}", 50, -10, 10);
+		IPvsIPSig					= new TH2D("IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 50, -0.1, 0.1, 50, -10, 10);
 
-		caloComp	= new TH1D("caloComp","calo compatibility of the muon", 100, 0., 1.);
-		segComp		= new TH1D("segComp","segment compatibility of the muon", 100, 0., 1.);
+		caloComp	= new TH1D("caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
+		segComp		= new TH1D("segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
 
 		track = new KappaTools::StandardTrackPlots(tmpDirectory, "track", "");
 		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "innerTrack", "");
