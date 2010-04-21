@@ -10,8 +10,8 @@
 #include <Toolbox/ProgressMonitor.h>
 #include <DataFormats/src/classes.h>
 
-typedef unsigned long run_id;
-typedef unsigned long lumi_id;
+typedef unsigned int run_id;
+typedef unsigned int lumi_id;
 
 struct FileInterface
 {
