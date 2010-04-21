@@ -15,7 +15,7 @@ typedef unsigned long lumi_id;
 
 struct FileInterface
 {
-	FileInterface(std::vector<std::string> &files, bool shuffle = false, int verbose = 2);
+	FileInterface(std::vector<std::string> files, bool shuffle = false, int verbose = 2);
 	void AssignEventPtr(KEventMetadata **meta_event, KGenEventMetadata **meta_event_gen = 0);
 	void AssignLumiPtr(run_id run, lumi_id lumi,
 		KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen = 0);

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-FileInterface::FileInterface(vector<string> &files, bool shuffle, int verbose) :
+FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	eventdata("Events"), isMC(false), lumidata("Lumis"), verbosity(verbose)
 {
 	if (shuffle)
