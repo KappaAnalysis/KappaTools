@@ -6,22 +6,22 @@ namespace KappaTools
 	{
 		getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
 
-		pt 						= new TH1D("pt","p_{T}", 75, 0., 75.);
-		pt_low 				= new TH1D("pt_low","p_{T}", 50, 0., 25.);
-		pt_full 			= new TH1D("pt_full","p_{T}", 100, 0., 1000.);
+		pt 						= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 75.);
+		pt_low 				= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
+		pt_full 			= new TH1D("pt_full","p_{\\mathrm{T}}", 100, 0., 1000.);
 		eta						= new TH1D("eta","#eta", 50, -5., 5.);
 		eta_zoom			= new TH1D("eta_zoom","#eta", 50, -2.5, 2.5);
 		phi						= new TH1D("phi","#phi", 50, -3.5, 3.5);
 
-		ref_x					= new TH1D("ref_x","reference point: x", 100, -3., 3.);
-		ref_y					= new TH1D("ref_y","reference point: y", 100, -3., 3.);
-		ref_z					= new TH1D("ref_z","reference point: z", 100, -15., 15.);
-		ref_rho				= new TH1D("ref_rho","reference point: rho", 100, -15., 15.);
+		ref_x					= new TH1D("ref_x","x_{\\mathrm{ref.}}", 100, -3., 3.);
+		ref_y					= new TH1D("ref_y","y_{\\mathrm{ref.}}", 100, -3., 3.);
+		ref_z					= new TH1D("ref_z","z_{\\mathrm{ref.}}", 100, -15., 15.);
+		ref_rho				= new TH1D("ref_rho","#rho_{\\mathrm{ref.}}", 100, -15., 15.);
 
-		chi2					= new TH1D("chi2","#chi^{2} of track", 50, 0., 50.);
-		ndof					= new TH1D("ndof","ndof of track", 50, 0., 50.);
-		chi2norm			= new TH1D("chi2norm","norm. #chi^{2} of track", 50, 0., 25.);
-		chi2prob			= new TH1D("chi2prob","prob(#chi^{2}) of track", 50, 0., 1.);
+		chi2					= new TH1D("chi2","#chi^{2}", 50, 0., 50.);
+		ndof					= new TH1D("ndof","\\mathrm{ndof}", 50, 0., 50.);
+		chi2norm			= new TH1D("chi2norm","#chi^{2} / \\mathrm{ndof}", 50, 0., 25.);
+		chi2prob			= new TH1D("chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
 
 		errPt	= new TH1D("errPt","errPt", 100, 0., 0.25);
 		errEta	= new TH1D("errEta","errEta", 100, 0., 0.025);
@@ -29,10 +29,10 @@ namespace KappaTools
 		errDxy	= new TH1D("errDxy","errDxy", 100, 0., 0.75);
 		errDz	= new TH1D("errDz","errDz", 100, 0., 2.5);
 
-		nPixelHits		= new TH1D("nPixelHits","number of hits in pixel", 5, 0., 5.);
-		nStripHits		= new TH1D("nStripHits","number of hits in strip", 20, 0., 20.);
+		nPixelHits		= new TH1D("nPixelHits","\\mathrm{hits\\,\\,in\\,\\,pixel}", 5, 0., 5.);
+		nStripHits		= new TH1D("nStripHits","\\mathrm{hits\\,\\,in\\,\\,strip}", 20, 0., 20.);
 
-		quality				= new TH1D("quality", "quality of the track", 16, 0., 16.);
+		quality				= new TH1D("quality", "\\mathrm{track\\,\\,quality}", 16, 0., 16.);
 	}
 
 	void StandardTrackPlots::process(KDataTrack * track, KDataVertex * pv, double weight)
