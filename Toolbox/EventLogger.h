@@ -8,14 +8,13 @@
 class EventID
 {
 public:
-	unsigned long nEvent;
-	unsigned long nLumi;
-	unsigned long nRun;
-	unsigned long nBX;
-	EventID(KEventMetadata * metadata)
-	{
-		nEvent = metadata->nEvent;
-	};
+	unsigned int nEvent;
+	unsigned int nLumi;
+	unsigned int nRun;
+	int nBX;
+	EventID(KEventMetadata * metadata) :
+		nEvent(metadata->nEvent), nLumi(metadata->nLumi),
+		nRun(metadata->nRun), nBX(metadata->nBX) {};
 };
 
 class EventLogger
