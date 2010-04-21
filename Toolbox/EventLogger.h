@@ -20,11 +20,14 @@ public:
 
 class EventLogger
 {
+public:
+	EventLogger();
+	void clear();
+	void put(KEventMetadata * metadata);
+	void print();
+
+private:
 	std::vector<EventID> store;
-	public:
-		EventLogger();
-		void clear();
-		void put(KEventMetadata * metadata);
-		void print();
 };
+
 #endif

@@ -19,4 +19,5 @@ namespace KappaTools
 			KLumiMetadata * get(KEventMetadata * eventMetadata);
 	};
 }
+
 #endif

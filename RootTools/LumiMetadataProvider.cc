@@ -10,7 +10,7 @@ KappaTools::LumiMetadataProvider::LumiMetadataProvider(TTree * lumis_tree)
 
 	std::cout << nentries << " lumi blocks\n";
 
-	for (unsigned int i=0;i<nentries;i++)	
+	for (unsigned int i=0;i<nentries;i++)
 	{
 		lumis_tree->GetEntry(i);
 		std::pair<unsigned long,unsigned long> idn (m_eventinfo->nRun, m_eventinfo->nLumi);
@@ -23,6 +23,4 @@ KLumiMetadata * KappaTools::LumiMetadataProvider::get(KEventMetadata * eventMeta
 {
 	std::pair<unsigned long,unsigned long> idn (eventMetadata->nRun, eventMetadata->nLumi);
 	return &tmpLumiMetadatas[idn];
-}	
-
-
+}
