@@ -3,4 +3,6 @@
 *.o
 *.so
 *.root
+*.bin
+*.sbin
 .svn
