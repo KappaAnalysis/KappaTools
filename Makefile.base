@@ -9,7 +9,7 @@ COPTS    = -g -O
 endif
 
 ifndef ARCH
-ARCH     = $(if $(findstring x86_64,$(shell uname -m)), "-m64", "-m32")
+ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++

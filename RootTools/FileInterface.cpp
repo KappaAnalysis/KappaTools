@@ -34,20 +34,35 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	eventdata.SetBranchAddress("KEventMetadata", &current_event);
 }
 
+KEventMetadata *FileInterface::GetEventMetadata()
+{
+	return current_event;
+}
+
+KGenEventMetadata *FileInterface::GetGenEventMetadata()
+{
+	if (!isMC)
+		return 0;
+	return static_cast<KGenEventMetadata*>(current_event);
+}
+
 void FileInterface::AssignEventPtr(KEventMetadata **meta_event, KGenEventMetadata **meta_event_gen)
 {
-	if (isMC)
-	{
-		*meta_event = current_event;
-		if (meta_event_gen)
-			*meta_event_gen = static_cast<KGenEventMetadata*>(current_event);
-	}
-	else
-	{
-		*meta_event = current_event;
-		if (meta_event_gen)
-			*meta_event_gen = 0;
-	}
+	*meta_event = GetEventMetadata();
+	if (meta_event_gen)
+		*meta_event_gen = GetGenEventMetadata();
+}
+
+KLumiMetadata *FileInterface::GetLumiMetadata(run_id run, lumi_id lumi)
+{
+	return &(lumimap_mc[make_pair(run, lumi)]);
+}
+
+KGenLumiMetadata *FileInterface::GetGenLumiMetadata(run_id run, lumi_id lumi)
+{
+	if (!isMC)
+		return 0;
+	return static_cast<KGenLumiMetadata*>(GetLumiMetadata(run, lumi));
 }
 
 void FileInterface::AssignLumiPtr(run_id run, lumi_id lumi,
