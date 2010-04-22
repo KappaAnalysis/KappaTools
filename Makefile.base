@@ -1,11 +1,24 @@
+include ../Makefile.user
+
+ifndef MYPREFIX
+MYPREFIX = $(HOME)
+endif
+
+ifndef COPTS
 COPTS    = -g -O
+endif
+
+ifndef ARCH
+ARCH     = $(if $(findstring x86_64,$(shell uname -m)), "-m64", "-m32")
+endif
+
 CXX      = g++
-CXXFLAGS = $(COPTS) -Wall -fPIC -I.. -I../../Kappa
+CXXFLAGS = $(COPTS) $(ARCH) -Wall -fPIC -I.. -I../../Kappa
 # gcc 4.3 disallows static in template specializations
 CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -v 2>&1 | grep "version 4.3"),"","static")
 
 LD       = g++
-LDFLAGS  = -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
+LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
 
 all: $(PROGRAM)
 
