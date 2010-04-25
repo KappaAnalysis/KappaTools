@@ -7,6 +7,7 @@
 #include "BasePlot.h"
 #include "MuonPlots.h"
 #include "JetPlots.h"
+#include "TNtuple.h"
 
 #include "DataFormats/interface/KMuon.h"
 #include "../Objects/Zmumu.h"
@@ -20,7 +21,7 @@ namespace KappaTools
 			TH1D * Z_mass, * Z_mass_low, * Z_mass_zoom;
 			TH1D * Z_phi, * Z_eta, * Z_pt, * Z_pt_full;
 			TH1D * muons_dR, * muons_dPhi;
-			
+
 			TH1D * zjet_dR, * zjet_dPhi;
 
 			StandardMuonPlots * muons_plots;
@@ -35,6 +36,16 @@ namespace KappaTools
 			void process(KappaTools::ZmumuObjects<JetType, METType> * zmumu, double weight = 1.0);
 			void final();
 	};
+
+	template <typename ZmumuType>
+	class ZmumuNtuple : public BasePlot
+	{
+		private:
+			TNtuple * ntuple;
+		public:
+			ZmumuNtuple(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			void process(ZmumuType * zmumu, double weight = 1.0);
+			void final();
+	};
 }
 #endif
-
