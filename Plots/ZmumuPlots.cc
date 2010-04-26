@@ -13,10 +13,9 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_pt_full					= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);
 	Z_eta 						= new TH1D("Z_eta","#eta_{Z}", 50, -5., 5.);
 	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
-	
+
 	zjet_dR						= new TH1D("zjet_dR", "#DeltaR(Z,jet)", 50, 0., 6.5);
 	zjet_dPhi					= new TH1D("zjet_dPhi", "#Delta #phi(Z,jet)", 50, 0., 3.5);
-
 
 	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
 	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 50, 0., 3.5);
@@ -49,7 +48,7 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 		zjet_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->p4, zmumu->getRJet()->p4), weight);
 		zjet_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4, zmumu->getRJet()->p4), weight);
 	}
-	
+
 	muons_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
 	muons_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
 	muon1_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
@@ -64,6 +63,40 @@ void KappaTools::ZmumuPlots<JetType, METType>::final()
 
 }
 
+
+template <typename ZmumuType>
+KappaTools::ZmumuNtuple<ZmumuType>::ZmumuNtuple(TDirectory * tmpFile, TString directory, TString subDirectory) : ntuple(0)
+{
+	getDirectory(tmpFile, directory, subDirectory);
+	ntuple = new TNtuple("ntuple", "ntuple", "weight:mass:pt:eta:pt1:pt2:eta1:eta2");
+}
+
+template <typename ZmumuType>
+void KappaTools::ZmumuNtuple<ZmumuType>::process(ZmumuType * zmumu, double weight)
+{
+	if (!zmumu)
+		return;
+
+	ntuple->Fill(
+		weight,
+		zmumu->getDiMu().mass(),
+		zmumu->getDiMu().pt(),
+		zmumu->getDiMu().eta(),
+		zmumu->getMuon1()->p4.pt(),
+		zmumu->getMuon2()->p4.pt(),
+		zmumu->getMuon1()->p4.eta(),
+		zmumu->getMuon2()->p4.eta()
+	);
+}
+
+template <typename ZmumuType>
+void KappaTools::ZmumuNtuple<ZmumuType>::final()
+{
+
+}
+
 //template class KappaTools::ZmumuPlots<MTAPFJet>;
 template class KappaTools::ZmumuPlots<KDataJet, KDataMET>;
 template class KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>;
+template class KappaTools::ZmumuNtuple<KappaTools::ZmumuObjects<KDataJet, KDataMET> >;
+template class KappaTools::ZmumuNtuple<KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET> >;
