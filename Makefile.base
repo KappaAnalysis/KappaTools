@@ -15,7 +15,8 @@ endif
 CXX      = g++
 CXXFLAGS = $(COPTS) $(ARCH) -Wall -fPIC -I.. -I../../Kappa
 # gcc 4.3 disallows static in template specializations
-CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -v 2>&1 | grep "Version 4.4"),"","static")
+#CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -v 2>&1 | grep "Version 4.4"),"","static")
+CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -dumpversion)|sed -e 's|.||' -ge 430,"","static")
 
 LD       = g++
 LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
