@@ -1,6 +1,7 @@
 #include "RunLumiReader.h"
 #include <boost/property_tree/json_parser.hpp>
 #include "Toolbox/StringTools.h"
+#include "Toolbox/IOHelper.h"
 
 void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > > &lumifilter)
 {
@@ -30,4 +31,15 @@ RunLumiSelector::RunLumiSelector(const run_id _passRun, const std::string json)
 {
 	if (json != "")
 		readLumiFilter(json, lumifilter);
+}
+
+std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
+{
+	return os << p.first << "-" << p.second;
+}
+
+std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
+{
+	os << "Accepted runs / lumis:" << std::endl << m.lumifilter << std::endl
+		<< "All runs <= " << m.passRun << " are automatically accepted" << std::endl;
 }

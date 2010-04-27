@@ -23,7 +23,11 @@ public:
 					return true;
 		return false;
 	}
+
+	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:
 	run_id passRun;
 	std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > > lumifilter;
 };
+
+std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
