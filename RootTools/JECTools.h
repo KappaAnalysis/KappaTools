@@ -8,24 +8,22 @@
 template<typename T>
 inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec, const double jes = 1)
 {
-	jet.p4 *= jes;
 	jec->setJetEta(jet.p4.eta());
 	jec->setJetPt(jet.p4.pt());
 	jec->setJetE(jet.p4.E());
 	jec->setJetPhi(jet.p4.phi());
-	jet.p4.SetPt(jet.p4.pt() * jec->getCorrection());
+	jet.p4 *= (jec->getCorrection() * jes);
 }
 
 template<>
 inline void correctSingleJet(KDataJet &jet, FactorizedJetCorrector *jec, const double jes)
 {
-	jet.p4 *= jes;
 	jec->setJetEta(jet.p4.eta());
 	jec->setJetPt(jet.p4.pt());
 	jec->setJetE(jet.p4.E());
 	jec->setJetPhi(jet.p4.phi());
 	jec->setJetEMF(jet.emf);
-	jet.p4.SetPt(jet.p4.pt() * jec->getCorrection());
+	jet.p4 *= (jec->getCorrection() * jes);
 }
 
 template<typename T>
