@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o
+LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o IOHelper.o
 PROGRAM  = libKToolbox.so libKToolbox.a example.bin example.sbin
 #------------------------------------------------------------------------------
 
