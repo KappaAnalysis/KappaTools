@@ -7,7 +7,7 @@ include ../Makefile.base
 COPTS += -pedantic
 
 %.bin: %.o
-	$(LD) $(LDFLAGS) -lToolbox -o $@ $^
+	$(LD) $(LDFLAGS) -lKToolbox -o $@ $^
 
 %.sbin: %.o libKToolbox.a
 	$(LD) $(LDFLAGS) -o $@ $^
