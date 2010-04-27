@@ -1,5 +1,6 @@
 #------------------------------------------------------------------------------
-LIBFILES = BasePlot.o StandardP4Plots.o MuonPlots.o ZmumuPlots.o JetPlots.o TrackPlots.o
+LIBFILES = BasePlot.o StandardP4Plots.o MuonPlots.o ZmumuPlots.o JetPlots.o \
+	TrackPlots.o VertexPlots.o
 PROGRAM  = libKPlots.so libKPlots.a $(LIBFILES)
 #------------------------------------------------------------------------------
 
