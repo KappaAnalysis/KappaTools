@@ -26,7 +26,7 @@ void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pa
 	}
 }
 
-RunLumiSelector::RunLumiSelector(const run_id _passRun, const std::string json)
+RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRun)
 	: passRun(_passRun)
 {
 	if (json != "")

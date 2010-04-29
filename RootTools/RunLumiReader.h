@@ -6,7 +6,7 @@ void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pa
 class RunLumiSelector
 {
 public:
-	RunLumiSelector(const run_id _passRun = 1, const std::string json = "");
+	RunLumiSelector(const std::string json = "", const run_id _passRun = 1);
 	inline bool accept(const run_id run, const lumi_id lumi) const
 	{
 		if (run <= passRun)
