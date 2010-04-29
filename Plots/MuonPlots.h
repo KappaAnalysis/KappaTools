@@ -1,5 +1,5 @@
-#ifndef KAPPA_MUON_PLOTS
-#define KAPPA_MUON_PLOTS
+#ifndef KAPPA_MUONPLOTS_H
+#define KAPPA_MUONPLOTS_H
 
 #include "TH1D.h"
 #include "TH2D.h"

@@ -13,9 +13,9 @@ namespace KappaTools
 		public:
 			// available modes:
 			static const int AND = 0; // true, if all cuts are passed (default)
-			static const int OR  = 1;	// true, if at least one cut is passed
-			static const int XOR = 2;	// true, if only one cut is passed
-			static const int NOT = 3;	// true, if no cut is passed
+			static const int OR  = 1; // true, if at least one cut is passed
+			static const int XOR = 2; // true, if only one cut is passed
+			static const int NOT = 3; // true, if no cut is passed
 			static const int TRU = 4; // true, always, ever, really ever
 
 			CutGroup();

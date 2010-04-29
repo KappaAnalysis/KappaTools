@@ -34,7 +34,7 @@ namespace KappaTools
 			void setMinCut(double min_);
 			void setMaxCut(double max_);
 			
-			virtual bool getInternalDecision();		
+			virtual bool getInternalDecision();
 			
 			double getDecisionValue();
 			
