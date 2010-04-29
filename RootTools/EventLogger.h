@@ -1,5 +1,5 @@
-#ifndef KEventLogger
-#define KEventLogger
+#ifndef KAPPA_EVENTLOGGER_H
+#define KAPPA_EVENTLOGGER_H
 
 #include <vector>
 #include <iostream>

@@ -1,5 +1,5 @@
-#ifndef KLumiMetadataProvider_h
-#define KLumiMetadataProvider_h
+#ifndef KAPPA_LUMIMETADATAPROVIDER_H
+#define KAPPA_LUMIMETADATAPROVIDER_H
 
 #include "DataFormats/interface/KMetadata.h"
 #include <map>

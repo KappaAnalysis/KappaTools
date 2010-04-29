@@ -1,5 +1,5 @@
-#ifndef KJetPlots_h
-#define KJetPlots_h
+#ifndef KAPPA_JETPLOTS_H
+#define KAPPA_JETPLOTS_H
 
 #include "TH1D.h"
 #include "TH2D.h"

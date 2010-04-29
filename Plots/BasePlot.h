@@ -1,5 +1,5 @@
-#ifndef KBasePlot_h
-#define KBasePlot_h
+#ifndef KAPPA_BASEPLOT_H
+#define KAPPA_BASEPLOT_H
 
 #include "TDirectory.h"
 

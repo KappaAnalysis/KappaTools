@@ -1,5 +1,5 @@
-#ifndef KTrackPlots_h
-#define KTrackPlots_h
+#ifndef KAPPA_TRACKPLOTS_H
+#define KAPPA_TRACKPLOTS_H
 
 #include "TH1D.h"
 #include "TH2D.h"

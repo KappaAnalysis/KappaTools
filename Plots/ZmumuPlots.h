@@ -1,5 +1,5 @@
-#ifndef KZmumuPlots_h
-#define KZmumuPlots_h
+#ifndef KAPPA_ZMUMUPLOTS_H
+#define KAPPA_ZMUMUPLOTS_H
 
 #include "TH1D.h"
 #include "TH2D.h"

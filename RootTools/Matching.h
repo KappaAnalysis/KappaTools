@@ -1,5 +1,5 @@
-#ifndef MATCHING_H
-#define MATCHING_H
+#ifndef KAPPA_MATCHING_H
+#define KAPPA_MATCHING_H
 
 #include <Math/VectorUtil.h>
 

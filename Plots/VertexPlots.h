@@ -1,5 +1,5 @@
-#ifndef KVertexPlots_h
-#define KVertexPlots_h
+#ifndef KAPPA_VERTEXPLOTS_H
+#define KAPPA_VERTEXPLOTS_H
 
 #include "TH1D.h"
 #include "TH2D.h"

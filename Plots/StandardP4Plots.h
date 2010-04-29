@@ -1,5 +1,5 @@
-#ifndef KStandardPlots_h
-#define KStandardPlots_h
+#ifndef KAPPA_STANDARDPLOTS_H
+#define KAPPA_STANDARDPLOTS_H
 
 #include "TH1D.h"
 #include "TDirectory.h"

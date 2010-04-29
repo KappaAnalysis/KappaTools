@@ -1,5 +1,5 @@
-#ifndef KT_FILEINTERFACE_H
-#define KT_FILEINTERFACE_H
+#ifndef KAPPA_FILEINTERFACE_H
+#define KAPPA_FILEINTERFACE_H
 
 #include <TFile.h>
 #include <TTree.h>
