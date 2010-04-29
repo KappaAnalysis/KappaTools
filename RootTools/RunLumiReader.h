@@ -11,11 +11,12 @@ public:
 	{
 		if (run <= passRun)
 			return true;
-		std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > >::const_iterator itRun = lumifilter.find(run);
+		typedef std::vector<std::pair<lumi_id, lumi_id> > lumirange;
+		std::map<run_id, lumirange>::const_iterator itRun = lumifilter.find(run);
 		if (itRun == lumifilter.end())
 			return false;
-		const std::vector<std::pair<lumi_id, lumi_id> > &lumis = itRun->second;
-		for (std::vector<std::pair<lumi_id, lumi_id> >::const_iterator itLumis = lumis.begin(); itLumis != lumis.end(); ++itLumis)
+		const lumirange &lumis = itRun->second;
+		for (lumirange::const_iterator itLumis = lumis.begin(); itLumis != lumis.end(); ++itLumis)
 			if (lumi < itLumis->first)
 				return false;
 			else

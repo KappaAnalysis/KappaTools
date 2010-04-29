@@ -42,4 +42,5 @@ std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 {
 	os << "Accepted runs / lumis:" << std::endl << m.lumifilter << std::endl
 		<< "All runs <= " << m.passRun << " are automatically accepted" << std::endl;
+	return os;
 }
