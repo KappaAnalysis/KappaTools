@@ -49,19 +49,19 @@ namespace KappaTools
 
 	void HLTriggerCut::setTriggerMap(KLumiMetadata * tmpLumiMetadata)
 	{
-		std::map<std::string, int> tmpMuonHltNamesMap;
+		std::map<std::string, int> tmpHltNamesMap;
 
 		int idx=0;
 		for (std::vector<std::string>::iterator it = tmpLumiMetadata->hltNames.begin(); it != tmpLumiMetadata->hltNames.end(); it++)
 		{
 			std::string tmpName = *it;
 
-			if (tmpMuonHltNamesMap[tmpName])
+			if (tmpHltNamesMap[tmpName])
 				continue;
 
-			tmpMuonHltNamesMap[tmpName] = idx++;
+			tmpHltNamesMap[tmpName] = idx++;
 		}
-		hltMap=tmpMuonHltNamesMap;
+		hltMap=tmpHltNamesMap;
 	}
 
 	void HLTriggerCut::setTrigger(std::vector<std::string> selected_)
@@ -95,6 +95,14 @@ namespace KappaTools
 	void HLTriggerCut::setMaxCut(int max_)
 	{
 		max = max_;
+	}
+
+	bool HLTriggerCut::isTriggerAvailable()
+	{
+		for (std::vector<std::string>::iterator it = selected.begin(); it != selected.end() ; it++)
+			if (hltMap.find(*it) == hltMap.end())
+				return false;
+		return true;
 	}
 
 	bool HLTriggerCut::getInternalDecision()
