@@ -31,6 +31,7 @@ namespace KappaTools
 			void setMinCut(int min_);
 			void setMaxCut(int max_);
 
+			bool isTriggerAvailable();
 			bool getInternalDecision();
 			double getDecisionValue();
 	};
