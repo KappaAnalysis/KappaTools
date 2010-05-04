@@ -63,8 +63,8 @@ namespace KappaTools
 		errDxy->Fill(track->errDxy);
 		errDz->Fill(track->errDz);
 
-		nPixelHits->Fill(track->nPixelHits);
-		nStripHits->Fill(track->nStripHits);
+		nPixelHits->Fill(track->nValidPixelHits);
+		nStripHits->Fill(track->nValidStripHits);
 
 		quality->Fill(track->quality);
 	}
