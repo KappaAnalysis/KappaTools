@@ -1,7 +1,8 @@
 #include <DataFormats/src/classes.h>
 #include <boost/property_tree/ptree.hpp>
+#include <set>
 
-void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > > &lumifilter);
+void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter);
 
 class RunLumiSelector
 {
@@ -11,7 +12,7 @@ public:
 	{
 		if (run <= passRun)
 			return true;
-		typedef std::vector<std::pair<lumi_id, lumi_id> > lumirange;
+		typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
 		std::map<run_id, lumirange>::const_iterator itRun = lumifilter.find(run);
 		if (itRun == lumifilter.end())
 			return false;
@@ -24,11 +25,12 @@ public:
 					return true;
 		return false;
 	}
+	std::pair<run_id, lumi_id> getMaxRunLumiPair();
 
 	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:
 	run_id passRun;
-	std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > > lumifilter;
+	std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > lumifilter;
 };
 
 std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
