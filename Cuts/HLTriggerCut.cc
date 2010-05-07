@@ -71,6 +71,14 @@ namespace KappaTools
 		max=selected_.size();
 	}
 
+	void HLTriggerCut::setTrigger(std::string selected_)
+	{
+		selected.clear();
+		selected.push_back(selected_);
+		min=1;
+		max=1;
+	}
+
 	void HLTriggerCut::setPointer(KEventMetadata * tmpObj)
 	{
 		obj=tmpObj;
