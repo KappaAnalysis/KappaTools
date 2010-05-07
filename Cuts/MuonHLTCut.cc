@@ -16,6 +16,11 @@ namespace KappaTools
 		obj=tmpObj;
 	}
 
+	bool MuonHLTCut::isTriggerAvailable()
+	{
+		return (hltMap.find(type) != hltMap.end());
+	}
+
 	bool MuonHLTCut::getInternalDecision()
 	{
 		if (!obj)

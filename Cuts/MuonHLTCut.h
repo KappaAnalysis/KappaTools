@@ -18,6 +18,7 @@ namespace KappaTools
 			MuonHLTCut(KDataMuon * tempObj);
 			MuonHLTCut(std::string type_);
 
+			bool isTriggerAvailable();
 			void setTriggerMap(KLumiMetadata * tmpLumiMetadata);
 
 			void setType(std::string type);
