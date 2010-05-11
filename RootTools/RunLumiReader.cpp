@@ -3,7 +3,7 @@
 #include "Toolbox/StringTools.h"
 #include "Toolbox/IOHelper.h"
 
-void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pair<lumi_id, lumi_id> > > &lumifilter)
+void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -21,7 +21,7 @@ void readLumiFilter(const std::string json, std::map<run_id, std::vector<std::pa
 				else if (lumi_high == 0)
 					lumi_high = parse<lumi_id>(itLumiRange->second.data());
 			}
-			lumifilter[run].push_back(std::make_pair(lumi_low, lumi_high));
+			lumifilter[run].insert(std::make_pair(lumi_low, lumi_high));
 		}
 	}
 }
@@ -31,6 +31,13 @@ RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRun)
 {
 	if (json != "")
 		readLumiFilter(json, lumifilter);
+}
+
+std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
+{
+	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
+	std::map<run_id,lumirange>::reverse_iterator iter = lumifilter.rbegin();
+	return std::make_pair<run_id,lumi_id>(iter->first, iter->second.rbegin()->second);
 }
 
 std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)

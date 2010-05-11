@@ -12,10 +12,10 @@ namespace KappaTools
 			KDataMuon * obj;
 			unsigned char type;
 		public:
-			static const char TRACKER    = 1;
-			static const char CALO       = 2;
-			static const char STANDALONE = 4;
-			static const char GLOBAL     = 8;
+			static const char GLOBAL     = 1<<1;
+			static const char TRACKER    = 1<<2;
+			static const char STANDALONE = 1<<3;
+			static const char CALO       = 1<<4;
 			
 			MuonTypeCut();
 			MuonTypeCut(KDataMuon * tempObj);

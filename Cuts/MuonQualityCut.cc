@@ -20,13 +20,13 @@ namespace KappaTools
 	{
 		if (!obj)
 			return false;
-		return (obj->type & type);
+		return (obj->isGoodMuon & type);
 	}
 
 	double MuonQualityCut::getDecisionValue()
 	{
 		if (!obj)
 			return 0;
-		return (obj->type);
+		return (obj->isGoodMuon);
 	}
 }

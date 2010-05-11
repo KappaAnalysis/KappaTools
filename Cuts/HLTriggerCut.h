@@ -25,6 +25,7 @@ namespace KappaTools
 
 			void setTriggerMap(KLumiMetadata * tmpLumiMetadata);
 			void setTrigger(std::vector<std::string> selected_);
+			void setTrigger(std::string selected_);
 			void setPointer(KEventMetadata * tmpObj);
 			void setCut(int min_);
 			void setCut(int min_, int max_);
