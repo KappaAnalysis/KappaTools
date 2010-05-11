@@ -4,7 +4,22 @@
 #include <vector>
 #include <map>
 #include <TDirectory.h>
+#include <TFile.h>
 #include <TKey.h>
+
+class ROOTGuard
+{
+public:
+	ROOTGuard() : dir(gDirectory), file(gFile) {}
+	~ROOTGuard()
+	{
+		gDirectory = dir;
+		gFile = file;
+	}
+private:
+	TDirectory *dir;
+	TFile *file;
+};
 
 template<typename T>
 std::vector<T*> DirObjects(const TDirectory *dir)
