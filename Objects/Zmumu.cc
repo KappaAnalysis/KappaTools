@@ -49,14 +49,9 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	//std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
 
 	std::cout << "\t\t track:        " << muon->track.p4 << "\n";
-	std::cout << "\t\t inner track:  " << muon->innerTrack.p4 << "\n";
-	std::cout << "\t\t global track: " << muon->globalTrack.p4 << "\n";
 	std::cout << "\t\t IP:           " << muon->track.getIP(primaryvertex,0) << "\n";
 	std::cout << "\t\t IPsignf.:     " << muon->track.getIP(primaryvertex,2) << "\n";
-	std::cout << "\t\t IP:           " << muon->globalTrack.getIP(primaryvertex,0) << "\n";
-	std::cout << "\t\t IPsignf.:     " << muon->globalTrack.getIP(primaryvertex,2) << "\n";
-	std::cout << "\t\t IP:           " << muon->innerTrack.getIP(primaryvertex,0) << "\n";
-	std::cout << "\t\t IPsignf.:     " << muon->innerTrack.getIP(primaryvertex,2) << "\n";
+	std::cout << "\t\t hltMatch:     " << muon->hltMatch << "\n";
 }
 
 template <typename JetType, typename METType>
