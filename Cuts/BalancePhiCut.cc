@@ -92,7 +92,7 @@ namespace KappaTools
 		switch (mode)
 		{
 			case 0:
-				return ROOT::Math::VectorUtil::Phi_mpi_pi(sum1.phi()-sum2.phi()-2*M_PI);
+				return std::abs(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(sum1,sum2)-M_PI));
 				break;
 			case 1:
 				return ROOT::Math::VectorUtil::DeltaPhi(sum1,sum2);
