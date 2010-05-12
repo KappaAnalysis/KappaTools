@@ -20,8 +20,8 @@ CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -dumpversion) | sed -e 's/.//' -ge 4
 LD       = g++
 LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
 
-PROGRAM_ALL = $(PROGRAM) $(PROGRAM_CUSTOM)
-LIBFILES_ALL = $(LIBFILES) $(LIBFILES_CUSTOM)
+PROGRAM_ALL = $(PROGRAM_CUSTOM) $(PROGRAM)
+LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
 
 all: $(PROGRAM_ALL)
 
