@@ -102,8 +102,9 @@ void FileInterface::SpeedupTree(long cache)
 			else
 				bname = b->GetName();
 			eventdata.SetBranchStatus(bname.c_str(), 0, &found);
-			if (cache > 0)
-				eventdata.AddBranchToCache(bname.c_str());
 		}
+		else
+			if (cache > 0)
+				eventdata.AddBranchToCache(b);
 	}
 }
