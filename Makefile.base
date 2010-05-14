@@ -20,25 +20,28 @@ CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -dumpversion) | sed -e 's/.//' -ge 4
 LD       = g++
 LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
 
-all: $(PROGRAM)
+PROGRAM_ALL = $(PROGRAM_CUSTOM) $(PROGRAM)
+LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
+
+all: $(PROGRAM_ALL)
 
 %.o: %.cc %.cpp %.hxx %.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.so: $(LIBFILES)
+%.so: $(LIBFILES_ALL)
 	$(LD) -shared $(LDFLAGS) -o $@ $^
 
-%.a: $(LIBFILES)
+%.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
 
-install: $(PROGRAM)
+install: $(PROGRAM_ALL)
 	test -d "$(MYPREFIX)/lib"
-	[ -n "$(filter %.a %.so, $(PROGRAM))" ] && \
-		cp $(filter %.a %.so, $(PROGRAM)) "$(MYPREFIX)/lib" \
+	[ -n "$(filter %.a %.so, $(PROGRAM_ALL))" ] && \
+		cp $(filter %.a %.so, $(PROGRAM_ALL)) "$(MYPREFIX)/lib" \
 		|| true
 #	test -d "$(MYPREFIX)/bin"
-#	[ -n "$(filter %.exe %.bin %.ana, $(PROGRAM))" ] && \
-#		cp $(filter %.exe %.bin %.ana, $(PROGRAM)) "$(MYPREFIX)/bin" \
+#	[ -n "$(filter %.exe %.bin %.ana, $(PROGRAM_ALL))" ] && \
+#		cp $(filter %.exe %.bin %.ana, $(PROGRAM_ALL)) "$(MYPREFIX)/bin" \
 #		|| true
 
 clean:

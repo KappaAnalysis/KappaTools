@@ -25,7 +25,7 @@ public:
 					return true;
 		return false;
 	}
-	std::pair<run_id,lumi_id> getMaxRunLumiPair();
+	std::pair<run_id, lumi_id> getMaxRunLumiPair();
 
 	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:

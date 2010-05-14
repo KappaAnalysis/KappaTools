@@ -76,13 +76,13 @@ namespace KappaTools
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);
 
 		muon_type->Fill(0., weight);
-		if (muon->isTrackerMuon)
+		if (muon->isTrackerMuon())
 			muon_type->Fill(1., weight);
-		if (muon->isCaloMuon)
+		if (muon->isCaloMuon())
 			muon_type->Fill(2., weight);
-		if (muon->isStandAloneMuon)
+		if (muon->isStandAloneMuon())
 			muon_type->Fill(3., weight);
-		if (muon->isGlobalMuon)
+		if (muon->isGlobalMuon())
 			muon_type->Fill(4., weight);
 
 		caloComp->Fill(muon->caloComp, weight);
