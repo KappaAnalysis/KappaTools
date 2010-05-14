@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
+#include "StringTools.h"
 
 std::vector<int> seq(int last);
 std::vector<int> seq(int start, int last);
