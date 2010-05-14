@@ -59,7 +59,7 @@ struct FileInterface
 	}
 
 	template<typename T>
-	std::map<std::string, T*> Get(bool inherited = false)
+	std::map<std::string, T*> GetAll(bool inherited = false)
 	{
 		std::map<std::string, T*> result;
 		std::vector<std::string> names = GetNames<T>(inherited);
