@@ -8,7 +8,7 @@
 
 #include <Toolbox/IOHelper.h>
 #include <Toolbox/ProgressMonitor.h>
-#include <DataFormats/src/classes.h>
+#include <DataFormats/interface/Kappa.h>
 
 typedef unsigned int run_id;
 typedef unsigned int lumi_id;
@@ -22,7 +22,7 @@ struct FileInterface
 	bool isMC;
 
 	template<typename T>
-	T *Get(std::string name, std::string altName = "")
+	T *Get(const std::string &name, const std::string altName = "")
 	{
 		TBranch *branch = eventdata.GetBranch(name.c_str());
 		std::string selected = "";
@@ -37,6 +37,35 @@ struct FileInterface
 		vBranchHolder.push_back(tmp);
 		eventdata.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
 		return tmp;
+	}
+
+	template<typename T>
+	std::vector<std::string> GetNames(bool inherited = false)
+	{
+		std::vector<std::string> result;
+		TObjArray *branches = eventdata.GetListOfBranches();
+		if (branches == 0)
+			return result;
+		TClass *req = TClass::GetClass(TypeName<T>::name);
+		std::string reqName = req->GetName();
+		for (int i = 0; i < branches->GetEntries(); ++i)
+		{
+			TBranch *b = (TBranch*)branches->At(i);
+			TClass *cur = TClass::GetClass(b->GetClassName());
+			if ((cur == req) || (inherited && cur->InheritsFrom(req)))
+				result.push_back(b->GetName());
+		}
+		return result;
+	}
+
+	template<typename T>
+	std::map<std::string, T*> Get(bool inherited = false)
+	{
+		std::map<std::string, T*> result;
+		std::vector<std::string> names = GetNames<T>(inherited);
+		for (std::vector<std::string>::const_iterator it = names.begin(); it < names.end(); ++it)
+			result[*it] = Get<T>(*it);
+		return result;
 	}
 
 	// Get event metadata objects
