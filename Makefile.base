@@ -18,7 +18,7 @@ CXXFLAGS = $(COPTS) $(ARCH) -Wall -fPIC -I.. -I../../Kappa
 CXXFLAGS += -D__Xstatic=$(if $(shell $(CXX) -dumpversion) | sed -e 's/.//' -ge 430,"","static")
 
 LD       = g++
-LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L$(MYPREFIX)/lib
+LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L../lib -L$(MYPREFIX)/lib
 
 PROGRAM_ALL = $(PROGRAM) $(PROGRAM_CUSTOM)
 LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
@@ -30,9 +30,13 @@ all: $(PROGRAM_ALL)
 
 %.so: $(LIBFILES_ALL)
 	$(LD) -shared $(LDFLAGS) -o $@ $^
+	mkdir -p ../lib
+	cp $@ ../lib
 
 %.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
+	mkdir -p ../lib
+	cp $@ ../lib
 
 install: $(PROGRAM_ALL)
 	test -d "$(MYPREFIX)/lib"

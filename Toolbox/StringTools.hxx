@@ -1,3 +1,7 @@
+#ifndef __Xstatic
+#define __Xstatic
+#endif
+
 template <typename T>
 static T parse(const std::string &s, bool fail)
 {
