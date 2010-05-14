@@ -40,6 +40,7 @@ namespace KappaTools
 			
 			static const int AbsPtDiff = 0;
 			static const int RelPtDiff = 1;
+			static const int PtRatio = 2;
 	};
 }
 #endif

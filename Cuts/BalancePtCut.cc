@@ -100,6 +100,9 @@ namespace KappaTools
 			case RelPtDiff:
 				return (sum1.pt()-sum2.pt())/sum1.pt();
 				break;
+			case PtRatio:
+				return (sum1.pt()/sum2.pt());
+				break;
 			default:
 				return -1.;
 		}

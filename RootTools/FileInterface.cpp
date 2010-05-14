@@ -82,8 +82,10 @@ void FileInterface::AssignLumiPtr(run_id run, lumi_id lumi,
 	}
 }
 
-void FileInterface::SpeedupTree()
+void FileInterface::SpeedupTree(long cache)
 {
+	if (cache > 0)
+		eventdata.SetCacheSize(cache);
 	TObjArray *branches = eventdata.GetListOfBranches();
 	if (branches == 0)
 		return;
@@ -94,13 +96,15 @@ void FileInterface::SpeedupTree()
 		{
 			UInt_t found = 0;
 			string btype = b->GetClassName();
+			string bname;
 			if (btype.find("vector") == 0)
-			{
-				string bname = string(b->GetName()) + ".*";
-				eventdata.SetBranchStatus(bname.c_str(), 0, &found);
-			}
+				bname = string(b->GetName()) + ".*";
 			else
-				eventdata.SetBranchStatus(b->GetName(), 0, &found);
+				bname = b->GetName();
+			eventdata.SetBranchStatus(bname.c_str(), 0, &found);
 		}
+		else
+			if (cache > 0)
+				eventdata.AddBranchToCache(b);
 	}
 }

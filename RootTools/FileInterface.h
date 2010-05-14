@@ -16,7 +16,7 @@ typedef unsigned int lumi_id;
 struct FileInterface
 {
 	FileInterface(std::vector<std::string> files, bool shuffle = false, int verbose = 2);
-	void SpeedupTree();
+	void SpeedupTree(long cache = 0);
 
 	TChain eventdata;
 	bool isMC;
