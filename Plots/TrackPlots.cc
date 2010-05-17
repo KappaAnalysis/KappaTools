@@ -55,7 +55,7 @@ namespace KappaTools
 		chi2->Fill(track->chi2, weight);
 		ndof->Fill(track->nDOF, weight);
 		chi2norm->Fill(track->chi2/track->nDOF, weight);
-		chi2prob->Fill(TMath::Prob(track->chi2, track->nDOF), weight);
+		chi2prob->Fill(TMath::Prob(track->chi2, static_cast<int>(track->nDOF)), weight);
 
 		errPt->Fill(track->errPt);
 		errEta->Fill(track->errEta);

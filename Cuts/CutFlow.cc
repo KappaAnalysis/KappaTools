@@ -179,7 +179,10 @@ namespace KappaTools
 	{
 		TH1F * histo = new TH1F(histoname.c_str(), histoname.c_str(), cutflow->size(), 0, cutflow->size());
 		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		{
 			histo->SetBinContent(idx+1, cutflowTable[idx]);
+			histo->GetXaxis()->SetBinLabel(idx+1, cutflow->getCutName(idx).c_str());
+		}
 		histo->Write();
 	}
 }

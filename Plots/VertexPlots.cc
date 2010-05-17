@@ -32,7 +32,7 @@ namespace KappaTools
 		chi2->Fill(pv->chi2, weight);
 		ndof->Fill(pv->nDOF, weight);
 		chi2norm->Fill(pv->chi2/pv->nDOF, weight);
-		chi2prob->Fill(TMath::Prob(pv->chi2, pv->nDOF), weight);
+		chi2prob->Fill(TMath::Prob(pv->chi2, static_cast<int>(pv->nDOF)), weight);
 	}
 
 	void StandardVertexPlots::final()

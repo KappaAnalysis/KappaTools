@@ -1,42 +1,38 @@
-#ifndef KTrackHitsCut_h
-#define KTrackHitsCut_h
+#ifndef KTrackChi2Cut_h
+#define KTrackChi2Cut_h
 
+#include "TMath.h"
 #include "BaseCut.h"
+#include "DataFormats/interface/KBasic.h"
 #include "DataFormats/interface/KTrack.h"
 
 namespace KappaTools
 {
 	template <typename T>
-	class TrackHitsCut : public BaseCut
+	class TrackChi2Cut : public BaseCut
 	{
 		private:
 			T * obj;
 			unsigned short min, max;
 			unsigned char type;
 		public:
-			enum TrackHitsType
+			enum Type
 			{
-				nPixelLayers,
-				nStripLayers,
-				nValidPixelHits,
-				nValidStripHits,
-				nValidMuonHits,
-				nLostMuonHits,
-				nBadMuonHits,
-				nValidHits,
-				nLostHits,
-				nTrackerHits // composition
+				CHI2,
+				NDOF,
+				CHI2NORM,
+				CHI2PROB
 			};
 
-			TrackHitsCut();
-			TrackHitsCut(T * tmpObj);
+			TrackChi2Cut();
+			TrackChi2Cut(T * tmpObj);
 
 			void setPointer(T * tmpObj);
 
 			void setType(unsigned char type_);
 			void setMinCut(unsigned short min_);
 			void setMaxCut(unsigned short max_);
-			
+
 			virtual bool getInternalDecision();
 			double getDecisionValue();
 	};

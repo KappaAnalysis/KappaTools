@@ -8,8 +8,33 @@ using namespace std;
 double myadd(const double &x) { return x + 12.5; }
 std::string myconv(const double &x) { return "XXX" + str(x); }
 
+// Not an ideal example on how to use CmdLineBase...
+struct CmdLineSetup
+{
+	CmdLineSetup(const int argc, char **argv) :
+		optStr('s', "string", "String", "string default"),
+		optInt('i', "integer", "Integer", 3),
+		optDouble('d', "double", "Double", 2.3),
+		optStrV('v', "svector", "Vector<string>", "a,b,c"),
+		optDV('D', "dvector", "Vector<double>", "3.2,1.54,12.2"),
+		optBool('b', "bool", "Bool", true)
+	{
+		CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version);
+		CmdLineBase::Show();
+	}
+	CmdLineOptionValue<std::string> optStr;
+	CmdLineOptionValue<int> optInt;
+	CmdLineOptionValue<double> optDouble;
+	CmdLineOptionVector<std::string> optStrV;
+	CmdLineOptionVector<double> optDV;
+	CmdLineOptionSwitch<bool> optBool;
+};
+
 int main(int argc, char **argv)
 {
+	CmdLineOptionVector<int> otherOption('I', "ivector", "Vector<int>", "1,2,3,5,8");
+	CmdLineSetup(argc, argv);
+
 	// Debug.h //////////////////////////////////////////////
 	DEBUGMSG();
 	/////////////////////////////////////////////////////////

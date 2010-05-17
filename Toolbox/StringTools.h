@@ -1,6 +1,7 @@
 #ifndef TBSTRINGTOOLS_H
 #define TBSTRINGTOOLS_H
 
+#include <vector>
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -17,6 +18,8 @@ static std::string str(const T &i);
 
 std::string tolower(std::string s);
 std::string toupper(std::string s);
+
+std::vector<std::string> tokenize(const std::string &str, const std::string &delim = " ", const bool escape = false);
 
 #include "StringTools.hxx"
 
