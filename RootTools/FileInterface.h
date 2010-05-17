@@ -46,7 +46,7 @@ struct FileInterface
 		TObjArray *branches = eventdata.GetListOfBranches();
 		if (branches == 0)
 			return result;
-		TClass *req = TClass::GetClass(TypeName<T>::name);
+		TClass *req = TClass::GetClass(TypeName<T>::name());
 		std::string reqName = req->GetName();
 		for (int i = 0; i < branches->GetEntries(); ++i)
 		{

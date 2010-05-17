@@ -4,12 +4,24 @@ namespace KappaTools
 {
 	void GoodTracksFractionCut::setPointer(KDataTracks * tmpObj)
 	{
-		obj=tmpObj;
+		obj_Tracks=tmpObj;
+		obj_TrackSummary=0;
+	}
+
+	void GoodTracksFractionCut::setPointer(KTrackSummary * tmpObj)
+	{
+		obj_Tracks=0;
+		obj_TrackSummary=tmpObj;
 	}
 
 	void GoodTracksFractionCut::setGoodTrackMask(unsigned int tmp_)
 	{
 		goodTrackMask = tmp_;
+	}
+
+	void GoodTracksFractionCut::setNumTracks(int numtracks_)
+	{
+		numtracks=numtracks_;
 	}
 
 	void GoodTracksFractionCut::setMinCut(double min_)
@@ -24,9 +36,14 @@ namespace KappaTools
 
 	bool GoodTracksFractionCut::getInternalDecision()
 	{
-		if (!obj)
+		if (!obj_Tracks && !obj_TrackSummary)
 			return false;
-	
+
+		if (obj_TrackSummary && obj_TrackSummary->nTracks <= numtracks)
+			return true;
+		if (obj_Tracks && obj_Tracks->size() <= numtracks)
+			return true;
+
 		double val = getDecisionValue();
 	
 		return (val>min && val<max);
@@ -34,16 +51,23 @@ namespace KappaTools
 
 	double GoodTracksFractionCut::getDecisionValue()
 	{
-		if (!obj)
+		if (!obj_Tracks && !obj_TrackSummary)
 			return -1.;
 
-		double goodTracks = 0;
-		double allTracks = obj->size();
-		for (KDataTracks::iterator it = obj->begin(); it != obj->end(); it++)
+		if (obj_TrackSummary)
 		{
-			if (it->quality & goodTrackMask)
-				goodTracks++;
+			return obj_TrackSummary->nTracksHQ / obj_TrackSummary->nTracks;
 		}
-		return goodTracks/allTracks;
+		else
+		{
+			double goodTracks = 0;
+			double allTracks = obj_Tracks->size();
+
+			for (KDataTracks::iterator it = obj_Tracks->begin(); it != obj_Tracks->end(); it++)
+				if (it->quality & goodTrackMask)
+					goodTracks++;
+
+			return goodTracks/allTracks;
+		}
 	};
 }
