@@ -7,7 +7,7 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 
 	Z_mass 						= new TH1D("Z_mass","m_{Z #rightarrow #mu #mu mass}", 50, 0., 150.);
 	Z_mass_low 				= new TH1D("Z_mass_low","m_{Z #rightarrow #mu #mu mass}", 50, 0., 75.);
-	Z_mass_zoom 			= new TH1D("Z_mass_zoom","m_{Z #rightarrow #mu #mu mass}", 50, 70., 110.);
+	Z_mass_zoom 			= new TH1D("Z_mass_zoom","m_{Z #rightarrow #mu #mu mass}", 60, 60., 120.);
 
 	Z_pt	 						= new TH1D("Z_pt","p_{\\mathrm{T}}^{Z}", 50, 0., 75.);
 	Z_pt_full					= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);

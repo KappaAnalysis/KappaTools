@@ -71,8 +71,12 @@ namespace KappaTools
 				return obj->nValidHits;
 			case TrackHitsCut::nLostHits:
 				return obj->nLostHits;
+			case TrackHitsCut::nTrackerHits:
+				return obj->nValidPixelHits+obj->nValidStripHits;
 			default:
 				return -1.;
 		}
 	}
+
+	template class TrackHitsCut<KDataTrack>;
 }
