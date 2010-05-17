@@ -13,9 +13,9 @@ namespace KappaTools
 			unsigned long nRun;
 			unsigned long nLumiMin;
 			unsigned long nLumiMax;
-			unsigned long nBX;
+			int nBX;
 		public:
-			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, unsigned long nBX_ = 0);
+			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, int nBX_ = 0);
 			bool contains(KEventMetadata * evt);
 			unsigned long getRun();
 	};
