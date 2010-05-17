@@ -20,6 +20,7 @@ namespace KappaTools
 			static const char INVERTED = 4;
 
 			BaseCut(std::string tmpCutName);
+			virtual ~BaseCut() {};
 			bool getDecision();
 			void setDecisionMode(char mode_);
 			virtual bool getInternalDecision() = 0;

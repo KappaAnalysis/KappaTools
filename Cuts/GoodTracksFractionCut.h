@@ -14,7 +14,7 @@ namespace KappaTools
 			KTrackSummary * obj_TrackSummary;
 			double min;
 			double max;
-			int numtracks;
+			unsigned int numtracks;
 			unsigned int goodTrackMask;
 		public:
 			GoodTracksFractionCut() : BaseCut("good track ratio"), obj_Tracks(0), obj_TrackSummary(0), min(0.), max(1.), numtracks(10), goodTrackMask(1 << 2) {};
