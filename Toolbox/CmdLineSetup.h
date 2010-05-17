@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include "String.h"
+#include "StringTools.h"
 
 // Command line option uses either no argument / requires it / is optional
 enum CmdLineOptionArg { CL_None = 0, CL_Req = 1, CL_Opt = 2};
