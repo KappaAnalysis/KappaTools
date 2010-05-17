@@ -77,4 +77,6 @@ namespace KappaTools
 				return -1.;
 		}
 	}
+
+	template class TrackHitsCut<KDataTrack>;
 }

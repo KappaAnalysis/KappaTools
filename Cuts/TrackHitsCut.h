@@ -2,7 +2,7 @@
 #define KTrackHitsCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KBasic.h"
+#include "DataFormats/interface/KTrack.h"
 
 namespace KappaTools
 {
@@ -11,8 +11,8 @@ namespace KappaTools
 	{
 		private:
 			T * obj;
-			unsigned char type;
 			unsigned short min, max;
+			unsigned char type;
 		public:
 			enum TrackHitsType
 			{
