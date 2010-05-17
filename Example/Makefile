@@ -3,7 +3,7 @@ PROGRAM  = test.ana
 #------------------------------------------------------------------------------
 
 include ../Makefile.root
-LDFLAGS += -lKToolbox -lKRootTools
+LDFLAGS += -lKToolbox -lKRootTools -lKappa
 
-%.ana: %.o ../../Kappa/DataFormats/test/dict.so
-	$(LD) $(LDFLAGS) -o $@ $^
+%.ana: %.o
+	$(LD) $(LDFLAGS) -L../../Kappa/DataFormats/test/ -o $@ $^
