@@ -24,7 +24,8 @@ namespace KappaTools
 				nLostMuonHits,
 				nBadMuonHits,
 				nValidHits,
-				nLostHits
+				nLostHits,
+				nTrackerHits // composition
 			};
 
 			TrackHitsCut();
