@@ -70,7 +70,7 @@ namespace KappaTools
 		vertex_chi2->Fill(muon->vertex.chi2, weight);
 		vertex_ndof->Fill(muon->vertex.nDOF, weight);
 		vertex_chi2norm->Fill(muon->vertex.chi2/muon->vertex.nDOF, weight);
-		vertex_chi2prob->Fill(TMath::Prob(muon->vertex.chi2, muon->vertex.nDOF), weight);
+		vertex_chi2prob->Fill(TMath::Prob(muon->vertex.chi2, static_cast<int>(muon->vertex.nDOF)), weight);
 
 		muon_trackHits->Fill(muon->trackHits, weight);
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);

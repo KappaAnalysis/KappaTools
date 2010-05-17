@@ -10,12 +10,12 @@ namespace KappaTools
 	class RunLumiEvtBXRange
 	{
 		private:
-			unsigned long nRun;
-			unsigned long nLumiMin;
-			unsigned long nLumiMax;
-			unsigned long nBX;
+			run_id nRun;
+			lumi_id nLumiMin;
+			lumi_id nLumiMax;
+			bx_id nBX;
 		public:
-			RunLumiEvtBXRange(unsigned long nRun_, unsigned long nLumiMin_ = 0, unsigned long nLumiMax_ = 0, unsigned long nBX_ = 0);
+			RunLumiEvtBXRange(run_id nRun_, lumi_id nLumiMin_ = 0, lumi_id nLumiMax_ = 0, bx_id nBX_ = 0);
 			bool contains(KEventMetadata * evt);
 			unsigned long getRun();
 	};
