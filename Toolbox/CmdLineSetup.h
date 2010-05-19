@@ -130,7 +130,7 @@ private:
 
 struct CmdLineInfo
 {
-	size_t id;
+	int id;
 	std::string arg;
 };
 
