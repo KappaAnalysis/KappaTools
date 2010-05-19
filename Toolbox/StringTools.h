@@ -11,10 +11,16 @@
 #define XQUOTE(x) #x
 
 template <typename T>
-static T parse(const std::string &s, bool fail = true);
+T parse(const std::string &s, bool fail = true);
+template <>
+std::string parse<std::string>(const std::string &s, bool);
+template <>
+bool parse<bool>(const std::string &s, bool);
 
 template <typename T>
-static std::string str(const T &i);
+std::string str(const T &i);
+template <>
+std::string str<bool>(const bool &i);
 
 std::string tolower(std::string s);
 std::string toupper(std::string s);
