@@ -19,7 +19,7 @@ struct CmdLineSetup
 		optDV('D', "dvector", "Vector<double>", "3.2,1.54,12.2"),
 		optBool('b', "bool", "Bool", true)
 	{
-		CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version);
+		CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version | OPT_Show);
 		CmdLineBase::Show();
 	}
 	CmdLineOptionValue<std::string> optStr;
