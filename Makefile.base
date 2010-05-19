@@ -17,7 +17,7 @@ endif
 
 CXX      = g++
 CXXFLAGS = $(ARCH) $(COPTS) -Wall -fPIC -I.. -I../../Kappa -I../external
-LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L../lib
+LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L. -L../lib
 
 all: $(PROGRAM_ALL)
 
