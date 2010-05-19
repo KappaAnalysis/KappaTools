@@ -133,29 +133,29 @@ void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::process(Ob
 	if (binning.size()==0)
 		return;
 
-	double pt = obj2->p4.eta();
+	double eta = obj2->p4.eta();
 
-	if (pt < binning[0])
+	if (eta < binning[0])
 		underflow->process(obj);
-	if (pt > binning[binning.size()-1])
+	if (eta > binning[binning.size()-1])
 		underflow->process(obj);
 
 	for (unsigned int idx = 0; idx < binning.size(); idx++)
 	{
 		if (mode & FILL_ABS)
-			pt = std::abs(pt);
+			eta = std::abs(eta);
 
 		bool process = false;
 		if (mode & FILL_EXCL)
-			if (idx < binning.size()-1 && pt >= binning[idx] && pt < binning[idx+1])
+			if (idx < binning.size()-1 && eta >= binning[idx] && eta < binning[idx+1])
 				process = true;
 
 		if (mode & FILL_INCL_UP)
-			if (pt >= binning[idx])
+			if (eta >= binning[idx])
 				process = true;
 
 		if (mode & FILL_INCL_DOWN)
-			if (pt <= binning[idx])
+			if (eta <= binning[idx])
 				process = true;
 
 		if (process)
