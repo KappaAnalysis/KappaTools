@@ -25,7 +25,9 @@ namespace KappaTools
 			void final();
 	};
 
-	template <typename PlottingClass, typename ObjectType>
+	// ObjectType1 -- Object to plot
+	// ObjectType2 -- Object for binning
+	template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
 	class PlotsByPt : public BasePlot
 	{
 		private:
@@ -36,7 +38,7 @@ namespace KappaTools
 		public:
 			//PlotsByPt(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
 			PlotsByPt(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
-			void process(ObjectType * obj, KDataVertex * pv = 0, double weight = 1.);
+			void process(ObjectType1 * obj, KDataVertex * pv = 0, double weight = 1., ObjectType2 * obj2 = 0);
 			void final();
 
 			void setMode(char mode_);
@@ -48,7 +50,9 @@ namespace KappaTools
 			static const char FILL_ABS = 8;
 	};
 
-	template <typename PlottingClass, typename ObjectType>
+	// ObjectType1 -- Object to plot
+	// ObjectType2 -- Object for binning
+	template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
 	class PlotsByEta : public BasePlot
 	{
 		private:
@@ -58,7 +62,7 @@ namespace KappaTools
 			int mode;
 		public:
 			PlotsByEta(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
-			void process(ObjectType * obj, KDataVertex * pv = 0, double weight = 1.);
+			void process(ObjectType1 * obj, KDataVertex * pv = 0, double weight = 1., ObjectType2 * obj2 = 0);
 			void final();
 
 			void setMode(char mode_);

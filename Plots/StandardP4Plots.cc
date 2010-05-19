@@ -33,8 +33,8 @@ void KappaTools::StandardP4Plots::final()
 }
 
 
-template <typename PlottingClass, typename ObjectType>
-KappaTools::PlotsByPt<PlottingClass, ObjectType>::PlotsByPt(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL)
 {
 	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
 
@@ -51,8 +51,8 @@ KappaTools::PlotsByPt<PlottingClass, ObjectType>::PlotsByPt(std::vector<double> 
 	}
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByPt<PlottingClass, ObjectType>::process(ObjectType * obj, KDataVertex * pv, double weight)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::process(ObjectType1 * obj, KDataVertex * pv, double weight, ObjectType2 * obj2)
 {
 	if (!obj)
 		return;
@@ -62,7 +62,7 @@ void KappaTools::PlotsByPt<PlottingClass, ObjectType>::process(ObjectType * obj,
 	if (binning.size()==0)
 		return;
 
-	double pt = obj->p4.pt();
+	double pt = obj2->p4.pt();
 
 	if (pt < binning[0])
 		underflow->process(obj);
@@ -92,20 +92,20 @@ void KappaTools::PlotsByPt<PlottingClass, ObjectType>::process(ObjectType * obj,
 	}
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByPt<PlottingClass, ObjectType>::final()
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::final()
 {
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByPt<PlottingClass, ObjectType>::setMode(char mode_)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::setMode(char mode_)
 {
 	mode = mode_;
 }
 
 
-template <typename PlottingClass, typename ObjectType>
-KappaTools::PlotsByEta<PlottingClass, ObjectType>::PlotsByEta(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL | FILL_ABS)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::PlotsByEta(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL | FILL_ABS)
 {
 	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
 
@@ -122,8 +122,8 @@ KappaTools::PlotsByEta<PlottingClass, ObjectType>::PlotsByEta(std::vector<double
 	}
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByEta<PlottingClass, ObjectType>::process(ObjectType * obj, KDataVertex * pv, double weight)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::process(ObjectType1 * obj, KDataVertex * pv, double weight, ObjectType2 * obj2)
 {
 	if (!obj)
 		return;
@@ -133,7 +133,7 @@ void KappaTools::PlotsByEta<PlottingClass, ObjectType>::process(ObjectType * obj
 	if (binning.size()==0)
 		return;
 
-	double pt = obj->p4.eta();
+	double pt = obj2->p4.eta();
 
 	if (pt < binning[0])
 		underflow->process(obj);
@@ -163,17 +163,17 @@ void KappaTools::PlotsByEta<PlottingClass, ObjectType>::process(ObjectType * obj
 	}
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByEta<PlottingClass, ObjectType>::final()
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::final()
 {
 }
 
-template <typename PlottingClass, typename ObjectType>
-void KappaTools::PlotsByEta<PlottingClass, ObjectType>::setMode(char mode_)
+template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
+void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::setMode(char mode_)
 {
 	mode = mode_;
 }
 
-template class KappaTools::PlotsByPt<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon >;
-template class KappaTools::PlotsByEta<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon >;
+template class KappaTools::PlotsByPt<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;
+template class KappaTools::PlotsByEta<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;
 
