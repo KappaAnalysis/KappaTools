@@ -13,13 +13,13 @@ ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++
-CXXFLAGS = $(COPTS) $(ARCH) -Wall -fPIC -I.. -I../../Kappa
 # gcc 4.3 disallows static in template specializations
 CXXVER   = $(shell $(CXX) -dumpversion | sed -e 's/\.//g')
 CXXFLAGS += -D__Xstatic=$(shell test $(CXXVER) -ge 430 && echo '""' || echo "static")
 
 LD       = g++
-LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L../lib -L$(MYPREFIX)/lib
+CXXFLAGS = $(ARCH) $(COPTS) -Wall -fPIC -I.. -I../../Kappa -I../external
+LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L../lib
 
 PROGRAM_ALL = $(PROGRAM) $(PROGRAM_CUSTOM)
 LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
