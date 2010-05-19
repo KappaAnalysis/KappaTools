@@ -6,4 +6,4 @@ include ../Makefile.root
 LDFLAGS += -lKToolbox -lKRootTools -lKappa
 
 %.ana: %.o
-	$(LD) $(LDFLAGS) -L../../Kappa/DataFormats/test/ -o $@ $^
+	$(CXX) $(LDFLAGS) -L../../Kappa/DataFormats/test/ -o $@ $^
