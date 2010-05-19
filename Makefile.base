@@ -50,4 +50,4 @@ install: $(PROGRAM_ALL)
 #		|| true
 
 clean:
-	@rm -f *.o *.so *.a *.exe *.bin *.ana
+	@rm -f $(PROGRAM_ALL) $(LIBFILES_ALL)
