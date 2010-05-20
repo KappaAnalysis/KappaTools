@@ -42,7 +42,7 @@ struct FileInterface
 				<< " Found: " << classRequest->GetName() << std::endl;
 			return 0;
 		}
-		T *tmp = classBranch->New();
+		T *tmp = static_cast<T*>(classBranch->New());
 		vBranchHolder.push_back(tmp);
 		eventdata.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
 		return tmp;
