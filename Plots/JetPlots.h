@@ -30,7 +30,7 @@ namespace KappaTools
 			void initSpecific();
 			void processSpecific(JetType * jet, KDataVertex * pv, double weight);
 		public:
-			StandardJetPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			StandardJetPlots(TDirectory * tmpFile, TString tmpDirectory="");
 
 			// TDirectory
 			void process(JetType * jet, KDataVertex * pv = 0, double weight = 1.);
@@ -42,7 +42,7 @@ namespace KappaTools
 		private:
 
 		public:
-			StandardPFJetsPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			StandardPFJetsPlots(TDirectory * tmpFile, TString tmpDirectory="");
 			void process(MTAPFJet * jet, MTAVertex * pv = 0);
 			void final();
 	};

@@ -1,8 +1,8 @@
 #include "StandardP4Plots.h"
 
-KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory)
 {
-	getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+	getDirectory(tmpFile, tmpDirectory);
 
 	pt 						= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 75.);
 	pt_low 				= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
@@ -34,20 +34,20 @@ void KappaTools::StandardP4Plots::final()
 
 
 template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
-KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL)
+KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory) : binning(binning_), mode(FILL_EXCL)
 {
-	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory);
 
-	all = new PlottingClass(curDirectory, "all", "");
-	underflow = new PlottingClass(curDirectory, "underflow", "");
-	overflow = new PlottingClass(curDirectory, "overflow", "");
+	all = new PlottingClass(curDirectory, "all");
+	underflow = new PlottingClass(curDirectory, "underflow");
+	overflow = new PlottingClass(curDirectory, "overflow");
 
 	for (unsigned int idx = 0; idx < binning.size(); idx++)
 	{
 		double pt_ = binning[idx];
 		TString bname = (pt_<10. ? "pt_0" : "pt_");
 		bname+=pt_;
-		plotsByBin.push_back(PlottingClass(curDirectory, bname, ""));
+		plotsByBin.push_back(PlottingClass(curDirectory, bname));
 	}
 }
 
@@ -105,20 +105,20 @@ void KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::setMode(cha
 
 
 template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
-KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::PlotsByEta(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory) : binning(binning_), mode(FILL_EXCL | FILL_ABS)
+KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::PlotsByEta(std::vector<double> binning_, TDirectory * tmpFile, TString tmpDirectory) : binning(binning_), mode(FILL_EXCL | FILL_ABS)
 {
-	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+	TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory);
 
-	all = new PlottingClass(curDirectory, "all", "");
-	underflow = new PlottingClass(curDirectory, "underflow", "");
-	overflow = new PlottingClass(curDirectory, "overflow", "");
+	all = new PlottingClass(curDirectory, "all");
+	underflow = new PlottingClass(curDirectory, "underflow");
+	overflow = new PlottingClass(curDirectory, "overflow");
 
 	for (unsigned int idx = 0; idx < binning.size(); idx++)
 	{
 		double eta_ = binning[idx];
 		TString bname = "eta_";
 		bname+=eta_;
-		plotsByBin.push_back(PlottingClass(curDirectory, bname, ""));
+		plotsByBin.push_back(PlottingClass(curDirectory, bname));
 	}
 }
 

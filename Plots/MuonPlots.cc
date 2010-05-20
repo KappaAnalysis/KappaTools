@@ -2,9 +2,9 @@
 
 namespace KappaTools
 {
-	StandardMuonPlots::StandardMuonPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString tmpSubDirectory_)
+	StandardMuonPlots::StandardMuonPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix)
 	{
-		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_, tmpSubDirectory_);
+		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_);
 
 		muon_pt 					= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 150.);
 		muon_pt_low		 		= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
@@ -37,9 +37,9 @@ namespace KappaTools
 		caloComp	= new TH1D("caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
 		segComp		= new TH1D("segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
 
-		track = new KappaTools::StandardTrackPlots(tmpDirectory, "track", "");
-		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "innerTrack", "");
-		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "globalTrack", "");
+		track = new KappaTools::StandardTrackPlots(tmpDirectory, "track");
+		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "innerTrack");
+		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "globalTrack");
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
@@ -97,9 +97,9 @@ namespace KappaTools
 	}
 
 	template <typename T>
-	MuonPlotsByType<T>::MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	MuonPlotsByType<T>::MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory)
 	{
-		TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+		TDirectory * curDirectory = getDirectory(tmpFile, tmpDirectory);
 
 		allMuons = new KappaTools::StandardMuonPlots(curDirectory, "all", "");
 		trackerMuons = new KappaTools::StandardMuonPlots(curDirectory, "tracker", "");
