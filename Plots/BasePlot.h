@@ -2,6 +2,7 @@
 #define KAPPA_BASEPLOT_H
 
 #include "TDirectory.h"
+//#include <iostream>
 
 namespace KappaTools
 {
@@ -9,11 +10,10 @@ namespace KappaTools
 	{
 		protected:
 			TDirectory * outFile;
-			TDirectory * outDirectory, * outSubDirectory;
 		
 		public:
 			BasePlot();
-			TDirectory * getDirectory(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory);
+			TDirectory * getDirectory(TDirectory * tmpFile, TString tmpDirectory);
 	};
 }
 #endif

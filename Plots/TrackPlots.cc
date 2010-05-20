@@ -2,9 +2,9 @@
 
 namespace KappaTools
 {
-	StandardTrackPlots::StandardTrackPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	StandardTrackPlots::StandardTrackPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix)
 	{
-		getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+		getDirectory(tmpFile_, tmpDirectory_);
 
 		pt 						= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 75.);
 		pt_low 				= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);

@@ -89,7 +89,7 @@ namespace KappaTools
 				-- int trackHits;
 			*/
 		public:
-			StandardMuonPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			StandardMuonPlots(TDirectory * tmpFile, TString tmpDirectory, TString prefix="");
 
 			// TDirectory
 			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
@@ -106,7 +106,7 @@ namespace KappaTools
 			T * caloMuons;
 			T * globalMuons;
 		public:
-			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory);
 			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
 			void final();
 	};

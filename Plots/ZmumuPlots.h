@@ -30,7 +30,7 @@ namespace KappaTools
 
 			StandardJetPlots<JetType> * jet_plots;
 		public:
-			ZmumuPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			ZmumuPlots(TDirectory * tmpFile, TString tmpDirectory="");
 
 			// TDirectory
 			void process(KappaTools::ZmumuObjects<JetType, METType> * zmumu, double weight = 1.0);
@@ -43,7 +43,7 @@ namespace KappaTools
 		private:
 			TNtuple * ntuple;
 		public:
-			ZmumuNtuple(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			ZmumuNtuple(TDirectory * tmpFile, TString tmpDirectory="");
 			void process(ZmumuType * zmumu, double weight = 1.0);
 			void final();
 	};

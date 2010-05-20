@@ -25,7 +25,7 @@ namespace KappaTools
 			TH1D * chi2prob;
 
 		public:
-			StandardVertexPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			StandardVertexPlots(TDirectory * tmpFile, TString tmpDirectory="");
 
 			// TDirectory
 			void process(KDataVertex * pv, double weight = 1.);
