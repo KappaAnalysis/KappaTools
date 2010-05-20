@@ -39,9 +39,9 @@ namespace KappaTools
 		if (!obj_Tracks && !obj_TrackSummary)
 			return false;
 
-		if (obj_TrackSummary && (int)obj_TrackSummary->nTracks <= numtracks)
+		if (obj_TrackSummary && obj_TrackSummary->nTracks <= numtracks)
 			return true;
-		if (obj_Tracks && (int)obj_Tracks->size() <= numtracks)
+		if (obj_Tracks && obj_Tracks->size() <= numtracks)
 			return true;
 
 		double val = getDecisionValue();

@@ -61,7 +61,7 @@ namespace KappaTools
 			case TrackChi2Cut::CHI2NORM:
 				return obj->chi2/obj->nDOF;
 			case TrackChi2Cut::CHI2PROB:
-				return TMath::Prob(obj->chi2, obj->nDOF);
+				return TMath::Prob(obj->chi2, static_cast<int>(obj->nDOF));
 			default:
 				return -1.;
 		}

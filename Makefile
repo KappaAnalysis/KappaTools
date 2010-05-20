@@ -1,4 +1,4 @@
-SUBDIR = Toolbox RootTools Cuts Objects Plots Example
+SUBDIR = external Toolbox RootTools Cuts Objects Plots Example
 
 all: $(SUBDIR)
 	for DIR in $(SUBDIR); do \

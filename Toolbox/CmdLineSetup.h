@@ -7,7 +7,7 @@
 
 // Command line option uses either no argument / requires it / is optional
 enum CmdLineOptionArg { CL_None = 0, CL_Req = 1, CL_Opt = 2};
-enum CmdLinePresets { OPT_None = 0, OPT_Help = 1, OPT_Version = 2 };
+enum CmdLinePresets { OPT_None = 0, OPT_Help = 1, OPT_Version = 2, OPT_Show = 4 };
 
 // Base class for command line options
 struct CmdLineOption
@@ -130,7 +130,7 @@ private:
 
 struct CmdLineInfo
 {
-	size_t id;
+	int id;
 	std::string arg;
 };
 
@@ -140,7 +140,7 @@ struct CmdLineBase
 	static bool GetInfo(const int argc, char **argv, CmdLineInfo *info);
 	static void DefaultAction(CmdLineInfo *info);
 
-	static void Show();
+	static void Show(std::string arg = "");
 	static void PrintHelp(std::string arg);
 	static void PrintVersion(std::string arg);
 
