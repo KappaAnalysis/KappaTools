@@ -33,8 +33,9 @@ struct FileInterface
 
 		if (selected == "")
 			return 0;
+		branch = eventdata.GetBranch(name.c_str());
 		TClass *classRequest = TClass::GetClass(TypeName<T>::name());
-		TClass *classBranch = TClass::GetClass(eventdata.GetBranch(selected.c_str())->GetClassName());
+		TClass *classBranch = TClass::GetClass(branch->GetClassName());
 		if (!classBranch->InheritsFrom(classRequest))
 		{
 			std::cout << "Incompatible types! Requested: " << classRequest->GetName()
