@@ -12,8 +12,10 @@ vector<CmdLineOption*> CmdLineBase::options;
 
 CmdLineOption::CmdLineOption(const char s, const string l,
 	const string h, const CmdLineOptionArg a)
-	: shortName(string() + s), longName(l), help(h), argument(a)
+	: longName(l), help(h), argument(a)
 {
+	if (s == 0)
+		this->shortName = "";
 	CmdLineBase::RegisterOption(this);
 }
 
