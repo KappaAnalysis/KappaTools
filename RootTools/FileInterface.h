@@ -25,6 +25,11 @@ struct FileInterface
 	T *Get(const std::string &name, const std::string altName = "")
 	{
 		TBranch *branch = eventdata.GetBranch(name.c_str());
+		if (!branch)
+		{
+			std::cout << "Requested branch not found: " << name << std::endl;
+			return 0;
+		}
 		std::string selected = "";
 		if ((branch == 0) && (altName != "") && (eventdata.GetBranch(altName.c_str()) != 0))
 			selected = altName;
