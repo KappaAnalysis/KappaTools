@@ -12,8 +12,10 @@ vector<CmdLineOption*> CmdLineBase::options;
 
 CmdLineOption::CmdLineOption(const char s, const string l,
 	const string h, const CmdLineOptionArg a)
-	: shortName(string() + s), longName(l), help(h), argument(a)
+	: longName(l), help(h), argument(a)
 {
+	if (s == 0)
+		this->shortName = "";
 	CmdLineBase::RegisterOption(this);
 }
 
@@ -48,7 +50,7 @@ void CmdLineBase::RegisterOption(CmdLineOption *opt)
 	options.push_back(opt);
 }
 
-struct option InitOpt(const std::string &name, const CmdLineOptionArg args, const int val)
+struct option InitOpt(const string &name, const CmdLineOptionArg args, const int val)
 {
 	struct option result;
 	result.name = name.c_str();
@@ -60,7 +62,7 @@ struct option InitOpt(const std::string &name, const CmdLineOptionArg args, cons
 
 bool CmdLineBase::GetInfo(const int argc, char **argv, CmdLineInfo *info)
 {
-	std::vector<struct option> optsarray;
+	vector<struct option> optsarray;
 	for (size_t i = 0; i < options.size(); ++i)
 	{
 		if (options[i]->longName != "")
@@ -71,7 +73,7 @@ bool CmdLineBase::GetInfo(const int argc, char **argv, CmdLineInfo *info)
 	optsarray.push_back(option());
 	memset(&(optsarray[optsarray.size() - 1]), 0, sizeof(struct option));
 	info->id = getopt_long_only(argc, argv, "", &(optsarray[0]), 0);
-	if ((info->id < 0) || (info->id > options.size()))
+	if ((info->id < 0) || (info->id > (int)options.size()))
 		return false;
 	if (optarg != 0)
 		info->arg = string(optarg);
@@ -87,7 +89,7 @@ void CmdLineBase::DefaultAction(CmdLineInfo *info)
 		optObj->FoundOption();
 }
 
-void CmdLineBase::Show()
+void CmdLineBase::Show(string arg)
 {
 	OStreamGuard guard(cout);
 	cout << "Used parameters: " << endl;
@@ -133,6 +135,11 @@ vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 	{
 		static CmdLineOptionCallback clVersion('h', "help",
 			"Print help", CmdLineBase::PrintHelp);
+	}
+	if (presets & OPT_Show)
+	{
+		static CmdLineOptionCallback clVersion('P', "parameters",
+			"Print parameters", CmdLineBase::Show);
 	}
 
 	CmdLineInfo opt;

@@ -2,9 +2,9 @@
 
 namespace KappaTools
 {
-	StandardVertexPlots::StandardVertexPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	StandardVertexPlots::StandardVertexPlots(TDirectory * tmpFile, TString tmpDirectory)
 	{
-		getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+		getDirectory(tmpFile, tmpDirectory);
 
 		pos_xy				= new TH1D("pos_xy","d_{xy}^{\\mathrm{pos.}}", 50, 0., 0.25);
 		pos_z					= new TH1D("pos_z","z_{\\mathrm{pos.}}", 50, -20., 20.);

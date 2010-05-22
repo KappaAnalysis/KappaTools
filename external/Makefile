@@ -7,3 +7,7 @@ boost:
 	tar -xvjf boost.tar.bz2
 	rm boost.tar.bz2
 	ln -fs boost_1_43_0/boost boost
+
+install:
+
+clean:

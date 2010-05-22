@@ -11,7 +11,7 @@ namespace KappaTools
 	{
 		private:
 			T * obj;
-			unsigned short min, max;
+			short min, max;
 			unsigned char type;
 		public:
 			enum TrackHitsType

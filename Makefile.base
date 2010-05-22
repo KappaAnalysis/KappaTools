@@ -1,5 +1,8 @@
 include ../Makefile.user
 
+PROGRAM_ALL  = $(PROGRAM) $(PROGRAM_CUSTOM)
+LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
+
 ifndef MYPREFIX
 MYPREFIX = $(HOME)
 endif
@@ -13,16 +16,8 @@ ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++
-# gcc 4.3 disallows static in template specializations
-CXXVER   = $(shell $(CXX) -dumpversion | sed -e 's/\.//g')
-CXXFLAGS += -D__Xstatic=$(shell test $(CXXVER) -ge 430 && echo '""' || echo "static")
-
-LD       = g++
 CXXFLAGS = $(ARCH) $(COPTS) -Wall -fPIC -I.. -I../../Kappa -I../external
-LDFLAGS  = $(ARCH) -O $(SYSLIBS) -L. -L../lib
-
-PROGRAM_ALL = $(PROGRAM) $(PROGRAM_CUSTOM)
-LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
+LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L. -L../lib
 
 all: $(PROGRAM_ALL)
 
@@ -30,7 +25,7 @@ all: $(PROGRAM_ALL)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 %.so: $(LIBFILES_ALL)
-	$(LD) -shared $(LDFLAGS) -o $@ $^
+	$(CXX) $(LDFLAGS) -shared -o $@ $^
 	mkdir -p ../lib
 	cp $@ ../lib
 

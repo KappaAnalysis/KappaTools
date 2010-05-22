@@ -3,9 +3,9 @@
 namespace KappaTools
 {
 	template <typename JetType>
-	StandardJetPlots<JetType>::StandardJetPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+	StandardJetPlots<JetType>::StandardJetPlots(TDirectory * tmpFile, TString tmpDirectory)
 	{
-		getDirectory(tmpFile, tmpDirectory, tmpSubDirectory);
+		getDirectory(tmpFile, tmpDirectory);
 
 		jet_pt 					= new TH1D(("pt"),"p_{T} of muon", 75, 0., 150.);
 		jet_pt_low		 		= new TH1D(("pt_low"),"p_{T} of muon", 50, 0., 25.);

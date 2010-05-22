@@ -1,9 +1,9 @@
 #include "ZmumuPlots.h"
 
 template <typename JetType, typename METType>
-KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TString directory, TString subDirectory)
+KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TString directory)
 {
-	TDirectory * tmpDirectory = getDirectory(tmpFile, directory, subDirectory);
+	TDirectory * tmpDirectory = getDirectory(tmpFile, directory);
 
 	Z_mass 						= new TH1D("Z_mass","m_{Z #rightarrow #mu #mu mass}", 50, 0., 150.);
 	Z_mass_low 				= new TH1D("Z_mass_low","m_{Z #rightarrow #mu #mu mass}", 50, 0., 75.);
@@ -20,11 +20,11 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
 	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 50, 0., 3.5);
 
-	muons_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muons", "");
-	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1", "");
-	muon2_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon2", "");
+	muons_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muons");
+	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1");
+	muon2_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon2");
 
-	jet_plots					= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet", "");
+	jet_plots					= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet");
 }
 
 template <typename JetType, typename METType>
@@ -65,9 +65,9 @@ void KappaTools::ZmumuPlots<JetType, METType>::final()
 
 
 template <typename ZmumuType>
-KappaTools::ZmumuNtuple<ZmumuType>::ZmumuNtuple(TDirectory * tmpFile, TString directory, TString subDirectory) : ntuple(0)
+KappaTools::ZmumuNtuple<ZmumuType>::ZmumuNtuple(TDirectory * tmpFile, TString directory) : ntuple(0)
 {
-	getDirectory(tmpFile, directory, subDirectory);
+	getDirectory(tmpFile, directory);
 	ntuple = new TNtuple("ntuple", "ntuple", "weight:mass:pt:eta:pt1:pt2:eta1:eta2");
 }
 

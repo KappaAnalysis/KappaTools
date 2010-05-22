@@ -33,7 +33,16 @@ struct FileInterface
 
 		if (selected == "")
 			return 0;
-		T *tmp = new T();
+		branch = eventdata.GetBranch(name.c_str());
+		TClass *classRequest = TClass::GetClass(TypeName<T>::name());
+		TClass *classBranch = TClass::GetClass(branch->GetClassName());
+		if (!classBranch->InheritsFrom(classRequest))
+		{
+			std::cout << "Incompatible types! Requested: " << classRequest->GetName()
+				<< " Found: " << classRequest->GetName() << std::endl;
+			return 0;
+		}
+		T *tmp = static_cast<T*>(classBranch->New());
 		vBranchHolder.push_back(tmp);
 		eventdata.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
 		return tmp;

@@ -40,7 +40,7 @@ namespace KappaTools
 			
 			TH1D * quality;
 		public:
-			StandardTrackPlots(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory="");
+			StandardTrackPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix="");
 
 			// TDirectory
 			void process(KDataTrack * track, KDataVertex * pv = 0, double weight = 1.);

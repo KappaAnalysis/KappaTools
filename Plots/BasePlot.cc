@@ -5,44 +5,38 @@ KappaTools::BasePlot::BasePlot()
 
 }
 
-TDirectory * KappaTools::BasePlot::getDirectory(TDirectory * tmpFile, TString tmpDirectory, TString tmpSubDirectory)
+TDirectory * KappaTools::BasePlot::getDirectory(TDirectory * tmpFile, TString tmpDirectory)
 {
-	outFile=tmpFile;
-	
-	if (tmpDirectory=="")
-		return outFile;
-	
-	// remove trailing whitespaces and replace all other whitespaces by an underscore
-	tmpDirectory = ((TString)(tmpDirectory.Strip())).ReplaceAll(" ","_");
-	tmpSubDirectory = ((TString)(tmpSubDirectory.Strip())).ReplaceAll(" ","_");
+	//std::cout << "tmpFile:    " << tmpFile->GetPath() << "\n";
+	//std::cout << "gDirectory: " << gDirectory->GetPath() << "\n";
 
-	// create directory if necessary
-	if (!outFile->GetDirectory(tmpDirectory))
+	if (tmpDirectory=="")
 	{
-		//std::cout << "create directory.." << tmpDirectory << "\n";
-		outDirectory = outFile->mkdir(tmpDirectory);
+		tmpFile->cd();
+		//std::cout << "tmpDirectory is empty... returning directory:" << tmpFile->GetPath() << "\n";
+		//std::cout << "\ttmpFile:      " << tmpFile->GetPath() << "\n";
+		//std::cout << "\tgDirectory:   " << gDirectory->GetPath() << "\n";
+		return tmpFile;
+	}
+
+	TDirectory * outDirectory;
+	if (!tmpFile->Get(tmpDirectory))
+	{
+		//std::cout << "directory '"<< tmpDirectory << "' doesn't exist...\n";
+		outDirectory = tmpFile->mkdir(tmpDirectory);
+		outDirectory->cd();
+		//std::cout << "\ttmpFile:      " << tmpFile->GetPath() << "\n";
+		//std::cout << "\toutDirectory: " << outDirectory->GetPath() << "\n";
+		//std::cout << "\tgDirectory:   " << gDirectory->GetPath() << "\n";
 	}
 	else
 	{
-		//std::cout << "change to directory.." << tmpDirectory << "\n";
-		outDirectory = (TDirectory * )outFile->GetDirectory(tmpDirectory);
+		//std::cout << "directory '"<< tmpDirectory << "' exists already...\n";
+		outDirectory = tmpFile->GetDirectory(tmpDirectory);
+		outDirectory->cd();
+		//std::cout << "\ttmpFile:      " << tmpFile->GetPath() << "\n";
+		//std::cout << "\toutDirectory: " << outDirectory->GetPath() << "\n";
+		//std::cout << "\tgDirectory:   " << gDirectory->GetPath() << "\n";
 	}
-	outDirectory->cd();
-	
-	if (tmpSubDirectory=="")
-		return outDirectory;
-		
-	if (!outDirectory->GetDirectory(tmpSubDirectory))
-	{
-		//std::cout << "create subdirectory.." << tmpSubDirectory << "\n";
-		outSubDirectory = outDirectory->mkdir(tmpSubDirectory);
-	}
-	else
-	{
-		//std::cout << "change to subdirectory.." << tmpSubDirectory << "\n";
-		outSubDirectory = (TDirectory * )outDirectory->GetDirectory(tmpSubDirectory);
-	}
-	outSubDirectory->cd();
-	
-	return outSubDirectory;
+	return outDirectory;
 }
