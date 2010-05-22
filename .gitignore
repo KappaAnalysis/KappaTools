@@ -7,3 +7,4 @@
 *.sbin
 .svn
 Example/*.ana
+external/*
