@@ -10,6 +10,7 @@
 #include "TNtuple.h"
 
 #include "DataFormats/interface/KMuon.h"
+#include "DataFormats/interface/KJetMET.h"
 #include "../Objects/Zmumu.h"
 #include "Math/GenVector/VectorUtil.h"
 namespace KappaTools

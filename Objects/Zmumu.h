@@ -5,6 +5,7 @@
 #include "DataFormats/interface/KMuon.h"
 #include "DataFormats/interface/KMetadata.h"
 #include "DataFormats/interface/KLorentzVector.h"
+#include "DataFormats/interface/KJetMET.h"
 #include "TMath.h"
 #include <stdlib.h>
 
