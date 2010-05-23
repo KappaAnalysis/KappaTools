@@ -22,7 +22,8 @@ namespace KappaTools
 			TH1D * Z_phi, * Z_eta, * Z_pt, * Z_pt_full;
 			TH1D * muons_dR, * muons_dPhi;
 
-			TH1D * zjet_dR, * zjet_dPhi;
+			TH1D * zjet_dR, * zjet_dPhi, * zjet_dPhi_zoom;
+			TH1D * jet_response;
 
 			StandardMuonPlots * muons_plots;
 			StandardMuonPlots * muon1_plots;
