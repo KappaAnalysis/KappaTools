@@ -8,10 +8,10 @@
 class EventID
 {
 public:
-	unsigned int nEvent;
-	unsigned int nLumi;
-	unsigned int nRun;
-	int nBX;
+	event_id nEvent;
+	lumi_id nLumi;
+	run_id nRun;
+	bx_id nBX;
 	EventID(KEventMetadata * metadata) :
 		nEvent(metadata->nEvent), nLumi(metadata->nLumi),
 		nRun(metadata->nRun), nBX(metadata->nBX) {};

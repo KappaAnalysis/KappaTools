@@ -6,6 +6,7 @@
 #include "DataFormats/interface/KBasic.h"
 #include "DataFormats/interface/KMuon.h"
 #include "DataFormats/interface/KTau.h"
+#include "DataFormats/interface/KJetMET.h"
 
 namespace KappaTools
 {

@@ -21,11 +21,11 @@ namespace KappaTools
 			void setPointer(T * tmpObj1, T * tmpObj2);
 			void addPointer(T * tmpObj);
 			void setPointer(std::vector< T * > tmpObj);
-			
+
 			void setCut(int allowed_charge_);
 			void setCut(std::vector<int> allowed_charges_);
 			void addCut(int allowed_charge_);
-			
+
 			bool getInternalDecision();
 			double getDecisionValue();
 	};

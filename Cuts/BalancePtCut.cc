@@ -82,16 +82,16 @@ namespace KappaTools
 	{
 		if (obj1.size()==0 || obj2.size()==0)
 			return -1.;
-		
+
 		RMLV sum1;
 		RMLV sum2;
-	
+
 		for (typename std::vector<T1 *>::iterator it = obj1.begin(); it != obj1.end(); it++)
 			sum1 += (*it)->p4;
 		
 		for (typename std::vector<T2 *>::iterator it = obj2.begin(); it != obj2.end(); it++)
 			sum2 += (*it)->p4;
-	
+
 		switch (mode)
 		{
 			case AbsPtDiff:
@@ -109,4 +109,6 @@ namespace KappaTools
 	}
 	template class BalancePtCut<KappaTools::ZmumuObjects<KDataJet, KDataMET>, KDataJet>;
 	template class BalancePtCut<KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KDataPFJet>;
+	template class BalancePtCut<KDataJet, KappaTools::ZmumuObjects<KDataJet, KDataMET> >;
+	template class BalancePtCut<KDataPFJet, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET> >;
 }
