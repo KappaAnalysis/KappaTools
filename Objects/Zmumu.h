@@ -5,6 +5,8 @@
 #include "DataFormats/interface/KMuon.h"
 #include "DataFormats/interface/KMetadata.h"
 #include "DataFormats/interface/KLorentzVector.h"
+#include "DataFormats/interface/KJetMET.h"
+#include "TMath.h"
 #include <stdlib.h>
 
 namespace KappaTools
@@ -18,6 +20,7 @@ namespace KappaTools
 			JetType * rjet;	// recoil jet
 			METType * met;
 			KEventMetadata * eventMetadata;
+			KLumiMetadata * lumiMetadata;
 			KDataVertex * primaryvertex;
 			void recalcP4();
 		public:
@@ -29,7 +32,7 @@ namespace KappaTools
 			void setMuons(KDataMuon * muon1, KDataMuon * muon2);
 			void setRJet(JetType * rjet);
 			void setMET(METType * met);
-			void setMetadata(KEventMetadata * eventMetadata_);
+			void setMetadata(KEventMetadata * eventMetadata_, KLumiMetadata * lumiMetadata_);
 			void setPV(KDataVertex * primaryvertex);
 			
 			KDataMuon * getMuon1();

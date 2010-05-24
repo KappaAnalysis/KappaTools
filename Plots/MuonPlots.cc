@@ -37,9 +37,9 @@ namespace KappaTools
 		caloComp	= new TH1D(prefix+"caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
 		segComp		= new TH1D(prefix+"segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
 
-		track = new KappaTools::StandardTrackPlots(tmpDirectory, "track");
-		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "innerTrack");
-		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, "globalTrack");
+		track = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"track");
+		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"innerTrack");
+		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"globalTrack");
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{

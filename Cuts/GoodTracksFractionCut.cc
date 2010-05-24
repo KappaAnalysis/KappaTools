@@ -56,7 +56,7 @@ namespace KappaTools
 
 		if (obj_TrackSummary)
 		{
-			return obj_TrackSummary->nTracksHQ / obj_TrackSummary->nTracks;
+			return (double)obj_TrackSummary->nTracksHQ / (double)obj_TrackSummary->nTracks;
 		}
 		else
 		{

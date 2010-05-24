@@ -35,7 +35,15 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 		std::cout << "\t\t nTracks = " << primaryvertex->nTracks << "\n";
 		std::cout << "\t\t ndof = " << primaryvertex->nDOF << "\n";
 		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "\n";
+		std::cout << "\t\t prob = " << TMath::Prob(primaryvertex->chi2, static_cast<int>(primaryvertex->nDOF)) << "\n";
 	}
+	std::cout << "\t Triggers: ";
+	for (unsigned int idx = 0; idx < lumiMetadata->hltNames.size(); idx++)
+	{
+		if ( eventMetadata->bitsHLT & ((unsigned long long)1 << idx))
+			std::cout << lumiMetadata->hltNames[idx] << ", ";
+	}
+	std::cout << "\n";
 }
 
 template <typename JetType, typename METType>
@@ -46,12 +54,18 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	std::cout << "\t\t vertex:       " << muon->vertex.position << "\n";
 	std::cout << "\t\t ecal iso 03:  " << muon->ecalIso03 << "\n";
 	std::cout << "\t\t hcal iso 03:  " << muon->hcalIso03 << "\n";
-	//std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
+	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
 
 	std::cout << "\t\t track:        " << muon->track.p4 << "\n";
 	std::cout << "\t\t IP:           " << muon->track.getIP(primaryvertex,0) << "\n";
 	std::cout << "\t\t IPsignf.:     " << muon->track.getIP(primaryvertex,2) << "\n";
-	std::cout << "\t\t hltMatch:     " << muon->hltMatch << "\n";
+	std::cout << "\t\t hltMatch:     ";
+	for (unsigned int idx = 0; idx < lumiMetadata->hltNamesMuons.size(); idx++)
+	{
+		if ( muon->hltMatch & ((unsigned long long)1 << idx))
+			std::cout << lumiMetadata->hltNamesMuons[idx] << ", ";
+	}
+	std::cout << "\n";
 }
 
 template <typename JetType, typename METType>
@@ -84,9 +98,10 @@ void KappaTools::ZmumuObjects<JetType, METType>::setMET(METType * met_)
 }
 
 template <typename JetType, typename METType>
-void KappaTools::ZmumuObjects<JetType, METType>::setMetadata(KEventMetadata * eventMetadata_)
+void KappaTools::ZmumuObjects<JetType, METType>::setMetadata(KEventMetadata * eventMetadata_, KLumiMetadata * lumiMetadata_)
 {
 	eventMetadata = eventMetadata_;
+	lumiMetadata = lumiMetadata_;
 }
 
 template <typename JetType, typename METType>
