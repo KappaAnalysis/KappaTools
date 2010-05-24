@@ -28,15 +28,15 @@ namespace KappaTools
 			void setPointer2(T2 * tmpObj);
 			void addPointer1(T1 * tmpObj);
 			void addPointer2(T2 * tmpObj);
-			
+
 			void setMode(unsigned int mode_);
-			
+
 			void setCut(double cut_);
 			void setMinCut(double min_);
 			void setMaxCut(double max_);
-			
+
 			virtual bool getInternalDecision();
-			
+
 			double getDecisionValue();
 	};
 }

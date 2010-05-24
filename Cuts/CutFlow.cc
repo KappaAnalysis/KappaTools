@@ -8,11 +8,11 @@ namespace KappaTools
 	}
 	std::string CutFlow::getCutName(unsigned int i)
 	{
-		return ( i<cutFlow.size() ? cutFlow[i]->getName() : "-");
+		return (i < cutFlow.size() ? cutFlow[i]->getName() : "-");
 	}
 	void CutFlow::printCutList()
 	{
-		int i=1;
+		int i = 1;
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 		{
 			std::cout << (i++) <<".: " << (*it)->getName() << "\n";

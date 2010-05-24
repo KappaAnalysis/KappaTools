@@ -82,13 +82,13 @@ namespace KappaTools
 	{
 		RMLV sum1;
 		RMLV sum2;
-	
+
 		for (typename std::vector<T1 *>::iterator it = obj1.begin(); it != obj1.end(); it++)
 			sum1 += (*it)->p4;
-		
+
 		for (typename std::vector<T2 *>::iterator it = obj2.begin(); it != obj2.end(); it++)
 			sum2 += (*it)->p4;
-	
+
 		switch (mode)
 		{
 			case 0:
@@ -96,7 +96,7 @@ namespace KappaTools
 				break;
 			case 1:
 				return ROOT::Math::VectorUtil::DeltaPhi(sum1,sum2);
-				break;			
+				break;
 			default:
 				return -1.;
 		}
