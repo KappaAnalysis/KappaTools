@@ -15,6 +15,8 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
 
 	jet_response			= new TH1D("jet_response", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z}", 100, 0., 2.);
+	jet_response_mpf	= new TH1D("jet_response_mpf", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z} (\\mathrm{MPF})", 100, 0., 2.);
+
 	zjet_dR						= new TH1D("zjet_dR", "#DeltaR(Z,jet)", 50, 0., 6.5);
 	zjet_dPhi					= new TH1D("zjet_dPhi", "#Delta #phi(Z,jet)", 50, -1.*M_PI, M_PI);
 	zjet_dPhi_zoom		= new TH1D("zjet_dPhi_zoom", "#Delta #phi(Z,jet)", 100, -0.4, +0.4);
@@ -56,7 +58,14 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 	if (zmumu->getRJet())
 	{
 		//if (zmumu->p4.pt()>20 && zmumu->p4.pt()<30)
-		jet_response->Fill(zmumu->getRJet()->p4.pt()/zmumu->p4.pt());
+		jet_response->Fill(zmumu->getRJet()->p4.pt()/zmumu->p4.pt(), weight);
+
+		if (zmumu->getMET())
+		{
+			RMLV met = (RMLV)zmumu->getMET()->p4;
+			double Rmpf=1 + (met.x()*z.x() + met.y()*z.y())/z.perp2();
+			jet_response_mpf->Fill(Rmpf, weight);
+		}
 		zjet_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->p4, zmumu->getRJet()->p4), weight);
 		zjet_dPhi->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4,zmumu->getRJet()->p4)-M_PI), weight);
 		zjet_dPhi_zoom->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4,zmumu->getRJet()->p4)-M_PI), weight);
