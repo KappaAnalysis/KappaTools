@@ -22,6 +22,10 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
 	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 50, 0., 3.5);
 
+	mumu_vtx_dd				= new TH1D("mumu_vtx_dd", "euklidean dist. between muons' vertices", 100, 0., 1.);
+	mumu_vtx_dr				= new TH1D("mumu_vtx_dr", "euklidean dist. between muons' vertices in perp. plane", 100, 0., 0.1);
+	mumu_vtx_dz				= new TH1D("mumu_vtx_dz", "euklidean dist. between muons' vertices in z direction", 100, -1., 1.);
+
 	muons_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muons");
 	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1");
 	muon2_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon2");
@@ -44,6 +48,10 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 
 	muons_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
 	muons_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
+
+	mumu_vtx_dd->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->track.ref,zmumu->getMuon2()->track.ref),weight);
+	mumu_vtx_dr->Fill(std::sqrt((zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())*(zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())+(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())*(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())),weight);
+	mumu_vtx_dz->Fill(zmumu->getMuon1()->track.ref.z()-zmumu->getMuon2()->track.ref.z(),weight);
 
 	if (zmumu->getRJet())
 	{
