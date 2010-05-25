@@ -137,4 +137,3 @@ namespace KappaTools
 		return firedTriggers;
 	}
 }
-

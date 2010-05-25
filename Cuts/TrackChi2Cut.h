@@ -37,4 +37,5 @@ namespace KappaTools
 			double getDecisionValue();
 	};
 }
+
 #endif

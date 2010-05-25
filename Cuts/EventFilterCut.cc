@@ -92,4 +92,3 @@ namespace KappaTools
 		return getInternalDecision();
 	}
 }
-
