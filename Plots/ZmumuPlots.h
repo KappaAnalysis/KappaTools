@@ -24,7 +24,9 @@ namespace KappaTools
 			TH1D * muons_dR, * muons_dPhi;
 
 			TH1D * zjet_dR, * zjet_dPhi, * zjet_dPhi_zoom;
-			TH1D * jet_response;
+			TH1D * jet_response, * jet_response_mpf;
+
+			TH1D * mumu_vtx_dd, * mumu_vtx_dr, * mumu_vtx_dz;
 
 			StandardMuonPlots * muons_plots;
 			StandardMuonPlots * muon1_plots;

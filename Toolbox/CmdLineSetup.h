@@ -72,6 +72,7 @@ struct CmdLineOptionVector : public CmdLineOption
 		const std::string &def = "", const CmdLineOptionArg a = CL_Req)
 		: CmdLineOption(s, l, h, a) { FoundOption(def); }
 
+	const T &operator[](const size_t idx) { return value[idx]; };
 	operator const std::vector<T>() const { return value; };
 	const std::vector<T> &Value() const { return value; };
 

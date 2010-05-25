@@ -15,12 +15,18 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
 
 	jet_response			= new TH1D("jet_response", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z}", 100, 0., 2.);
+	jet_response_mpf	= new TH1D("jet_response_mpf", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z} (\\mathrm{MPF})", 100, 0., 2.);
+
 	zjet_dR						= new TH1D("zjet_dR", "#DeltaR(Z,jet)", 50, 0., 6.5);
 	zjet_dPhi					= new TH1D("zjet_dPhi", "#Delta #phi(Z,jet)", 50, -1.*M_PI, M_PI);
 	zjet_dPhi_zoom		= new TH1D("zjet_dPhi_zoom", "#Delta #phi(Z,jet)", 100, -0.4, +0.4);
 
 	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
 	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 50, 0., 3.5);
+
+	mumu_vtx_dd				= new TH1D("mumu_vtx_dd", "euklidean dist. between muons' vertices", 100, 0., 1.);
+	mumu_vtx_dr				= new TH1D("mumu_vtx_dr", "euklidean dist. between muons' vertices in perp. plane", 100, 0., 0.1);
+	mumu_vtx_dz				= new TH1D("mumu_vtx_dz", "euklidean dist. between muons' vertices in z direction", 100, -1., 1.);
 
 	muons_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muons");
 	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1");
@@ -45,10 +51,21 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 	muons_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
 	muons_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
 
+	mumu_vtx_dd->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->track.ref,zmumu->getMuon2()->track.ref),weight);
+	mumu_vtx_dr->Fill(std::sqrt((zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())*(zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())+(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())*(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())),weight);
+	mumu_vtx_dz->Fill(zmumu->getMuon1()->track.ref.z()-zmumu->getMuon2()->track.ref.z(),weight);
+
 	if (zmumu->getRJet())
 	{
 		//if (zmumu->p4.pt()>20 && zmumu->p4.pt()<30)
-		jet_response->Fill(zmumu->getRJet()->p4.pt()/zmumu->p4.pt());
+		jet_response->Fill(zmumu->getRJet()->p4.pt()/zmumu->p4.pt(), weight);
+
+		if (zmumu->getMET())
+		{
+			RMLV met = (RMLV)zmumu->getMET()->p4;
+			double Rmpf=1 + (met.x()*z.x() + met.y()*z.y())/z.perp2();
+			jet_response_mpf->Fill(Rmpf, weight);
+		}
 		zjet_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->p4, zmumu->getRJet()->p4), weight);
 		zjet_dPhi->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4,zmumu->getRJet()->p4)-M_PI), weight);
 		zjet_dPhi_zoom->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4,zmumu->getRJet()->p4)-M_PI), weight);
