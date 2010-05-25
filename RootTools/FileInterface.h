@@ -9,6 +9,7 @@
 #include <Toolbox/IOHelper.h>
 #include <Toolbox/ProgressMonitor.h>
 #include <DataFormats/interface/Kappa.h>
+#include "Directory.h"
 
 typedef unsigned int run_id;
 typedef unsigned int lumi_id;
@@ -56,20 +57,7 @@ struct FileInterface
 	template<typename T>
 	std::vector<std::string> GetNames(bool inherited = false)
 	{
-		std::vector<std::string> result;
-		TObjArray *branches = eventdata.GetListOfBranches();
-		if (branches == 0)
-			return result;
-		TClass *req = TClass::GetClass(TypeName<T>::name());
-		std::string reqName = req->GetName();
-		for (int i = 0; i < branches->GetEntries(); ++i)
-		{
-			TBranch *b = (TBranch*)branches->At(i);
-			TClass *cur = TClass::GetClass(b->GetClassName());
-			if ((cur == req) || (inherited && cur->InheritsFrom(req)))
-				result.push_back(b->GetName());
-		}
-		return result;
+		return TreeObjects(eventdata, TypeName<T>::name(), inherited);
 	}
 
 	template<typename T>
