@@ -108,3 +108,32 @@ void FileInterface::SpeedupTree(long cache)
 				eventdata.AddBranchToCache(b);
 	}
 }
+
+void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName)
+{
+	TBranch *branch = chain.GetBranch(name.c_str());
+	std::string selected = "";
+	if ((branch == 0) && (altName != "") && (chain.GetBranch(altName.c_str()) != 0))
+		selected = altName;
+	else if (branch != 0)
+		selected = name;
+	if (selected == "")
+	{
+		std::cout << "Requested branch not found: " << name << std::endl;
+		return 0;
+	}
+
+	branch = chain.GetBranch(name.c_str());
+	TClass *classRequest = TClass::GetClass(cname);
+	TClass *classBranch = TClass::GetClass(branch->GetClassName());
+	if (!classBranch->InheritsFrom(classRequest))
+	{
+		std::cout << "Incompatible types! Requested: " << classRequest->GetName()
+			<< " Found: " << classRequest->GetName() << std::endl;
+		return 0;
+	}
+	void *tmp = classBranch->New();
+	vBranchHolder.push_back(tmp);
+	chain.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
+	return tmp;
+}
