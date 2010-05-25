@@ -55,6 +55,9 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	std::cout << "\t\t ecal iso 03:  " << muon->ecalIso03 << "\n";
 	std::cout << "\t\t hcal iso 03:  " << muon->hcalIso03 << "\n";
 	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
+	std::cout << "\t\t valid muon hits in global track: " << muon->globalTrack.nValidMuonHits << "\n";
+	std::cout << "\t\t chi2/ndof for global track: " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "\n";
+	std::cout << "\t\t valid muon hits in track: " << muon->track.nValidPixelHits+muon->track.nValidStripHits << "\n";
 
 	std::cout << "\t\t track:        " << muon->track.p4 << "\n";
 	std::cout << "\t\t IP:           " << muon->track.getIP(primaryvertex,0) << "\n";
