@@ -9,6 +9,7 @@
 #include <Toolbox/IOHelper.h>
 #include <Toolbox/ProgressMonitor.h>
 #include <DataFormats/interface/Kappa.h>
+#include "Directory.h"
 
 typedef unsigned int run_id;
 typedef unsigned int lumi_id;
@@ -24,50 +25,13 @@ struct FileInterface
 	template<typename T>
 	T *Get(const std::string &name, const std::string altName = "")
 	{
-		TBranch *branch = eventdata.GetBranch(name.c_str());
-		std::string selected = "";
-		if ((branch == 0) && (altName != "") && (eventdata.GetBranch(altName.c_str()) != 0))
-			selected = altName;
-		else if (branch != 0)
-			selected = name;
-		if (selected == "")
-		{
-			std::cout << "Requested branch not found: " << name << std::endl;
-			return 0;
-		}
-
-		branch = eventdata.GetBranch(name.c_str());
-		TClass *classRequest = TClass::GetClass(TypeName<T>::name());
-		TClass *classBranch = TClass::GetClass(branch->GetClassName());
-		if (!classBranch->InheritsFrom(classRequest))
-		{
-			std::cout << "Incompatible types! Requested: " << classRequest->GetName()
-				<< " Found: " << classRequest->GetName() << std::endl;
-			return 0;
-		}
-		T *tmp = static_cast<T*>(classBranch->New());
-		vBranchHolder.push_back(tmp);
-		eventdata.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
-		return tmp;
+		return static_cast<T*>(GetInternal(eventdata, TypeName<T>::name(), name, altName));
 	}
 
 	template<typename T>
 	std::vector<std::string> GetNames(bool inherited = false)
 	{
-		std::vector<std::string> result;
-		TObjArray *branches = eventdata.GetListOfBranches();
-		if (branches == 0)
-			return result;
-		TClass *req = TClass::GetClass(TypeName<T>::name());
-		std::string reqName = req->GetName();
-		for (int i = 0; i < branches->GetEntries(); ++i)
-		{
-			TBranch *b = (TBranch*)branches->At(i);
-			TClass *cur = TClass::GetClass(b->GetClassName());
-			if ((cur == req) || (inherited && cur->InheritsFrom(req)))
-				result.push_back(b->GetName());
-		}
-		return result;
+		return TreeObjects(eventdata, TypeName<T>::name(), inherited);
 	}
 
 	template<typename T>
@@ -149,6 +113,8 @@ private:
 		}
 		return result;
 	}
+
+	void *GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName = "");
 };
 
 #endif

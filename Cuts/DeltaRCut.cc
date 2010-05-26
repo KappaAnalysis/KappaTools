@@ -40,5 +40,5 @@ namespace KappaTools
 		if (!obj1 || !obj2)
 			return -1.;
 		return ROOT::Math::VectorUtil::DeltaR(obj1->p4, obj2->p4);
-	};			
+	};
 }

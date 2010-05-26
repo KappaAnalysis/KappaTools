@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <TDirectory.h>
+#include <TTree.h>
 #include <TFile.h>
 #include <TKey.h>
 
@@ -50,5 +51,6 @@ std::map<std::string, T*> DirObjectsMap(const TDirectory *dir)
 }
 
 std::vector<std::string> DirObjects(const TDirectory *dir, std::string filter);
+std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, const bool inherited = false);
 
 #endif
