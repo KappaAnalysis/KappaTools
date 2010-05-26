@@ -174,6 +174,14 @@ void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::setMode(ch
 	mode = mode_;
 }
 
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataJet, KDataMET>, KappaTools::ZmumuObjects<KDataJet, KDataMET>, KappaTools::ZmumuObjects<KDataJet, KDataMET> >;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET> >;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET> >;
+
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataJet, KDataMET>, KappaTools::ZmumuObjects<KDataJet, KDataMET>, KDataJet>;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET>, KDataPFJet>;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KDataPFJet>;
+
 template class KappaTools::PlotsByPt<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;
 template class KappaTools::PlotsByEta<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;
 

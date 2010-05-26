@@ -6,7 +6,9 @@
 #include "BasePlot.h"
 #include "DataFormats/interface/KLorentzVector.h"
 
+#include "Objects/Zmumu.h"
 #include "MuonPlots.h"
+#include "ZmumuPlots.h"
 
 namespace KappaTools
 {
