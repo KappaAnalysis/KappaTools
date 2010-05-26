@@ -120,5 +120,7 @@ void KappaTools::ZmumuNtuple<ZmumuType>::final()
 //template class KappaTools::ZmumuPlots<MTAPFJet>;
 template class KappaTools::ZmumuPlots<KDataJet, KDataMET>;
 template class KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>;
+template class KappaTools::ZmumuPlots<KDataPFJet, KDataMET>;
 template class KappaTools::ZmumuNtuple<KappaTools::ZmumuObjects<KDataJet, KDataMET> >;
 template class KappaTools::ZmumuNtuple<KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET> >;
+template class KappaTools::ZmumuNtuple<KappaTools::ZmumuObjects<KDataPFJet, KDataMET> >;
