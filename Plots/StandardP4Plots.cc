@@ -54,7 +54,7 @@ KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::v
 		else
 			bname = "pt_";
 		bname+=pt_;
-		plotsByBin.push_back(PlottingClass(curDirectory, bname));
+		plotsByBin.push_back(PlottingClass(curDirectory, bname.ReplaceAll(" ","")));
 	}
 }
 
