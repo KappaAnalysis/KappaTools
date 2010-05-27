@@ -125,7 +125,7 @@ KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::PlotsByEta(std:
 		double eta_ = binning[idx];
 		TString bname = "eta_";
 		bname+=eta_;
-		plotsByBin.push_back(PlottingClass(curDirectory, bname));
+		plotsByBin.push_back(PlottingClass(curDirectory, bname.ReplaceAll(" ","")));
 	}
 }
 
