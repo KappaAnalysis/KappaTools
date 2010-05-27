@@ -45,7 +45,14 @@ KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::v
 	for (unsigned int idx = 0; idx < binning.size(); idx++)
 	{
 		double pt_ = binning[idx];
-		TString bname = (pt_<10. ? "pt_0" : "pt_");
+		TString bname;
+		if (pt_<100.)
+			if (pt_<10.)
+				bname = "pt_00";
+			else
+				bname = "pt_0";
+		else
+			bname = "pt_";
 		bname+=pt_;
 		plotsByBin.push_back(PlottingClass(curDirectory, bname));
 	}
