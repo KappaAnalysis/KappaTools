@@ -9,13 +9,16 @@ namespace KappaTools
 	TrackHitsCut<T>::TrackHitsCut(T * tmpObj) : BaseCut("track hits"), obj(tmpObj), min(0), max(-1), type(TrackHitsCut::nValidHits) {}
 
 	template <typename T>
+	TrackHitsCut<T>::TrackHitsCut(int type_) : BaseCut("track hits"), obj(0), min(0), max(-1), type(type_) {}
+
+	template <typename T>
 	void TrackHitsCut<T>::setPointer(T * tmpObj)
 	{
 		obj = tmpObj;
 	}
 
 	template <typename T>
-	void TrackHitsCut<T>::setType(unsigned char type_)
+	void TrackHitsCut<T>::setType(int type_)
 	{
 		type = type_;
 	}
