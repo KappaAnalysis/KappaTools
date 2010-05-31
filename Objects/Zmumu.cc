@@ -37,6 +37,8 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "\n";
 		std::cout << "\t\t prob = " << TMath::Prob(primaryvertex->chi2, static_cast<int>(primaryvertex->nDOF)) << "\n";
 	}
+	if (met)
+		std::cout << "\t MET: " << met->p4 << "\n";
 	std::cout << "\t Triggers: ";
 	for (unsigned int idx = 0; idx < lumiMetadata->hltNames.size(); idx++)
 	{
