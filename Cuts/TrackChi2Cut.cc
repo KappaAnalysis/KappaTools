@@ -3,10 +3,13 @@
 namespace KappaTools
 {
 	template <typename T>
-	TrackChi2Cut<T>::TrackChi2Cut()	: BaseCut("track hits"), obj(0), min(0), max(-1), type(TrackChi2Cut<T>::CHI2NORM) {}
+	TrackChi2Cut<T>::TrackChi2Cut()	: BaseCut("chi2 cut"), obj(0), min(0), max(-1), type(TrackChi2Cut<T>::CHI2NORM) {}
 
 	template <typename T>
-	TrackChi2Cut<T>::TrackChi2Cut(T * tmpObj) : BaseCut("track hits"), obj(tmpObj), min(0), max(-1), type(TrackChi2Cut<T>::CHI2NORM) {}
+	TrackChi2Cut<T>::TrackChi2Cut(T * tmpObj) : BaseCut("chi2 cut"), obj(tmpObj), min(0), max(-1), type(TrackChi2Cut<T>::CHI2NORM) {}
+
+	template <typename T>
+	TrackChi2Cut<T>::TrackChi2Cut(int type_) : BaseCut("chi2 cut"), obj(0), min(0), max(-1), type(type_) {}
 
 	template <typename T>
 	void TrackChi2Cut<T>::setPointer(T * tmpObj)
@@ -15,7 +18,7 @@ namespace KappaTools
 	}
 
 	template <typename T>
-	void TrackChi2Cut<T>::setType(unsigned char type_)
+	void TrackChi2Cut<T>::setType(int type_)
 	{
 		type = type_;
 	}

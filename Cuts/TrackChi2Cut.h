@@ -14,7 +14,7 @@ namespace KappaTools
 		private:
 			T * obj;
 			short min, max;
-			unsigned char type;
+			int type;
 		public:
 			enum Type
 			{
@@ -26,10 +26,11 @@ namespace KappaTools
 
 			TrackChi2Cut();
 			TrackChi2Cut(T * tmpObj);
+			TrackChi2Cut(int type_);
 
 			void setPointer(T * tmpObj);
 
-			void setType(unsigned char type_);
+			void setType(int type_);
 			void setMinCut(unsigned short min_);
 			void setMaxCut(unsigned short max_);
 
