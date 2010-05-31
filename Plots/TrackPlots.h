@@ -22,7 +22,7 @@ namespace KappaTools
 			TH1D * pt, * pt_low, * pt_full;
 			TH1D * eta, * eta_zoom;
 			TH1D * phi;
-			
+
 			TH1D * charge;
 			TH1D * chi2;
 			TH1D * ndof;
@@ -35,9 +35,11 @@ namespace KappaTools
 			TH1D * errDxy;
 			TH1D * errDz;
 
+			TH1D * nTrackerHits;
+			TH1D * nValidMuonHits;
 			TH1D * nPixelHits;
 			TH1D * nStripHits;
-			
+
 			TH1D * quality;
 		public:
 			StandardTrackPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix="");
@@ -48,4 +50,3 @@ namespace KappaTools
 	};
 }
 #endif
-

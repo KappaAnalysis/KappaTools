@@ -29,8 +29,10 @@ namespace KappaTools
 		errDxy	= new TH1D("errDxy","errDxy", 100, 0., 0.75);
 		errDz	= new TH1D("errDz","errDz", 100, 0., 2.5);
 
-		nPixelHits		= new TH1D("nPixelHits","\\mathrm{hits\\,\\,in\\,\\,pixel}", 5, 0., 5.);
-		nStripHits		= new TH1D("nStripHits","\\mathrm{hits\\,\\,in\\,\\,strip}", 20, 0., 20.);
+		nTrackerHits	= new TH1D("nTrackerHits","\\mathrm{hits\\,\\,in\\,\\,tracker}", 50, 0., 50.);
+		nValidMuonHits= new TH1D("nValidMuonHits","\\mathrm{hits\\,\\,in\\,\\,muon}", 75, 0., 75.);
+		nPixelHits		= new TH1D("nPixelHits","\\mathrm{hits\\,\\,in\\,\\,pixel}", 15, 0., 15.);
+		nStripHits		= new TH1D("nStripHits","\\mathrm{hits\\,\\,in\\,\\,strip}", 30, 0., 30.);
 
 		quality				= new TH1D("quality", "\\mathrm{track\\,\\,quality}", 16, 0., 16.);
 	}
@@ -62,6 +64,9 @@ namespace KappaTools
 		errPhi->Fill(track->errPhi);
 		errDxy->Fill(track->errDxy);
 		errDz->Fill(track->errDz);
+
+		nTrackerHits->Fill(track->nValidPixelHits+track->nValidStripHits);
+		nValidMuonHits->Fill(track->nValidMuonHits);
 
 		nPixelHits->Fill(track->nValidPixelHits);
 		nStripHits->Fill(track->nValidStripHits);
