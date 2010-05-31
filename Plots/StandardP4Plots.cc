@@ -61,7 +61,7 @@ KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::PlotsByPt(std::v
 template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
 void KappaTools::PlotsByPt<PlottingClass, ObjectType1, ObjectType2>::process(ObjectType1 * obj, KDataVertex * pv, double weight, ObjectType2 * obj2)
 {
-	if (!obj)
+	if (!obj || !obj2)
 		return;
 
 	all->process(obj);
@@ -132,7 +132,7 @@ KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::PlotsByEta(std:
 template <typename PlottingClass, typename ObjectType1, typename ObjectType2>
 void KappaTools::PlotsByEta<PlottingClass, ObjectType1, ObjectType2>::process(ObjectType1 * obj, KDataVertex * pv, double weight, ObjectType2 * obj2)
 {
-	if (!obj)
+	if (!obj || !obj2)
 		return;
 
 	all->process(obj);
