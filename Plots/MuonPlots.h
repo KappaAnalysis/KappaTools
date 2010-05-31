@@ -53,7 +53,7 @@ namespace KappaTools
 			TH1D * vertex_chi2norm;
 			TH1D * vertex_chi2prob;
 
-			TH1D * IP;
+			TH1D * IP, * IP_zoom;
 			TH1D * IPSig;
 			TH2D * IPvsIPSig;
 

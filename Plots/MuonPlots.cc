@@ -30,9 +30,10 @@ namespace KappaTools
 		vertex_chi2norm			= new TH1D(prefix+"vertex_chi2norm","#chi^{2} / \\mathrm{ndof}", 10, 0., 10.);
 		vertex_chi2prob			= new TH1D(prefix+"vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
 
-		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 50, -0.1, 0.1);
-		IPSig							= new TH1D(prefix+"IPSig","\\mathrm{IP}_\\mathrm{signif.}", 50, -10, 10);
-		IPvsIPSig					= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 50, -0.1, 0.1, 50, -10, 10);
+		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.1, 0.1);
+		IP_zoom						= new TH1D(prefix+"IP_zoom","\\mathrm{IP}", 100, -0.01, 0.01);
+		IPSig							= new TH1D(prefix+"IPSig","\\mathrm{IP}_\\mathrm{signif.}", 100, -10, 10);
+		IPvsIPSig					= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, -0.1, 0.1, 100, -10, 10);
 
 		caloComp	= new TH1D(prefix+"caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
 		segComp		= new TH1D(prefix+"segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
@@ -63,6 +64,7 @@ namespace KappaTools
 		if (pv)
 		{
 			IP->Fill(muon->track.getIP(pv,0), weight);
+			IP_zoom->Fill(muon->track.getIP(pv,0), weight);
 			IPSig->Fill(muon->track.getIP(pv,2), weight);
 			IPvsIPSig->Fill(muon->track.getIP(pv,0),muon->track.getIP(pv,2), weight);
 		}
