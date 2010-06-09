@@ -117,6 +117,10 @@ namespace KappaTools
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 			(*it)->evaluate();
 	}
+	const std::vector< KappaTools::BaseCut * > KappaTools::CutFlow::getCutFlow()
+	{
+		return cutFlow;
+	}
 
 	// -------------------------------------------------------
 
