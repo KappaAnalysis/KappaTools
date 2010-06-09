@@ -105,6 +105,7 @@ namespace KappaTools
 			T * standaloneMuons;
 			T * caloMuons;
 			T * globalMuons;
+			T * realGlobalMuons;
 		public:
 			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory);
 			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);

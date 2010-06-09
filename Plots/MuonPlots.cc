@@ -108,6 +108,7 @@ namespace KappaTools
 		caloMuons = new KappaTools::StandardMuonPlots(curDirectory, "calo", "");
 		standaloneMuons = new KappaTools::StandardMuonPlots(curDirectory, "standalone", "");
 		globalMuons = new KappaTools::StandardMuonPlots(curDirectory, "global", "");
+		realGlobalMuons = new KappaTools::StandardMuonPlots(curDirectory, "realglobal", "");
 	}
 
 	template <typename T>
@@ -117,14 +118,16 @@ namespace KappaTools
 			return;
 
 		allMuons->process(muon, pv, weight);
-		if (muon->type & (1<<0))
+		if (muon->isTrackerMuon())
 			trackerMuons->process(muon, pv, weight);
-		if (muon->type & (1<<1))
+		if (muon->isCaloMuon())
 			caloMuons->process(muon, pv, weight);
-		if (muon->type & (1<<2))
+		if (muon->isStandAloneMuon())
 			standaloneMuons->process(muon, pv, weight);
-		if (muon->type & (1<<3))
+		if (muon->isGlobalMuon())
 			globalMuons->process(muon, pv, weight);
+		if (muon->isTrackerMuon() && muon->isGlobalMuon())
+			realGlobalMuons->process(muon, pv, weight);
 	}
 
 	template <typename T>
