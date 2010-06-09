@@ -145,6 +145,17 @@ KDataVertex * KappaTools::ZmumuObjects<JetType, METType>::getPV()
 	return primaryvertex;
 }
 
+template <typename JetType, typename METType>
+KEventMetadata * KappaTools::ZmumuObjects<JetType, METType>::getEventMetadata()
+{
+	return eventMetadata;
+}
+template <typename JetType, typename METType>
+KLumiMetadata * KappaTools::ZmumuObjects<JetType, METType>::getLumiMetadata()
+{
+	return lumiMetadata;
+}
+
 template class KappaTools::ZmumuObjects<KDataJet, KDataMET>;
 template class KappaTools::ZmumuObjects<KDataPFJet, KDataMET>;
 template class KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>;
