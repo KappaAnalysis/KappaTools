@@ -68,9 +68,9 @@ namespace KappaTools
 	{
 		if (obj1.size()==0 || obj2.size()==0)
 			return false;
-	
+
 		double val = getDecisionValue();
-	
+
 		if (val>min && val<max)
 			return true;
 		else
@@ -87,10 +87,12 @@ namespace KappaTools
 		RMLV sum2;
 
 		for (typename std::vector<T1 *>::iterator it = obj1.begin(); it != obj1.end(); it++)
-			sum1 += (*it)->p4;
-		
+			if (*it)
+				sum1 += (*it)->p4;
+
 		for (typename std::vector<T2 *>::iterator it = obj2.begin(); it != obj2.end(); it++)
-			sum2 += (*it)->p4;
+			if (*it)
+				sum2 += (*it)->p4;
 
 		switch (mode)
 		{
