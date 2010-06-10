@@ -19,7 +19,7 @@ namespace KappaTools
 	class ZmumuPlots : public BasePlot
 	{
 		private:
-			TH1D * Z_mass, * Z_mass_low, * Z_mass_zoom;
+			TH1D * Z_mass, * Z_mass_low, * Z_mass_zoom, * Z_mass_fine;
 			TH1D * Z_phi, * Z_eta, * Z_pt, * Z_pt_full;
 			TH1D * muons_dR, * muons_dPhi;
 

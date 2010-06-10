@@ -32,7 +32,7 @@ namespace KappaTools
 	class StandardMuonPlots : public BasePlot
 	{
 		private:
-			TH1D * muon_pt, * muon_pt_low;
+			TH1D * muon_pt, * muon_pt_low, * muon_pt_fine;
 			TH1D * muon_eta, * muon_eta_zoom, * muon_phi;
 
 			TH1D * muon_hasVertex;
