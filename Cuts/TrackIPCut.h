@@ -13,6 +13,7 @@ namespace KappaTools
 	{
 		private:
 			KDataVertex * pv;
+			KDataBeamSpot * bs;
 			T * obj;
 			double min, max;
 			int type;
@@ -35,6 +36,7 @@ namespace KappaTools
 			TrackIPCut(int type_);
 
 			void setPV(KDataVertex * tmpObj);
+			void setBS(KDataBeamSpot * tmpObj);
 			void setPointer(T * tmpObj);
 
 			void setType(int type_);

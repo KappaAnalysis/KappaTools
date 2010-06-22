@@ -21,6 +21,14 @@ namespace KappaTools
 	void TrackIPCut<T>::setPV(KDataVertex * tmpObj)
 	{
 		pv = tmpObj;
+		bs = 0;
+	}
+
+	template <typename T>
+	void TrackIPCut<T>::setBS(KDataBeamSpot * tmpObj)
+	{
+		pv = 0;
+		bs = tmpObj;
 	}
 
 	template <typename T>
@@ -58,7 +66,7 @@ namespace KappaTools
 	template <typename T>
 	double TrackIPCut<T>::getDecisionValue()
 	{
-		if (!obj || !pv)
+		if (!obj || (!pv && !bs))
 			return -1.;
 
 		/*
@@ -70,11 +78,20 @@ namespace KappaTools
 		switch(type)
 		{
 			case TrackIPCut::DXY:
-				return obj->getIP(pv, 0);
+				if (pv)
+					return obj->getIP(pv, 0);
+				else
+					return obj->getIP(bs, 0);
 			case TrackIPCut::DXY_ERRTRK:
-				return obj->getIP(pv, 1);
+				if (pv)
+					return obj->getIP(pv, 1);
+				else
+					return obj->getIP(bs, 1);
 			case TrackIPCut::DXY_ERRTRK_ERRVTX:
-				return obj->getIP(pv, 2);
+				if (pv)
+					return obj->getIP(pv, 2);
+				else
+					return obj->getIP(bs, 2);
 			default:
 				return -1.;
 		}
