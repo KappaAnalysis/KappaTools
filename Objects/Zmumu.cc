@@ -51,20 +51,24 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 template <typename JetType, typename METType>
 void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon * muon)
 {
-	std::cout << "\t\t #chambers:    " << muon->numberOfChambers << "\n";
-	std::cout << "\t\t #track hits:  " << muon->trackHits << "\n";
-	std::cout << "\t\t vertex:       " << muon->vertex.position << "\n";
-	std::cout << "\t\t ecal iso 03:  " << muon->ecalIso03 << "\n";
-	std::cout << "\t\t hcal iso 03:  " << muon->hcalIso03 << "\n";
-	std::cout << "\t\t track iso 03: " << muon->trackIso03 << "\n";
-	std::cout << "\t\t valid muon hits in global track: " << muon->globalTrack.nValidMuonHits << "\n";
-	std::cout << "\t\t chi2/ndof for global track: " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "\n";
-	std::cout << "\t\t valid muon hits in track: " << muon->track.nValidPixelHits+muon->track.nValidStripHits << "\n";
+	std::cout << "\t\t type:                  " << (muon->isGlobalMuon()?"glb ":"--- ") << (muon->isStandAloneMuon()?"sta ":"--- ") << (muon->isTrackerMuon()?"trk ":"--- ")<< "\n";
+	std::cout << "\t\t #chambers:             " << muon->numberOfChambers << "\n";
+	std::cout << "\t\t #matches:              " << muon->numberOfMatches << "\n";
+	std::cout << "\t\t #valid tracker hits:   " << (muon->track.nValidPixelHits+muon->track.nValidStripHits) << "\n";
+	std::cout << "\t\t #valid pixel hits:     " << muon->track.nValidPixelHits << "\n";
+	std::cout << "\t\t #valid muon hits (glb) " << muon->globalTrack.nValidMuonHits << "\n";
+	std::cout << "\t\t vertex:                " << muon->vertex.position << "\n";
+	std::cout << "\t\t ecal iso 03:           " << muon->ecalIso03 << "\n";
+	std::cout << "\t\t hcal iso 03:           " << muon->hcalIso03 << "\n";
+	std::cout << "\t\t track iso 03:          " << muon->trackIso03 << "\n";
+	std::cout << "\t\t chi2/ndof (glb):       " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "\n";
 
-	std::cout << "\t\t track:        " << muon->track.p4 << "\n";
-	std::cout << "\t\t IP:           " << muon->track.getIP(primaryvertex,0) << "\n";
-	std::cout << "\t\t IPsignf.:     " << muon->track.getIP(primaryvertex,2) << "\n";
-	std::cout << "\t\t hltMatch:     ";
+	std::cout << "\t\t track:                 " << muon->track.p4 << "\n";
+	std::cout << "\t\t IP (trk vs pv):        " << muon->track.getIP(primaryvertex,0) << "\n";
+	std::cout << "\t\t IPsignf. (trk vs pv):  " << muon->track.getIP(primaryvertex,2) << "\n";
+	std::cout << "\t\t IP (trk vs bs):        " << muon->track.getIP(beamspot,0) << "\n";
+	std::cout << "\t\t IPsignf. (trk vs bs):  " << muon->track.getIP(beamspot,2) << "\n";
+	std::cout << "\t\t hltMatch:              ";
 	for (unsigned int idx = 0; idx < lumiMetadata->hltNamesMuons.size(); idx++)
 	{
 		if ( muon->hltMatch & ((unsigned long long)1 << idx))
@@ -116,6 +120,12 @@ void KappaTools::ZmumuObjects<JetType, METType>::setPV(KDataVertex * primaryvert
 }
 
 template <typename JetType, typename METType>
+void KappaTools::ZmumuObjects<JetType, METType>::setBS(KDataBeamSpot * beamspot_)
+{
+	beamspot = beamspot_;
+}
+
+template <typename JetType, typename METType>
 KDataMuon * KappaTools::ZmumuObjects<JetType, METType>::getMuon1()
 {
 	return muon1;
@@ -143,6 +153,12 @@ template <typename JetType, typename METType>
 KDataVertex * KappaTools::ZmumuObjects<JetType, METType>::getPV()
 {
 	return primaryvertex;
+}
+
+template <typename JetType, typename METType>
+KDataBeamSpot * KappaTools::ZmumuObjects<JetType, METType>::getBS()
+{
+	return beamspot;
 }
 
 template <typename JetType, typename METType>

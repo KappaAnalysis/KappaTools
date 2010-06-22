@@ -22,6 +22,7 @@ namespace KappaTools
 			KEventMetadata * eventMetadata;
 			KLumiMetadata * lumiMetadata;
 			KDataVertex * primaryvertex;
+			KDataBeamSpot * beamspot;
 			void recalcP4();
 		public:
 			void printInformation();
@@ -33,17 +34,19 @@ namespace KappaTools
 			void setRJet(JetType * rjet);
 			void setMET(METType * met);
 			void setMetadata(KEventMetadata * eventMetadata_, KLumiMetadata * lumiMetadata_);
-			void setPV(KDataVertex * primaryvertex);
+			void setPV(KDataVertex * pv);
+			void setBS(KDataBeamSpot * bs);
 			
 			KDataMuon * getMuon1();
 			KDataMuon * getMuon2();
 			JetType * getRJet();
 			METType * getMET();
 			KDataVertex * getPV();
+			KDataBeamSpot * getBS();
 			KEventMetadata * getEventMetadata();
 			KLumiMetadata * getLumiMetadata();
 			
-			ZmumuObjects() : muon1(0), muon2(0), rjet(0), met(0), eventMetadata(0), primaryvertex(0) {};
+			ZmumuObjects() : muon1(0), muon2(0), rjet(0), met(0), eventMetadata(0), primaryvertex(0), beamspot(0) {};
 	};
 }
 
