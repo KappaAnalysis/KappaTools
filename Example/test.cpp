@@ -11,6 +11,7 @@ int main(int argc, char **argv)
 	vector<string> names = fi.GetNames<KDataLVs>();
 	cout << names << endl << endl;
 	KDataLVs *jets = fi.Get<KDataLVs>(names[0]);
+	KDataBeamSpot *bs = fi.Get<KDataBeamSpot>("offlineBeamSpot");
 
 	KEventMetadata *meta_event = 0;
 	KGenEventMetadata *meta_event_gen = 0;
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
 		KGenLumiMetadata *meta_lumi_gen = 0;
 		fi.AssignLumiPtr(meta_event->nRun, meta_event->nLumi, &meta_lumi, &meta_lumi_gen);
 
-		cout << *meta_event << endl << *meta_lumi << *jets << endl << endl;
+		cout << *meta_event << endl << *meta_lumi << *jets << endl << *bs << endl << endl;
 	}
 
 	return 0;
