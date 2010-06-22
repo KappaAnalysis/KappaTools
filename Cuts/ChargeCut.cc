@@ -74,9 +74,19 @@ namespace KappaTools
 	{
 		int sum=0;
 		for (typename std::vector< T * >::iterator it = obj.begin(); it!=obj.end(); it++)
-			sum+=(*it)->charge; 
-		return sum; 
+			sum+=(*it)->charge;
+		return sum;
+	};
+
+	template <>
+	double ChargeCut<KParton>::getDecisionValue()
+	{
+		int sum=0;
+		for (std::vector< KParton * >::iterator it = obj.begin(); it!=obj.end(); it++)
+			sum+=(*it)->charge();
+		return sum;
 	};
 }
 
 template class KappaTools::ChargeCut<KDataMuon>;
+template class KappaTools::ChargeCut<KParton>;
