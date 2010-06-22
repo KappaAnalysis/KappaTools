@@ -2,9 +2,9 @@
 
 namespace KappaTools
 {
-	CutGroup::CutGroup() : BaseCut("group of cuts"), mode(AND) {}
+	CutGroup::CutGroup() : BaseCut("group of cuts"), mode(AND), debug(false) {}
 
-	CutGroup::CutGroup(int mode_) : BaseCut("group of cuts"), mode(mode_) {}
+	CutGroup::CutGroup(int mode_) : BaseCut("group of cuts"), mode(mode_), debug(false) {}
 
 	void CutGroup::addCut(KappaTools::BaseCut * cut)
 	{
@@ -19,6 +19,10 @@ namespace KappaTools
 	bool CutGroup::getInternalDecision()
 	{
 		if (cuts.size()==0) return false;
+
+		if (mode == COMPLEX)
+			return getComplexDecision();
+
 		unsigned int dec = 0;
 		for (std::vector< BaseCut * >::iterator it = cuts.begin(); it != cuts.end(); it++)
 			if ((*it)->getDecision())
@@ -37,9 +41,74 @@ namespace KappaTools
 		return false;
 	}
 
+	void CutGroup::setDebug(bool debug_)
+	{
+		debug = debug_;
+	}
+
+	void CutGroup::clearCommands()
+	{
+		commands.clear();
+	}
+
+	void CutGroup::addCommand(int cmd)
+	{
+		commands.push_back(cmd);
+	}
+
+	bool CutGroup::getComplexDecision()
+	{
+		std::stack<bool> calc;
+		if (debug)
+		{
+			for (std::vector< KappaTools::BaseCut * >::iterator it = cuts.begin(); it!=cuts.end(); it++)
+				std::cout << (*it)->getDecision();
+			std::cout << "\n";
+		}
+		for (std::vector<int>::iterator it = commands.begin(); it != commands.end(); it++)
+		{
+			int cmd = (*it);
+			if (debug)
+				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << "\n";
+			if (cmd>=0)
+				calc.push( cuts.at((*it))->getDecision() );
+			if (cmd == CutGroup::NOT)
+			{
+				int arg1 = calc.top(); calc.pop();
+				calc.push(!arg1);
+			}
+			if (cmd == CutGroup::AND)
+			{
+				int arg1 = calc.top(); calc.pop();
+				int arg2 = calc.top(); calc.pop();
+				calc.push( arg1 & arg2);
+			}
+			if (cmd == CutGroup::OR)
+			{
+				int arg1 = calc.top(); calc.pop();
+				int arg2 = calc.top(); calc.pop();
+				calc.push( arg1 | arg2);
+			}
+			if (cmd == CutGroup::XOR)
+			{
+				int arg1 = calc.top(); calc.pop();
+				int arg2 = calc.top(); calc.pop();
+				calc.push( arg1 ^ arg2);
+			}
+		}
+		if (calc.size()>1)
+			throw("evaluation failed, please check your L1 trigger cut syntax");
+		if (debug)
+			std::cout << "result: " << calc.top() << "\n";
+		if (calc.size()>0)
+			return calc.top();
+		else
+			return false;
+	}
+
 	double CutGroup::getDecisionValue()
 	{
-		return 1.;
+		return getInternalDecision();
 	}
 
 	void CutGroup::printCutList()
