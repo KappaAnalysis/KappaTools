@@ -49,5 +49,6 @@ namespace KappaTools
 	template class PtCut<KDataTau>;
 	template class PtCut<KDataPFTau>;
 	template class PtCut<KDataJet>;
-	template class PtCut<KDataPFJet>;	
+	template class PtCut<KDataPFJet>;
+	template class PtCut<KParton>;
 }

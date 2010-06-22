@@ -70,3 +70,4 @@ namespace KappaTools
 template class KappaTools::InvariantMassCut<KDataMuon>;
 template class KappaTools::InvariantMassCut<KDataJet>;
 template class KappaTools::InvariantMassCut<KDataPFJet>;
+template class KappaTools::InvariantMassCut<KParton>;

@@ -57,4 +57,5 @@ namespace KappaTools
 	template class EtaCut<KDataPFTau>;
 	template class EtaCut<KDataJet>;
 	template class EtaCut<KDataPFJet>;
+	template class EtaCut<KParton>;
 }
