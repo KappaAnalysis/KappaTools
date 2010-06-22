@@ -2,9 +2,28 @@
 
 namespace KappaTools
 {
+	CutFlow::CutFlow()
+	{
+		cutFlow.clear();
+	}
+	CutFlow::CutFlow(CutFlow * cf)
+	{
+		cutFlow.clear();
+		std::vector< BaseCut * > tmp = cf->getCutFlow();
+		for (std::vector< BaseCut * >::const_iterator it = tmp.begin(); it != tmp.end(); it++)
+		{
+			cutFlow.push_back((*it));
+		}
+	}
 	void CutFlow::addCut(KappaTools::BaseCut * cut)
 	{
 		cutFlow.push_back(cut);
+	}
+	void CutFlow::addCut(CutFlow * cf)
+	{
+		std::vector< BaseCut * > tmp = cf->getCutFlow();
+		for (std::vector< BaseCut * >::const_iterator it = tmp.begin(); it != tmp.end(); it++)
+			cutFlow.push_back((*it));
 	}
 	std::string CutFlow::getCutName(unsigned int i)
 	{
@@ -122,8 +141,6 @@ namespace KappaTools
 		return cutFlow;
 	}
 
-	// -------------------------------------------------------
-
 	KappaTools::CutflowTable::CutflowTable()
 	{
 		cutflow = 0;
@@ -141,14 +158,22 @@ namespace KappaTools
 		cutflowTable = std::vector<unsigned long>(cutflow->size());
 	}
 
-	void KappaTools::CutflowTable::collect()
+	// collect all cuts up to a specified cut (inclusive)
+	// with this one can use an event based selection and a combinatorial
+	// selection of objects in one cut flow
+	void KappaTools::CutflowTable::collect(KappaTools::BaseCut * cut)
 	{
 		if (!cutflow)
 			return;
 
 		boost::dynamic_bitset<> tempCollect = cutflow->getAccDecisionVector();
+
 		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		{
 			tmpResult[idx] |= tempCollect[idx];
+			if (cutflow->getCutFlow().at(idx) == cut)
+				break;
+		}
 	}
 
 	void KappaTools::CutflowTable::nextEvent()
@@ -171,10 +196,13 @@ namespace KappaTools
 
 		for (unsigned int idx=0; idx<cutflow->size(); idx++)
 		{
-			std::cout << idx << ".:\t" << cutflow->getCutName(idx) << "\t";
+			std::string tmpName = cutflow->getCutName(idx);
+			std::cout << idx << ".:\t" << tmpName << "";
+			for (unsigned int i=0; i<(30-tmpName.length()); i++)
+				std::cout << " ";
 			std::cout << cutflowTable[idx] << "\t";
-			std::cout <<  cutflowTable[idx]/(double)cutflowTable[0] << "\t";
-			std::cout << ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << "\n";
+			std::cout << std::setprecision(4) <<   cutflowTable[idx]/(double)cutflowTable[0] << "\t";
+			std::cout << std::setprecision(4) <<  ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << "\n";
 		}
 		std::cout << "\n";
 	}

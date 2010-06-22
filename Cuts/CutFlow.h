@@ -2,8 +2,10 @@
 #define KCutFlow_h
 
 #include <vector>
+
 #include "BaseCut.h"
 #include <iostream>
+#include <iomanip>
 #include <boost/dynamic_bitset.hpp>
 #include "TH1F.h"
 
@@ -15,6 +17,7 @@ namespace KappaTools
 			std::vector< KappaTools::BaseCut * > cutFlow;
 		public:
 			void addCut(KappaTools::BaseCut * cut);
+			void addCut(CutFlow * cf);
 			unsigned int size();
 
 			std::string getCutName(unsigned int i);
@@ -37,6 +40,9 @@ namespace KappaTools
 			const std::vector< KappaTools::BaseCut * > getCutFlow();
 			void initEvaluation(bool autoPrefix = false);
 			void evaluate();
+
+			CutFlow();
+			CutFlow(CutFlow * cf);
 	};
 
 	class CutflowTable
@@ -48,7 +54,7 @@ namespace KappaTools
 		public:
 			CutflowTable();
 			CutflowTable(CutFlow * cutflow_);
-			void collect();
+			void collect(KappaTools::BaseCut * cut = 0);
 			void nextEvent();
 			void printTable();
 			void writeHistogram(std::string histoname);
