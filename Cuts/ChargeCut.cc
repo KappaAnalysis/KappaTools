@@ -64,10 +64,7 @@ namespace KappaTools
 		if (obj.size()==0)
 			return false;
 
-		int sum=0;
-		for (typename std::vector< T * >::iterator it = obj.begin(); it!=obj.end(); it++)
-			if (*it)
-				sum+=(*it)->charge;
+		int sum=getDecisionValue();
 
 		return (find(allowed_charges.begin(), allowed_charges.end(),sum) != allowed_charges.end());
 	};
