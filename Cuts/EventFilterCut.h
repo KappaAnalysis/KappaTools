@@ -31,6 +31,7 @@ namespace KappaTools
 
 			void setPointer(KEventMetadata * tmpObj);
 
+			void addRange(std::vector<RunLumiEvtBXRange> range_);
 			void addRange(RunLumiEvtBXRange range_);
 			void clearList();
 			std::vector<unsigned long> getRuns();

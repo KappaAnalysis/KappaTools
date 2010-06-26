@@ -53,6 +53,11 @@ namespace KappaTools
 		obj=tmpObj;
 	}
 
+	void EventFilterCut::addRange(std::vector<RunLumiEvtBXRange> range_)
+	{
+		for (std::vector<RunLumiEvtBXRange>::iterator it = range_.begin(); it != range_.end(); ++it)
+			whitelist.push_back(*it);
+	}
 	void EventFilterCut::addRange(RunLumiEvtBXRange range_)
 	{
 		whitelist.push_back(range_);
