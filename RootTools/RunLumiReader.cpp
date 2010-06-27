@@ -27,8 +27,8 @@ void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<
 	}
 }
 
-RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRun)
-	: passRun(_passRun)
+RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRunLow, const run_id _passRunHigh)
+	: passRunLow(_passRunLow), passRunHigh(_passRunHigh)
 {
 	if (json != "")
 		readLumiFilter(json, lumifilter);
@@ -48,7 +48,16 @@ std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
 
 std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 {
-	os << "Accepted runs / lumis:" << std::endl << m.lumifilter << std::endl
-		<< "All runs >= " << m.passRun << " are automatically accepted" << std::endl;
+	os << "Accepted runs / lumis:" << std::endl << m.lumifilter << std::endl;
+	if ((m.passRunLow > 0) || (m.passRunHigh > 0))
+	{
+		os << "All runs with ";
+		if (m.passRunLow > 0)
+			os << m.passRunLow << " <= ";
+		os << "run";
+		if (m.passRunHigh > 0)
+			os << " <= " << m.passRunHigh << " ";
+		os << "are automatically accepted" << std::endl;
+	}
 	return os;
 }

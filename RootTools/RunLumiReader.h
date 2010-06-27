@@ -6,10 +6,11 @@ void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<
 class RunLumiSelector
 {
 public:
-	RunLumiSelector(const std::string json = "", const run_id _passRun = 1);
+	RunLumiSelector(const std::string json = "", const run_id _passRunLow = 1, const run_id _passRunHigh = -1);
 	inline bool accept(const run_id run, const lumi_id lumi) const
 	{
-		if (run >= passRun)
+		if (((passRunLow > 0) && (run <= passRunLow)) ||
+			((passRunHigh > 0) && (run >= passRunHigh)))
 			return true;
 		typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
 		std::map<run_id, lumirange>::const_iterator itRun = lumifilter.find(run);
@@ -28,7 +29,7 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:
-	run_id passRun;
+	run_id passRunLow, passRunHigh;
 	std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > lumifilter;
 };
 
