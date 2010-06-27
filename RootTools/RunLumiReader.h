@@ -9,7 +9,7 @@ public:
 	RunLumiSelector(const std::string json = "", const run_id _passRun = 1);
 	inline bool accept(const run_id run, const lumi_id lumi) const
 	{
-		if (run <= passRun)
+		if (run >= passRun)
 			return true;
 		typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
 		std::map<run_id, lumirange>::const_iterator itRun = lumifilter.find(run);
