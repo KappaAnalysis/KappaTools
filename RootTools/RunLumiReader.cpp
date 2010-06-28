@@ -34,6 +34,11 @@ RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRunLo
 		readLumiFilter(json, lumifilter);
 }
 
+void RunLumiSelector::addJSONFile(const std::string json)
+{
+	readLumiFilter(json, lumifilter);
+}
+
 std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
 {
 	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
@@ -53,11 +58,12 @@ std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 	{
 		os << "All runs with ";
 		if (m.passRunLow > 0)
-			os << m.passRunLow << " <= ";
-		os << "run";
+			os << "run<=" << m.passRunLow << "";
+		if ((m.passRunLow > 0) && (m.passRunHigh > 0))
+			os << " and ";
 		if (m.passRunHigh > 0)
-			os << " <= " << m.passRunHigh << " ";
-		os << "are automatically accepted" << std::endl;
+			os << "run>=" << m.passRunHigh << "";
+		os << " are automatically accepted" << std::endl;
 	}
 	return os;
 }
