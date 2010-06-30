@@ -20,7 +20,7 @@ namespace KappaTools
 	{
 		private:
 			TH1D * Z_mass, * Z_mass_low, * Z_mass_zoom, * Z_mass_fine;
-			TH1D * Z_phi, * Z_eta, * Z_pt, * Z_pt_full;
+			TH1D * Z_phi, * Z_eta, * Z_pt, * Z_pt_full, * Z_y;
 			TH1D * muons_dR, * muons_dPhi;
 
 			TH1D * zjet_dR, * zjet_dPhi, * zjet_dPhi_zoom;

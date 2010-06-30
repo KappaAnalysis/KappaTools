@@ -14,6 +14,7 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_pt_full					= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);
 	Z_eta 						= new TH1D("Z_eta","#eta_{Z}", 50, -5., 5.);
 	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
+	Z_y 							= new TH1D("Z_y","#y_{Z}", 50, -3., 3.);
 
 	jet_response			= new TH1D("jet_response", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z}", 100, 0., 2.);
 	jet_response_mpf	= new TH1D("jet_response_mpf", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z} (\\mathrm{MPF})", 100, 0., 2.);
@@ -46,6 +47,7 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 	Z_mass_fine->Fill(z.mass(), weight);
 
 	Z_eta->Fill(z.eta(), weight);
+	Z_y->Fill(z.Rapidity(), weight);
 	Z_phi->Fill(z.phi(), weight);
 	Z_pt->Fill(z.pt(), weight);
 	Z_pt_full->Fill(z.pt(), weight);
