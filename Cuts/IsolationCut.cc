@@ -3,10 +3,10 @@
 namespace KappaTools
 {
 	template <typename T>
-	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(TRACKISO) {}
+	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO) {}
 
 	template <typename T>
-	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(TRACKISO) {}
+	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO) {}
 
 	template <typename T>
 	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_) {}
@@ -87,6 +87,16 @@ namespace KappaTools
 				return obj->ecalIso05;
 			if (coneSize == 0.6)
 				return obj->ecalIso06;
+		}
+
+		if (isoType == SUMPTISO)
+		{
+			if (coneSize == 0.3)
+				return obj->sumPtIso03;
+			if (coneSize == 0.5)
+				return obj->sumPtIso05;
+			if (coneSize == 0.6)
+				return obj->sumPtIso06;
 		}
 
 		if (isoType == RELCOMBISO)
