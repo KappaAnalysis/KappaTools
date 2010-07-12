@@ -39,7 +39,7 @@ namespace KappaTools
 	{
 		if (name=="")
 			name = cutName;
-		eval_tuple = new TNtuple((TString)name, (TString)name, "value:decision");
+		eval_tuple = new TNtuple(((TString)"eval_"+name).ReplaceAll(" ","_").ReplaceAll(".","").ReplaceAll("<","").ReplaceAll(">","").ReplaceAll(":","").ReplaceAll(",",""), (TString)name, "value:decision");
 	}
 
 	void BaseCut::evaluate()

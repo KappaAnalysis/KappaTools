@@ -38,7 +38,7 @@ namespace KappaTools
 			bool allMinusTwoSuccessful(unsigned int cut1, unsigned int cut2);
 
 			const std::vector< KappaTools::BaseCut * > getCutFlow();
-			void initEvaluation(bool autoPrefix = false);
+			virtual void initEvaluation(bool autoPrefix = false);
 			void evaluate();
 
 			CutFlow();
