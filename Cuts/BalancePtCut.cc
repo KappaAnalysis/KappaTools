@@ -109,6 +109,7 @@ namespace KappaTools
 				return -1.;
 		}
 	}
+	template class BalancePtCut<KDataLV, KDataLV>;
 	template class BalancePtCut<KappaTools::ZmumuObjects<KDataJet, KDataMET>, KDataJet>;
 	template class BalancePtCut<KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KDataPFJet>;
 	template class BalancePtCut<KDataJet, KappaTools::ZmumuObjects<KDataJet, KDataMET> >;

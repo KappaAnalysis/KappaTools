@@ -52,6 +52,7 @@ namespace KappaTools
 			return obj->p4.eta();
 	};
 
+	template class EtaCut<KDataLV>;
 	template class EtaCut<KDataMuon>;
 	template class EtaCut<KDataTau>;
 	template class EtaCut<KDataPFTau>;
