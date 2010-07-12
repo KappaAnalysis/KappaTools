@@ -46,6 +46,30 @@ std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
 	return std::make_pair<run_id,lumi_id>(iter->first, iter->second.rbegin()->second);
 }
 
+void RunLumiSelector::printJSON()
+{
+	std::cout << "\n";
+	std::cout << "{";
+	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::iterator it1 = lumifilter.begin(); it1 != lumifilter.end(); )
+	{
+		std::cout << "\""<< (*it1).first << "\": [";
+		for (std::set<std::pair<lumi_id, lumi_id> >::iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end(); )
+		{
+			std::cout << "[" << (*it2).first << "," << (*it2).second << "]";
+			it2++;
+			if (it2!=(*it1).second.end())
+				std::cout << ", ";
+		}
+		std::cout << "]";
+		it1++;
+		if (it1!=lumifilter.end())
+			std::cout << ", ";
+	}
+	std::cout << "}";
+	std::cout << "\n";
+	std::cout << "\n";
+}
+
 std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
 {
 	return os << p.first << "-" << p.second;
