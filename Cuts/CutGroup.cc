@@ -11,6 +11,11 @@ namespace KappaTools
 			cuts.push_back(cut);
 	}
 
+	void CutGroup::clearCuts()
+	{
+			cuts.clear();
+	}
+
 	void CutGroup::setMode(int mode_)
 	{
 		mode = mode_;

@@ -30,6 +30,7 @@ namespace KappaTools
 			CutGroup(int mode_);
 
 			void addCut(KappaTools::BaseCut * cut);
+			void clearCuts();
 			void setMode(int mode_);
 
 			bool getComplexDecision();
