@@ -11,8 +11,6 @@ namespace KappaTools
 		{};
 	bool RunLumiEvtBXRange::contains(KEventMetadata * evt)
 	{
-		//std::cout << evt->nRun << "\t" << nRun << "\n";
-
 		if (evt->nRun != nRun)
 			return false;
 		if (nBX != 0 && evt->nBX != nBX)
@@ -84,7 +82,6 @@ namespace KappaTools
 		if(!obj)
 			return false;
 
-		//std::cout << whitelist.size() << "\n";
 		for (std::vector<RunLumiEvtBXRange>::iterator it = whitelist.begin(); it != whitelist.end(); ++it)
 			if (it->contains(obj))
 				return true;

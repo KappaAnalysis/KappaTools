@@ -8,7 +8,7 @@ KappaTools::LumiMetadataProvider::LumiMetadataProvider(TTree * lumis_tree)
 	
 	Long64_t nentries = lumis_tree->GetEntries();
 
-	std::cout << nentries << " lumi blocks\n";
+	std::cout << nentries << " lumi blocks" << std::endl;
 
 	for (unsigned int i=0;i<nentries;i++)
 	{

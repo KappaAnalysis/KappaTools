@@ -26,9 +26,6 @@ namespace KappaTools
 		if (!obj)
 			return false;
 
-		//if ((getDecisionValue() > 0.))
-		//	for (std::map<std::string, int>::iterator it = hltMap.begin(); it!=hltMap.end(); it++)
-		//		std::cout << "\t" << it->first << " " << it->second <<"\n";
 		return (getDecisionValue() > 0.);
 	}
 
@@ -39,15 +36,12 @@ namespace KappaTools
 
 		if (hltMap.find(type) == hltMap.end())
 		{
-			std::cout << "trigger " << type << " not available\n";
+			std::cout << "trigger " << type << " not available"<<std::endl;
 			for (std::map<std::string, int>::iterator it = hltMap.begin(); it!=hltMap.end(); it++)
-				std::cout << "\t" << it->first << " available\n";
+				std::cout << "\t" << it->first << " available"<<std::endl;
 			return -1.;
 		}
 
-		//if (obj->hltMatch > 0)
-		//	std::cout << "!!!!!!!!!!!!\n";
-		//std::cout << type << "\t" << hltMap[type] << "\t" << obj->hltMatch << "\n";
 		if ( ( obj->hltMatch & ( (unsigned long long)1 << hltMap[type] ) ) != 0 )
 			return 1.;
 		else
@@ -66,11 +60,8 @@ namespace KappaTools
 			if (tmpMuonHltNamesMap[tmpName])
 				continue;
 
-			//std::cout << "muon-Objekte: " << tmpName << " " << idx << "\n";
 			tmpMuonHltNamesMap[tmpName] = idx++;
 		}
 		hltMap=tmpMuonHltNamesMap;
-
-		//std::cout << "\n";
 	}
 }

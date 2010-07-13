@@ -48,7 +48,7 @@ namespace KappaTools
 		{
 			int cmd = (*it);
 			if (debug)
-				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << "\n";
+				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << std::endl;
 			if (cmd>=0)
 				calc.push( (*l1 & ((unsigned long long)1 << cmd)) );
 			if (cmd == L1TriggerCut::NOT)

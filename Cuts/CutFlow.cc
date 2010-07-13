@@ -34,7 +34,7 @@ namespace KappaTools
 		int i = 1;
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 		{
-			std::cout << (i++) <<".: " << (*it)->getName() << "\n";
+			std::cout << (i++) <<".: " << (*it)->getName() << std::endl;
 		}
 	}
 	// evaluates all but one cut
@@ -104,8 +104,8 @@ namespace KappaTools
 	void CutFlow::printDecisionValues()
 	{
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
-				std::cout << "value of " << (*it)->getName() << ": \t" << (*it)->getDecisionValue() << "\t" <<((*it)->getDecision()?"+":"-")<< "\n";
-		std::cout << "\n";
+				std::cout << "value of " << (*it)->getName() << ": \t" << (*it)->getDecisionValue() << "\t" <<((*it)->getDecision()?"+":"-") << std::endl;
+		std::cout << std::endl;
 	}
 	boost::dynamic_bitset<> CutFlow::getAccDecisionVector()
 	{
@@ -202,9 +202,9 @@ namespace KappaTools
 				std::cout << " ";
 			std::cout << cutflowTable[idx] << "\t";
 			std::cout << std::setprecision(4) <<   cutflowTable[idx]/(double)cutflowTable[0] << "\t";
-			std::cout << std::setprecision(4) <<  ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << "\n";
+			std::cout << std::setprecision(4) <<  ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << std::endl;
 		}
-		std::cout << "\n";
+		std::cout << std::endl;
 	}
 
 	void KappaTools::CutflowTable::writeHistogram(std::string histoname)

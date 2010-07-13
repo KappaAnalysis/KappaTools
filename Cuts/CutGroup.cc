@@ -68,13 +68,13 @@ namespace KappaTools
 		{
 			for (std::vector< KappaTools::BaseCut * >::iterator it = cuts.begin(); it!=cuts.end(); it++)
 				std::cout << (*it)->getDecision();
-			std::cout << "\n";
+			std::cout << std::endl;
 		}
 		for (std::vector<int>::iterator it = commands.begin(); it != commands.end(); it++)
 		{
 			int cmd = (*it);
 			if (debug)
-				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << "\n";
+				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << std::endl;
 			if (cmd>=0)
 				calc.push( cuts.at((*it))->getDecision() );
 			if (cmd == CutGroup::NOT)
@@ -104,7 +104,7 @@ namespace KappaTools
 		if (calc.size()>1)
 			throw("evaluation failed, please check your L1 trigger cut syntax");
 		if (debug)
-			std::cout << "result: " << calc.top() << "\n";
+			std::cout << "result: " << calc.top() << std::endl;
 		if (calc.size()>0)
 			return calc.top();
 		else
@@ -121,7 +121,7 @@ namespace KappaTools
 		int i=1;
 		for (std::vector< BaseCut * >::iterator it = cuts.begin(); it != cuts.end(); it++)
 		{
-			std::cout << (i++) <<".: " << (*it)->getName() << "\n";
+			std::cout << (i++) <<".: " << (*it)->getName() << std::endl;
 		}
 	}
 }

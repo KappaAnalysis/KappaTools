@@ -12,69 +12,69 @@ template <typename JetType, typename METType>
 void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 {
 	RMLV z = getDiMuP4();
-	std::cout << "di-muon candidate:\n";
-	std::cout << "\t run=" << eventMetadata->nRun << " AND lumi=" << eventMetadata->nLumi << "\n";
-	std::cout << "\t event=" << eventMetadata->nEvent << "\n";
-	std::cout << "\t mass: " << z.mass() << "\n";
+	std::cout << "di-muon candidate:" << std::endl;
+	std::cout << "\t run=" << eventMetadata->nRun << " AND lumi=" << eventMetadata->nLumi << "" << std::endl;
+	std::cout << "\t event=" << eventMetadata->nEvent << "" << std::endl;
+	std::cout << "\t mass: " << z.mass() << "" << std::endl;
 	std::cout << "\t pT = " << z.pt() << "\t";
 	std::cout << "\t eta = " << z.eta() << "\t";
-	std::cout << "\t phi = " << z.phi() << "\n";
-	std::cout << "\n";
-	std::cout << "\t Muon 1: " << muon1->p4 << "\n";
+	std::cout << "\t phi = " << z.phi() << "" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t Muon 1: " << muon1->p4 << "" << std::endl;
 	printMuonInformation(muon1);
-	std::cout << "\n";
-	std::cout << "\t Muon 2: " << muon2->p4 << "\n";
+	std::cout << "" << std::endl;
+	std::cout << "\t Muon 2: " << muon2->p4 << "" << std::endl;
 	printMuonInformation(muon2);
-	std::cout << "\n\t Primaryvertex:\n";
+	std::cout << std::endl << "\t Primaryvertex:" << std::endl;
 	if (!primaryvertex)
-		std::cout << "\t\t not present!\n";
+		std::cout << "\t\t not present!" << std::endl;
 	else
 	{
-		std::cout << "\t\t fake = " << primaryvertex->fake << "\n";
-		std::cout << "\t\t pos = " << primaryvertex->position << "\n";
-		std::cout << "\t\t nTracks = " << primaryvertex->nTracks << "\n";
-		std::cout << "\t\t ndof = " << primaryvertex->nDOF << "\n";
-		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "\n";
-		std::cout << "\t\t prob = " << TMath::Prob(primaryvertex->chi2, static_cast<int>(primaryvertex->nDOF)) << "\n";
+		std::cout << "\t\t fake = " << primaryvertex->fake << "" << std::endl;
+		std::cout << "\t\t pos = " << primaryvertex->position << "" << std::endl;
+		std::cout << "\t\t nTracks = " << primaryvertex->nTracks << "" << std::endl;
+		std::cout << "\t\t ndof = " << primaryvertex->nDOF << "" << std::endl;
+		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "" << std::endl;
+		std::cout << "\t\t prob = " << TMath::Prob(primaryvertex->chi2, static_cast<int>(primaryvertex->nDOF)) << "" << std::endl;
 	}
 	if (met)
-		std::cout << "\t MET: " << met->p4 << "\n";
+		std::cout << "\t MET: " << met->p4 << "" << std::endl;
 	std::cout << "\t Triggers: ";
 	for (unsigned int idx = 0; idx < lumiMetadata->hltNames.size(); idx++)
 	{
 		if ( eventMetadata->bitsHLT & ((unsigned long long)1 << idx))
 			std::cout << lumiMetadata->hltNames[idx] << ", ";
 	}
-	std::cout << "\n";
+	std::cout << "" << std::endl;
 }
 
 template <typename JetType, typename METType>
 void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon * muon)
 {
-	std::cout << "\t\t type:                  " << (muon->isGlobalMuon()?"glb ":"--- ") << (muon->isStandAloneMuon()?"sta ":"--- ") << (muon->isTrackerMuon()?"trk ":"--- ")<< "\n";
-	std::cout << "\t\t #chambers:             " << muon->numberOfChambers << "\n";
-	std::cout << "\t\t #matches:              " << muon->numberOfMatches << "\n";
-	std::cout << "\t\t #valid tracker hits:   " << (muon->track.nValidPixelHits+muon->track.nValidStripHits) << "\n";
-	std::cout << "\t\t #valid pixel hits:     " << muon->track.nValidPixelHits << "\n";
-	std::cout << "\t\t #valid muon hits (glb) " << muon->globalTrack.nValidMuonHits << "\n";
-	std::cout << "\t\t vertex:                " << muon->vertex.position << "\n";
-	std::cout << "\t\t ecal iso 03:           " << muon->ecalIso03 << "\n";
-	std::cout << "\t\t hcal iso 03:           " << muon->hcalIso03 << "\n";
-	std::cout << "\t\t track iso 03:          " << muon->trackIso03 << "\n";
-	std::cout << "\t\t chi2/ndof (glb):       " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "\n";
+	std::cout << "\t\t type:                  " << (muon->isGlobalMuon()?"glb ":"--- ") << (muon->isStandAloneMuon()?"sta ":"--- ") << (muon->isTrackerMuon()?"trk ":"--- ")<< "" << std::endl;
+	std::cout << "\t\t #chambers:             " << muon->numberOfChambers << "" << std::endl;
+	std::cout << "\t\t #matches:              " << muon->numberOfMatches << "" << std::endl;
+	std::cout << "\t\t #valid tracker hits:   " << (muon->track.nValidPixelHits+muon->track.nValidStripHits) << "" << std::endl;
+	std::cout << "\t\t #valid pixel hits:     " << muon->track.nValidPixelHits << "" << std::endl;
+	std::cout << "\t\t #valid muon hits (glb) " << muon->globalTrack.nValidMuonHits << "" << std::endl;
+	std::cout << "\t\t vertex:                " << muon->vertex.position << "" << std::endl;
+	std::cout << "\t\t ecal iso 03:           " << muon->ecalIso03 << "" << std::endl;
+	std::cout << "\t\t hcal iso 03:           " << muon->hcalIso03 << "" << std::endl;
+	std::cout << "\t\t track iso 03:          " << muon->trackIso03 << "" << std::endl;
+	std::cout << "\t\t chi2/ndof (glb):       " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "" << std::endl;
 
-	std::cout << "\t\t track:                 " << muon->track.p4 << "\n";
-	std::cout << "\t\t IP (trk vs pv):        " << muon->track.getIP(primaryvertex,0) << "\n";
-	std::cout << "\t\t IPsignf. (trk vs pv):  " << muon->track.getIP(primaryvertex,2) << "\n";
-	std::cout << "\t\t IP (trk vs bs):        " << muon->track.getIP(beamspot,0) << "\n";
-	std::cout << "\t\t IPsignf. (trk vs bs):  " << muon->track.getIP(beamspot,2) << "\n";
+	std::cout << "\t\t track:                 " << muon->track.p4 << "" << std::endl;
+	std::cout << "\t\t IP (trk vs pv):        " << muon->track.getIP(primaryvertex,0) << "" << std::endl;
+	std::cout << "\t\t IPsignf. (trk vs pv):  " << muon->track.getIP(primaryvertex,2) << "" << std::endl;
+	std::cout << "\t\t IP (trk vs bs):        " << muon->track.getIP(beamspot,0) << "" << std::endl;
+	std::cout << "\t\t IPsignf. (trk vs bs):  " << muon->track.getIP(beamspot,2) << "" << std::endl;
 	std::cout << "\t\t hltMatch:              ";
 	for (unsigned int idx = 0; idx < lumiMetadata->hltNamesMuons.size(); idx++)
 	{
 		if ( muon->hltMatch & ((unsigned long long)1 << idx))
 			std::cout << lumiMetadata->hltNamesMuons[idx] << ", ";
 	}
-	std::cout << "\n";
+	std::cout << "" << std::endl;
 }
 
 template <typename JetType, typename METType>

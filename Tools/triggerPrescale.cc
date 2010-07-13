@@ -33,7 +33,7 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 	lumis_tree->SetCacheSize(200000000);
 	for (std::vector<std::string>::iterator it=filenames.begin(); it!=filenames.end();it++)
 	{
-		std::cout << "loading " << *it << "...\n";
+		std::cout << "loading " << *it << "..." << std::endl;
 		lumis_tree->Add((*it).c_str());
 	}
 
@@ -42,9 +42,9 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 	lumis_tree->SetBranchAddress("KLumiMetadata",&m_lumimetadata,&b_lumimetadata);
 	lumis_tree->AddBranchToCache(b_lumimetadata);
 
-	std::cout << "retrieving number of lumi sections...\n";
+	std::cout << "retrieving number of lumi sections..." << std::endl;
 	Long64_t nentries_reco = lumis_tree->GetEntries();
-	std::cout << nentries_reco << " lumi sections found\n";
+	std::cout << nentries_reco << " lumi sections found" << std::endl;
 
 	RunLumiSelector runLumiSelector(jsonFiles);
 
@@ -90,11 +90,11 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 				diff = true;
 		if (diff)
 		{
-			std::cout << "\n";
+			std::cout << std::endl;
 			if (prevID.first == (*it).first.first)
-				std::cout << "from ls " << prevID.second << " to ls " << (*it).first.second << " in run "<< prevID.first  << ":\n";
+				std::cout << "from ls " << prevID.second << " to ls " << (*it).first.second << " in run "<< prevID.first  << ":" << std::endl;
 			else
-				std::cout << "from run "<< prevID.first << " to run " << (*it).first.first << ":\n";
+				std::cout << "from run "<< prevID.first << " to run " << (*it).first.first << ":" << std::endl;
 			for (unsigned int idx = 0; idx < hlTrigger.size(); idx++)
 				if (prevPrescales[idx]!=(*it).second[idx])
 				{
@@ -107,7 +107,7 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 					std::cout << " -> ";
 					std::cout.width ( 5 );
 					std::cout << (*it).second[idx];
-					std::cout << "\n";
+					std::cout << std::endl;
 				}
 			prevID = (*it).first;
 			prevPrescales = (*it).second;
@@ -147,13 +147,13 @@ int main(int argc, char* argv[])
 	if (filenames.size())
 	{
 		if (optBatchMode)
-				std::cout << "running in batch mode...\n";
+				std::cout << "running in batch mode..." << std::endl;
 
 		zmumu(filenames, optJsonFiles.Value(), hlTrigger, optOutputFile);
 	}
 	else
 	{
-		std::cout << "No input files specified. Quitting program.\n";
+		std::cout << "No input files specified. Quitting program." << std::endl;
 	}
 	return 0;
 }
