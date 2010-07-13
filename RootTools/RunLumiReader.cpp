@@ -34,6 +34,13 @@ RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRunLo
 		readLumiFilter(json, lumifilter);
 }
 
+RunLumiSelector::RunLumiSelector(const std::vector<std::string> &json, const run_id _passRunLow, const run_id _passRunHigh)
+	: passRunLow(_passRunLow), passRunHigh(_passRunHigh)
+{
+	for (size_t i = 0; i < json.size(); ++i)
+		readLumiFilter(json[i], lumifilter);
+}
+
 void RunLumiSelector::addJSONFile(const std::string json)
 {
 	readLumiFilter(json, lumifilter);
