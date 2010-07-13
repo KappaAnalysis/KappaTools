@@ -13,15 +13,15 @@ namespace KappaTools
 		muon_eta_zoom			= new TH1D(prefix+"eta_zoom","#eta", 50, -2.5, 2.5);
 		muon_phi					= new TH1D(prefix+"phi","#phi", 50, -3.5, 3.5);
 
-		muon_ecalIso03		= new TH1D(prefix+"ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 5.);
-		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 5.);
-		muon_trackIso03		= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 5.);
-		muon_sumPtIso03		= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 5.);
+		muon_ecalIso03		= new TH1D(prefix+"ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 10.);
+		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
+		muon_trackIso03		= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
+		muon_sumPtIso03		= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
 
-		muon_ecalIso06		= new TH1D(prefix+"ecalIso06","\\mathrm{iso}_{\\mathrm{ecal}}(0.6)", 50, 0, 10.);
-		muon_hcalIso06		= new TH1D(prefix+"hcalIso06","\\mathrm{iso}_{\\mathrm{hcal}}(0.6)", 50, 0, 10.);
-		muon_trackIso06		= new TH1D(prefix+"trackIso06","\\mathrm{iso}_{\\mathrm{trk.}}(0.6)", 50, 0, 10.0);
-		muon_sumPtIso06		= new TH1D(prefix+"sumPtIso06","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 5.);
+		muon_ecalIso05		= new TH1D(prefix+"ecalIso05","\\mathrm{iso}_{\\mathrm{ecal}}(0.5)", 50, 0, 10.);
+		muon_hcalIso05		= new TH1D(prefix+"hcalIso05","\\mathrm{iso}_{\\mathrm{hcal}}(0.5)", 50, 0, 10.);
+		muon_trackIso05		= new TH1D(prefix+"trackIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.0);
+		muon_sumPtIso05		= new TH1D(prefix+"sumPtIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.);
 
 		muon_type					= new TH1D(prefix+"type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
 
@@ -62,10 +62,10 @@ namespace KappaTools
 		muon_trackIso03->Fill(muon->trackIso03, weight);
 		muon_sumPtIso03->Fill(muon->sumPtIso03, weight);
 
-		muon_ecalIso06->Fill(muon->ecalIso06, weight);
-		muon_hcalIso06->Fill(muon->hcalIso06, weight);
-		muon_trackIso06->Fill(muon->trackIso06, weight);
-		muon_sumPtIso06->Fill(muon->sumPtIso06, weight);
+		muon_ecalIso05->Fill(muon->ecalIso05, weight);
+		muon_hcalIso05->Fill(muon->hcalIso05, weight);
+		muon_trackIso05->Fill(muon->trackIso05, weight);
+		muon_sumPtIso05->Fill(muon->sumPtIso05, weight);
 
 		if (pv)
 		{
