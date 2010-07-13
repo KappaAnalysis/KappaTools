@@ -29,7 +29,7 @@ public:
 	}
 	std::pair<run_id, lumi_id> getMaxRunLumiPair();
 
-	void printJSON();
+	void printJSON(std::ostream &os = std::cout);
 	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:
 	run_id passRunLow, passRunHigh;
