@@ -7,6 +7,7 @@ class RunLumiSelector
 {
 public:
 	RunLumiSelector(const std::string json = "", const run_id _passRunLow = 1, const run_id _passRunHigh = 0);
+	RunLumiSelector(const std::vector<std::string> &json, const run_id _passRunLow = 1, const run_id _passRunHigh = 0);
 	void addJSONFile(const std::string json = "");
 	inline bool accept(const run_id run, const lumi_id lumi) const
 	{
@@ -28,7 +29,7 @@ public:
 	}
 	std::pair<run_id, lumi_id> getMaxRunLumiPair();
 
-	void printJSON();
+	void printJSON(std::ostream &os = std::cout);
 	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
 private:
 	run_id passRunLow, passRunHigh;

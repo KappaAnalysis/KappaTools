@@ -34,6 +34,13 @@ RunLumiSelector::RunLumiSelector(const std::string json, const run_id _passRunLo
 		readLumiFilter(json, lumifilter);
 }
 
+RunLumiSelector::RunLumiSelector(const std::vector<std::string> &json, const run_id _passRunLow, const run_id _passRunHigh)
+	: passRunLow(_passRunLow), passRunHigh(_passRunHigh)
+{
+	for (size_t i = 0; i < json.size(); ++i)
+		readLumiFilter(json[i], lumifilter);
+}
+
 void RunLumiSelector::addJSONFile(const std::string json)
 {
 	readLumiFilter(json, lumifilter);
@@ -46,28 +53,25 @@ std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
 	return std::make_pair<run_id,lumi_id>(iter->first, iter->second.rbegin()->second);
 }
 
-void RunLumiSelector::printJSON()
+void RunLumiSelector::printJSON(std::ostream &os)
 {
-	std::cout << "\n";
-	std::cout << "{";
+	os << std::endl << "{";
 	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::iterator it1 = lumifilter.begin(); it1 != lumifilter.end(); )
 	{
-		std::cout << "\""<< (*it1).first << "\": [";
+		os << "\""<< (*it1).first << "\": [";
 		for (std::set<std::pair<lumi_id, lumi_id> >::iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end(); )
 		{
-			std::cout << "[" << (*it2).first << "," << (*it2).second << "]";
+			os << "[" << (*it2).first << "," << (*it2).second << "]";
 			it2++;
 			if (it2!=(*it1).second.end())
-				std::cout << ", ";
+				os << ", ";
 		}
-		std::cout << "]";
+		os << "]";
 		it1++;
 		if (it1!=lumifilter.end())
-			std::cout << ", ";
+			os << ", ";
 	}
-	std::cout << "}";
-	std::cout << "\n";
-	std::cout << "\n";
+	os << "}" << std::endl << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)

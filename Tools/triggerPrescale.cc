@@ -46,11 +46,7 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 	Long64_t nentries_reco = lumis_tree->GetEntries();
 	std::cout << nentries_reco << " lumi sections found\n";
 
-	RunLumiSelector runLumiSelector("", 0, 0);
-	for (std::vector<std::string>::iterator it = jsonFiles.begin(); it != jsonFiles.end(); it++)
-		runLumiSelector.addJSONFile(*it);
-	if (jsonFiles.size() == 0)
-		runLumiSelector = RunLumiSelector("", 0, 1);
+	RunLumiSelector runLumiSelector(jsonFiles);
 
 	std::map<std::pair<unsigned long,unsigned long>, std::vector<int>, compRunLS> prescalesTable;
 
