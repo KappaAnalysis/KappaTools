@@ -7,6 +7,7 @@ KappaTools::BasePlot::BasePlot()
 
 TDirectory * KappaTools::BasePlot::getDirectory(TDirectory * tmpFile, TString tmpDirectory)
 {
+	tmpDirectory = tmpDirectory.ReplaceAll(" ","_").ReplaceAll(".","").ReplaceAll("<","").ReplaceAll(">","").ReplaceAll(":","").ReplaceAll(",","");
 	if (tmpDirectory=="")
 	{
 		tmpFile->cd();
