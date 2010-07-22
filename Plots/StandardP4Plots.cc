@@ -13,6 +13,7 @@ KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDi
 	mass					= new TH1D("mass","m", 75, 0., 250.);
 	mass_low			= new TH1D("mass_low","m", 75, 0., 75.);
 	mass_zwindow	= new TH1D("mass_zwindow","m", 70, 50., 130.);
+	eta_zoom_phi	= new TH2D("eta_zoom_phi", "#eta vs. #phi", 50, -2.5, 2.5, 50, -3.5, 3.5);
 }
 
 void KappaTools::StandardP4Plots::process(RMLV p4, double weight)
@@ -26,6 +27,7 @@ void KappaTools::StandardP4Plots::process(RMLV p4, double weight)
 	mass->Fill(p4.mass(), weight);
 	mass_low->Fill(p4.mass(), weight);
 	mass_zwindow->Fill(p4.mass(), weight);
+	eta_zoom_phi->Fill(p4.eta(), p4.phi(), weight);
 }
 
 void KappaTools::StandardP4Plots::final()

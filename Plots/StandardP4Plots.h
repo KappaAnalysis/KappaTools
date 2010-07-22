@@ -20,6 +20,7 @@ namespace KappaTools
 			TH1D * eta, * eta_zoom;
 			TH1D * phi;
 			TH1D * mass, * mass_low, * mass_zwindow;
+			TH2D * eta_zoom_phi;
 
 			StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory);
 
