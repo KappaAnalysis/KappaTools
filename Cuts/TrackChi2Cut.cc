@@ -24,13 +24,13 @@ namespace KappaTools
 	}
 
 	template <typename T>
-	void TrackChi2Cut<T>::setMinCut(unsigned short min_)
+	void TrackChi2Cut<T>::setMinCut(float min_)
 	{
 		min = min_;
 	}
 
 	template <typename T>
-	void TrackChi2Cut<T>::setMaxCut(unsigned short max_)
+	void TrackChi2Cut<T>::setMaxCut(float max_)
 	{
 		max = max_;
 	}

@@ -13,7 +13,7 @@ namespace KappaTools
 	{
 		private:
 			T * obj;
-			short min, max;
+			float min, max;
 			int type;
 		public:
 			enum Type
@@ -31,8 +31,8 @@ namespace KappaTools
 			void setPointer(T * tmpObj);
 
 			void setType(int type_);
-			void setMinCut(unsigned short min_);
-			void setMaxCut(unsigned short max_);
+			void setMinCut(float min_);
+			void setMaxCut(float max_);
 
 			virtual bool getInternalDecision();
 			double getDecisionValue();
