@@ -173,6 +173,18 @@ KLumiMetadata * KappaTools::ZmumuObjects<JetType, METType>::getLumiMetadata()
 	return lumiMetadata;
 }
 
+template <typename JetType, typename METType>
+double KappaTools::ZmumuObjects<JetType, METType>::getDeltaPhi()
+{
+	return ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(p4,rjet->p4)-M_PI);
+}
+
+template <typename JetType, typename METType>
+double KappaTools::ZmumuObjects<JetType, METType>::getResponse()
+{
+	return (rjet->p4.pt() / p4.pt());
+}
+
 template class KappaTools::ZmumuObjects<KDataJet, KDataMET>;
 template class KappaTools::ZmumuObjects<KDataPFJet, KDataMET>;
 template class KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>;
