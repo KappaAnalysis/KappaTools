@@ -61,6 +61,7 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	std::cout << "\t\t ecal iso 03:           " << muon->ecalIso03 << "" << std::endl;
 	std::cout << "\t\t hcal iso 03:           " << muon->hcalIso03 << "" << std::endl;
 	std::cout << "\t\t track iso 03:          " << muon->trackIso03 << "" << std::endl;
+	std::cout << "\t\t sum track pt iso 03:   " << muon->sumPtIso03 << "" << std::endl;
 	std::cout << "\t\t chi2/ndof (glb):       " << muon->globalTrack.chi2/muon->globalTrack.nDOF << "" << std::endl;
 
 	std::cout << "\t\t track:                 " << muon->track.p4 << "" << std::endl;
