@@ -74,6 +74,10 @@ void RunLumiSelector::printJSON(std::ostream &os)
 	os << "}" << std::endl << std::endl;
 }
 
+const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > & RunLumiSelector::getRunLumiMap(){
+  return lumifilter;
+}
+
 std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
 {
 	return os << p.first << "-" << p.second;
@@ -95,3 +99,4 @@ std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 	}
 	return os;
 }
+
