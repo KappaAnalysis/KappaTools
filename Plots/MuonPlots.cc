@@ -12,6 +12,8 @@ namespace KappaTools
 		muon_eta 					= new TH1D(prefix+"eta","#eta", 50, -5., 5.);
 		muon_eta_zoom			= new TH1D(prefix+"eta_zoom","#eta", 50, -2.5, 2.5);
 		muon_phi					= new TH1D(prefix+"phi","#phi", 50, -3.5, 3.5);
+		muon_eta_phi			= new TH2D(prefix+"eta_phi", "#eta vs. #phi", 50, -5., 5., 50, -3.5, 3.5);
+		muon_eta_zoom_phi	= new TH2D(prefix+"eta_zoom_phi", "#eta vs. #phi", 50, -2.5, 2.5, 50, -3.5, 3.5);
 
 		muon_ecalIso03		= new TH1D(prefix+"ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 10.);
 		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
@@ -56,6 +58,8 @@ namespace KappaTools
 		muon_eta->Fill(muon->p4.eta(), weight);
 		muon_eta_zoom->Fill(muon->p4.eta(), weight);
 		muon_phi->Fill(muon->p4.phi(), weight);
+		muon_eta_phi->Fill(muon->p4.eta(), muon->p4.phi(), weight);
+		muon_eta_zoom_phi->Fill(muon->p4.eta(), muon->p4.phi(), weight);
 
 		muon_ecalIso03->Fill(muon->ecalIso03, weight);
 		muon_hcalIso03->Fill(muon->hcalIso03, weight);

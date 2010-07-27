@@ -34,6 +34,7 @@ namespace KappaTools
 		private:
 			TH1D * muon_pt, * muon_pt_low, * muon_pt_fine;
 			TH1D * muon_eta, * muon_eta_zoom, * muon_phi;
+			TH2D * muon_eta_phi, * muon_eta_zoom_phi;
 
 			TH1D * muon_hasVertex;
 
