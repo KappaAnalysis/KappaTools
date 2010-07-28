@@ -28,7 +28,12 @@ int main(int argc, char **argv)
 		KGenLumiMetadata *meta_lumi_gen = 0;
 		fi.AssignLumiPtr(meta_event->nRun, meta_event->nLumi, &meta_lumi, &meta_lumi_gen);
 
-		cout << *meta_event << endl << *meta_lumi << *jets << endl << *bs << endl << endl;
+		cout << *meta_event << endl << *meta_lumi;
+		if (meta_lumi_gen)
+			cout << *meta_lumi_gen << endl;
+		cout << *jets << endl;
+		if (bs)
+			cout << *bs << endl << endl;
 	}
 
 	return 0;
