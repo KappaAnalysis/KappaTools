@@ -25,7 +25,7 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 		for (unsigned int j = 0; j < target_size; ++j)
 		{
 			const T2 &jet_j = target[j];
-			const double dR = DeltaR(jet_i.lv, jet_j.lv);
+			const double dR = DeltaR(jet_i.p4, jet_j.p4);
 			if (dR < 1)
 				match_metric[i][j] = dR;
 			else
@@ -82,7 +82,7 @@ void displayMatching(const T1 *jetsGen, const T2 *jetsCalo, const std::vector<in
 			cout << endl;
 			continue;
 		}
-		cout << jetsCalo->at(k).lv << " -> " << jetsGen->at(j).lv << endl;
+		cout << jetsCalo->at(k).p4 << " -> " << jetsGen->at(j).p4 << endl;
 	}
 }
 
