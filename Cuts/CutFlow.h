@@ -2,6 +2,7 @@
 #define KCutFlow_h
 
 #include <vector>
+#include <algorithm>
 
 #include "BaseCut.h"
 #include <iostream>

@@ -198,7 +198,7 @@ namespace KappaTools
 		{
 			std::string tmpName = cutflow->getCutName(idx);
 			std::cout << idx << ".:\t" << tmpName << "";
-			for (unsigned int i=0; i<(30-tmpName.length()); i++)
+			for (unsigned int i=0; i<std::max<unsigned long>(0, 40-tmpName.length()); i++)
 				std::cout << " ";
 			std::cout << cutflowTable[idx] << "\t";
 			std::cout << std::setprecision(4) <<   cutflowTable[idx]/(double)cutflowTable[0] << "\t";
