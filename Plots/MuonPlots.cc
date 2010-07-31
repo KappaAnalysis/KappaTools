@@ -5,10 +5,12 @@ namespace KappaTools
 	StandardMuonPlots::StandardMuonPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix)
 	{
 		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_);
-
+		double muon_pt_medium_binning[16] = { 0,5,6,7,8,9,10,11,13,16,20,25,40,60,100 };
+		
 		muon_pt 					= new TH1D(prefix+"pt","p_{\\mathrm{T}}", 75, 0., 150.);
 		muon_pt_fine			= new TH1D(prefix+"pt_fine","p_{\\mathrm{T}}", 200, 0., 200.);
 		muon_pt_low		 		= new TH1D(prefix+"pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
+		muon_pt_medium		= new TH1D(prefix+"pt_medium","p_{\\mathrm{T}}", 14, muon_pt_medium_binning);
 		muon_eta 					= new TH1D(prefix+"eta","#eta", 50, -5., 5.);
 		muon_eta_zoom			= new TH1D(prefix+"eta_zoom","#eta", 50, -2.5, 2.5);
 		muon_phi					= new TH1D(prefix+"phi","#phi", 50, -3.5, 3.5);
@@ -55,6 +57,7 @@ namespace KappaTools
 		muon_pt->Fill(muon->p4.pt(), weight);
 		muon_pt_low->Fill(muon->p4.pt(), weight);
 		muon_pt_fine->Fill(muon->p4.pt(), weight);
+		muon_pt_medium->Fill(muon->p4.pt(), weight);
 		muon_eta->Fill(muon->p4.eta(), weight);
 		muon_eta_zoom->Fill(muon->p4.eta(), weight);
 		muon_phi->Fill(muon->p4.phi(), weight);
