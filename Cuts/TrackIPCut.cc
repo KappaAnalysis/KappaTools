@@ -3,13 +3,13 @@
 namespace KappaTools
 {
 	template <typename T>
-	TrackIPCut<T>::TrackIPCut()	: BaseCut("trk IP cut"), obj(0), min(0), max(-1), type(TrackIPCut<T>::DXY) {}
+	TrackIPCut<T>::TrackIPCut()	: BaseCut("trk IP cut"), pv(0), bs(0), obj(0), min(0), max(-1), type(TrackIPCut<T>::DXY) {}
 
 	template <typename T>
-	TrackIPCut<T>::TrackIPCut(T * tmpObj) : BaseCut("trk IP cut"), obj(tmpObj), min(0), max(-1), type(TrackIPCut<T>::DXY) {}
+	TrackIPCut<T>::TrackIPCut(T * tmpObj) : BaseCut("trk IP cut"), pv(0), bs(0), obj(tmpObj), min(0), max(-1), type(TrackIPCut<T>::DXY) {}
 
 	template <typename T>
-	TrackIPCut<T>::TrackIPCut(int type_) : BaseCut("trk IP cut"), obj(0), min(0), max(-1), type(type_) {}
+	TrackIPCut<T>::TrackIPCut(int type_) : BaseCut("trk IP cut"), pv(0), bs(0), obj(0), min(0), max(-1), type(type_) {}
 
 	template <typename T>
 	void TrackIPCut<T>::setPointer(T * tmpObj)
