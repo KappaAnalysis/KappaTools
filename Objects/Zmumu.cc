@@ -37,6 +37,16 @@ void KappaTools::ZmumuObjects<JetType, METType>::printInformation()
 		std::cout << "\t\t chi2 = " << primaryvertex->chi2 << "" << std::endl;
 		std::cout << "\t\t prob = " << TMath::Prob(primaryvertex->chi2, static_cast<int>(primaryvertex->nDOF)) << "" << std::endl;
 	}
+	std::cout << std::endl << "\t Beamspot:" << std::endl;
+	if (!beamspot)
+		std::cout << "\t\t not present!" << std::endl;
+	else
+	{
+		std::cout << "\t\t type = " << (int)beamspot->type << "" << std::endl;
+		std::cout << "\t\t pos = " << beamspot->position << "" << std::endl;
+		std::cout << "\t\t beamWidthX = " << beamspot->beamWidthX << "" << std::endl;
+		std::cout << "\t\t beamWidthY = " << beamspot->beamWidthY << "" << std::endl;
+	}
 	if (met)
 		std::cout << "\t MET: " << met->p4 << "" << std::endl;
 	std::cout << "\t Triggers: ";
@@ -84,7 +94,7 @@ void KappaTools::ZmumuObjects<JetType, METType>::recalcP4()
 	if (!muon1 || !muon2)
 		p4 = RMLV();
 	else
-		p4 = muon1->p4 + muon2->p4;
+		p4 = (RMLV)muon1->p4 + (RMLV)muon2->p4;
 }
 
 template <typename JetType, typename METType>
