@@ -133,12 +133,12 @@ vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 	}
 	if (presets & OPT_Help)
 	{
-		static CmdLineOptionCallback clVersion('h', "help",
+		static CmdLineOptionCallback clHelp('h', "help",
 			"Print help", CmdLineBase::PrintHelp);
 	}
 	if (presets & OPT_Show)
 	{
-		static CmdLineOptionCallback clVersion('P', "parameters",
+		static CmdLineOptionCallback clParams('P', "parameters",
 			"Print parameters", CmdLineBase::Show);
 	}
 
