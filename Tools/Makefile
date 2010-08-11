@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-PROGRAM  = triggerPrescale.sbin writeLSList.sbin
+PROGRAM  = triggerPrescale.sbin writeLSList.sbin duplicateEventChecker.sbin
 #------------------------------------------------------------------------------
 
 include ../Makefile.root
@@ -8,4 +8,7 @@ triggerPrescale.sbin: triggerPrescale.o ../lib/libKToolbox.a ../lib/libKRootTool
 	$(CXX) $(LDFLAGS) -o $@ $^
 
 writeLSList.sbin: writeLSList.o ../lib/libKToolbox.a ../lib/libKRootTools.a ../../Kappa/DataFormats/test/libKappa.o
+	$(CXX) $(LDFLAGS) -o $@ $^
+
+duplicateEventChecker.sbin: duplicateEventChecker.o ../lib/libKToolbox.a ../lib/libKRootTools.a ../../Kappa/DataFormats/test/libKappa.o
 	$(CXX) $(LDFLAGS) -o $@ $^
