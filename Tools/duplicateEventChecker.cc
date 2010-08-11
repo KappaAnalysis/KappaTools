@@ -17,15 +17,14 @@ set<EventId> _globalEventCheckerSet;
 string progname;
 
 void MyHelpFunction(string arg){
-  cout<<"Duplicate Event Checker Help: "<<endl;
-  cout<<progname<<" [list of filenames] "<<endl;
+  cout <<"Duplicate Event Checker Help: " << endl;
+  cout << CmdLineBase::basename << " [list of filenames] " << endl;
   exit(1);
 }
 
 int main(int argc, char* argv[])
 {
-  static CmdLineOptionCallback clVersion('h', "help", "Print help", MyHelpFunction);
-  progname=argv[0];
+  static CmdLineOptionCallback clHelp('h', "help", "Print help", MyHelpFunction);
   std::vector<std::string> filenames = CmdLineBase::ParseArgs(argc, argv);
 
   if (filenames.size()==0) {
