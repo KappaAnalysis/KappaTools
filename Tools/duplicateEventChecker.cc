@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
   
   cout<<"\nDuplicate Event Checker "<<endl;
   cout<<"-- currently only checking for duplicate run/lumisection/event numbers."<<endl;
-  cout<<"Feel free to add physical event-checking for Generator etc. Yourself, as this needs to be adopted to the specific sample. (Check Muon/Jet Pt, etc.)\n"<<endl;
+  cout<<"Feel free to add physical event-checking for Generator etc. yourself, as this needs to be adopted to the specific sample. (Check Muon/Jet Pt, etc.)\n"<<endl;
   
   FileInterface kpFi(filenames,false,2);
   TChain *theChain=&kpFi.eventdata;
