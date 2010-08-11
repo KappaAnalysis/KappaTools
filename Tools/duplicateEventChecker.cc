@@ -14,8 +14,6 @@ std::ostream& operator <<(std::ostream& output, const EventId& id){
 
 set<EventId> _globalEventCheckerSet;
 
-string progname;
-
 void MyHelpFunction(string arg){
   cout <<"Duplicate Event Checker Help: " << endl;
   cout << CmdLineBase::basename << " [list of filenames] " << endl;
