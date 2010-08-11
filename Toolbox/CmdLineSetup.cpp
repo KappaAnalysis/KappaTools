@@ -8,6 +8,7 @@
 using namespace std;
 
 size_t CmdLineBase::pWidth = 0;
+std::string CmdLineBase::basename = "";
 vector<CmdLineOption*> CmdLineBase::options;
 
 CmdLineOption::CmdLineOption(const char s, const string l,
@@ -126,6 +127,7 @@ void CmdLineBase::PrintVersion(string arg)
 
 vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 {
+	basename = string(argv[0]);
 	if (presets & OPT_Version)
 	{
 		static CmdLineOptionCallback clVersion('V', "version",

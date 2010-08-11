@@ -145,6 +145,7 @@ struct CmdLineBase
 	static void PrintHelp(std::string arg = "");
 	static void PrintVersion(std::string arg = "");
 
+	static std::string basename;
 	static std::vector<std::string> ParseArgs(const int argc, char **argv, int presets = OPT_None);
 private:
 	static size_t pWidth;
