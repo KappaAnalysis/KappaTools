@@ -142,8 +142,8 @@ struct CmdLineBase
 	static void DefaultAction(CmdLineInfo *info);
 
 	static void Show(std::string arg = "");
-	static void PrintHelp(std::string arg);
-	static void PrintVersion(std::string arg);
+	static void PrintHelp(std::string arg = "");
+	static void PrintVersion(std::string arg = "");
 
 	static std::vector<std::string> ParseArgs(const int argc, char **argv, int presets = OPT_None);
 private:
