@@ -106,7 +106,7 @@ void CmdLineBase::Show(string arg)
 
 void CmdLineBase::PrintHelp(string arg)
 {
-	cout << "Available command line options:" << endl;
+	cout << "Available command line options for " << basename << ":" << endl;
 	for (size_t i = 0; i < options.size(); ++i)
 	{
 		cout << *(options[i]);
