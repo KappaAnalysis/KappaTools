@@ -59,8 +59,7 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	}
 
 	// Find matching index
-	//for (unsigned int t = 0; t < target_size; ++t)
-	while (true)
+	for (size_t t = 0; t < target_size; ++t)
 	{
 //		PrintMatrix(match_metric, base_size, target_size);
 		int best_i = -1, best_j = -1;
