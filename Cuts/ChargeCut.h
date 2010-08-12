@@ -27,6 +27,7 @@ namespace KappaTools
 			void addCut(int allowed_charge_);
 
 			bool getInternalDecision();
+			int getInternalDecisionValue();
 			double getDecisionValue();
 	};
 }

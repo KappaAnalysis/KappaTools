@@ -64,13 +64,13 @@ namespace KappaTools
 		if (obj.size()==0)
 			return false;
 
-		int sum=getDecisionValue();
+		int sum=getInternalDecisionValue();
 
 		return (find(allowed_charges.begin(), allowed_charges.end(),sum) != allowed_charges.end());
 	};
 
 	template <typename T>
-	double ChargeCut<T>::getDecisionValue()
+	int ChargeCut<T>::getInternalDecisionValue()
 	{
 		int sum=0;
 		for (typename std::vector< T * >::iterator it = obj.begin(); it!=obj.end(); it++)
@@ -79,13 +79,19 @@ namespace KappaTools
 	};
 
 	template <>
-	double ChargeCut<KParton>::getDecisionValue()
+	int ChargeCut<KParton>::getInternalDecisionValue()
 	{
 		int sum=0;
 		for (std::vector< KParton * >::iterator it = obj.begin(); it!=obj.end(); it++)
 			sum+=(*it)->charge();
 		return sum;
 	};
+
+	template <typename T>
+	double ChargeCut<T>::getDecisionValue()
+	{
+		return (double)getInternalDecisionValue();
+	}
 }
 
 template class KappaTools::ChargeCut<KDataMuon>;
