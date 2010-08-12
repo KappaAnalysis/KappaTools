@@ -5,7 +5,30 @@
 
 using namespace std;
 
-template<typename T1, typename T2>
+struct matchSort_deltaR
+{
+	double maxDeltaR;
+	matchSort_deltaR(double t = 0.3) : maxDeltaR(t) {};
+	double operator()(const RMDataLV obj1, const RMDataLV obj2)
+	{
+		double val =	ROOT::Math::VectorUtil::DeltaR(obj1, obj2);
+		return (val <= maxDeltaR ? val : -1.);
+	};
+};
+
+struct matchSort_deltaRdeltaPtRel
+{
+	double maxDeltaR, maxDeltaPtRel;
+	matchSort_deltaRdeltaPtRel(double t = 0.3, double t2 = 1e9) : maxDeltaR(t), maxDeltaPtRel(t2) {};
+	double operator()(const RMDataLV obj1, const RMDataLV obj2)
+	{
+		double val1 =	ROOT::Math::VectorUtil::DeltaR(obj1, obj2);
+		double val2 =	std::abs(obj1.pt() - obj2.pt()) / obj2.pt();
+		return (val1 < maxDeltaR && val2 < maxDeltaPtRel ? val1 : -1.);
+	};
+};
+
+template<typename T1, typename T2, typename MetricClass>
 std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base_size,
 	const std::vector<T2> &target, const size_t target_size)
 {
@@ -16,6 +39,7 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	std::vector<int> result(target_size, -1);
 	static const double invalid = 1e10;
 
+	MetricClass metricFct;
 	// Build m x n Matrix with dR
 	match_metric = new double*[base_size];
 	for (unsigned int i = 0; i < base_size; ++i)
@@ -25,8 +49,9 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 		for (unsigned int j = 0; j < target_size; ++j)
 		{
 			const T2 &jet_j = target[j];
-			const double dR = DeltaR(jet_i.p4, jet_j.p4);
-			if (dR < 1)
+			
+			const double dR = metricFct(jet_i.p4, jet_j.p4);
+			if (dR > -1.)
 				match_metric[i][j] = dR;
 			else
 				match_metric[i][j] = invalid;
@@ -34,7 +59,8 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	}
 
 	// Find matching index
-	for (unsigned int t = 0; t < target_size; ++t)
+	//for (unsigned int t = 0; t < target_size; ++t)
+	while (true)
 	{
 //		PrintMatrix(match_metric, base_size, target_size);
 		int best_i = -1, best_j = -1;
@@ -56,6 +82,8 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 			match_metric[best_i][j] = invalid;
 		if (best_i < invalid - 1)
 			result[best_j] = best_i;
+		//if (best_i == invalid)
+		//	break;
 	}
 
 	for (unsigned int i = 0; i < base_size; ++i)
