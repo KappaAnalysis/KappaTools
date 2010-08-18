@@ -16,7 +16,7 @@ namespace KappaTools
 	{
 		private:
 		public:
-			TH1D * pt, * pt_low, * pt_full;
+			TH1D * pt, * pt_low, * pt_medium, * pt_full;
 			TH1D * eta, * eta_zoom;
 			TH1D * phi;
 			TH1D * mass, * mass_low, * mass_zwindow;

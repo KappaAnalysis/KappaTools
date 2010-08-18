@@ -3,9 +3,11 @@
 KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory)
 {
 	getDirectory(tmpFile, tmpDirectory);
+	double pt_medium_binning[16] = { 0,5,6,7,8,9,10,11,13,16,20,25,40,60,100 };
 
 	pt 						= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 75.);
 	pt_low 				= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
+	pt_medium			= new TH1D("pt_medium","p_{\\mathrm{T}}", 14, pt_medium_binning);
 	pt_full 			= new TH1D("pt_full","p_{\\mathrm{T}}", 100, 0., 1000.);
 	eta						= new TH1D("eta","#eta", 50, -5., 5.);
 	eta_zoom			= new TH1D("eta_zoom","#eta", 50, -2.5, 2.5);
@@ -20,6 +22,7 @@ void KappaTools::StandardP4Plots::process(RMLV p4, double weight)
 {
 	pt->Fill(p4.pt(), weight);
 	pt_low->Fill(p4.pt(), weight);
+	pt_medium->Fill(p4.pt(), weight);
 	pt_full->Fill(p4.pt(), weight);
 	eta->Fill(p4.eta(), weight);
 	eta_zoom->Fill(p4.eta(), weight);
