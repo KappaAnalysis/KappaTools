@@ -34,6 +34,13 @@ namespace KappaTools
 	}
 
 	template <typename T>
+	void EtaCut<T>::setCut(double eta_min_, double eta_max_)
+	{
+		eta_min = eta_min_;
+		eta_max = eta_max_;
+	}
+
+	template <typename T>
 	bool EtaCut<T>::getInternalDecision()
 	{
 		if (!obj)

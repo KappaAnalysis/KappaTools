@@ -24,6 +24,7 @@ namespace KappaTools
 			void setPointer(T * tmpObj);
 
 			void setCut(double eta_max_);
+			void setCut(double eta_min_, double eta_max_);
 			void setMinCut(double eta_min_);
 			void setMaxCut(double eta_max_);
 
