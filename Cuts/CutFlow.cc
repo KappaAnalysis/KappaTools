@@ -63,6 +63,16 @@ namespace KappaTools
 				return false;
 		return true;
 	}
+	bool CutFlow::allBeforeSuccessful(KappaTools::BaseCut * cut)
+	{
+		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
+			if ( cut==(*it))
+				return true;
+			else
+				if (!((*it)->getDecision()))
+					return false;
+		return false;
+	}
 	std::vector< double > CutFlow::getCutValues()
 	{
 		std::vector< double > dec;
