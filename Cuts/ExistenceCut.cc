@@ -11,19 +11,19 @@ namespace KappaTools
 	template <typename T>
 	void ExistenceCut<T>::setPointer(T * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	template <typename T>
 	bool ExistenceCut<T>::getInternalDecision()
 	{
-		return ( obj ? true : false );
+		return (obj ? true : false);
 	}
 
 	template <typename T>
 	double ExistenceCut<T>::getDecisionValue()
 	{
-		return ( obj ? 1. : 0.);
+		return (obj ? 1. : 0.);
 	}
 
 	template class ExistenceCut<KDataVertex>;

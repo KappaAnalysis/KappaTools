@@ -4,14 +4,14 @@ namespace KappaTools
 {
 	void GoodTracksFractionCut::setPointer(KDataTracks * tmpObj)
 	{
-		obj_Tracks=tmpObj;
-		obj_TrackSummary=0;
+		obj_Tracks = tmpObj;
+		obj_TrackSummary = 0;
 	}
 
 	void GoodTracksFractionCut::setPointer(KTrackSummary * tmpObj)
 	{
-		obj_Tracks=0;
-		obj_TrackSummary=tmpObj;
+		obj_Tracks = 0;
+		obj_TrackSummary = tmpObj;
 	}
 
 	void GoodTracksFractionCut::setGoodTrackMask(unsigned int tmp_)
@@ -21,17 +21,17 @@ namespace KappaTools
 
 	void GoodTracksFractionCut::setNumTracks(int numtracks_)
 	{
-		numtracks=numtracks_;
+		numtracks = numtracks_;
 	}
 
 	void GoodTracksFractionCut::setMinCut(double min_)
 	{
-		min=min_;
+		min = min_;
 	}
 
 	void GoodTracksFractionCut::setMaxCut(double max_)
 	{
-		max=max_;
+		max = max_;
 	}
 
 	bool GoodTracksFractionCut::getInternalDecision()
@@ -45,8 +45,8 @@ namespace KappaTools
 			return true;
 
 		double val = getDecisionValue();
-	
-		return (val>min && val<max);
+
+		return (val > min && val < max);
 	};
 
 	double GoodTracksFractionCut::getDecisionValue()
@@ -67,7 +67,7 @@ namespace KappaTools
 				if (it->quality & goodTrackMask)
 					goodTracks++;
 
-			return goodTracks/allTracks;
+			return goodTracks / allTracks;
 		}
 	};
 }

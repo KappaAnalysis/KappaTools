@@ -8,12 +8,12 @@ namespace KappaTools
 
 	void CutGroup::addCut(KappaTools::BaseCut * cut)
 	{
-			cuts.push_back(cut);
+		cuts.push_back(cut);
 	}
 
 	void CutGroup::clearCuts()
 	{
-			cuts.clear();
+		cuts.clear();
 	}
 
 	void CutGroup::setMode(int mode_)
@@ -23,7 +23,7 @@ namespace KappaTools
 
 	bool CutGroup::getInternalDecision()
 	{
-		if (cuts.size()==0) return false;
+		if (cuts.size() == 0) return false;
 
 		if (mode == COMPLEX)
 			return getComplexDecision();
@@ -36,11 +36,11 @@ namespace KappaTools
 		if (mode == AND)
 			return (dec == cuts.size());
 		if (mode == OR)
-			return (dec>0);
+			return (dec > 0);
 		if (mode == XOR)
-			return (dec==1);
+			return (dec == 1);
 		if (mode == NOT)
-			return (dec==0);
+			return (dec == 0);
 		if (mode == TRU)
 			return true;
 		return false;
@@ -66,7 +66,7 @@ namespace KappaTools
 		std::stack<bool> calc;
 		if (debug)
 		{
-			for (std::vector< KappaTools::BaseCut * >::iterator it = cuts.begin(); it!=cuts.end(); it++)
+			for (std::vector< KappaTools::BaseCut * >::iterator it = cuts.begin(); it != cuts.end(); it++)
 				std::cout << (*it)->getDecision();
 			std::cout << std::endl;
 		}
@@ -75,8 +75,8 @@ namespace KappaTools
 			int cmd = (*it);
 			if (debug)
 				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << std::endl;
-			if (cmd>=0)
-				calc.push( cuts.at((*it))->getDecision() );
+			if (cmd >= 0)
+				calc.push(cuts.at((*it))->getDecision());
 			if (cmd == CutGroup::NOT)
 			{
 				int arg1 = calc.top(); calc.pop();
@@ -86,26 +86,26 @@ namespace KappaTools
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 & arg2);
+				calc.push(arg1 & arg2);
 			}
 			if (cmd == CutGroup::OR)
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 | arg2);
+				calc.push(arg1 | arg2);
 			}
 			if (cmd == CutGroup::XOR)
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 ^ arg2);
+				calc.push(arg1 ^ arg2);
 			}
 		}
-		if (calc.size()>1)
+		if (calc.size() > 1)
 			throw("evaluation failed, please check your L1 trigger cut syntax");
 		if (debug)
 			std::cout << "result: " << calc.top() << std::endl;
-		if (calc.size()>0)
+		if (calc.size() > 0)
 			return calc.top();
 		else
 			return false;
@@ -118,10 +118,10 @@ namespace KappaTools
 
 	void CutGroup::printCutList()
 	{
-		int i=1;
+		int i = 1;
 		for (std::vector< BaseCut * >::iterator it = cuts.begin(); it != cuts.end(); it++)
 		{
-			std::cout << (i++) <<".: " << (*it)->getName() << std::endl;
+			std::cout << (i++) << ".: " << (*it)->getName() << std::endl;
 		}
 	}
 }

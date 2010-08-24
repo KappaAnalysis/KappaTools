@@ -66,12 +66,12 @@ namespace KappaTools
 	template <typename T1, typename T2>
 	bool BalancePhiCut<T1, T2>::getInternalDecision()
 	{
-		if (obj1.size()==0 || obj2.size()==0)
+		if (obj1.size() == 0 || obj2.size() == 0)
 			return false;
-	
+
 		double val = getDecisionValue();
-	
-		if (val>min && val<max)
+
+		if (val > min && val < max)
 			return true;
 		else
 			return false;
@@ -92,10 +92,10 @@ namespace KappaTools
 		switch (mode)
 		{
 			case 0:
-				return std::abs(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(sum1,sum2)-M_PI));
+				return std::abs(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(sum1, sum2) - M_PI));
 				break;
 			case 1:
-				return ROOT::Math::VectorUtil::DeltaPhi(sum1,sum2);
+				return ROOT::Math::VectorUtil::DeltaPhi(sum1, sum2);
 				break;
 			default:
 				return -1.;

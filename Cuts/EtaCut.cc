@@ -47,7 +47,7 @@ namespace KappaTools
 			return false;
 
 		double val = getDecisionValue();
-		return (val>eta_min && val<eta_max);
+		return (val > eta_min && val < eta_max);
 	};
 
 	template <typename T>

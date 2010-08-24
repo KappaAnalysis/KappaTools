@@ -3,19 +3,19 @@
 namespace KappaTools
 {
 	zVertexCut::zVertexCut()	: BaseCut("z vtx cut"), obj(0), min(0.), max(1e6) {}
-	
+
 	zVertexCut::zVertexCut(KDataVertex * tmpObj) : BaseCut("z vtx cut"), obj(tmpObj), min(0.), max(1e6) {}
 
 	void zVertexCut::setPointer(KDataVertex * tmpObj)
 	{
 		obj = tmpObj;
 	}
-	
+
 	void zVertexCut::setMinCut(double min_)
 	{
 		min = min_;
 	}
-	
+
 	void zVertexCut::setMaxCut(double max_)
 	{
 		max = max_;
@@ -25,9 +25,9 @@ namespace KappaTools
 	{
 		if (!obj)
 			return false;
-		
+
 		double val = getDecisionValue();
-		return (val>min && val<max);
+		return (val > min && val < max);
 	};
 
 	double zVertexCut::getDecisionValue()

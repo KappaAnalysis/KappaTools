@@ -8,7 +8,7 @@ namespace KappaTools
 
 	void NoneCut::setCut(bool dec_)
 	{
-		dec=dec_;
+		dec = dec_;
 	}
 
 	bool NoneCut::getInternalDecision()

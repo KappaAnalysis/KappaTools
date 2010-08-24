@@ -16,7 +16,7 @@ namespace KappaTools
 	{
 		obj = tmpObj;
 	}
-	
+
 	template <typename T>
 	void TrackIPCut<T>::setPV(KDataVertex * tmpObj)
 	{
@@ -57,10 +57,10 @@ namespace KappaTools
 
 		double val = getDecisionValue();
 
-		if (max==-1)
-			return (val>min);
+		if (max == -1)
+			return (val > min);
 		else
-			return (val>min && val<max);
+			return (val > min && val < max);
 	}
 
 	template <typename T>
@@ -75,7 +75,7 @@ namespace KappaTools
 				1 - dxy/error(track)
 				2 - dxy/sqrt(error(track)**2 + error(vertex)**2)
 		*/
-		switch(type)
+		switch (type)
 		{
 			case TrackIPCut::DXY:
 				if (pv)

@@ -4,33 +4,33 @@ namespace KappaTools
 {
 	void VertexNdofCut::setPointer(KDataVertex * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	void VertexNdofCut::setMinCut(int min_)
 	{
-		min=min_;
+		min = min_;
 	}
 
 	void VertexNdofCut::setMaxCut(int max_)
 	{
-		max=max_;
+		max = max_;
 	}
 
 	bool VertexNdofCut::getInternalDecision()
 	{
 		if (!obj)
 			return false;
-	
+
 		double val = getDecisionValue();
-	
+
 		if (max == -1)
-			if (val>min)
+			if (val > min)
 				return true;
 			else
 				return false;
 		else
-			return (val>min && val<max);
+			return (val > min && val < max);
 	};
 
 	double VertexNdofCut::getDecisionValue()

@@ -13,7 +13,7 @@ namespace KappaTools
 
 	void MuonHLTCut::setPointer(KDataMuon * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	bool MuonHLTCut::isTriggerAvailable()
@@ -36,13 +36,13 @@ namespace KappaTools
 
 		if (hltMap.find(type) == hltMap.end())
 		{
-			std::cout << "trigger " << type << " not available"<<std::endl;
-			for (std::map<std::string, int>::iterator it = hltMap.begin(); it!=hltMap.end(); it++)
-				std::cout << "\t" << it->first << " available"<<std::endl;
+			std::cout << "trigger " << type << " not available" << std::endl;
+			for (std::map<std::string, int>::iterator it = hltMap.begin(); it != hltMap.end(); it++)
+				std::cout << "\t" << it->first << " available" << std::endl;
 			return -1.;
 		}
 
-		if ( ( obj->hltMatch & ( (unsigned long long)1 << hltMap[type] ) ) != 0 )
+		if ((obj->hltMatch & ((unsigned long long)1 << hltMap[type])) != 0)
 			return 1.;
 		else
 			return 0.;
@@ -52,7 +52,7 @@ namespace KappaTools
 	{
 		std::map<std::string, int> tmpMuonHltNamesMap;
 
-		int idx=0;
+		int idx = 0;
 		for (std::vector<std::string>::iterator it = tmpLumiMetadata->hltNamesMuons.begin(); it != tmpLumiMetadata->hltNamesMuons.end(); it++)
 		{
 			std::string tmpName = *it;
@@ -62,6 +62,6 @@ namespace KappaTools
 
 			tmpMuonHltNamesMap[tmpName] = idx++;
 		}
-		hltMap=tmpMuonHltNamesMap;
+		hltMap = tmpMuonHltNamesMap;
 	}
 }

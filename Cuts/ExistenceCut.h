@@ -10,14 +10,14 @@ namespace KappaTools
 	template <typename T>
 	class ExistenceCut : public BaseCut
 	{
-		private:
-			T * obj;
-		public:
-			ExistenceCut();
-			ExistenceCut(T * tmpObj);
-			void setPointer(T * tmpObj);
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+	private:
+		T * obj;
+	public:
+		ExistenceCut();
+		ExistenceCut(T * tmpObj);
+		void setPointer(T * tmpObj);
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 

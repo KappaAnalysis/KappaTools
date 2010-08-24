@@ -49,8 +49,8 @@ namespace KappaTools
 			int cmd = (*it);
 			if (debug)
 				std::cout << "elements on stack: " << calc.size() << "\tnext command: " << cmd << std::endl;
-			if (cmd>=0)
-				calc.push( (*l1 & ((unsigned long long)1 << cmd)) );
+			if (cmd >= 0)
+				calc.push((*l1 & ((unsigned long long)1 << cmd)));
 			if (cmd == L1TriggerCut::NOT)
 			{
 				int arg1 = calc.top(); calc.pop();
@@ -60,24 +60,24 @@ namespace KappaTools
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 & arg2);
+				calc.push(arg1 & arg2);
 			}
 			if (cmd == L1TriggerCut::OR)
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 | arg2);
+				calc.push(arg1 | arg2);
 			}
 			if (cmd == L1TriggerCut::XOR)
 			{
 				int arg1 = calc.top(); calc.pop();
 				int arg2 = calc.top(); calc.pop();
-				calc.push( arg1 ^ arg2);
+				calc.push(arg1 ^ arg2);
 			}
 		}
-		if (calc.size()>1)
+		if (calc.size() > 1)
 			throw("evaluation failed, please check your L1 trigger cut syntax");
-		if (calc.size()>0)
+		if (calc.size() > 0)
 			return calc.top();
 		else
 			return false;

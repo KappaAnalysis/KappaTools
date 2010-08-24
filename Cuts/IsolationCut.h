@@ -9,33 +9,33 @@ namespace KappaTools
 	template <typename T>
 	class IsolationCut : public BaseCut
 	{
-		private:
-			T * obj;
-			double min;
-			double max;
-			double coneSize;
-			unsigned char isoType;
-		public:
-			const static unsigned char TRACKISO = 0;
-			const static unsigned char ECALISO  = 1;
-			const static unsigned char HCALISO  = 2;
-			const static unsigned char RELCOMBISO  = 3;
-			const static unsigned char SUMPTISO = 4;
+	private:
+		T * obj;
+		double min;
+		double max;
+		double coneSize;
+		unsigned char isoType;
+	public:
+		const static unsigned char TRACKISO = 0;
+		const static unsigned char ECALISO  = 1;
+		const static unsigned char HCALISO  = 2;
+		const static unsigned char RELCOMBISO  = 3;
+		const static unsigned char SUMPTISO = 4;
 
-			IsolationCut();
-			IsolationCut(T * tmpObj);
-			IsolationCut(unsigned char isoType_, double coneSize_);
+		IsolationCut();
+		IsolationCut(T * tmpObj);
+		IsolationCut(unsigned char isoType_, double coneSize_);
 
-			void setPointer(T * tmpObj);
+		void setPointer(T * tmpObj);
 
-			void setType(unsigned char isoType_);
-			void setConeSize(double coneSize_);
-			void setMinCut(double min_);
-			void setMaxCut(double max_);
+		void setType(unsigned char isoType_);
+		void setConeSize(double coneSize_);
+		void setMinCut(double min_);
+		void setMaxCut(double max_);
 
-			virtual bool getInternalDecision();
+		virtual bool getInternalDecision();
 
-			double getDecisionValue();
+		double getDecisionValue();
 	};
 }
 #endif

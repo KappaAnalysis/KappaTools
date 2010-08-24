@@ -31,7 +31,7 @@ namespace KappaTools
 			return false;
 
 		double val = getDecisionValue();
-		
+
 		return (obj->quality & mask);
 	}
 
@@ -40,7 +40,7 @@ namespace KappaTools
 	{
 		if (!obj)
 			return -1.;
-		
+
 		return obj->quality;
 	}
 }
