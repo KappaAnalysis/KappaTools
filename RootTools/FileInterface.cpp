@@ -123,7 +123,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 		return 0;
 	}
 
-	branch = chain.GetBranch(name.c_str());
+	branch = chain.GetBranch(selected.c_str());
 	TClass *classRequest = TClass::GetClass(cname);
 	TClass *classBranch = TClass::GetClass(branch->GetClassName());
 	if (!classBranch->InheritsFrom(classRequest))
