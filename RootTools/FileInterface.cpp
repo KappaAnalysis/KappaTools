@@ -129,7 +129,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	if (!classBranch->InheritsFrom(classRequest))
 	{
 		std::cout << "Incompatible types! Requested: " << classRequest->GetName()
-			<< " Found: " << classRequest->GetName() << std::endl;
+			<< " Found: " << classBranch->GetName() << std::endl;
 		return 0;
 	}
 	void *tmp = classBranch->New();
