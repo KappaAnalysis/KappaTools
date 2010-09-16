@@ -65,8 +65,6 @@ namespace KappaTools
 				return obj->trackIso03;
 			if (coneSize == 0.5)
 				return obj->trackIso05;
-			if (coneSize == 0.6)
-				return obj->trackIso06;
 		}
 
 		if (isoType == HCALISO)
@@ -75,8 +73,6 @@ namespace KappaTools
 				return obj->hcalIso03;
 			if (coneSize == 0.5)
 				return obj->hcalIso05;
-			if (coneSize == 0.6)
-				return obj->hcalIso06;
 		}
 
 		if (isoType == ECALISO)
@@ -85,8 +81,6 @@ namespace KappaTools
 				return obj->ecalIso03;
 			if (coneSize == 0.5)
 				return obj->ecalIso05;
-			if (coneSize == 0.6)
-				return obj->ecalIso06;
 		}
 
 		if (isoType == SUMPTISO)
@@ -95,8 +89,6 @@ namespace KappaTools
 				return obj->sumPtIso03;
 			if (coneSize == 0.5)
 				return obj->sumPtIso05;
-			if (coneSize == 0.6)
-				return obj->sumPtIso06;
 		}
 
 		if (isoType == RELCOMBISO)
@@ -105,8 +97,6 @@ namespace KappaTools
 				return (obj->sumPtIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
 			if (coneSize == 0.5)
 				return (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
-			if (coneSize == 0.6)
-				return (obj->sumPtIso06 + obj->hcalIso06 + obj->ecalIso06) / obj->p4.pt();
 		}
 		return -1;
 	}
