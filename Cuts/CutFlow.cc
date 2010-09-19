@@ -227,4 +227,9 @@ namespace KappaTools
 		}
 		histo->Write();
 	}
+
+	unsigned long KappaTools::CutflowTable::get(size_t idx)
+	{
+		return cutflowTable.at(idx);
+	}
 }

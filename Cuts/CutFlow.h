@@ -60,6 +60,7 @@ namespace KappaTools
 		void nextEvent();
 		void printTable();
 		void writeHistogram(std::string histoname);
+		unsigned long get(size_t idx);
 	};
 }
 #endif
