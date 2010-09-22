@@ -55,6 +55,19 @@ struct FileInterface
 	void AssignLumiPtr(run_id run, lumi_id lumi,
 		KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen = 0);
 
+	// Get lumi list
+	std::vector<std::pair<run_id, lumi_id> > GetRunLumis()
+	{
+		std::vector<std::pair<run_id, lumi_id> > result;
+		if (isMC)
+			for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
+				result.push_back(it->first);
+		else
+			for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+				result.push_back(it->first);
+		return result;
+	}
+
 private:
 	TChain lumidata;
 	int verbosity;
