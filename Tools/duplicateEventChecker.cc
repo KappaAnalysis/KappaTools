@@ -1,19 +1,12 @@
 #include <TChain.h>
 #include "RootTools/FileInterface.h"
+#include "RootTools/EventLogger.h"
+#include "DataFormats/interface/KDebug.h"
 #include "Toolbox/CmdLineSetup.h"
 #include "Toolbox/ProgressMonitor.h"
-#include "EventId.h"
 #include <set>
 
 using namespace std;
-
-std::ostream& operator<<(std::ostream& output, const EventId& id)
-{
-	output << "Run_id: " << id.rid << ", Lumi_id: " << id.lid << ", Event_Id: " << id.nCmsEvent;
-	return output;
-}
-
-set<EventId> _globalEventCheckerSet;
 
 void MyHelpFunction(string arg)
 {
@@ -32,46 +25,36 @@ int main(int argc, char* argv[])
 		cerr << "No input files given!" << endl;
 		MyHelpFunction("");
 	}
-	cout << "Reading files: " << endl;
-	for (std::vector<std::string>::iterator it = filenames.begin(); it != filenames.end();it++)
-		cout << *it << ", ";
-
-	cout << endl;
-
+	cout << "Reading files: " << filenames << endl;
 	cout << "\nDuplicate Event Checker " << endl;
-	cout << "-- currently only checking for duplicate run/lumisection/event numbers." << endl;
+	cout << "-- currently only checking for duplicate run/lumisection/event/BX numbers." << endl;
 	cout << "Feel free to add physical event-checking for Generator etc. yourself, as this needs to be adopted to the specific sample. (Check Muon/Jet Pt, etc.)\n" << endl;
 
 	FileInterface kpFi(filenames, false, 2);
-	TChain *theChain = &kpFi.eventdata;
+	TChain &theChain = kpFi.eventdata;
 	KEventMetadata *metadata;
 	KGenEventMetadata *kGen;
 	kpFi.AssignEventPtr(&metadata, &kGen);
-	run_id rid(0);  lumi_id lid(0);
-	event_id nCmsEvent(0);
-	//now code the super-sophisticated event loop.
-	const unsigned nEvents = theChain->GetEntries();
-	_globalEventCheckerSet.clear();
-	ProgressMonitor pm(nEvents);
 
+	EventLogger<std::set<EventID> > log;
+
+	//now code the super-sophisticated event loop.
+	const unsigned nEvents = theChain.GetEntries();
+	ProgressMonitor pm(nEvents);
 	for (unsigned i = 0;i < nEvents;++i)
 	{
 		if (!pm.Update()) break;
-		theChain->GetEntry(i);
-		nCmsEvent = metadata->nEvent;
-		rid = metadata->nRun;
-		lid = metadata->nLumi;
-		EventId tmpId(rid, lid, nCmsEvent);
-		if (_globalEventCheckerSet.find(tmpId) != _globalEventCheckerSet.end())
+		theChain.GetEntry(i);
+		if (log.has(metadata))
 		{
 			cerr << "Duplicate Event found!!! " << endl;
-			cout << tmpId << endl;
+			cout << *metadata << endl;
 			exit(1);
 		}
-		else _globalEventCheckerSet.insert(tmpId);
+		else
+			log.put(metadata);
 	}
 
 	cout << "RESULT: No duplicate events found." << endl;
 	return 0;
 }
-
