@@ -8,6 +8,8 @@ using namespace std;
 double myadd(const double &x) { return x + 12.5; }
 std::string myconv(const double &x) { return "XXX" + str(x); }
 
+static VersionInfo version("test framework", QUOTE(VCS_REVISION));
+
 // Not an ideal example on how to use CmdLineBase...
 struct CmdLineSetup
 {
