@@ -10,19 +10,19 @@ namespace KappaTools
 	class MuonHLTCut : public BaseCut
 	{
 	private:
-		KDataMuon * obj;
+		const KDataMuon * obj;
 		std::string type;
 		std::map<std::string, int> hltMap;
 	public:
 		MuonHLTCut();
-		MuonHLTCut(KDataMuon * tempObj);
+		MuonHLTCut(const KDataMuon * tempObj);
 		MuonHLTCut(std::string type_);
 
 		bool isTriggerAvailable();
-		void setTriggerMap(KLumiMetadata * tmpLumiMetadata);
+		void setTriggerMap(const KLumiMetadata * tmpLumiMetadata);
 
 		void setType(std::string type);
-		void setPointer(KDataMuon * tmpObj);
+		void setPointer(const KDataMuon * tmpObj);
 
 		bool getInternalDecision();
 		double getDecisionValue();

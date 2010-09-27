@@ -23,7 +23,7 @@ namespace KappaTools
 		HLTriggerCut(KEventMetadata * tempObj, std::vector<std::string> selected_, int min_);
 		HLTriggerCut(KEventMetadata * tempObj, std::vector<std::string> selected_, int min_, int max_);
 
-		void setTriggerMap(KLumiMetadata * tmpLumiMetadata);
+		void setTriggerMap(const KLumiMetadata * tmpLumiMetadata);
 		void setTrigger(std::vector<std::string> selected_);
 		void setTrigger(std::string selected_);
 		void setPointer(KEventMetadata * tmpObj);

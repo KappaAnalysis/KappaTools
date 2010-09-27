@@ -47,12 +47,12 @@ namespace KappaTools
 			max(max_)
 	{}
 
-	void HLTriggerCut::setTriggerMap(KLumiMetadata * tmpLumiMetadata)
+	void HLTriggerCut::setTriggerMap(const KLumiMetadata * tmpLumiMetadata)
 	{
 		std::map<std::string, int> tmpHltNamesMap;
 
 		int idx = 0;
-		for (std::vector<std::string>::iterator it = tmpLumiMetadata->hltNames.begin(); it != tmpLumiMetadata->hltNames.end(); it++)
+		for (std::vector<std::string>::const_iterator it = tmpLumiMetadata->hltNames.begin(); it != tmpLumiMetadata->hltNames.end(); it++)
 		{
 			std::string tmpName = *it;
 

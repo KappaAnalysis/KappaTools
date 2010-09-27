@@ -3,7 +3,7 @@
 namespace KappaTools
 {
 	MuonHLTCut::MuonHLTCut() : BaseCut("muon hlt cut"), obj(0), type("") {}
-	MuonHLTCut::MuonHLTCut(KDataMuon * tempObj) : BaseCut("muon hlt cut"), obj(tempObj), type("") {}
+	MuonHLTCut::MuonHLTCut(const KDataMuon * tempObj) : BaseCut("muon hlt cut"), obj(tempObj), type("") {}
 	MuonHLTCut::MuonHLTCut(std::string type_) : BaseCut("muon hlt cut"), obj(0), type(type_) {}
 
 	void MuonHLTCut::setType(std::string type_)
@@ -11,7 +11,7 @@ namespace KappaTools
 		type = type_;
 	}
 
-	void MuonHLTCut::setPointer(KDataMuon * tmpObj)
+	void MuonHLTCut::setPointer(const KDataMuon * tmpObj)
 	{
 		obj = tmpObj;
 	}
@@ -48,12 +48,12 @@ namespace KappaTools
 			return 0.;
 	}
 
-	void MuonHLTCut::setTriggerMap(KLumiMetadata * tmpLumiMetadata)
+	void MuonHLTCut::setTriggerMap(const KLumiMetadata * tmpLumiMetadata)
 	{
 		std::map<std::string, int> tmpMuonHltNamesMap;
 
 		int idx = 0;
-		for (std::vector<std::string>::iterator it = tmpLumiMetadata->hltNamesMuons.begin(); it != tmpLumiMetadata->hltNamesMuons.end(); it++)
+		for (std::vector<std::string>::const_iterator it = tmpLumiMetadata->hltNamesMuons.begin(); it != tmpLumiMetadata->hltNamesMuons.end(); it++)
 		{
 			std::string tmpName = *it;
 
