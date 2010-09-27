@@ -93,10 +93,13 @@ private:
 		std::map<run_id, std::pair<lumi_id, lumi_id> > run_start_end;
 		if (lumidata.GetEntries() > 0)
 		{
-			ProgressMonitor pm(lumidata.GetEntries());
+			ProgressMonitor *pm = 0;
+			if (verbosity > 0)
+				pm = new ProgressMonitor(lumidata.GetEntries());
 			for (int i = 0; i < lumidata.GetEntries(); ++i)
 			{
-				pm.Update();
+				if (pm)
+					pm->Update();
 				lumidata.GetEntry(i);
 				result[std::make_pair(meta_lumi->nRun, meta_lumi->nLumi)] = *meta_lumi;
 				if (verbosity > 2)
@@ -109,11 +112,14 @@ private:
 					std::min(run_start_end[meta_lumi->nRun].first, meta_lumi->nLumi),
 					std::max(run_start_end[meta_lumi->nRun].second, meta_lumi->nLumi)
 				);
+				if (pm)
+					delete pm;
 			}
 		}
 		if (verbosity > 2)
 			std::cout << std::endl << std::endl;
-		std::cout << "Number of unique lumi sections in dataset: " << result.size() << std::endl;
+		if (verbosity > 0)
+			std::cout << "Number of unique lumi sections in dataset: " << result.size() << std::endl;
 		if (verbosity > 1)
 		{
 			std::cout << std::endl << "Lumi ranges:" << std::endl;
