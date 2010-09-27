@@ -13,21 +13,21 @@ namespace KappaTools
 	template <typename T>
 	class PtCut : public BaseCut
 	{
-		private:
-			T * obj;
-			double pt_min;
-			double pt_max;
-		public:
-			PtCut();
-			PtCut(T * tmpObj);
-			
-			void setPointer(T * tmpObj);
-				
-			void setMinCut(double pt_min_);
-			void setMaxCut(double pt_max_);
-			
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+	private:
+		T * obj;
+		double pt_min;
+		double pt_max;
+	public:
+		PtCut();
+		PtCut(T * tmpObj);
+
+		void setPointer(T * tmpObj);
+
+		void setMinCut(double pt_min_);
+		void setMaxCut(double pt_max_);
+
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 #endif

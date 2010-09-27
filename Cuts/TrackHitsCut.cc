@@ -27,7 +27,7 @@ namespace KappaTools
 	{
 		min = min_;
 	}
-	
+
 	template <typename T>
 	void TrackHitsCut<T>::setMaxCut(unsigned short max_)
 	{
@@ -42,10 +42,10 @@ namespace KappaTools
 
 		double val = getDecisionValue();
 
-		if (max==-1)
-			return (val>=min);
+		if (max == -1)
+			return (val >= min);
 		else
-			return (val>=min && val<=max);
+			return (val >= min && val <= max);
 	}
 
 	template <typename T>
@@ -54,7 +54,7 @@ namespace KappaTools
 		if (!obj)
 			return -1.;
 
-		switch(type)
+		switch (type)
 		{
 			case TrackHitsCut::nPixelLayers:
 				return obj->nPixelLayers;
@@ -75,7 +75,7 @@ namespace KappaTools
 			case TrackHitsCut::nLostHits:
 				return obj->nLostHits;
 			case TrackHitsCut::nTrackerHits:
-				return obj->nValidPixelHits+obj->nValidStripHits;
+				return obj->nValidPixelHits + obj->nValidStripHits;
 			default:
 				return -1.;
 		}

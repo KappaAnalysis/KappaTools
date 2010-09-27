@@ -13,28 +13,29 @@ namespace KappaTools
 	template <typename T>
 	class TrackQualityCut : public BaseCut
 	{
-		private:
-			T * obj;
-			int mask;
-		public:
-			enum TrackQualityBitmask {
-				loose = 1 << 0,
-				tight = 1 << 1,
-				highPurity = 1 << 2,
-				confirmed = 1 << 3,
-				goodIterative = 1 << 4,
-				qualitySize = 1 << 5
-				};
+	private:
+		T * obj;
+		int mask;
+	public:
+		enum TrackQualityBitmask
+		{
+			loose = 1 << 0,
+			tight = 1 << 1,
+			highPurity = 1 << 2,
+			confirmed = 1 << 3,
+			goodIterative = 1 << 4,
+			qualitySize = 1 << 5
+		};
 
-			TrackQualityCut();
-			TrackQualityCut(T * tmpObj);
+		TrackQualityCut();
+		TrackQualityCut(T * tmpObj);
 
-			void setPointer(T * tmpObj);
+		void setPointer(T * tmpObj);
 
-			void setCut(int mask_);
-			
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+		void setCut(int mask_);
+
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 #endif

@@ -1,24 +1,6 @@
 #include "EventLogger.h"
 
-EventLogger::EventLogger()
+std::ostream &operator<<(std::ostream &output, const EventID &id)
 {
-
-}
-
-void EventLogger::clear()
-{
-	store.clear();
-}
-
-void EventLogger::put(KEventMetadata * metadata)
-{
-	store.push_back(EventID(metadata));
-}
-
-void EventLogger::print()
-{
-	for (std::vector<EventID>::iterator it = store.begin(); it != store.end(); it++)
-	{
-		std::cout << it->nRun << "\t" << it->nLumi << "\t" << it->nEvent << "\t" << it->nBX << "\n";
-	}
+	return output << id.nRun << "\t" << id.nLumi << "\t" << id.nEvent << "\t" << id.nBX;
 }

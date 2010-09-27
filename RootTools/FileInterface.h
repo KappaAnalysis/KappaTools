@@ -55,6 +55,19 @@ struct FileInterface
 	void AssignLumiPtr(run_id run, lumi_id lumi,
 		KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen = 0);
 
+	// Get lumi list
+	std::vector<std::pair<run_id, lumi_id> > GetRunLumis()
+	{
+		std::vector<std::pair<run_id, lumi_id> > result;
+		if (isMC)
+			for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
+				result.push_back(it->first);
+		else
+			for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+				result.push_back(it->first);
+		return result;
+	}
+
 private:
 	TChain lumidata;
 	int verbosity;
@@ -80,10 +93,13 @@ private:
 		std::map<run_id, std::pair<lumi_id, lumi_id> > run_start_end;
 		if (lumidata.GetEntries() > 0)
 		{
-			ProgressMonitor pm(lumidata.GetEntries());
+			ProgressMonitor *pm = 0;
+			if (verbosity > 0)
+				pm = new ProgressMonitor(lumidata.GetEntries());
 			for (int i = 0; i < lumidata.GetEntries(); ++i)
 			{
-				pm.Update();
+				if (pm)
+					pm->Update();
 				lumidata.GetEntry(i);
 				result[std::make_pair(meta_lumi->nRun, meta_lumi->nLumi)] = *meta_lumi;
 				if (verbosity > 2)
@@ -96,11 +112,14 @@ private:
 					std::min(run_start_end[meta_lumi->nRun].first, meta_lumi->nLumi),
 					std::max(run_start_end[meta_lumi->nRun].second, meta_lumi->nLumi)
 				);
+				if (pm)
+					delete pm;
 			}
 		}
 		if (verbosity > 2)
 			std::cout << std::endl << std::endl;
-		std::cout << "Number of unique lumi sections in dataset: " << result.size() << std::endl;
+		if (verbosity > 0)
+			std::cout << "Number of unique lumi sections in dataset: " << result.size() << std::endl;
 		if (verbosity > 1)
 		{
 			std::cout << std::endl << "Lumi ranges:" << std::endl;

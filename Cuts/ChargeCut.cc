@@ -36,7 +36,7 @@ namespace KappaTools
 	void ChargeCut<T>::setPointer(std::vector< T * > tmpObj)
 	{
 		obj.clear();
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	template <typename T>
@@ -61,29 +61,29 @@ namespace KappaTools
 	template <typename T>
 	bool ChargeCut<T>::getInternalDecision()
 	{
-		if (obj.size()==0)
+		if (obj.size() == 0)
 			return false;
 
-		int sum=getInternalDecisionValue();
+		int sum = getInternalDecisionValue();
 
-		return (find(allowed_charges.begin(), allowed_charges.end(),sum) != allowed_charges.end());
+		return (find(allowed_charges.begin(), allowed_charges.end(), sum) != allowed_charges.end());
 	};
 
 	template <typename T>
 	int ChargeCut<T>::getInternalDecisionValue()
 	{
-		int sum=0;
-		for (typename std::vector< T * >::iterator it = obj.begin(); it!=obj.end(); it++)
-			sum+=(*it)->charge;
+		int sum = 0;
+		for (typename std::vector< T * >::iterator it = obj.begin(); it != obj.end(); it++)
+			sum += (*it)->charge;
 		return sum;
 	};
 
 	template <>
 	int ChargeCut<KParton>::getInternalDecisionValue()
 	{
-		int sum=0;
-		for (std::vector< KParton * >::iterator it = obj.begin(); it!=obj.end(); it++)
-			sum+=(*it)->charge();
+		int sum = 0;
+		for (std::vector< KParton * >::iterator it = obj.begin(); it != obj.end(); it++)
+			sum += (*it)->charge();
 		return sum;
 	};
 

@@ -4,11 +4,11 @@
 namespace KappaTools
 {
 	RunLumiEvtBXRange::RunLumiEvtBXRange(run_id nRun_, lumi_id nLumiMin_, lumi_id nLumiMax_, bx_id nBX_) :
-		nRun(nRun_),
-		nLumiMin(nLumiMin_),
-		nLumiMax(nLumiMax_),
-		nBX(nBX_)
-		{};
+			nRun(nRun_),
+			nLumiMin(nLumiMin_),
+			nLumiMax(nLumiMax_),
+			nBX(nBX_)
+	{};
 	bool RunLumiEvtBXRange::contains(KEventMetadata * evt)
 	{
 		if (evt->nRun != nRun)
@@ -16,16 +16,16 @@ namespace KappaTools
 		if (nBX != 0 && evt->nBX != nBX)
 			return false;
 
-		if (nLumiMin==0 && nLumiMax == 0)
+		if (nLumiMin == 0 && nLumiMax == 0)
 			return true;
 
-		if (nLumiMin==0 && evt->nLumi<=nLumiMax)
+		if (nLumiMin == 0 && evt->nLumi <= nLumiMax)
 			return true;
 
-		if (nLumiMin<=evt->nLumi && nLumiMax == 0)
+		if (nLumiMin <= evt->nLumi && nLumiMax == 0)
 			return true;
 
-		if (nLumiMin<=evt->nLumi && evt->nLumi<=nLumiMax)
+		if (nLumiMin <= evt->nLumi && evt->nLumi <= nLumiMax)
 			return true;
 
 		return false;
@@ -37,18 +37,18 @@ namespace KappaTools
 
 
 	EventFilterCut::EventFilterCut() :
-		BaseCut("evt. filter"),
-		obj(0)
-		{}
+			BaseCut("evt. filter"),
+			obj(0)
+	{}
 
 	EventFilterCut::EventFilterCut(KEventMetadata * tempObj) :
-		BaseCut("evt. filter"),
-		obj(tempObj)
-		{}
+			BaseCut("evt. filter"),
+			obj(tempObj)
+	{}
 
 	void EventFilterCut::setPointer(KEventMetadata * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	void EventFilterCut::addRange(std::vector<RunLumiEvtBXRange> range_)
@@ -73,13 +73,13 @@ namespace KappaTools
 			if (find(usedRuns.begin(), usedRuns.end(), it->getRun()) == usedRuns.end())
 				usedRuns.push_back(it->getRun());
 
-		stable_sort (usedRuns.begin(), usedRuns.end());
+		stable_sort(usedRuns.begin(), usedRuns.end());
 		return usedRuns;
 	}
 
 	bool EventFilterCut::getInternalDecision()
 	{
-		if(!obj)
+		if (!obj)
 			return false;
 
 		for (std::vector<RunLumiEvtBXRange>::iterator it = whitelist.begin(); it != whitelist.end(); ++it)

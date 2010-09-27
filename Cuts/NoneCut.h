@@ -9,14 +9,14 @@ namespace KappaTools
 	// it's useful as first cut or as a place holder
 	class NoneCut : public BaseCut
 	{
-		private:
-			bool dec;
-		public:
-			NoneCut();
-			NoneCut(bool dec_);
-			void setCut(bool dec_);
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+	private:
+		bool dec;
+	public:
+		NoneCut();
+		NoneCut(bool dec_);
+		void setCut(bool dec_);
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 #endif

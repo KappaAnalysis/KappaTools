@@ -34,7 +34,7 @@ namespace KappaTools
 		int i = 1;
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 		{
-			std::cout << (i++) <<".: " << (*it)->getName() << std::endl;
+			std::cout << (i++) << ".: " << (*it)->getName() << std::endl;
 		}
 	}
 	// evaluates all but one cut
@@ -45,13 +45,13 @@ namespace KappaTools
 	// evaluates all but two cuts
 	bool CutFlow::allMinusTwoSuccessful(unsigned int cut1, unsigned int cut2)
 	{
-		return allMinusTwoSuccessful(cutFlow.at(cut1),cutFlow.at(cut2));
+		return allMinusTwoSuccessful(cutFlow.at(cut1), cutFlow.at(cut2));
 	}
 	// evaluates all but one cut
 	bool CutFlow::allMinusOneSuccessful(KappaTools::BaseCut * cut)
 	{
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
-			if ( cut!=(*it) && !((*it)->getDecision()))
+			if (cut != (*it) && !((*it)->getDecision()))
 				return false;
 		return true;
 	}
@@ -59,9 +59,19 @@ namespace KappaTools
 	bool CutFlow::allMinusTwoSuccessful(KappaTools::BaseCut * cut1, KappaTools::BaseCut * cut2)
 	{
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
-			if ( cut1!=(*it) && cut2!=(*it) && !((*it)->getDecision()))
+			if (cut1 != (*it) && cut2 != (*it) && !((*it)->getDecision()))
 				return false;
 		return true;
+	}
+	bool CutFlow::allBeforeSuccessful(KappaTools::BaseCut * cut)
+	{
+		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
+			if ( cut==(*it))
+				return true;
+			else
+				if (!((*it)->getDecision()))
+					return false;
+		return false;
 	}
 	std::vector< double > CutFlow::getCutValues()
 	{
@@ -96,7 +106,7 @@ namespace KappaTools
 	}
 	bool CutFlow::successful()
 	{
- 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
+		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
 			if (!(*it)->getDecision())
 				return false;
 		return true;
@@ -104,7 +114,7 @@ namespace KappaTools
 	void CutFlow::printDecisionValues()
 	{
 		for (std::vector< BaseCut * >::iterator it = cutFlow.begin(); it != cutFlow.end(); it++)
-				std::cout << "value of " << (*it)->getName() << ": \t" << (*it)->getDecisionValue() << "\t" <<((*it)->getDecision()?"+":"-") << std::endl;
+			std::cout << "value of " << (*it)->getName() << ": \t" << (*it)->getDecisionValue() << "\t" << ((*it)->getDecision() ? "+" : "-") << std::endl;
 		std::cout << std::endl;
 	}
 	boost::dynamic_bitset<> CutFlow::getAccDecisionVector()
@@ -113,7 +123,7 @@ namespace KappaTools
 		boost::dynamic_bitset<> dec(cutFlow.size());
 		for (unsigned int idx = 0; idx < cutFlow.size(); ++idx)
 			if (cutFlow[idx]->getDecision())
-				dec[idx]=true;
+				dec[idx] = true;
 			else
 				break;
 		return dec;
@@ -151,9 +161,9 @@ namespace KappaTools
 		cutflow = cutflow_;
 
 		tmpResult = cutflow->getAccDecisionVector();
-		for (unsigned int idx=0; idx<cutflow->size(); idx++)
-			tmpResult[idx]=0;
-		tmpResult[0]=1;
+		for (unsigned int idx = 0; idx < cutflow->size(); idx++)
+			tmpResult[idx] = 0;
+		tmpResult[0] = 1;
 
 		cutflowTable = std::vector<unsigned long>(cutflow->size());
 	}
@@ -168,7 +178,7 @@ namespace KappaTools
 
 		boost::dynamic_bitset<> tempCollect = cutflow->getAccDecisionVector();
 
-		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		for (unsigned int idx = 0; idx < cutflow->size(); idx++)
 		{
 			tmpResult[idx] |= tempCollect[idx];
 			if (cutflow->getCutFlow().at(idx) == cut)
@@ -181,12 +191,12 @@ namespace KappaTools
 		if (!cutflow)
 			return;
 
-		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		for (unsigned int idx = 0; idx < cutflow->size(); idx++)
 		{
-			cutflowTable[idx]+=tmpResult[idx];
-			tmpResult[idx]=0;
+			cutflowTable[idx] += tmpResult[idx];
+			tmpResult[idx] = 0;
 		}
-		tmpResult[0]=1;
+		tmpResult[0] = 1;
 	}
 
 	void KappaTools::CutflowTable::printTable()
@@ -194,15 +204,15 @@ namespace KappaTools
 		if (!cutflow)
 			return;
 
-		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		for (unsigned int idx = 0; idx < cutflow->size(); idx++)
 		{
 			std::string tmpName = cutflow->getCutName(idx);
 			std::cout << idx << ".:\t" << tmpName << "";
-			for (unsigned int i=0; i<std::max<unsigned long>(0, 40-tmpName.length()); i++)
+			for (unsigned int i = 0; i < std::max<unsigned long>(0, 40 - tmpName.length()); i++)
 				std::cout << " ";
 			std::cout << cutflowTable[idx] << "\t";
-			std::cout << std::setprecision(4) <<   cutflowTable[idx]/(double)cutflowTable[0] << "\t";
-			std::cout << std::setprecision(4) <<  ( idx > 0 ? (cutflowTable[idx]/(double)cutflowTable[idx-1]) : 1.	) << std::endl;
+			std::cout << std::setprecision(4) <<   cutflowTable[idx] / (double)cutflowTable[0] << "\t";
+			std::cout << std::setprecision(4) << (idx > 0 ? (cutflowTable[idx] / (double)cutflowTable[idx-1]) : 1.) << std::endl;
 		}
 		std::cout << std::endl;
 	}
@@ -210,11 +220,16 @@ namespace KappaTools
 	void KappaTools::CutflowTable::writeHistogram(std::string histoname)
 	{
 		TH1F * histo = new TH1F(histoname.c_str(), histoname.c_str(), cutflow->size(), 0, cutflow->size());
-		for (unsigned int idx=0; idx<cutflow->size(); idx++)
+		for (unsigned int idx = 0; idx < cutflow->size(); idx++)
 		{
-			histo->SetBinContent(idx+1, cutflowTable[idx]);
-			histo->GetXaxis()->SetBinLabel(idx+1, cutflow->getCutName(idx).c_str());
+			histo->SetBinContent(idx + 1, cutflowTable[idx]);
+			histo->GetXaxis()->SetBinLabel(idx + 1, cutflow->getCutName(idx).c_str());
 		}
 		histo->Write();
+	}
+
+	unsigned long KappaTools::CutflowTable::get(size_t idx)
+	{
+		return cutflowTable.at(idx);
 	}
 }

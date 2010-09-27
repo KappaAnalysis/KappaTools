@@ -43,10 +43,10 @@ namespace KappaTools
 
 		double val = getDecisionValue();
 
-		if (max==-1)
-			return (val>=min);
+		if (max == -1)
+			return (val >= min);
 		else
-			return (val>=min && val<=max);
+			return (val >= min && val <= max);
 	}
 
 	template <typename T>
@@ -55,14 +55,14 @@ namespace KappaTools
 		if (!obj)
 			return -1.;
 
-		switch(type)
+		switch (type)
 		{
 			case TrackChi2Cut::CHI2:
 				return obj->chi2;
 			case TrackChi2Cut::NDOF:
 				return obj->nDOF;
 			case TrackChi2Cut::CHI2NORM:
-				return obj->chi2/obj->nDOF;
+				return obj->chi2 / obj->nDOF;
 			case TrackChi2Cut::CHI2PROB:
 				return TMath::Prob(obj->chi2, static_cast<int>(obj->nDOF));
 			default:

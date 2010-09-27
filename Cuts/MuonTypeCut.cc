@@ -10,10 +10,10 @@ namespace KappaTools
 	{
 		type = type_;
 	}
-	
+
 	void MuonTypeCut::setPointer(KDataMuon * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	bool MuonTypeCut::getInternalDecision()

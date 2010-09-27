@@ -13,7 +13,7 @@ namespace KappaTools
 
 	void MuonQualityCut::setPointer(KDataMuon * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	bool MuonQualityCut::getInternalDecision()

@@ -9,20 +9,20 @@ namespace KappaTools
 {
 	class MuonMatchesCut : public BaseCut
 	{
-		private:
-			KDataMuon * obj;
-			double min, max;
-		public:
-			MuonMatchesCut();
-			MuonMatchesCut(KDataMuon * tmpObj);
+	private:
+		KDataMuon * obj;
+		double min, max;
+	public:
+		MuonMatchesCut();
+		MuonMatchesCut(KDataMuon * tmpObj);
 
-			void setPointer(KDataMuon * tmpObj);
+		void setPointer(KDataMuon * tmpObj);
 
-			void setMinCut(double min_);
-			void setMaxCut(double max_);
+		void setMinCut(double min_);
+		void setMaxCut(double max_);
 
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 

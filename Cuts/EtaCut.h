@@ -13,22 +13,23 @@ namespace KappaTools
 	template <typename T>
 	class EtaCut : public BaseCut
 	{
-		private:
-			T * obj;
-			double eta_min;
-			double eta_max;
-		public:
-			EtaCut();
-			EtaCut(T * tmpObj);
+	private:
+		T * obj;
+		double eta_min;
+		double eta_max;
+	public:
+		EtaCut();
+		EtaCut(T * tmpObj);
 
-			void setPointer(T * tmpObj);
+		void setPointer(T * tmpObj);
 
-			void setCut(double eta_max_);
-			void setMinCut(double eta_min_);
-			void setMaxCut(double eta_max_);
+		void setCut(double eta_max_);
+		void setCut(double eta_min_, double eta_max_);
+		void setMinCut(double eta_min_);
+		void setMaxCut(double eta_max_);
 
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 #endif

@@ -66,12 +66,12 @@ namespace KappaTools
 	template <typename T1, typename T2>
 	bool BalancePtCut<T1, T2>::getInternalDecision()
 	{
-		if (obj1.size()==0 || obj2.size()==0)
+		if (obj1.size() == 0 || obj2.size() == 0)
 			return false;
 
 		double val = getDecisionValue();
 
-		if (val>min && val<max)
+		if (val > min && val < max)
 			return true;
 		else
 			return false;
@@ -80,7 +80,7 @@ namespace KappaTools
 	template <typename T1, typename T2>
 	double BalancePtCut<T1, T2>::getDecisionValue()
 	{
-		if (obj1.size()==0 || obj2.size()==0)
+		if (obj1.size() == 0 || obj2.size() == 0)
 			return -1.;
 
 		RMLV sum1;
@@ -97,13 +97,13 @@ namespace KappaTools
 		switch (mode)
 		{
 			case AbsPtDiff:
-				return sum1.pt()-sum2.pt();
+				return sum1.pt() - sum2.pt();
 				break;
 			case RelPtDiff:
-				return (sum1.pt()-sum2.pt())/sum1.pt();
+				return (sum1.pt() - sum2.pt()) / sum1.pt();
 				break;
 			case PtRatio:
-				return (sum1.pt()/sum2.pt());
+				return (sum1.pt() / sum2.pt());
 				break;
 			default:
 				return -1.;

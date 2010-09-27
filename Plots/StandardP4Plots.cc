@@ -1,13 +1,47 @@
 #include "StandardP4Plots.h"
 
+KappaTools::TriggerP4Plots::TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory) : StandardP4Plots::StandardP4Plots(tmpFile, tmpDirectory)
+{
+	double pt_binning[16] = { 0,5,6,7,8,9,10,11,13,16,20,25,40,60,100 };
+	double eta_binning[17] = { -2.4, -2.1, -1.8, -1.5, -1.2, -0.9, -0.6, -0.3, 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4};
+	double eta_regions_binning[8] = { -2.4, -2.1, -1.2, -0.9, 0.9, 1.2, 2.1, 2.4};
+
+	pt_binned		= new TH1D("pt_binned","p_{\\mathrm{T}}", 14, pt_binning);
+	
+	eta_binned		= new TH1D("eta_binned","#eta", 16, eta_binning);
+	eta_regions		= new TH1D("eta_regions","#eta", 7, eta_regions_binning);
+	
+	
+}
+
+void KappaTools::TriggerP4Plots::process(RMDataLV p4, double weight)
+{
+	process((RMLV) p4, weight);
+}
+void KappaTools::TriggerP4Plots::process(RMLV p4, double weight)
+{
+	pt_binned->Fill(p4.pt(), weight);
+	eta_binned->Fill(p4.eta(), weight);
+	eta_regions->Fill(p4.eta(), weight);
+	
+	StandardP4Plots::process(p4, weight);
+}
+
+void KappaTools::TriggerP4Plots::final()
+{
+	StandardP4Plots::final();
+}
+
 KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory)
 {
 	getDirectory(tmpFile, tmpDirectory);
 
 	pt 						= new TH1D("pt","p_{\\mathrm{T}}", 75, 0., 75.);
 	pt_low 				= new TH1D("pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
+
 	pt_full 			= new TH1D("pt_full","p_{\\mathrm{T}}", 100, 0., 1000.);
 	eta						= new TH1D("eta","#eta", 50, -5., 5.);
+
 	eta_zoom			= new TH1D("eta_zoom","#eta", 50, -2.5, 2.5);
 	phi						= new TH1D("phi","#phi", 50, -3.5, 3.5);
 	mass					= new TH1D("mass","m", 75, 0., 250.);

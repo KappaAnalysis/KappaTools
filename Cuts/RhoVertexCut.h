@@ -8,21 +8,21 @@ namespace KappaTools
 {
 	class RhoVertexCut : public BaseCut
 	{
-		private:
-			KDataVertex * obj;
-			double min;
-			double max;
-		public:
-			RhoVertexCut();
-			RhoVertexCut(KDataVertex * tmpObj);
+	private:
+		KDataVertex * obj;
+		double min;
+		double max;
+	public:
+		RhoVertexCut();
+		RhoVertexCut(KDataVertex * tmpObj);
 
-			void setPointer(KDataVertex * tmpObj);
+		void setPointer(KDataVertex * tmpObj);
 
-			void setMinCut(double min_);
-			void setMaxCut(double max_);
+		void setMinCut(double min_);
+		void setMaxCut(double max_);
 
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 

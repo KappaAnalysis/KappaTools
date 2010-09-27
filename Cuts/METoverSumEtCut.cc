@@ -5,19 +5,19 @@ namespace KappaTools
 	template <typename METType>
 	void METoverSumEtCut<METType>::setPointer(METType * tmpObj)
 	{
-		obj=tmpObj;
+		obj = tmpObj;
 	}
 
 	template <typename METType>
 	void METoverSumEtCut<METType>::setMinCut(double min_)
 	{
-		min=min_;
+		min = min_;
 	}
 
 	template <typename METType>
 	void METoverSumEtCut<METType>::setMaxCut(double max_)
 	{
-		max=max_;
+		max = max_;
 	}
 
 	template <typename METType>
@@ -25,10 +25,10 @@ namespace KappaTools
 	{
 		if (!obj)
 			return false;
-	
+
 		double val = getDecisionValue();
-	
-		return (val>min && val<max);
+
+		return (val > min && val < max);
 	};
 
 	template <typename METType>
@@ -37,6 +37,6 @@ namespace KappaTools
 		if (!obj)
 			return -1.;
 
-		return obj->p4.Et()/obj->sumEt;
+		return obj->p4.Et() / obj->sumEt;
 	};
 }

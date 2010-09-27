@@ -18,6 +18,7 @@ namespace KappaTools
 		public:
 			TH1D * pt, * pt_low, * pt_full;
 			TH1D * eta, * eta_zoom;
+
 			TH1D * phi;
 			TH1D * mass, * mass_low, * mass_zwindow;
 			TH2D * eta_zoom_phi;
@@ -26,6 +27,18 @@ namespace KappaTools
 
 			void process(RMLV p4, double weight = 1.0);
 			void final();
+	};
+	
+	class TriggerP4Plots : public StandardP4Plots
+	{
+		public:
+		TH1D *pt_binned;
+		TH1D *eta_binned, *eta_regions;
+
+		TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory);
+		void process(RMLV p4, double weight = 1.0);
+		void process(RMDataLV p4, double weight = 1.0);
+		void final();
 	};
 
 	// ObjectType1 -- Object to plot

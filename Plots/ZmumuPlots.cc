@@ -10,7 +10,7 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_mass_low 				= new TH1D("Z_mass_low","m_{Z #rightarrow #mu #mu mass}", 50, 0., 75.);
 	Z_mass_zoom 			= new TH1D("Z_mass_zoom","m_{Z #rightarrow #mu #mu mass}", 60, 60., 120.);
 
-	Z_pt	 						= new TH1D("Z_pt","p_{\\mathrm{T}}^{Z}", 50, 0., 75.);
+	Z_pt	 						= new TH1D("Z_pt","p_{\\mathrm{T}}^{Z}", 50, 0., 150.);
 	Z_pt_full					= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);
 	Z_eta 						= new TH1D("Z_eta","#eta_{Z}", 50, -5., 5.);
 	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
@@ -24,7 +24,7 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	zjet_dPhi_zoom		= new TH1D("zjet_dPhi_zoom", "#Delta #phi(Z,jet)", 100, -0.4, +0.4);
 
 	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
-	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 50, 0., 3.5);
+	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 100, -3.5, 3.5);
 
 	mumu_vtx_dd				= new TH1D("mumu_vtx_dd", "euklidean dist. between muons' vertices", 100, 0., 1.);
 	mumu_vtx_dr				= new TH1D("mumu_vtx_dr", "euklidean dist. between muons' vertices in perp. plane", 100, 0., 0.1);
@@ -53,7 +53,7 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 	Z_pt_full->Fill(z.pt(), weight);
 
 	muons_dR->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
-	muons_dPhi->Fill(ROOT::Math::VectorUtil::DeltaPhi(zmumu->getMuon1()->p4, zmumu->getMuon2()->p4), weight);
+	muons_dPhi->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->getMuon1()->p4,zmumu->getMuon2()->p4)-M_PI), weight);
 
 	mumu_vtx_dd->Fill(ROOT::Math::VectorUtil::DeltaR(zmumu->getMuon1()->track.ref,zmumu->getMuon2()->track.ref),weight);
 	mumu_vtx_dr->Fill(std::sqrt((zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())*(zmumu->getMuon1()->track.ref.x()-zmumu->getMuon2()->track.ref.x())+(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())*(zmumu->getMuon1()->track.ref.y()-zmumu->getMuon2()->track.ref.y())),weight);

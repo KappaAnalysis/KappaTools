@@ -9,37 +9,37 @@ namespace KappaTools
 	template <typename T>
 	class TrackHitsCut : public BaseCut
 	{
-		private:
-			T * obj;
-			short min, max;
-			int type;
-		public:
-			enum TrackHitsType
-			{
-				nPixelLayers,
-				nStripLayers,
-				nValidPixelHits,
-				nValidStripHits,
-				nValidMuonHits,
-				nLostMuonHits,
-				nBadMuonHits,
-				nValidHits,
-				nLostHits,
-				nTrackerHits // composition
-			};
+	private:
+		T * obj;
+		short min, max;
+		int type;
+	public:
+		enum TrackHitsType
+		{
+			nPixelLayers,
+			nStripLayers,
+			nValidPixelHits,
+			nValidStripHits,
+			nValidMuonHits,
+			nLostMuonHits,
+			nBadMuonHits,
+			nValidHits,
+			nLostHits,
+			nTrackerHits // composition
+		};
 
-			TrackHitsCut();
-			TrackHitsCut(T * tmpObj);
-			TrackHitsCut(int type_);
+		TrackHitsCut();
+		TrackHitsCut(T * tmpObj);
+		TrackHitsCut(int type_);
 
-			void setPointer(T * tmpObj);
+		void setPointer(T * tmpObj);
 
-			void setType(int type_);
-			void setMinCut(unsigned short min_);
-			void setMaxCut(unsigned short max_);
-			
-			virtual bool getInternalDecision();
-			double getDecisionValue();
+		void setType(int type_);
+		void setMinCut(unsigned short min_);
+		void setMaxCut(unsigned short max_);
+
+		virtual bool getInternalDecision();
+		double getDecisionValue();
 	};
 }
 #endif
