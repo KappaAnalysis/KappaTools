@@ -112,9 +112,9 @@ private:
 					std::min(run_start_end[meta_lumi->nRun].first, meta_lumi->nLumi),
 					std::max(run_start_end[meta_lumi->nRun].second, meta_lumi->nLumi)
 				);
-				if (pm)
-					delete pm;
 			}
+			if (pm)
+				delete pm;
 		}
 		if (verbosity > 2)
 			std::cout << std::endl << std::endl;
