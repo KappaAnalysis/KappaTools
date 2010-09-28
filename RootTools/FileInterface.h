@@ -93,12 +93,12 @@ private:
 		std::map<run_id, std::pair<lumi_id, lumi_id> > run_start_end;
 		if (lumidata.GetEntries() > 0)
 		{
-			ProgressMonitor *pm = 0;
+			std::auto_ptr<ProgressMonitor> pm;
 			if (verbosity > 0)
-				pm = new ProgressMonitor(lumidata.GetEntries());
+				pm.reset(new ProgressMonitor(lumidata.GetEntries()));
 			for (int i = 0; i < lumidata.GetEntries(); ++i)
 			{
-				if (pm)
+				if (pm.get())
 					pm->Update();
 				lumidata.GetEntry(i);
 				result[std::make_pair(meta_lumi->nRun, meta_lumi->nLumi)] = *meta_lumi;

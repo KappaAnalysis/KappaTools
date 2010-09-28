@@ -29,7 +29,6 @@ namespace KappaTools
 
 		muon_type					= new TH1D(prefix+"type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
 
-		muon_trackHits					= new TH1D(prefix+"trackHits","number of muon track hits", 50, 0., 50.);
 		muon_numberOfChambers		= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, 0., 20.);
 
 		vertex_chi2					= new TH1D(prefix+"vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
@@ -87,7 +86,6 @@ namespace KappaTools
 		vertex_chi2norm->Fill(muon->vertex.chi2/muon->vertex.nDOF, weight);
 		vertex_chi2prob->Fill(TMath::Prob(muon->vertex.chi2, static_cast<int>(muon->vertex.nDOF)), weight);
 
-		muon_trackHits->Fill(muon->trackHits, weight);
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);
 
 		muon_type->Fill(0., weight);
