@@ -48,6 +48,11 @@ namespace KappaTools
 	{
 		if (!obj)
 			return -1.;
+		if(index == -1)
+		{
+			std::cout << "TauDiscrCut: No discriminant map loaded. Call setDiscrMapPF or setDiscrMapCalo" << std::endl;
+			return -1.0;
+		}
 
 		if(obj->discr & (1ull << index)) return 1.0;
 		return 0.0;
