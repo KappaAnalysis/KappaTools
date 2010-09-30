@@ -122,7 +122,12 @@ namespace KappaTools
 		for (std::vector<std::string>::iterator it = selected.begin(); it != selected.end() ; it++)
 		{
 			if (hltMap.find(*it) == hltMap.end())
+			{
+				std::cout << "trigger " << *it << " not available" << std::endl;
+				for (std::map<std::string, int>::iterator it = hltMap.begin(); it != hltMap.end(); it++)
+					std::cout << "\t" << it->first << " available" << std::endl;
 				continue;
+			}
 
 			if ((obj->bitsHLT & ((unsigned long long)1 << hltMap[*it])) != 0)
 				fired++;
