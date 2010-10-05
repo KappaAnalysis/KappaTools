@@ -1,4 +1,5 @@
-#include <Kappa/DataFormats/src/classes.h>
+#include <DataFormats/interface/Kappa.h>
+#include <DataFormats/interface/KDebug.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <cstring>
