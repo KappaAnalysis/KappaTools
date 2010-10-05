@@ -14,14 +14,14 @@ namespace KappaTools
 	class PtCut : public BaseCut
 	{
 	private:
-		T * obj;
+		const T * obj;
 		double pt_min;
 		double pt_max;
 	public:
 		PtCut();
-		PtCut(T * tmpObj);
+		PtCut(const T * tmpObj);
 
-		void setPointer(T * tmpObj);
+		void setPointer(const T * tmpObj);
 
 		void setMinCut(double pt_min_);
 		void setMaxCut(double pt_max_);

@@ -6,10 +6,10 @@ namespace KappaTools
 	EtaCut<T>::EtaCut()	: BaseCut("eta cut"), obj(0), eta_min(0.), eta_max(1e6) {}
 
 	template <typename T>
-	EtaCut<T>::EtaCut(T * tmpObj) : BaseCut("eta cut"), obj(tmpObj), eta_min(0.), eta_max(1e6) {}
+	EtaCut<T>::EtaCut(const T * tmpObj) : BaseCut("eta cut"), obj(tmpObj), eta_min(0.), eta_max(1e6) {}
 
 	template <typename T>
-	void EtaCut<T>::setPointer(T * tmpObj)
+	void EtaCut<T>::setPointer(const T * tmpObj)
 	{
 		obj = tmpObj;
 	}
