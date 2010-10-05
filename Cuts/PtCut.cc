@@ -6,10 +6,10 @@ namespace KappaTools
 	PtCut<T>::PtCut()	: BaseCut("pT cut"), obj(0), pt_min(0.), pt_max(1e6) {}
 
 	template <typename T>
-	PtCut<T>::PtCut(T * tmpObj) : BaseCut("pT cut"), obj(tmpObj), pt_min(0.), pt_max(1e6) {}
+	PtCut<T>::PtCut(const T * tmpObj) : BaseCut("pT cut"), obj(tmpObj), pt_min(0.), pt_max(1e6) {}
 
 	template <typename T>
-	void PtCut<T>::setPointer(T * tmpObj)
+	void PtCut<T>::setPointer(const T * tmpObj)
 	{
 		obj = tmpObj;
 	}
