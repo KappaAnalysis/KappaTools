@@ -160,3 +160,15 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	chain.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
 	return tmp;
 }
+
+std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis()
+{
+	std::vector<std::pair<run_id, lumi_id> > result;
+	if (isMC)
+		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
+			result.push_back(it->first);
+	else
+		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+			result.push_back(it->first);
+	return result;
+}
