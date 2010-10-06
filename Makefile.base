@@ -33,12 +33,12 @@ all: $(PROGRAM_ALL)
 %.so: $(LIBFILES_ALL)
 	$(CXX) $(LDFLAGS) -shared -o $@ $^
 	mkdir -p ../lib
-	cp $@ ../lib
+	cp -nu $@ ../lib
 
 %.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
 	mkdir -p ../lib
-	cp $@ ../lib
+	cp -nu $@ ../lib
 
 install: $(PROGRAM_ALL)
 	test -d "$(MYPREFIX)/lib"
