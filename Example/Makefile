@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-PROGRAM  = test.bin test.sbin
+PROGRAM  = test.bin test.sbin testMatching.bin testMatching.sbin
 #------------------------------------------------------------------------------
 
 include ../Makefile.root

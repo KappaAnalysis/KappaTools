@@ -1,2 +1,6 @@
+all: $(SUBDIR)
+
+install:
+
 clean:
-	rm *.so *.a
+	@rm -f *.so *.a
