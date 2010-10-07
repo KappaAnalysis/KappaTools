@@ -16,7 +16,9 @@ CmdLineOption::CmdLineOption(const char s, const string l,
 	: longName(l), help(h), argument(a)
 {
 	if (s == 0)
-		this->shortName = "";
+		shortName = "";
+	else
+		shortName = s;
 	CmdLineBase::RegisterOption(this);
 }
 
