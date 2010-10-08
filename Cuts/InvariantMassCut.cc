@@ -3,22 +3,19 @@
 namespace KappaTools
 {
 	template <typename T>
-	InvariantMassCut<T>::InvariantMassCut() : BaseCut("inv. mass cut"), cut_inversion(false)
+	InvariantMassCut<T>::InvariantMassCut() : BaseCut("inv. mass cut")
 	{
 		mass_min = 0.;
 		mass_max = 1e5;
 	}
 
 	template <typename T>
-	InvariantMassCut<T>::InvariantMassCut(T * tmpObj) : BaseCut("inv. mass cut"), cut_inversion(false)
+	InvariantMassCut<T>::InvariantMassCut(T * tmpObj) : BaseCut("inv. mass cut")
 	{
 		obj.push_back(tmpObj);
 		mass_min = 0.;
 		mass_max = 1e5;
 	};
-
-	template <typename T>
-	void InvariantMassCut<T>::inverse(bool invert) { cut_inversion = invert; }
 
 	template <typename T>
 	void InvariantMassCut<T>::setPointer(T * tmpObj) 								{	obj.clear(); obj.push_back(tmpObj);														};
@@ -47,14 +44,8 @@ namespace KappaTools
 		if (obj.size() == 0)
 			return false;
 
-		RMLV sum;
-		for (typename std::vector< T * >::iterator it = obj.begin(); it != obj.end(); it++)
-			if (*it)
-				sum += (*it)->p4;
-		if (cut_inversion)
-			return (sum.mass() < mass_min || sum.mass() > mass_max);
-		else
-			return !(sum.mass() < mass_min || sum.mass() > mass_max);
+		double sum = getDecisionValue();
+		return (sum >= mass_min && sum <= mass_max);
 	};
 
 	template <typename T>

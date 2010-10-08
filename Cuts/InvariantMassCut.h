@@ -13,8 +13,6 @@ namespace KappaTools
 	class InvariantMassCut : public BaseCut
 	{
 	private:
-		//FIXME: cut inversion should be done via BaseCut class!
-		double cut_inversion;
 		std::vector< T * > obj;
 		double mass_min;
 		double mass_max;
@@ -22,7 +20,6 @@ namespace KappaTools
 		InvariantMassCut();
 		InvariantMassCut(T * tmpObj);
 
-		void inverse(bool invert);
 		void setPointer(T * tmpObj);
 		void setPointer(T * tmpObj1, T * tmpObj2);
 		void addPointer(T * tmpObj);
