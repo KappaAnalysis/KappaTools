@@ -61,6 +61,7 @@ namespace KappaTools
 		void printTable();
 		void writeHistogram(std::string histoname);
 		unsigned long get(size_t idx);
+		size_t size();
 	};
 }
 #endif

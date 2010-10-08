@@ -232,4 +232,9 @@ namespace KappaTools
 	{
 		return cutflowTable.at(idx);
 	}
+
+	size_t KappaTools::CutflowTable::size()
+	{
+		return cutflowTable.size();
+	}
 }
