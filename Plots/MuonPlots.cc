@@ -21,6 +21,7 @@ namespace KappaTools
 		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
 		muon_trackIso03		= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
 		muon_sumPtIso03		= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
+		muon_relCombIso03		= new TH1D(prefix+"relCombIso03","\\mathrm{iso}_{\\mathrm{rel.}}(0.3)", 50, 0, 0.5);
 
 		muon_ecalIso05		= new TH1D(prefix+"ecalIso05","\\mathrm{iso}_{\\mathrm{ecal}}(0.5)", 50, 0, 10.);
 		muon_hcalIso05		= new TH1D(prefix+"hcalIso05","\\mathrm{iso}_{\\mathrm{hcal}}(0.5)", 50, 0, 10.);
@@ -35,6 +36,7 @@ namespace KappaTools
 		vertex_ndof					= new TH1D(prefix+"vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
 		vertex_chi2norm			= new TH1D(prefix+"vertex_chi2norm","#chi^{2} / \\mathrm{ndof}", 10, 0., 10.);
 		vertex_chi2prob			= new TH1D(prefix+"vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
+		vertex_zdist				= new TH1D(prefix+"vertex_zdist","d(\\mathrm{PV},\\mu)", 50, 0., 1.);
 
 		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.1, 0.1);
 		IP_zoom						= new TH1D(prefix+"IP_zoom","\\mathrm{IP}", 100, -0.01, 0.01);
@@ -67,6 +69,7 @@ namespace KappaTools
 		muon_hcalIso03->Fill(muon->hcalIso03, weight);
 		muon_trackIso03->Fill(muon->trackIso03, weight);
 		muon_sumPtIso03->Fill(muon->sumPtIso03, weight);
+		muon_relCombIso03->Fill((muon->ecalIso03+muon->hcalIso03+muon->sumPtIso03)/muon->p4.pt(), weight);
 
 		muon_ecalIso05->Fill(muon->ecalIso05, weight);
 		muon_hcalIso05->Fill(muon->hcalIso05, weight);
@@ -79,6 +82,7 @@ namespace KappaTools
 			IP_zoom->Fill(muon->track.getIP(pv,0), weight);
 			IPSig->Fill(muon->track.getIP(pv,2), weight);
 			IPvsIPSig->Fill(muon->track.getIP(pv,0),muon->track.getIP(pv,2), weight);
+			vertex_zdist->Fill(std::abs(muon->track.ref.z()-pv->position.z()));
 		}
 
 		vertex_chi2->Fill(muon->vertex.chi2, weight);

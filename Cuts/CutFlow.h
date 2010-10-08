@@ -19,9 +19,9 @@ namespace KappaTools
 	public:
 		void addCut(KappaTools::BaseCut * cut);
 		void addCut(CutFlow * cf);
-		unsigned int size();
+		size_t size();
 
-		std::string getCutName(unsigned int i);
+		std::string getCutName(size_t i);
 		void printCutList();
 		void printDecisionValues();
 
@@ -35,8 +35,8 @@ namespace KappaTools
 
 		bool allMinusOneSuccessful(KappaTools::BaseCut * cut);
 		bool allMinusTwoSuccessful(KappaTools::BaseCut * cut1, KappaTools::BaseCut * cut2);
-		bool allMinusOneSuccessful(unsigned int cut);
-		bool allMinusTwoSuccessful(unsigned int cut1, unsigned int cut2);
+		bool allMinusOneSuccessful(size_t cut);
+		bool allMinusTwoSuccessful(size_t cut1, size_t cut2);
 		bool allBeforeSuccessful(KappaTools::BaseCut * cut);
 
 		const std::vector< KappaTools::BaseCut * > getCutFlow();
@@ -61,6 +61,7 @@ namespace KappaTools
 		void printTable();
 		void writeHistogram(std::string histoname);
 		unsigned long get(size_t idx);
+		size_t size();
 	};
 }
 #endif

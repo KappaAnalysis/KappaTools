@@ -42,6 +42,7 @@ namespace KappaTools
 			TH1D * muon_hcalIso03;
 			TH1D * muon_trackIso03;
 			TH1D * muon_sumPtIso03;
+			TH1D * muon_relCombIso03;
 
 			TH1D * muon_ecalIso05;
 			TH1D * muon_hcalIso05;
@@ -54,6 +55,7 @@ namespace KappaTools
 			TH1D * vertex_ndof;
 			TH1D * vertex_chi2norm;
 			TH1D * vertex_chi2prob;
+			TH1D * vertex_zdist;
 
 			TH1D * IP, * IP_zoom;
 			TH1D * IPSig;
