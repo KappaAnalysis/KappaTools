@@ -1,5 +1,5 @@
-#ifndef TOOLBOX_H
-#define TOOLBOX_H
+#ifndef KTOOLBOX_H
+#define KTOOLBOX_H
 
 #include "Debug.h"
 #include "ProgressMonitor.h"

@@ -1,45 +1,56 @@
 #ifndef KAPPA_MATCHING_H
 #define KAPPA_MATCHING_H
 
+#include <vector>
 #include <Math/VectorUtil.h>
+#include "Toolbox/IOHelper.h"
 
 using namespace std;
 
 struct matchSort_deltaR
 {
-	double maxDeltaR;
-	matchSort_deltaR(double t = 0.3) : maxDeltaR(t) {};
-	double operator()(const RMDataLV obj1, const RMDataLV obj2)
+	matchSort_deltaR(const double dR = 0.3) : maxDeltaR(dR) {};
+
+	template<typename T1, typename T2>
+	double operator()(const T1 &obj1, const T2 &obj2) const
 	{
-		double val =	ROOT::Math::VectorUtil::DeltaR(obj1, obj2);
-		return (val <= maxDeltaR ? val : -1.);
+		const double val = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
+		return val <= maxDeltaR ? val : NAN;
 	};
+
+	const double maxDeltaR;
 };
 
 struct matchSort_deltaRdeltaPtRel
 {
-	double maxDeltaR, maxDeltaPtRel;
-	matchSort_deltaRdeltaPtRel(double t = 0.3, double t2 = 1e9) : maxDeltaR(t), maxDeltaPtRel(t2) {};
-	double operator()(const RMDataLV obj1, const RMDataLV obj2)
+	matchSort_deltaRdeltaPtRel(const double dR = 0.3, const double dPtRel = 1e9) : maxDeltaR(dR), maxDeltaPtRel(dPtRel) {};
+
+	template<typename T1, typename T2>
+	double operator()(const T1 &obj1, const T2 &obj2) const
 	{
-		double val1 =	ROOT::Math::VectorUtil::DeltaR(obj1, obj2);
-		double val2 =	std::abs(obj1.pt() - obj2.pt()) / obj2.pt();
-		return (val1 < maxDeltaR && val2 < maxDeltaPtRel ? val1 : -1.);
+		const double val1 = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
+		const double val2 = std::abs(obj1.p4.pt() - obj2.p4.pt()) / obj2.p4.pt();
+		return (val1 < maxDeltaR && val2 < maxDeltaPtRel) ? val1 : NAN;
 	};
+
+	const double maxDeltaR, maxDeltaPtRel;
 };
 
-template<typename T1, typename T2, typename MetricClass>
+template<typename T1, typename T2>
 std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base_size,
-	const std::vector<T2> &target, const size_t target_size)
+	const std::vector<T2> &target, const size_t target_size, const double dR = 0.3)
 {
-	using namespace ROOT::Math;
-	using namespace ROOT::Math::VectorUtil;
+	static matchSort_deltaR metric(dR);
+	return matchSort_Matrix(base, base_size, target, target_size, metric);
+}
 
+template<typename T1, typename T2, typename TMetricClass>
+std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base_size,
+	const std::vector<T2> &target, const size_t target_size, const TMetricClass &metricFct)
+{
 	double **match_metric = 0;
 	std::vector<int> result(target_size, -1);
-	static const double invalid = 1e10;
 
-	MetricClass metricFct;
 	// Build m x n Matrix with dR
 	match_metric = new double*[base_size];
 	for (unsigned int i = 0; i < base_size; ++i)
@@ -49,40 +60,36 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 		for (unsigned int j = 0; j < target_size; ++j)
 		{
 			const T2 &jet_j = target[j];
-			
-			const double dR = metricFct(jet_i.p4, jet_j.p4);
-			if (dR > -1.)
-				match_metric[i][j] = dR;
-			else
-				match_metric[i][j] = invalid;
+			match_metric[i][j] = metricFct(jet_i, jet_j);
 		}
 	}
+	//printMatrix(match_metric, base_size, target_size);
 
 	// Find matching index
 	for (size_t t = 0; t < target_size; ++t)
 	{
-//		PrintMatrix(match_metric, base_size, target_size);
-		int best_i = -1, best_j = -1;
-		double best_m = invalid;
-		for (unsigned int i = 0; i < base_size; ++i)
-			for (unsigned int j = 0; j < target_size; ++j)
+		// Find matrix entry with smallest metric
+		int bestBase = -1, bestTarget = -1;
+		double best_m = NAN;
+		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
+			for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
 			{
-				const double m = match_metric[i][j];
-				if (m < best_m)
+				const double m = match_metric[idxBase][idxTarget];
+				if ((!isnan(m)) && ((m < best_m) || isnan(best_m)))
 				{
-					best_i = i; best_j = j; best_m = m;
+					bestBase = idxBase; bestTarget = idxTarget; best_m = m;
 				}
 			}
-		if ((best_i == -1) || (best_j == -1))
-			return result;
-		for (unsigned int i = 0; i < base_size; ++i)
-			match_metric[i][best_j] = invalid;
-		for (unsigned int j = 0; j < target_size; ++j)
-			match_metric[best_i][j] = invalid;
-		if (best_i < invalid - 1)
-			result[best_j] = best_i;
-		//if (best_i == invalid)
-		//	break;
+
+		// Add matched connection, if all objects are matched => EXIT
+		if (isnan(best_m))
+			break;
+		// Invalidate metrics of matched objects
+		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
+			match_metric[idxBase][bestTarget] = NAN;
+		for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
+			match_metric[bestBase][idxTarget] = NAN;
+		result[bestTarget] = bestBase;
 	}
 
 	for (unsigned int i = 0; i < base_size; ++i)
@@ -90,27 +97,6 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	delete [] match_metric;
 
 	return result;
-}
-
-template<typename T1, typename T2>
-void displayMatching(const T1 *jetsGen, const T2 *jetsCalo, const std::vector<int> &match)
-{
-	cout << "===========" << endl;
-	displayLVs(*jetsGen);
-	cout << "----" << endl;
-	displayLVs(*jetsCalo);
-	cout << "----" << endl;
-	for (size_t j = 0; j < match.size(); ++j)
-	{
-		const int k = match[j];
-		cout << j << "->" << k << "\t";
-		if (k < 0)
-		{
-			cout << endl;
-			continue;
-		}
-		cout << jetsCalo->at(k).p4 << " -> " << jetsGen->at(j).p4 << endl;
-	}
 }
 
 #endif

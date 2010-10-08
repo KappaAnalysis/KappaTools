@@ -3,6 +3,12 @@ include ../Makefile.user
 PROGRAM_ALL  = $(PROGRAM) $(PROGRAM_CUSTOM)
 LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
 
+ifndef VCS_REVISION
+GIT_REVISION = $(shell git log -n1 --pretty=oneline 2> /dev/null | cut -d " " -f 1)
+SVN_REVISION = $(shell svnversion 2> /dev/null)
+VCS_REVISION = $(if $(SVN_REVISION),$(SVN_REVISION),$(GIT_REVISION))
+endif
+
 ifndef MYPREFIX
 MYPREFIX = $(HOME)
 endif
@@ -16,7 +22,7 @@ ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++
-CXXFLAGS = $(ARCH) $(COPTS) -Wall -fPIC -I.. -I../../Kappa -I../external
+CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC -I.. -I../.. -I../../Kappa -I../external
 LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L. -L../lib
 
 all: $(PROGRAM_ALL)
@@ -26,13 +32,11 @@ all: $(PROGRAM_ALL)
 
 %.so: $(LIBFILES_ALL)
 	$(CXX) $(LDFLAGS) -shared -o $@ $^
-	mkdir -p ../lib
-	cp $@ ../lib
+	[ ! -s "../lib/$(shell basename $@)" ] && cp $@ ../lib/`basename $@`
 
 %.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
-	mkdir -p ../lib
-	cp $@ ../lib
+	[ ! -s "../lib/$(shell basename $@)" ] && cp $@ ../lib/`basename $@`
 
 install: $(PROGRAM_ALL)
 	test -d "$(MYPREFIX)/lib"

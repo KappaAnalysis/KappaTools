@@ -47,12 +47,12 @@ namespace KappaTools
 			max(max_)
 	{}
 
-	void HLTriggerCut::setTriggerMap(KLumiMetadata * tmpLumiMetadata)
+	void HLTriggerCut::setTriggerMap(const KLumiMetadata * tmpLumiMetadata)
 	{
 		std::map<std::string, int> tmpHltNamesMap;
 
 		int idx = 0;
-		for (std::vector<std::string>::iterator it = tmpLumiMetadata->hltNames.begin(); it != tmpLumiMetadata->hltNames.end(); it++)
+		for (std::vector<std::string>::const_iterator it = tmpLumiMetadata->hltNames.begin(); it != tmpLumiMetadata->hltNames.end(); it++)
 		{
 			std::string tmpName = *it;
 
@@ -122,7 +122,12 @@ namespace KappaTools
 		for (std::vector<std::string>::iterator it = selected.begin(); it != selected.end() ; it++)
 		{
 			if (hltMap.find(*it) == hltMap.end())
+			{
+				std::cout << "trigger " << *it << " not available" << std::endl;
+				for (std::map<std::string, int>::iterator it = hltMap.begin(); it != hltMap.end(); it++)
+					std::cout << "\t" << it->first << " available" << std::endl;
 				continue;
+			}
 
 			if ((obj->bitsHLT & ((unsigned long long)1 << hltMap[*it])) != 0)
 				fired++;

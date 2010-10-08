@@ -49,7 +49,6 @@ namespace KappaTools
 			TH1D * muon_trackIso05;
 			TH1D * muon_sumPtIso05;
 
-			TH1D * muon_trackHits;
 			TH1D * muon_numberOfChambers;
 
 			TH1D * vertex_chi2;

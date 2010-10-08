@@ -14,14 +14,14 @@ namespace KappaTools
 	class EtaCut : public BaseCut
 	{
 	private:
-		T * obj;
+		const T * obj;
 		double eta_min;
 		double eta_max;
 	public:
 		EtaCut();
-		EtaCut(T * tmpObj);
+		EtaCut(const T * tmpObj);
 
-		void setPointer(T * tmpObj);
+		void setPointer(const T * tmpObj);
 
 		void setCut(double eta_max_);
 		void setCut(double eta_min_, double eta_max_);

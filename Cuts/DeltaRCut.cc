@@ -6,7 +6,7 @@ namespace KappaTools
 	DeltaRCut<T1, T2>::DeltaRCut() : BaseCut("deltaR cut"), obj1(0), obj2(0), dR_min(0), dR_max(1e4) {}
 
 	template <typename T1, typename T2>
-	void DeltaRCut<T1, T2>::setPointer(T1 * tmpObj1, T2 * tmpObj2)
+	void DeltaRCut<T1, T2>::setPointer(const T1 * tmpObj1, const T2 * tmpObj2)
 	{
 		obj1 = tmpObj1;
 		obj2 = tmpObj2;
@@ -41,4 +41,6 @@ namespace KappaTools
 			return -1.;
 		return ROOT::Math::VectorUtil::DeltaR(obj1->p4, obj2->p4);
 	};
+
+	template class DeltaRCut<KDataLV, KDataLV>;
 }

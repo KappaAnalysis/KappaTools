@@ -119,21 +119,56 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 		selected = name;
 	if (selected == "")
 	{
-		std::cout << "Requested branch not found: " << name << std::endl;
+		std::cerr << "Requested branch not found: " << name << std::endl;
 		return 0;
 	}
 
 	branch = chain.GetBranch(selected.c_str());
 	TClass *classRequest = TClass::GetClass(cname);
 	TClass *classBranch = TClass::GetClass(branch->GetClassName());
+
+	// Check inheritance of requested object
 	if (!classBranch->InheritsFrom(classRequest))
 	{
-		std::cout << "Incompatible types! Requested: " << classRequest->GetName()
+		std::cerr << "Incompatible types! Requested: " << classRequest->GetName()
 			<< " Found: " << classBranch->GetName() << std::endl;
 		return 0;
 	}
+	// Check members of requested object
+	std::set<std::string> membersBranch, membersDict, membersDifference;
+	TObjArray *lmBranch = branch->GetListOfBranches();
+	for (int i = 0; i < lmBranch->GetEntries(); ++i)
+		membersBranch.insert(lmBranch->At(i)->GetName());
+	TList *lmDict = classBranch->GetListOfAllPublicDataMembers();
+	for (int i = 0; i < lmDict->GetEntries(); ++i)
+		membersDict.insert(lmDict->At(i)->GetName());
+	set_symmetric_difference(
+		membersBranch.begin(), membersBranch.end(),
+		membersDict.begin(), membersDict.end(),
+		inserter(membersDifference, membersDifference.begin()));
+	// This check does not yet work with vector
+	if ((string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size())
+	{
+		cerr << "Dictionary is not consistent with file content!" << endl;
+		cerr << "Branch content: " << membersBranch << endl;
+		cerr << "  Dict content: " << membersDict << endl;
+		return 0;
+	}
+	// Allocate correct instance and set pointer
 	void *tmp = classBranch->New();
 	vBranchHolder.push_back(tmp);
 	chain.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
 	return tmp;
+}
+
+std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis()
+{
+	std::vector<std::pair<run_id, lumi_id> > result;
+	if (isMC)
+		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
+			result.push_back(it->first);
+	else
+		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+			result.push_back(it->first);
+	return result;
 }
