@@ -21,6 +21,9 @@ void run(std::string filename)
 		lumis_tree->GetEntry(i);
 		std::cout << m_lumimetadata->nRun << "\t" << m_lumimetadata->nLumi << "\t" << filename << std::endl;
 	}
+
+	delete m_lumimetadata;
+	delete lumis_tree;
 }
 
 int main(int argc, char* argv[])
