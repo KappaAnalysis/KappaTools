@@ -24,6 +24,8 @@ endif
 CXX      = g++
 CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC -I.. -I../.. -I../../Kappa -I../external
 LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L. -L../lib
+LDFLAGS  += -Wl,-rpath,$(shell cd ../lib; pwd)
+LDFLAGS  += -Wl,-rpath,$(shell cd ../../Kappa/lib; pwd)
 
 all: $(PROGRAM_ALL)
 
@@ -32,21 +34,15 @@ all: $(PROGRAM_ALL)
 
 %.so: $(LIBFILES_ALL)
 	$(CXX) $(LDFLAGS) -shared -o $@ $^
-	[ ! -s "../lib/$(shell basename $@)" ] && cp $@ ../lib/`basename $@`
+	mkdir -p ../lib
+	cp $@ ../lib
 
 %.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
-	[ ! -s "../lib/$(shell basename $@)" ] && cp $@ ../lib/`basename $@`
+	mkdir -p ../lib
+	cp $@ ../lib
 
 install: $(PROGRAM_ALL)
-	test -d "$(MYPREFIX)/lib"
-	[ -n "$(filter %.a %.so, $(PROGRAM_ALL))" ] && \
-		cp $(filter %.a %.so, $(PROGRAM_ALL)) "$(MYPREFIX)/lib" \
-		|| true
-#	test -d "$(MYPREFIX)/bin"
-#	[ -n "$(filter %.exe %.bin %.ana, $(PROGRAM_ALL))" ] && \
-#		cp $(filter %.exe %.bin %.ana, $(PROGRAM_ALL)) "$(MYPREFIX)/bin" \
-#		|| true
 
 clean:
 	@rm -f $(PROGRAM_ALL) $(LIBFILES_ALL)
