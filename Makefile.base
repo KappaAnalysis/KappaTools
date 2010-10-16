@@ -35,12 +35,12 @@ all: $(PROGRAM_ALL)
 %.so: $(LIBFILES_ALL)
 	$(CXX) $(LDFLAGS) -shared -o $@ $^
 	mkdir -p ../lib
-	cp $@ ../lib
+	-test ! $@ -ef ../lib/`basename $@` && cp $@ ../lib
 
 %.a: $(LIBFILES_ALL)
 	ar rcs $@ $^
 	mkdir -p ../lib
-	cp $@ ../lib
+	-test ! $@ -ef ../lib/`basename $@` && cp $@ ../lib
 
 install: $(PROGRAM_ALL)
 
