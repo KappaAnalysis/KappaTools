@@ -37,8 +37,8 @@ namespace KappaTools
 
 		n90->Fill(jet->n90, weight);
 		nConstituents->Fill(jet->nConst, weight);
-		emFraction->Fill(jet->emf, weight);
-		hadFraction->Fill(1.-jet->emf, weight);
+		//emFraction->Fill(jet->fEM, weight);
+		//hadFraction->Fill(1.-jet->fEM, weight);
 
 		processSpecific(jet, pv, weight);
 	}
@@ -67,8 +67,8 @@ namespace KappaTools
 	{
 		if (!jet)
 			return;
-		neutralEmFraction->Fill(jet->neutralEmFraction, weight);
-		chargedEmFraction->Fill(jet->chargedEmFraction, weight);
+		neutralEmFraction->Fill(jet->neutralEMFraction, weight);
+		chargedEmFraction->Fill(jet->chargedEMFraction, weight);
 		neutralHadFraction->Fill(jet->neutralHadFraction, weight);
 		chargedHadFraction->Fill(jet->chargedHadFraction, weight);
 	}
