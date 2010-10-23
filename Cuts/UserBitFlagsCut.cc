@@ -35,7 +35,7 @@ namespace KappaTools
 			BaseCut("user bit cut"),
 			obj(tempObj),
 			selected(selected_),
-			min(min),
+			min(min_),
 			max(-1)
 	{}
 

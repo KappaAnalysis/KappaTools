@@ -35,7 +35,7 @@ namespace KappaTools
 			BaseCut("HLT cut"),
 			obj(tempObj),
 			selected(selected_),
-			min(min),
+			min(min_),
 			max(-1)
 	{}
 
