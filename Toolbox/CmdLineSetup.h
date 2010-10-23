@@ -21,9 +21,9 @@ struct CmdLineOption
 	std::string help;
 	CmdLineOptionArg argument;
 
-	virtual void FoundOption(std::string arg = "") {};
-	virtual std::string PrintOption() const { return ""; };
-	virtual std::string PrintHelp() const { return help; };
+	virtual void FoundOption(std::string arg = "") {}
+	virtual std::string PrintOption() const { return ""; }
+	virtual std::string PrintHelp() const { return help; }
 };
 
 // Print current value of option
@@ -37,11 +37,11 @@ struct CmdLineOptionValue : public CmdLineOption
 		const T &def = T(), const CmdLineOptionArg a = CL_Req)
 		: CmdLineOption(s, l, h, a), value(def) {}
 
-	operator const T() const { return value; };
-	const T &Value() const { return value; };
+	operator const T() const { return value; }
+	const T &Value() const { return value; }
 
-	virtual void FoundOption(std::string arg = "") { value = parse<T>(arg); };
-	virtual std::string PrintOption() const { return str(value); };
+	virtual void FoundOption(std::string arg = "") { value = parse<T>(arg); }
+	virtual std::string PrintOption() const { return str(value); }
 private:
 	T value;
 };
@@ -54,12 +54,12 @@ struct CmdLineOptionValue<std::string> : public CmdLineOption
 		const std::string &def = std::string(), const CmdLineOptionArg a = CL_Req)
 		: CmdLineOption(s, l, h, a), value(def) {}
 
-	operator const char*() const { return value.c_str(); };
-	operator const std::string() const { return value; };
-	const std::string &Value() const { return value; };
+	operator const char*() const { return value.c_str(); }
+	operator const std::string() const { return value; }
+	const std::string &Value() const { return value; }
 
-	virtual void FoundOption(std::string arg = "") { value = parse<std::string>(arg); };
-	virtual std::string PrintOption() const { return str(value); };
+	virtual void FoundOption(std::string arg = "") { value = parse<std::string>(arg); }
+	virtual std::string PrintOption() const { return str(value); }
 private:
 	std::string value;
 };
@@ -72,9 +72,9 @@ struct CmdLineOptionVector : public CmdLineOption
 		const std::string &def = "", const CmdLineOptionArg a = CL_Req)
 		: CmdLineOption(s, l, h, a) { FoundOption(def); }
 
-	const T &operator[](const size_t idx) { return value[idx]; };
-	operator const std::vector<T>() const { return value; };
-	const std::vector<T> &Value() const { return value; };
+	const T &operator[](const size_t idx) { return value[idx]; }
+	operator const std::vector<T>() const { return value; }
+	const std::vector<T> &Value() const { return value; }
 
 	virtual void FoundOption(std::string arg = "")
 	{
@@ -84,7 +84,7 @@ struct CmdLineOptionVector : public CmdLineOption
 		std::vector<std::string> tmp = tokenize(arg, ",");
 		for (size_t i = 0; i < tmp.size(); ++i)
 			value.push_back(parse<T>(tmp[i]));
-	};
+	}
 	virtual std::string PrintOption() const
 	{
 		std::string tmp;
@@ -95,7 +95,7 @@ struct CmdLineOptionVector : public CmdLineOption
 			tmp += str(value[value.size() - 1]);
 		}
 		return tmp;
-	};
+	}
 private:
 	std::vector<T> value;
 };
@@ -108,11 +108,11 @@ struct CmdLineOptionSwitch : public CmdLineOption
 		const T &def = T(), const CmdLineOptionArg a = CL_None)
 		: CmdLineOption(s, l, h, a), value(def) {}
 
-	operator const T() const { return value; };
-	const T &Value() const { return value; };
+	operator const T() const { return value; }
+	const T &Value() const { return value; }
 
-	virtual void FoundOption(std::string arg = "") { value = !value; };
-	virtual std::string PrintOption() const { return str(value); };
+	virtual void FoundOption(std::string arg = "") { value = !value; }
+	virtual std::string PrintOption() const { return str(value); }
 private:
 	T value;
 };
@@ -124,7 +124,7 @@ struct CmdLineOptionCallback : public CmdLineOption
 		void (*c)(std::string) = 0, const CmdLineOptionArg a = CL_None)
 		: CmdLineOption(s, l, h, a), pf(c) {}
 
-	virtual void FoundOption(std::string arg = "") { if (pf) pf(arg); };
+	virtual void FoundOption(std::string arg = "") { if (pf) pf(arg); }
 private:
 	void (*pf)(std::string);
 };
