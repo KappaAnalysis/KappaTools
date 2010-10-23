@@ -44,6 +44,11 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	return matchSort_Matrix(base, base_size, target, target_size, metric);
 }
 
+
+// return vector has the size of the target (retvec.size()==target.size())
+// retvec[idx] gives the index for the object in base that matches target[idx]
+//  ===>  target[idx] matches base[retvec[idx]]
+// note: assuming above that target_size = target.size()
 template<typename T1, typename T2, typename TMetricClass>
 std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base_size,
 	const std::vector<T2> &target, const size_t target_size, const TMetricClass &metricFct)
