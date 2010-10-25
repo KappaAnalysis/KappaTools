@@ -2,6 +2,41 @@
 
 using namespace std;
 
+namespace
+{
+	template<typename OutputIterator>
+	OutputIterator GetListOfAllBranches(TBranch* branch, OutputIterator out)
+	{
+		TObjArray *lmBranch = branch->GetListOfBranches();
+		for (int i = 0; i < lmBranch->GetEntries(); ++i)
+		{
+			TBranch* subbranch = dynamic_cast<TBranch*>(lmBranch->At(i));
+			assert(subbranch != NULL);
+
+			std::string name = lmBranch->At(i)->GetName();
+
+			// Some hardcoded check because introspection of KDataLV does
+			// not yield p4 but p4.fCoordinates.pt, p4.fCoordinates.eta
+			// etc. directly.
+			// TODO: A better way would probably be to do exactly that for
+			// the TClass data members in FileInterface::GetInternal, if
+			// possible (needs further investigation).
+			if(name == "KDataLV")
+				*out++ = "p4";
+			else if(name == "covariance")
+				*out++ = "covariance";
+			else if(name == "position")
+				*out++ = "position";
+			else if(subbranch->IsFolder())
+				out = GetListOfAllBranches(subbranch, out);
+			else
+				*out++ = lmBranch->At(i)->GetName();
+		}
+
+		return out;
+	}
+}
+
 FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	eventdata("Events"), isMC(false), lumidata("Lumis"), verbosity(verbose)
 {
@@ -136,9 +171,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	}
 	// Check members of requested object
 	std::set<std::string> membersBranch, membersDict, membersDifference;
-	TObjArray *lmBranch = branch->GetListOfBranches();
-	for (int i = 0; i < lmBranch->GetEntries(); ++i)
-		membersBranch.insert(lmBranch->At(i)->GetName());
+	GetListOfAllBranches(branch, std::inserter(membersBranch, membersBranch.begin()));
 	TList *lmDict = classBranch->GetListOfAllPublicDataMembers();
 	for (int i = 0; i < lmDict->GetEntries(); ++i)
 		membersDict.insert(lmDict->At(i)->GetName());
