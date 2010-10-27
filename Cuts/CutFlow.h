@@ -45,6 +45,7 @@ namespace KappaTools
 
 		CutFlow();
 		CutFlow(CutFlow * cf);
+		~CutFlow() {};
 	};
 
 	class CutflowTable
