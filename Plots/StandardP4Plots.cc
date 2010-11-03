@@ -3,12 +3,13 @@
 KappaTools::TriggerP4Plots::TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory) : StandardP4Plots::StandardP4Plots(tmpFile, tmpDirectory)
 {
 	double pt_binning[16] = { 0,5,6,7,8,9,10,11,13,16,20,25,40,60,100 };
-	double eta_binning[17] = { -2.4, -2.1, -1.8, -1.5, -1.2, -0.9, -0.6, -0.3, 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4};
+	//double eta_binning[17] = { -2.4, -2.1, -1.8, -1.5, -1.2, -0.9, -0.6, -0.3, 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4};
+	double eta_binning[21] = { -2.4, -2.1, -1.85, -1.6, -1.4, -1.2, -1.05, -0.9, -0.6, -0.3, 0, 0.3, 0.6, 0.9, 1.05, 1.2, 1.4, 1.6, 1.85, 2.1, 2.4};
 	double eta_regions_binning[8] = { -2.4, -2.1, -1.2, -0.9, 0.9, 1.2, 2.1, 2.4};
 
 	pt_binned		= new TH1D("pt_binned","p_{\\mathrm{T}}", 14, pt_binning);
 	
-	eta_binned		= new TH1D("eta_binned","#eta", 16, eta_binning);
+	eta_binned		= new TH1D("eta_binned","#eta", 20, eta_binning);
 	eta_regions		= new TH1D("eta_regions","#eta", 7, eta_regions_binning);
 	
 	pt_eta = new TH2D("pt_eta", "#pt vs. #eta", 7, eta_regions_binning, 14, pt_binning);
