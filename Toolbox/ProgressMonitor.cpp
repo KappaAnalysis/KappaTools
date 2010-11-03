@@ -23,6 +23,7 @@ ProgressMonitor::ProgressMonitor(const unsigned long nPos)
 
 ProgressMonitor::~ProgressMonitor()
 {
+	signal(SIGINT, SIG_DFL);
 	if (bShow)
 		cout << "\r";
 	cout << "Status: " << *this << endl;
