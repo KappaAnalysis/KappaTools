@@ -60,7 +60,7 @@ void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFile
 
 		lumis_tree->GetEntry(i);
 
-		if (!runLumiSelector.accept(m_lumimetadata->nRun, m_lumimetadata->nLumi))
+		if (jsonFiles.size() && !runLumiSelector.accept(m_lumimetadata->nRun, m_lumimetadata->nLumi))
 			continue;
 
 		std::vector<int> prescales(hlTrigger.size());
