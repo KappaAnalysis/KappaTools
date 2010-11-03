@@ -11,7 +11,7 @@ KappaTools::TriggerP4Plots::TriggerP4Plots(TDirectory * tmpFile, TString tmpDire
 	eta_binned		= new TH1D("eta_binned","#eta", 16, eta_binning);
 	eta_regions		= new TH1D("eta_regions","#eta", 7, eta_regions_binning);
 	
-	
+	pt_eta = new TH2D("pt_eta", "#pt vs. #eta", 7, eta_regions_binning, 14, pt_binning);
 }
 
 void KappaTools::TriggerP4Plots::process(RMDataLV p4, double weight)
@@ -23,7 +23,7 @@ void KappaTools::TriggerP4Plots::process(RMLV p4, double weight)
 	pt_binned->Fill(p4.pt(), weight);
 	eta_binned->Fill(p4.eta(), weight);
 	eta_regions->Fill(p4.eta(), weight);
-	
+	pt_eta->Fill(p4.eta(), p4.pt(), weight);
 	StandardP4Plots::process(p4, weight);
 }
 

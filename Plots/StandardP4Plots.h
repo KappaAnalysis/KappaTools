@@ -34,6 +34,7 @@ namespace KappaTools
 		public:
 		TH1D *pt_binned;
 		TH1D *eta_binned, *eta_regions;
+		TH2D * pt_eta;
 
 		TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory);
 		void process(RMLV p4, double weight = 1.0);
