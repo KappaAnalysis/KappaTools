@@ -194,6 +194,23 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	return tmp;
 }
 
+bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
+{
+	if (isMC)
+	{
+		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
+			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
+				return true;
+	}
+	else
+	{
+		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
+				return true;
+	}
+	return false;
+}
+
 std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis()
 {
 	std::vector<std::pair<run_id, lumi_id> > result;

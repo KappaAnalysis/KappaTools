@@ -43,6 +43,8 @@ struct FileInterface
 	// Get lumi list
 	std::vector<std::pair<run_id, lumi_id> > GetRunLumis();
 
+	// check if
+	bool isCompatible(unsigned int minRun, unsigned int maxRun);
 private:
 	TChain lumidata;
 	int verbosity;
