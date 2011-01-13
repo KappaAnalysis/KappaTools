@@ -78,6 +78,22 @@ namespace KappaTools
 		min = 1;
 		max = 1;
 	}
+	void HLTriggerCut::setTriggerFuzzy(std::string selected_)
+	{
+		selected.clear();
+		boost::regex pattern(selected_ +"(_v[[:digit:]]+)?", boost::regex::icase | boost::regex::extended);
+		for (std::map<std::string, int>::iterator it = hltMap.begin(); it != hltMap.end(); ++it)
+		{
+			if (boost::regex_search(it->first, pattern))
+			{
+				selected.push_back(it->first);
+				break;
+			}
+		}
+		min = 1;
+		max = 1;
+	}
+
 
 	void HLTriggerCut::setPointer(KEventMetadata * tmpObj)
 	{

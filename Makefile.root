@@ -2,4 +2,4 @@ include ../Makefile.base
 
 CXXFLAGS += $(shell ${ROOTSYS}/bin/root-config --cflags)
 LDFLAGS += $(shell ${ROOTSYS}/bin/root-config --libs) \
-	-lGenVector -lReflex -lMathCore -lReflexDict
+	-lGenVector -lReflex -lMathCore -lReflexDict -lboost_regex

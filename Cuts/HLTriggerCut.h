@@ -3,6 +3,7 @@
 
 #include "BaseCut.h"
 #include "DataFormats/interface/KMetadata.h"
+#include <boost/algorithm/string/regex.hpp>
 #include <vector>
 
 namespace KappaTools
@@ -26,6 +27,7 @@ namespace KappaTools
 		void setTriggerMap(const KLumiMetadata * tmpLumiMetadata);
 		void setTrigger(std::vector<std::string> selected_);
 		void setTrigger(std::string selected_);
+		void setTriggerFuzzy(std::string selected_);
 		void setPointer(KEventMetadata * tmpObj);
 		void setCut(int min_);
 		void setCut(int min_, int max_);
