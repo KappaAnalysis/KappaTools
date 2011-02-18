@@ -41,7 +41,7 @@ struct FileInterface
 	void AssignLumiPtr(run_id run, lumi_id lumi, KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen = 0);
 
 	// Get lumi list
-	std::vector<std::pair<run_id, lumi_id> > GetRunLumis();
+	std::vector<std::pair<run_id, lumi_id> > GetRunLumis() const;
 
 	// check if
 	bool isCompatible(unsigned int minRun, unsigned int maxRun);
