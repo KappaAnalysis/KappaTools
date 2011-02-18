@@ -128,6 +128,14 @@ namespace KappaTools
 				break;
 		return dec;
 	}
+	unsigned int CutFlow::getSuccessfulCuts() const
+	{
+		unsigned int c = 0;
+		for (size_t idx = 0; idx < cutFlow.size(); ++idx)
+			if (cutFlow[idx]->getDecision())
+				++c;
+		return c;
+	}
 	unsigned int CutFlow::getAccSuccessfulCuts()
 	{
 		// vector is 1 until the first decision is false
