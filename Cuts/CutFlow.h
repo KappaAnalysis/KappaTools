@@ -41,7 +41,7 @@ namespace KappaTools
 		bool allBeforeSuccessful(KappaTools::BaseCut * cut);
 
 		const std::vector< KappaTools::BaseCut * > getCutFlow();
-		virtual void initEvaluation(bool autoPrefix = false);
+		void initEvaluation(bool autoPrefix = false);
 		void evaluate();
 
 		CutFlow();
