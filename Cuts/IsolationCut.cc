@@ -123,7 +123,7 @@ namespace KappaTools
 			retValue -= (jetAreaInfo->median - jetAreaInfo->sigma) * coneSize * coneSize * 3.14159;
 		}
 #endif
-		return std::min(retValue, 0.);
+		return std::max(retValue, 0.);
 	}
 }
 
