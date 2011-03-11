@@ -3,19 +3,28 @@
 namespace KappaTools
 {
 	template <typename T>
-	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO) {}
+	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubstraction(false) {}
 
 	template <typename T>
-	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO) {}
+	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubstraction(false) {}
 
 	template <typename T>
-	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_) {}
+	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_), pileUpSubstraction(false) {}
 
+#ifdef KAPPA_FEATURE_JETAREA
+	template <typename T>
+	void IsolationCut<T>::setPointer(T * tmpObj, KJetArea * tmpJetAreaInfo)
+	{
+		obj = tmpObj;
+		jetAreaInfo = tmpJetAreaInfo;
+	}
+#else
 	template <typename T>
 	void IsolationCut<T>::setPointer(T * tmpObj)
 	{
 		obj = tmpObj;
 	}
+#endif
 
 	template <typename T>
 	void IsolationCut<T>::setType(unsigned char isoType_)
@@ -42,6 +51,14 @@ namespace KappaTools
 		max = max_;
 	}
 
+#ifdef KAPPA_FEATURE_JETAREA
+	template <typename T>
+	void IsolationCut<T>::setPUSubstraction(bool pileUpSubstraction_)
+	{
+		pileUpSubstraction = pileUpSubstraction_;
+	}
+#endif
+
 	template <typename T>
 	bool IsolationCut<T>::getInternalDecision()
 	{
@@ -59,46 +76,54 @@ namespace KappaTools
 		if (!obj)
 			return -1;
 
+		double retValue = -1.;
 		if (isoType == TRACKISO)
 		{
 			if (coneSize == 0.3)
-				return obj->trackIso03;
+				retValue = obj->trackIso03;
 			if (coneSize == 0.5)
-				return obj->trackIso05;
+				retValue = obj->trackIso05;
 		}
 
 		if (isoType == HCALISO)
 		{
 			if (coneSize == 0.3)
-				return obj->hcalIso03;
+				retValue = obj->hcalIso03;
 			if (coneSize == 0.5)
-				return obj->hcalIso05;
+				retValue = obj->hcalIso05;
 		}
 
 		if (isoType == ECALISO)
 		{
 			if (coneSize == 0.3)
-				return obj->ecalIso03;
+				retValue = obj->ecalIso03;
 			if (coneSize == 0.5)
-				return obj->ecalIso05;
+				retValue = obj->ecalIso05;
 		}
 
 		if (isoType == SUMPTISO)
 		{
 			if (coneSize == 0.3)
-				return obj->sumPtIso03;
+				retValue = obj->sumPtIso03;
 			if (coneSize == 0.5)
-				return obj->sumPtIso05;
+				retValue = obj->sumPtIso05;
 		}
 
 		if (isoType == RELCOMBISO)
 		{
 			if (coneSize == 0.3)
-				return (obj->sumPtIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
+				retValue = (obj->sumPtIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
 			if (coneSize == 0.5)
-				return (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
+				retValue = (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
 		}
-		return -1;
+
+#ifdef KAPPA_FEATURE_JETAREA
+		if ((isoType == SUMPTISO || isoType == RELCOMBISO) && !jetAreaInfo && pileUpSubstraction)
+		{
+			retValue -= (jetAreaInfo->median - jetAreaInfo->sigma) * coneSize * coneSize * 3.14159;
+		}
+#endif
+		return std::min(retValue, 0.);
 	}
 }
 
