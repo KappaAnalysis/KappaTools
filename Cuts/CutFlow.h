@@ -31,6 +31,7 @@ namespace KappaTools
 		boost::dynamic_bitset<> getAccDecisionVector();	// vector is 1 until the first decision is false
 
 		bool successful();
+		unsigned int getSuccessfulCuts() const;
 		unsigned int getAccSuccessfulCuts();
 
 		bool allMinusOneSuccessful(KappaTools::BaseCut * cut);
@@ -40,7 +41,7 @@ namespace KappaTools
 		bool allBeforeSuccessful(KappaTools::BaseCut * cut);
 
 		const std::vector< KappaTools::BaseCut * > getCutFlow();
-		virtual void initEvaluation(bool autoPrefix = false);
+		void initEvaluation(bool autoPrefix = false);
 		void evaluate();
 
 		CutFlow();

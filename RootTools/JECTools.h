@@ -22,7 +22,7 @@ inline void correctSingleJet(KDataJet &jet, FactorizedJetCorrector *jec, const d
 	jec->setJetPt(jet.p4.pt());
 	jec->setJetE(jet.p4.E());
 	jec->setJetPhi(jet.p4.phi());
-	jec->setJetEMF(jet.emf);
+	jec->setJetEMF(jet.fEM);
 	jet.p4 *= (jec->getCorrection() * jes);
 }
 

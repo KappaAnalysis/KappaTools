@@ -211,7 +211,7 @@ bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 	return false;
 }
 
-std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis()
+std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
 {
 	std::vector<std::pair<run_id, lumi_id> > result;
 	if (isMC)
