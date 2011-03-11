@@ -21,7 +21,8 @@ namespace KappaTools
 		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
 		muon_trackIso03		= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
 		muon_sumPtIso03		= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
-		muon_relCombIso03		= new TH1D(prefix+"relCombIso03","\\mathrm{iso}_{\\mathrm{rel.}}(0.3)", 50, 0, 0.5);
+		muon_relCombIso03	= new TH1D(prefix+"relCombIso03","\\mathrm{iso}_{\\mathrm{rel.}}(0.3)", 60, 0., 0.5);
+		muon_relCombPFIso04	= new TH1D(prefix+"relCombPFIso04", "\\mathrm{iso}_{\\mathrm{rel.\\,pf.}}(0.4)", 60, 0., 0.5);
 
 		muon_pfIso04			= new TH1D(prefix+"pfIso04","\\mathrm{iso}_{\\mathrm{pf}}(0.4)", 50, 0, 10.);
 
@@ -129,6 +130,7 @@ namespace KappaTools
 		muon_trackIso03->Fill(muon->trackIso03, weight);
 		muon_sumPtIso03->Fill(muon->sumPtIso03, weight);
 		muon_relCombIso03->Fill((muon->ecalIso03+muon->hcalIso03+muon->sumPtIso03)/muon->p4.pt(), weight);
+		muon_relCombPFIso04->Fill((muon->pfIso04)/muon->p4.pt(), weight);
 
 		muon_pfIso04->Fill(muon->pfIso04, weight);
 

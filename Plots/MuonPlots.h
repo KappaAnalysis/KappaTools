@@ -45,6 +45,7 @@ namespace KappaTools
 			TH1D * muon_relCombIso03;
 
 			TH1D * muon_pfIso04;
+			TH1D * muon_relCombPFIso04;
 			TH1D * muon_ecalIso05;
 			TH1D * muon_hcalIso05;
 			TH1D * muon_trackIso05;
