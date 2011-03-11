@@ -62,6 +62,10 @@ namespace KappaTools
 			TH1D * IPSig;
 			TH2D * IPvsIPSig;
 
+			TH1D * IP_abs, * IP_zoom_abs;
+			TH1D * IPSig_abs;
+			TH2D * IPvsIPSig_abs;
+
 			TH1D * muon_type;
 
 			TH1D * caloComp;

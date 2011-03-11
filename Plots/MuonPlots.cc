@@ -32,7 +32,7 @@ namespace KappaTools
 
 		muon_type					= new TH1D(prefix+"type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
 
-		muon_numberOfChambers		= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, 0., 20.);
+		muon_numberOfChambers		= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, -0.5, 19.5);
 
 		vertex_chi2					= new TH1D(prefix+"vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
 		vertex_ndof					= new TH1D(prefix+"vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
@@ -40,10 +40,15 @@ namespace KappaTools
 		vertex_chi2prob			= new TH1D(prefix+"vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
 		vertex_zdist				= new TH1D(prefix+"vertex_zdist","d(\\mathrm{PV},\\mu)", 50, 0., 1.);
 
-		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.1, 0.1);
+		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.05, 0.05);
 		IP_zoom						= new TH1D(prefix+"IP_zoom","\\mathrm{IP}", 100, -0.01, 0.01);
 		IPSig							= new TH1D(prefix+"IPSig","\\mathrm{IP}_\\mathrm{signif.}", 100, -10, 10);
-		IPvsIPSig					= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, -0.1, 0.1, 100, -10, 10);
+		IPvsIPSig					= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, -0.05, 0.05, 100, -10, 10);
+
+		IP_abs						= new TH1D(prefix+"IP_abs","\\mathrm{IP}", 100, 0., 0.05);
+		IP_zoom_abs					= new TH1D(prefix+"IP_zoom_abs","\\mathrm{IP}", 100, 0., 0.01);
+		IPSig_abs					= new TH1D(prefix+"IPSig_abs","\\mathrm{IP}_\\mathrm{signif.}", 100, 0., 10.);
+		IPvsIPSig_abs				= new TH2D(prefix+"IPvsIPSig_abs","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, 0., 0.05, 100, 0., 10.);
 
 		caloComp	= new TH1D(prefix+"caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
 		segComp		= new TH1D(prefix+"segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
@@ -51,6 +56,8 @@ namespace KappaTools
 		track = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"track");
 		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"innerTrack");
 		globalTrack = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"globalTrack");
+
+		tmpDirectory->cd();
 	}
 	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
 	{
@@ -66,6 +73,11 @@ namespace KappaTools
 			IPSig->Fill(muon->track.getIP(pv,2), weight);
 			IPvsIPSig->Fill(muon->track.getIP(pv,0),muon->track.getIP(pv,2), weight);
 			vertex_zdist->Fill(std::abs(muon->track.ref.z()-pv->position.z()));
+
+			IP_abs->Fill(std::abs(muon->track.getIP(pv,0)), weight);
+			IP_zoom_abs->Fill(std::abs(muon->track.getIP(pv,0)), weight);
+			IPSig_abs->Fill(std::abs(muon->track.getIP(pv,2)), weight);
+			IPvsIPSig_abs->Fill(std::abs(muon->track.getIP(pv,0)),std::abs(muon->track.getIP(pv,2)), weight);
 		}
 
 		track->process(&muon->track, pv, weight);
@@ -86,6 +98,11 @@ namespace KappaTools
 			IPSig->Fill(muon->track.getIP(bs,2), weight);
 			IPvsIPSig->Fill(muon->track.getIP(bs,0),muon->track.getIP(bs,2), weight);
 			vertex_zdist->Fill(std::abs(muon->track.ref.z()-bs->position.z()));
+
+			IP_abs->Fill(std::abs(muon->track.getIP(bs,0)), weight);
+			IP_zoom_abs->Fill(std::abs(muon->track.getIP(bs,0)), weight);
+			IPSig_abs->Fill(std::abs(muon->track.getIP(bs,2)), weight);
+			IPvsIPSig_abs->Fill(std::abs(muon->track.getIP(bs,0)),std::abs(muon->track.getIP(bs,2)), weight);
 		}
 
 		track->process(&muon->track, bs, weight);

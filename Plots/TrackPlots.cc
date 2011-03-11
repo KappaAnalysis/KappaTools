@@ -18,9 +18,9 @@ namespace KappaTools
 		ref_z					= new TH1D("ref_z","z_{\\mathrm{ref.}}", 100, -15., 15.);
 		ref_rho				= new TH1D("ref_rho","#rho_{\\mathrm{ref.}}", 100, -15., 15.);
 
-		chi2					= new TH1D("chi2","#chi^{2}", 50, 0., 50.);
-		ndof					= new TH1D("ndof","\\mathrm{ndof}", 50, 0., 50.);
-		chi2norm			= new TH1D("chi2norm","#chi^{2} / \\mathrm{ndof}", 50, 0., 25.);
+		chi2					= new TH1D("chi2","#chi^{2}", 50, 0., 150.);
+		ndof					= new TH1D("ndof","\\mathrm{ndof}", 100, -0.5, 99.5);
+		chi2norm			= new TH1D("chi2norm","#chi^{2} / \\mathrm{ndof}", 50, 0., 20.);
 		chi2prob			= new TH1D("chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
 
 		errPt	= new TH1D("errPt","errPt", 100, 0., 0.25);
@@ -29,10 +29,10 @@ namespace KappaTools
 		errDxy	= new TH1D("errDxy","errDxy", 100, 0., 0.75);
 		errDz	= new TH1D("errDz","errDz", 100, 0., 2.5);
 
-		nTrackerHits	= new TH1D("nTrackerHits","\\mathrm{hits\\,\\,in\\,\\,tracker}", 50, 0., 50.);
-		nValidMuonHits= new TH1D("nValidMuonHits","\\mathrm{hits\\,\\,in\\,\\,muon}", 75, 0., 75.);
-		nPixelHits		= new TH1D("nPixelHits","\\mathrm{hits\\,\\,in\\,\\,pixel}", 15, 0., 15.);
-		nStripHits		= new TH1D("nStripHits","\\mathrm{hits\\,\\,in\\,\\,strip}", 30, 0., 30.);
+		nTrackerHits	= new TH1D("nTrackerHits","\\mathrm{hits\\,\\,in\\,\\,tracker}", 50, -0.5, 49.5);
+		nValidMuonHits= new TH1D("nValidMuonHits","\\mathrm{hits\\,\\,in\\,\\,muon}", 75, -0.5, 74.5);
+		nPixelHits		= new TH1D("nPixelHits","\\mathrm{hits\\,\\,in\\,\\,pixel}", 15, -0.5, 14.5);
+		nStripHits		= new TH1D("nStripHits","\\mathrm{hits\\,\\,in\\,\\,strip}", 30, -0.5, 29.5);
 
 		quality				= new TH1D("quality", "\\mathrm{track\\,\\,quality}", 16, 0., 16.);
 	}
