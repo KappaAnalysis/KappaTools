@@ -42,6 +42,20 @@ namespace KappaTools
 		if (!track || track->nDOF == 0)
 			return;
 
+		process(track, weight);
+	}
+	void StandardTrackPlots::process(KDataTrack * track, KDataBeamSpot * pv, double weight)
+	{
+		if (!track || track->nDOF == 0)
+			return;
+
+		process(track, weight);
+	}
+	void StandardTrackPlots::process(KDataTrack * track, double weight)
+	{
+		if (!track || track->nDOF == 0)
+			return;
+
 		pt->Fill(track->p4.pt(), weight);
 		pt_low->Fill(track->p4.pt(), weight);
 		pt_full->Fill(track->p4.pt(), weight);

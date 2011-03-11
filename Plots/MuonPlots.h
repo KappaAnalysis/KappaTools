@@ -97,7 +97,9 @@ namespace KappaTools
 			StandardMuonPlots(TDirectory * tmpFile, TString tmpDirectory, TString prefix="");
 
 			// TDirectory
-			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
+			void process(KDataMuon * muon, KDataVertex * pv, double weight = 1.);
+			void process(KDataMuon * muon, KDataBeamSpot * bs, double weight = 1.);
+			void process(KDataMuon * muon, double weight = 1.);
 			void final();
 	};
 

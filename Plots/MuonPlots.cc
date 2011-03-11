@@ -57,6 +57,46 @@ namespace KappaTools
 		if (!muon)
 			return;
 
+		process(muon, weight);
+
+		if (pv)
+		{
+			IP->Fill(muon->track.getIP(pv,0), weight);
+			IP_zoom->Fill(muon->track.getIP(pv,0), weight);
+			IPSig->Fill(muon->track.getIP(pv,2), weight);
+			IPvsIPSig->Fill(muon->track.getIP(pv,0),muon->track.getIP(pv,2), weight);
+			vertex_zdist->Fill(std::abs(muon->track.ref.z()-pv->position.z()));
+		}
+
+		track->process(&muon->track, pv, weight);
+		innerTrack->process(&muon->innerTrack, pv, weight);
+		globalTrack->process(&muon->globalTrack, pv, weight);
+	}
+	void StandardMuonPlots::process(KDataMuon * muon, KDataBeamSpot * bs, double weight)
+	{
+		if (!muon)
+			return;
+
+		process(muon, weight);
+
+		if (bs)
+		{
+			IP->Fill(muon->track.getIP(bs,0), weight);
+			IP_zoom->Fill(muon->track.getIP(bs,0), weight);
+			IPSig->Fill(muon->track.getIP(bs,2), weight);
+			IPvsIPSig->Fill(muon->track.getIP(bs,0),muon->track.getIP(bs,2), weight);
+			vertex_zdist->Fill(std::abs(muon->track.ref.z()-bs->position.z()));
+		}
+
+		track->process(&muon->track, bs, weight);
+		innerTrack->process(&muon->innerTrack, bs, weight);
+		globalTrack->process(&muon->globalTrack, bs, weight);
+	}
+	void StandardMuonPlots::process(KDataMuon * muon, double weight)
+	{
+		if (!muon)
+			return;
+
 		muon_pt->Fill(muon->p4.pt(), weight);
 		muon_pt_low->Fill(muon->p4.pt(), weight);
 		muon_pt_fine->Fill(muon->p4.pt(), weight);
@@ -80,15 +120,6 @@ namespace KappaTools
 		muon_trackIso05->Fill(muon->trackIso05, weight);
 		muon_sumPtIso05->Fill(muon->sumPtIso05, weight);
 
-		if (pv)
-		{
-			IP->Fill(muon->track.getIP(pv,0), weight);
-			IP_zoom->Fill(muon->track.getIP(pv,0), weight);
-			IPSig->Fill(muon->track.getIP(pv,2), weight);
-			IPvsIPSig->Fill(muon->track.getIP(pv,0),muon->track.getIP(pv,2), weight);
-			vertex_zdist->Fill(std::abs(muon->track.ref.z()-pv->position.z()));
-		}
-
 		vertex_chi2->Fill(muon->vertex.chi2, weight);
 		vertex_ndof->Fill(muon->vertex.nDOF, weight);
 		vertex_chi2norm->Fill(muon->vertex.chi2/muon->vertex.nDOF, weight);
@@ -108,10 +139,6 @@ namespace KappaTools
 
 		caloComp->Fill(muon->caloComp, weight);
 		segComp->Fill(muon->segComp, weight);
-
-		track->process(&muon->track, pv, weight);
-		innerTrack->process(&muon->innerTrack, pv, weight);
-		globalTrack->process(&muon->globalTrack, pv, weight);
 	}
 	void StandardMuonPlots::final()
 	{

@@ -75,11 +75,20 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 		zjet_dPhi_zoom->Fill(ROOT::Math::VectorUtil::Phi_mpi_pi(ROOT::Math::VectorUtil::DeltaPhi(zmumu->p4,zmumu->getRJet()->p4)-M_PI), weight);
 	}
 
-	muons_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
-	muons_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
-	muon1_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
-	muon2_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
-
+	if (zmumu->getPV())
+	{
+		muons_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
+		muons_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
+		muon1_plots->process(zmumu->getMuon1(), zmumu->getPV(), weight);
+		muon2_plots->process(zmumu->getMuon2(), zmumu->getPV(), weight);
+	}
+	else
+	{
+		muons_plots->process(zmumu->getMuon1(), zmumu->getBS(), weight);
+		muons_plots->process(zmumu->getMuon2(), zmumu->getBS(), weight);
+		muon1_plots->process(zmumu->getMuon1(), zmumu->getBS(), weight);
+		muon2_plots->process(zmumu->getMuon2(), zmumu->getBS(), weight);
+	}
 	jet_plots->process(zmumu->getRJet(), zmumu->getPV(), weight);
 }
 
