@@ -7,52 +7,89 @@ namespace KappaTools
 		TDirectory * tmpDirectory = getDirectory(tmpFile_, tmpDirectory_);
 		double muon_pt_medium_binning[16] = { 0,5,6,7,8,9,10,11,13,16,20,25,40,60,100 };
 		
-		muon_pt 					= new TH1D(prefix+"pt","p_{\\mathrm{T}}", 75, 0., 150.);
+		muon_pt 				= new TH1D(prefix+"pt","p_{\\mathrm{T}}", 75, 0., 150.);
+		muon_pt->Sumw2();
 		muon_pt_fine			= new TH1D(prefix+"pt_fine","p_{\\mathrm{T}}", 200, 0., 200.);
+		muon_pt_fine->Sumw2();
 		muon_pt_low		 		= new TH1D(prefix+"pt_low","p_{\\mathrm{T}}", 50, 0., 25.);
-		muon_pt_medium		= new TH1D(prefix+"pt_medium","p_{\\mathrm{T}}", 14, muon_pt_medium_binning);
-		muon_eta 					= new TH1D(prefix+"eta","#eta", 50, -5., 5.);
+		muon_pt_low->Sumw2();
+		muon_pt_medium			= new TH1D(prefix+"pt_medium","p_{\\mathrm{T}}", 14, muon_pt_medium_binning);
+		muon_pt_medium->Sumw2();
+		muon_eta 				= new TH1D(prefix+"eta","#eta", 50, -5., 5.);
+		muon_eta->Sumw2();
 		muon_eta_zoom			= new TH1D(prefix+"eta_zoom","#eta", 50, -2.5, 2.5);
-		muon_phi					= new TH1D(prefix+"phi","#phi", 50, -3.5, 3.5);
+		muon_eta_zoom->Sumw2();
+		muon_phi				= new TH1D(prefix+"phi","#phi", 50, -3.5, 3.5);
+		muon_phi->Sumw2();
 		muon_eta_phi			= new TH2D(prefix+"eta_phi", "#eta vs. #phi", 50, -5., 5., 50, -3.5, 3.5);
-		muon_eta_zoom_phi	= new TH2D(prefix+"eta_zoom_phi", "#eta vs. #phi", 50, -2.5, 2.5, 50, -3.5, 3.5);
+		muon_eta_phi->Sumw2();
+		muon_eta_zoom_phi		= new TH2D(prefix+"eta_zoom_phi", "#eta vs. #phi", 50, -2.5, 2.5, 50, -3.5, 3.5);
+		muon_eta_zoom_phi->Sumw2();
 
-		muon_ecalIso03		= new TH1D(prefix+"ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 10.);
-		muon_hcalIso03		= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
-		muon_trackIso03		= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
-		muon_sumPtIso03		= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
-		muon_relCombIso03	= new TH1D(prefix+"relCombIso03","\\mathrm{iso}_{\\mathrm{rel.}}(0.3)", 60, 0., 0.5);
-		muon_relCombPFIso04	= new TH1D(prefix+"relCombPFIso04", "\\mathrm{iso}_{\\mathrm{rel.\\,pf.}}(0.4)", 60, 0., 0.5);
+		muon_ecalIso03			= new TH1D(prefix+"ecalIso03","\\mathrm{iso}_{\\mathrm{ecal}}(0.3)", 50, 0, 10.);
+		muon_ecalIso03->Sumw2();
+		muon_hcalIso03			= new TH1D(prefix+"hcalIso03","\\mathrm{iso}_{\\mathrm{hcal}}(0.3)", 50, 0, 10.);
+		muon_hcalIso03->Sumw2();
+		muon_trackIso03			= new TH1D(prefix+"trackIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
+		muon_trackIso03->Sumw2();
+		muon_sumPtIso03			= new TH1D(prefix+"sumPtIso03","\\mathrm{iso}_{\\mathrm{trk.}}(0.3)", 50, 0, 10.);
+		muon_sumPtIso03->Sumw2();
+		muon_relCombIso03		= new TH1D(prefix+"relCombIso03","\\mathrm{iso}_{\\mathrm{rel.}}(0.3)", 60, 0., 0.5);
+		muon_relCombIso03->Sumw2();
+		muon_relCombPFIso04		= new TH1D(prefix+"relCombPFIso04", "\\mathrm{iso}_{\\mathrm{rel.\\,pf.}}(0.4)", 60, 0., 0.5);
+		muon_relCombPFIso04->Sumw2();
 
 		muon_pfIso04			= new TH1D(prefix+"pfIso04","\\mathrm{iso}_{\\mathrm{pf}}(0.4)", 50, 0, 10.);
+		muon_pfIso04->Sumw2();
 
-		muon_ecalIso05		= new TH1D(prefix+"ecalIso05","\\mathrm{iso}_{\\mathrm{ecal}}(0.5)", 50, 0, 10.);
-		muon_hcalIso05		= new TH1D(prefix+"hcalIso05","\\mathrm{iso}_{\\mathrm{hcal}}(0.5)", 50, 0, 10.);
-		muon_trackIso05		= new TH1D(prefix+"trackIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.0);
-		muon_sumPtIso05		= new TH1D(prefix+"sumPtIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.);
+		muon_ecalIso05			= new TH1D(prefix+"ecalIso05","\\mathrm{iso}_{\\mathrm{ecal}}(0.5)", 50, 0, 10.);
+		muon_ecalIso05->Sumw2();
+		muon_hcalIso05			= new TH1D(prefix+"hcalIso05","\\mathrm{iso}_{\\mathrm{hcal}}(0.5)", 50, 0, 10.);
+		muon_hcalIso05->Sumw2();
+		muon_trackIso05			= new TH1D(prefix+"trackIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.0);
+		muon_trackIso05->Sumw2();
+		muon_sumPtIso05			= new TH1D(prefix+"sumPtIso05","\\mathrm{iso}_{\\mathrm{trk.}}(0.5)", 50, 0, 10.);
+		muon_sumPtIso05->Sumw2();
 
-		muon_type					= new TH1D(prefix+"type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
+		muon_type				= new TH1D(prefix+"type","\\mathrm{muon\\,\\,type:\\,\\,exists,\\,\\,tracker,\\,\\,calo,\\,\\,sta,\\,\\,global}", 10, 0, 5);
+		muon_type->Sumw2();
 
-		muon_numberOfChambers		= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, -0.5, 19.5);
+		muon_numberOfChambers	= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, -0.5, 19.5);
+		muon_numberOfChambers->Sumw2();
 
-		vertex_chi2					= new TH1D(prefix+"vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
-		vertex_ndof					= new TH1D(prefix+"vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
+		vertex_chi2				= new TH1D(prefix+"vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
+		vertex_chi2->Sumw2();
+		vertex_ndof				= new TH1D(prefix+"vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
+		vertex_ndof->Sumw2();
 		vertex_chi2norm			= new TH1D(prefix+"vertex_chi2norm","#chi^{2} / \\mathrm{ndof}", 10, 0., 10.);
+		vertex_chi2norm->Sumw2();
 		vertex_chi2prob			= new TH1D(prefix+"vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
-		vertex_zdist				= new TH1D(prefix+"vertex_zdist","d(\\mathrm{PV},\\mu)", 50, 0., 1.);
+		vertex_chi2prob->Sumw2();
+		vertex_zdist			= new TH1D(prefix+"vertex_zdist","d(\\mathrm{PV},\\mu)", 50, 0., 1.);
+		vertex_zdist->Sumw2();
 
-		IP								= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.05, 0.05);
-		IP_zoom						= new TH1D(prefix+"IP_zoom","\\mathrm{IP}", 100, -0.01, 0.01);
-		IPSig							= new TH1D(prefix+"IPSig","\\mathrm{IP}_\\mathrm{signif.}", 100, -10, 10);
-		IPvsIPSig					= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, -0.05, 0.05, 100, -10, 10);
+		IP						= new TH1D(prefix+"IP","\\mathrm{IP}", 100, -0.05, 0.05);
+		IP->Sumw2();
+		IP_zoom					= new TH1D(prefix+"IP_zoom","\\mathrm{IP}", 100, -0.01, 0.01);
+		IP_zoom->Sumw2();
+		IPSig					= new TH1D(prefix+"IPSig","\\mathrm{IP}_\\mathrm{signif.}", 100, -10, 10);
+		IPSig->Sumw2();
+		IPvsIPSig				= new TH2D(prefix+"IPvsIPSig","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, -0.05, 0.05, 100, -10, 10);
+		IPvsIPSig->Sumw2();
 
-		IP_abs						= new TH1D(prefix+"IP_abs","\\mathrm{IP}", 100, 0., 0.05);
-		IP_zoom_abs					= new TH1D(prefix+"IP_zoom_abs","\\mathrm{IP}", 100, 0., 0.01);
-		IPSig_abs					= new TH1D(prefix+"IPSig_abs","\\mathrm{IP}_\\mathrm{signif.}", 100, 0., 10.);
-		IPvsIPSig_abs				= new TH2D(prefix+"IPvsIPSig_abs","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, 0., 0.05, 100, 0., 10.);
+		IP_abs					= new TH1D(prefix+"IP_abs","\\mathrm{IP}", 100, 0., 0.05);
+		IP_abs->Sumw2();
+		IP_zoom_abs				= new TH1D(prefix+"IP_zoom_abs","\\mathrm{IP}", 100, 0., 0.01);
+		IP_zoom_abs->Sumw2();
+		IPSig_abs				= new TH1D(prefix+"IPSig_abs","\\mathrm{IP}_\\mathrm{signif.}", 100, 0., 10.);
+		IPSig_abs->Sumw2();
+		IPvsIPSig_abs			= new TH2D(prefix+"IPvsIPSig_abs","\\mathrm{IP\\,\\,vs\\,\\,IP}_\\mathrm{signif.}", 100, 0., 0.05, 100, 0., 10.);
+		IPvsIPSig_abs->Sumw2();
 
 		caloComp	= new TH1D(prefix+"caloComp","\\mathrm{calo\\,\\,compatibility}", 100, 0., 1.);
+		caloComp->Sumw2();
 		segComp		= new TH1D(prefix+"segComp","\\mathrm{segment\\,\\,compatibility}", 100, 0., 1.);
+		segComp->Sumw2();
 
 		track = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"track");
 		innerTrack = new KappaTools::StandardTrackPlots(tmpDirectory, prefix+"innerTrack");

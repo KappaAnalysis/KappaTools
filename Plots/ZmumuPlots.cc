@@ -5,36 +5,55 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 {
 	TDirectory * tmpDirectory = getDirectory(tmpFile, directory);
 
-	Z_mass 						= new TH1D("Z_mass","m_{Z #rightarrow #mu #mu mass}", 40, 0., 200.);
+	Z_mass 					= new TH1D("Z_mass","m_{Z #rightarrow #mu #mu mass}", 40, 0., 200.);
+	Z_mass->Sumw2();
 	Z_mass_fine				= new TH1D("Z_mass_fine","m_{Z #rightarrow #mu #mu mass}", 200, 0., 200.);
+	Z_mass_fine->Sumw2();
 	Z_mass_low 				= new TH1D("Z_mass_low","m_{Z #rightarrow #mu #mu mass}", 50, 0., 75.);
+	Z_mass_low->Sumw2();
 	Z_mass_zoom 			= new TH1D("Z_mass_zoom","m_{Z #rightarrow #mu #mu mass}", 60, 60., 120.);
+	Z_mass_zoom->Sumw2();
 
-	Z_pt	 						= new TH1D("Z_pt","p_{\\mathrm{T}}^{Z}", 75, 0., 150.);
-	Z_pt_full					= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);
-	Z_eta 						= new TH1D("Z_eta","#eta_{Z}", 50, -5., 5.);
-	Z_phi 						= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
-	Z_y 							= new TH1D("Z_y","#y_{Z}", 50, -3., 3.);
+	Z_pt	 				= new TH1D("Z_pt","p_{\\mathrm{T}}^{Z}", 75, 0., 150.);
+	Z_pt->Sumw2();
+	Z_pt_full				= new TH1D("Z_pt_full","p_{\\mathrm{T}}^{Z}", 100, 0., 1000.);
+	Z_pt_full->Sumw2();
+	Z_eta 					= new TH1D("Z_eta","#eta_{Z}", 50, -5., 5.);
+	Z_eta->Sumw2();
+	Z_phi 					= new TH1D("Z_phi","#phi_{Z}", 50, -3.5, 3.5);
+	Z_phi->Sumw2();
+	Z_y 					= new TH1D("Z_y","#y_{Z}", 50, -3., 3.);
+	Z_y->Sumw2();
 
 	jet_response			= new TH1D("jet_response", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z}", 100, 0., 2.);
-	jet_response_mpf	= new TH1D("jet_response_mpf", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z} (\\mathrm{MPF})", 100, 0., 2.);
+	jet_response->Sumw2();
+	jet_response_mpf		= new TH1D("jet_response_mpf", "p_{\\mathrm{T}}^{\\mathrm{jet}} / p_{\\mathrm{T}}^{Z} (\\mathrm{MPF})", 100, 0., 2.);
+	jet_response_mpf->Sumw2();
 
-	zjet_dR						= new TH1D("zjet_dR", "#DeltaR(Z,jet)", 50, 0., 6.5);
-	zjet_dPhi					= new TH1D("zjet_dPhi", "#Delta #phi(Z,jet)", 50, -1.*M_PI, M_PI);
-	zjet_dPhi_zoom		= new TH1D("zjet_dPhi_zoom", "#Delta #phi(Z,jet)", 100, -0.4, +0.4);
+	zjet_dR					= new TH1D("zjet_dR", "#DeltaR(Z,jet)", 50, 0., 6.5);
+	zjet_dR->Sumw2();
+	zjet_dPhi				= new TH1D("zjet_dPhi", "#Delta #phi(Z,jet)", 50, -1.*M_PI, M_PI);
+	zjet_dPhi->Sumw2();
+	zjet_dPhi_zoom			= new TH1D("zjet_dPhi_zoom", "#Delta #phi(Z,jet)", 100, -0.4, +0.4);
+	zjet_dPhi_zoom->Sumw2();
 
-	muons_dR					= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
+	muons_dR				= new TH1D("muons_dR", "#DeltaR(#mu_{1},#mu_{2})", 50, 0., 6.5);
+	muons_dR->Sumw2();
 	muons_dPhi				= new TH1D("muons_dPhi", "#Delta #phi(#mu_{1},#mu_{2})", 100, -3.5, 3.5);
+	muons_dPhi->Sumw2();
 
 	mumu_vtx_dd				= new TH1D("mumu_vtx_dd", "euklidean dist. between muons' vertices", 100, 0., 1.);
+	mumu_vtx_dd->Sumw2();
 	mumu_vtx_dr				= new TH1D("mumu_vtx_dr", "euklidean dist. between muons' vertices in perp. plane", 100, 0., 0.1);
+	mumu_vtx_dr->Sumw2();
 	mumu_vtx_dz				= new TH1D("mumu_vtx_dz", "euklidean dist. between muons' vertices in z direction", 100, -1., 1.);
+	mumu_vtx_dz->Sumw2();
 
 	muons_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muons");
 	muon1_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon1");
 	muon2_plots				= new KappaTools::StandardMuonPlots(tmpDirectory, "muon2");
 
-	jet_plots					= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet");
+	jet_plots				= new KappaTools::StandardJetPlots<JetType>(tmpDirectory, "jet");
 }
 
 template <typename JetType, typename METType>
