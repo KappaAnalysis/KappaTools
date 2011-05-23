@@ -117,10 +117,15 @@ namespace KappaTools
 				retValue = (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
 		}
 
-#ifdef KAPPA_FEATURE_JETAREA
-		if ((isoType == SUMPTISO || isoType == RELCOMBISO) && !jetAreaInfo && pileUpSubstraction)
+		if (isoType == RELCOMBPFISO)
 		{
-			retValue -= (jetAreaInfo->median - jetAreaInfo->sigma) * coneSize * coneSize * 3.14159;
+			retValue = obj->pfIso04 / obj->p4.pt();
+		}
+
+#ifdef KAPPA_FEATURE_JETAREA
+		if (isoType == RELCOMBPFISO && jetAreaInfo && pileUpSubstraction)
+		{
+			retValue -= jetAreaInfo->median * 0.4 * 0.4 * 3.14159 / obj->p4.pt();
 		}
 #endif
 		return std::max(retValue, 0.);

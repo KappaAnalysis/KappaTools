@@ -26,6 +26,7 @@ namespace KappaTools
 		const static unsigned char HCALISO  = 2;
 		const static unsigned char RELCOMBISO  = 3;
 		const static unsigned char SUMPTISO = 4;
+		const static unsigned char RELCOMBPFISO  = 5;
 
 		IsolationCut();
 		IsolationCut(T * tmpObj);
