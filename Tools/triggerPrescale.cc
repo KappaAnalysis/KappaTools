@@ -27,7 +27,7 @@ struct compRunLS
 	}
 };
 
-void zmumu(std::vector<std::string> filenames, std::vector<std::string> jsonFiles, std::vector<std::string> hlTrigger, std::string outputFilename)
+void showPrescales(std::vector<std::string> filenames, std::vector<std::string> jsonFiles, std::vector<std::string> hlTrigger, std::string outputFilename)
 {
 	TChain * lumis_tree = new TChain("Lumis");
 
@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 		if (optBatchMode)
 			std::cout << "running in batch mode..." << std::endl;
 
-		zmumu(filenames, optJsonFiles.Value(), hlTrigger, optOutputFile);
+		showPrescales(filenames, optJsonFiles.Value(), hlTrigger, optOutputFile);
 	}
 	else
 	{

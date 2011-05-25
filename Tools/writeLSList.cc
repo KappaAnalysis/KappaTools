@@ -1,6 +1,7 @@
 #include "TChain.h"
 #include "DataFormats/interface/KMetadata.h"
 #include "Toolbox/CmdLineSetup.h"
+#include <iomanip>
 
 void run(std::string filename)
 {
@@ -19,7 +20,10 @@ void run(std::string filename)
 	for (unsigned int i = 0;i < nentries;i++)
 	{
 		lumis_tree->GetEntry(i);
-		std::cout << m_lumimetadata->nRun << "\t" << m_lumimetadata->nLumi << "\t" << filename << std::endl;
+		std::cout
+			<< std::setw(7) << m_lumimetadata->nRun << "\t"
+			<< std::setw(7) << m_lumimetadata->nLumi << "\t"
+			<< filename << std::endl;
 	}
 
 	delete m_lumimetadata;
