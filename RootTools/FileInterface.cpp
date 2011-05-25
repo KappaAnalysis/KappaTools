@@ -179,8 +179,8 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 		membersBranch.begin(), membersBranch.end(),
 		membersDict.begin(), membersDict.end(),
 		inserter(membersDifference, membersDifference.begin()));
-	// This check does not yet work with vector
-	if ((string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size())
+	// This check does not yet work with vector and KVertexSummary
+	if (string(classBranch->GetName()) != "KVertexSummary" && (string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size())
 	{
 		cerr << "Dictionary is not consistent with file content!" << endl;
 		cerr << "Branch content: " << membersBranch << endl;
