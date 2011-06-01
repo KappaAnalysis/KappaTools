@@ -3,13 +3,13 @@
 namespace KappaTools
 {
 	template <typename T>
-	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubstraction(false) {}
+	IsolationCut<T>::IsolationCut() : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubtraction(false) {}
 
 	template <typename T>
-	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubstraction(false) {}
+	IsolationCut<T>::IsolationCut(T * tmpObj) : BaseCut("track iso cut"), obj(tmpObj), min(0.), max(1.), coneSize(0.3), isoType(SUMPTISO), pileUpSubtraction(false) {}
 
 	template <typename T>
-	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_), pileUpSubstraction(false) {}
+	IsolationCut<T>::IsolationCut(unsigned char type_, double coneSize_) : BaseCut("track iso cut"), obj(0), min(0.), max(1.), coneSize(coneSize_), isoType(type_), pileUpSubtraction(false) {}
 
 #ifdef KAPPA_FEATURE_JETAREA
 	template <typename T>
@@ -53,9 +53,9 @@ namespace KappaTools
 
 #ifdef KAPPA_FEATURE_JETAREA
 	template <typename T>
-	void IsolationCut<T>::setPUSubstraction(bool pileUpSubstraction_)
+	void IsolationCut<T>::setPUSubtraction(bool pileUpSubtraction_)
 	{
-		pileUpSubstraction = pileUpSubstraction_;
+		pileUpSubtraction = pileUpSubtraction_;
 	}
 #endif
 
@@ -117,17 +117,18 @@ namespace KappaTools
 				retValue = (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
 		}
 
+#ifdef KAPPA_FEATURE_JETAREA
+		if (isoType == RELCOMBPFISO && jetAreaInfo && pileUpSubtraction)
+		{
+			retValue = obj->puSubtractedPFIso04(jetAreaInfo) / obj->p4.pt();
+		}
+		else
+#endif
 		if (isoType == RELCOMBPFISO)
 		{
 			retValue = obj->pfIso04 / obj->p4.pt();
 		}
 
-#ifdef KAPPA_FEATURE_JETAREA
-		if (isoType == RELCOMBPFISO && jetAreaInfo && pileUpSubstraction)
-		{
-			retValue -= jetAreaInfo->median * 0.4 * 0.4 * 3.14159 / obj->p4.pt();
-		}
-#endif
 		return std::max(retValue, 0.);
 	}
 }

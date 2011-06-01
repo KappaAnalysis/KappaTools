@@ -19,7 +19,7 @@ namespace KappaTools
 		double max;
 		double coneSize;
 		unsigned char isoType;
-		bool pileUpSubstraction;
+		bool pileUpSubtraction;
 	public:
 		const static unsigned char TRACKISO = 0;
 		const static unsigned char ECALISO  = 1;
@@ -43,7 +43,7 @@ namespace KappaTools
 		void setMinCut(double min_);
 		void setMaxCut(double max_);
 #ifdef KAPPA_FEATURE_JETAREA
-		void setPUSubstraction(bool pileUpSubstraction_);
+		void setPUSubtraction(bool pileUpSubtraction_);
 #endif
 		virtual bool getInternalDecision();
 
