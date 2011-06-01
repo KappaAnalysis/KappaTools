@@ -90,7 +90,10 @@ void FileInterface::AssignEventPtr(KEventMetadata **meta_event, KGenEventMetadat
 
 KLumiMetadata *FileInterface::GetLumiMetadata(run_id run, lumi_id lumi)
 {
-	return &(lumimap_mc[make_pair(run, lumi)]);
+	if (isMC)
+		return &(lumimap_mc[make_pair(run, lumi)]);
+	else
+		return &(lumimap_data[make_pair(run, lumi)]);
 }
 
 KGenLumiMetadata *FileInterface::GetGenLumiMetadata(run_id run, lumi_id lumi)
