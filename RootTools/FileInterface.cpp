@@ -147,7 +147,7 @@ void FileInterface::SpeedupTree(long cache)
 	}
 }
 
-void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName)
+void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName, const bool check)
 {
 	TBranch *branch = chain.GetBranch(name.c_str());
 	std::string selected = "";
@@ -183,7 +183,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 		membersDict.begin(), membersDict.end(),
 		inserter(membersDifference, membersDifference.begin()));
 	// This check does not yet work with vector
-	if ((string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size())
+	if ((string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size() && check)
 	{
 		cerr << "Dictionary is not consistent with file content!" << endl;
 		cerr << "Branch content: " << membersBranch << endl;

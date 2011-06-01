@@ -1,7 +1,7 @@
 template<typename T>
-T *FileInterface::Get(const std::string &name, const std::string altName)
+T *FileInterface::Get(const std::string &name, const std::string altName, const bool check)
 {
-	return static_cast<T*>(GetInternal(eventdata, TypeName<T>::name(), name, altName));
+	return static_cast<T*>(GetInternal(eventdata, TypeName<T>::name(), name, altName, check));
 }
 
 template<typename T>

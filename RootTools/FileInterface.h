@@ -24,7 +24,7 @@ struct FileInterface
 
 	// Get event content of files
 	template<typename T>
-	T *Get(const std::string &name, const std::string altName = "");
+	T *Get(const std::string &name, const std::string altName = "", const bool check = true);
 	template<typename T>
 	std::vector<std::string> GetNames(bool inherited = false);
 	template<typename T>
@@ -57,7 +57,7 @@ private:
 	template<typename T>
 	std::map<std::pair<run_id, lumi_id>, T> GetLumis();
 
-	void *GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName = "");
+	void *GetInternal(TChain &chain, const char *cname, const std::string &name, const std::string altName = "", const bool check = true);
 };
 
 #include "FileInterface.hxx"
