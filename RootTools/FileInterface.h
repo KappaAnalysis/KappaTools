@@ -20,7 +20,7 @@ struct FileInterface
 	void SpeedupTree(long cache = 0);
 
 	TChain eventdata;
-	bool isMC;
+	enum {STD, GEN, DATA} lumiInfoType;
 
 	// Get event content of files
 	template<typename T>
@@ -38,7 +38,9 @@ struct FileInterface
 	// Get lumi metadata objects
 	KLumiMetadata *GetLumiMetadata(run_id run, lumi_id lumi);
 	KGenLumiMetadata *GetGenLumiMetadata(run_id run, lumi_id lumi);
-	void AssignLumiPtr(run_id run, lumi_id lumi, KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen = 0);
+	bool AssignLumiPtr(run_id run, lumi_id lumi, KLumiMetadata **meta_lumi);
+	bool AssignLumiPtr(run_id run, lumi_id lumi, KGenLumiMetadata **meta_lumi);
+	bool AssignLumiPtr(run_id run, lumi_id lumi, KDataLumiMetadata **meta_lumi);
 
 	// Get lumi list
 	std::vector<std::pair<run_id, lumi_id> > GetRunLumis() const;
@@ -52,7 +54,8 @@ private:
 
 	std::list<void*> vBranchHolder;
 	std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata> lumimap_mc;
-	std::map<std::pair<run_id, lumi_id>, KLumiMetadata> lumimap_data;
+	std::map<std::pair<run_id, lumi_id>, KLumiMetadata> lumimap_std;
+	std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata> lumimap_data;
 
 	template<typename T>
 	std::map<std::pair<run_id, lumi_id>, T> GetLumis();
