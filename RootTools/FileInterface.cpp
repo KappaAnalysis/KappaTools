@@ -38,7 +38,7 @@ namespace
 }
 
 FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
-	eventdata("Events"), isMC(false), lumidata("Lumis"), verbosity(verbose)
+	eventdata("Events"), lumiInfoType(STD), lumidata("Lumis"), verbosity(verbose)
 {
 	if (shuffle)
 		random_shuffle(files.begin(), files.end());
@@ -52,72 +52,34 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 
 	TBranch *b = lumidata.GetBranch("KLumiMetadata");
 	if (b)
-		isMC = (string(b->GetClassName()) == "KGenLumiMetadata");
-	if (verbosity)
-		cout << endl << "Data source: " << (isMC ? "Monte-Carlo" : "Detector") << endl;
-
-	if (isMC)
 	{
+		if (string(b->GetClassName()) == "KGenLumiMetadata")
+			lumiInfoType = GEN;
+		if (string(b->GetClassName()) == "KLumiMetadata")
+			lumiInfoType = STD;
+		if (string(b->GetClassName()) == "KDataLumiMetadata")
+			lumiInfoType = DATA;
+	}
+
+	switch (lumiInfoType)
+	{
+	case GEN:
+		cout << endl << "Data source: Monte Carlo" << endl;
 		lumimap_mc = GetLumis<KGenLumiMetadata>();
 		current_event = new KGenEventMetadata();
-	}
-	else
-	{
-		lumimap_data = GetLumis<KLumiMetadata>();
+		break;
+	case STD:
+		cout << endl << "Data source: default" << endl;
+		lumimap_std = GetLumis<KLumiMetadata>();
 		current_event = new KEventMetadata();
+		break;
+	case DATA:
+		cout << endl << "Data source: data" << endl;
+		lumimap_data = GetLumis<KDataLumiMetadata>();
+		current_event = new KEventMetadata();
+		break;
 	}
 	eventdata.SetBranchAddress("KEventMetadata", &current_event);
-}
-
-KEventMetadata *FileInterface::GetEventMetadata()
-{
-	return current_event;
-}
-
-KGenEventMetadata *FileInterface::GetGenEventMetadata()
-{
-	if (!isMC)
-		return 0;
-	return static_cast<KGenEventMetadata*>(current_event);
-}
-
-void FileInterface::AssignEventPtr(KEventMetadata **meta_event, KGenEventMetadata **meta_event_gen)
-{
-	*meta_event = GetEventMetadata();
-	if (meta_event_gen)
-		*meta_event_gen = GetGenEventMetadata();
-}
-
-KLumiMetadata *FileInterface::GetLumiMetadata(run_id run, lumi_id lumi)
-{
-	if (isMC)
-		return &(lumimap_mc[make_pair(run, lumi)]);
-	else
-		return &(lumimap_data[make_pair(run, lumi)]);
-}
-
-KGenLumiMetadata *FileInterface::GetGenLumiMetadata(run_id run, lumi_id lumi)
-{
-	if (!isMC)
-		return 0;
-	return static_cast<KGenLumiMetadata*>(GetLumiMetadata(run, lumi));
-}
-
-void FileInterface::AssignLumiPtr(run_id run, lumi_id lumi,
-	KLumiMetadata **meta_lumi, KGenLumiMetadata **meta_lumi_gen)
-{
-	if (isMC)
-	{
-		*meta_lumi = &(lumimap_mc[make_pair(run, lumi)]);
-		if (meta_lumi_gen)
-			*meta_lumi_gen = static_cast<KGenLumiMetadata*>(*meta_lumi);
-	}
-	else
-	{
-		*meta_lumi = &(lumimap_data[make_pair(run, lumi)]);
-		if (meta_lumi_gen)
-			*meta_lumi_gen = 0;
-	}
 }
 
 void FileInterface::SpeedupTree(long cache)
@@ -199,17 +161,23 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 
 bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 {
-	if (isMC)
+	switch (lumiInfoType)
 	{
+	case GEN:
 		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
 			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
 				return true;
-	}
-	else
-	{
-		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+		break;
+	case STD:
+		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_std.begin(); it != lumimap_std.end(); ++it)
 			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
 				return true;
+		break;
+	case DATA:
+		for (std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
+				return true;
+		break;
 	}
 	return false;
 }
@@ -217,11 +185,65 @@ bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
 {
 	std::vector<std::pair<run_id, lumi_id> > result;
-	if (isMC)
+	switch (lumiInfoType)
+	{
+	case GEN:
 		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
 			result.push_back(it->first);
-	else
-		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+		break;
+	case STD:
+		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_std.begin(); it != lumimap_std.end(); ++it)
 			result.push_back(it->first);
+		break;
+	case DATA:
+		for (std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
+			result.push_back(it->first);
+		break;
+	}
 	return result;
+}
+
+template<>
+KEventMetadata *FileInterface::Get()
+{
+	return current_event;
+}
+
+template<>
+KGenEventMetadata *FileInterface::Get()
+{
+	if (lumiInfoType == GEN)
+		return static_cast<KGenEventMetadata*>(current_event);
+	return 0;
+}
+
+template<>
+KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+{
+	switch (lumiInfoType)
+	{
+	case GEN:
+		return &(lumimap_mc[std::make_pair(run, lumi)]);
+	case STD:
+		return &(lumimap_std[std::make_pair(run, lumi)]);
+	case DATA:
+		return &(lumimap_data[std::make_pair(run, lumi)]);
+	}
+	return 0;
+}
+
+template<>
+KGenLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+{
+	if (lumiInfoType == GEN)
+		return &(lumimap_mc[std::make_pair(run, lumi)]);
+	return 0;
+}
+
+template<>
+KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+{
+	if (lumiInfoType == DATA)
+		return &(lumimap_data[std::make_pair(run, lumi)]);
+	return 0;
 }

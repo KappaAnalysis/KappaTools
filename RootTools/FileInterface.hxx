@@ -1,3 +1,32 @@
+// Get event metadata objects
+template<typename T>
+T *FileInterface::Get()
+{
+	std::cerr << "Unsupported event type: " << TypeName<T>::name() << std::endl;
+	return 0;
+}
+
+template<>
+KEventMetadata *FileInterface::Get();
+template<>
+KGenEventMetadata *FileInterface::Get();
+
+// Get lumi metadata objects
+template<typename T>
+T *FileInterface::Get(run_id run, lumi_id lumi)
+{
+	std::cerr << "Unsupported lumi metadata type: " << TypeName<T>::name() << std::endl;
+	return 0;
+}
+
+template<>
+KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+template<>
+KGenLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+template<>
+KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+
+// Get event content from files
 template<typename T>
 T *FileInterface::Get(const std::string &name, const std::string altName, const bool check)
 {
