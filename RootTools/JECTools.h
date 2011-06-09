@@ -2,7 +2,7 @@
 #define KAPPA_JECTOOLS_H
 
 #include <CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h>
-#include <DataFormats/src/classes.h>
+#include <DataFormats/interface/Kappa.h>
 #include "SortTools.h"
 
 template<typename T>

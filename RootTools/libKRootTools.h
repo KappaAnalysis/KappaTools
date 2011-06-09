@@ -5,11 +5,14 @@
 #include "DisplayTools.h"
 #include "EventLogger.h"
 #include "FileInterface.h"
-#include "JECTools.h"
 #include "JetID.h"
 #include "LSWatcher.h"
 #include "Matching.h"
 #include "RunLumiReader.h"
 #include "SortTools.h"
+
+#ifdef JEC
+#include "JECTools.h"
+#endif
 
 #endif
