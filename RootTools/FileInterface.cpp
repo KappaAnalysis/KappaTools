@@ -159,48 +159,50 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	return tmp;
 }
 
+template<typename T>
+inline bool isCompatible(const std::map<std::pair<run_id, lumi_id>, T> &lumimap, unsigned int minRun, unsigned int maxRun)
+{
+	for (typename std::map<std::pair<run_id, lumi_id>, T>::const_iterator it = lumimap.begin(); it != lumimap.end(); ++it)
+		if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
+			return true;
+	return false;
+}
+
 bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 {
 	switch (lumiInfoType)
 	{
 	case GEN:
-		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
-			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
-				return true;
-		break;
+		return ::isCompatible(lumimap_mc, minRun, maxRun);
 	case STD:
-		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_std.begin(); it != lumimap_std.end(); ++it)
-			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
-				return true;
-		break;
+		return ::isCompatible(lumimap_std, minRun, maxRun);
 	case DATA:
-		for (std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
-			if ((it->first.first >= minRun || minRun == 0) && (it->first.first <= maxRun || maxRun == 0))
-				return true;
-		break;
+		return ::isCompatible(lumimap_data, minRun, maxRun);
 	}
 	return false;
 }
 
-std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
+template<typename T>
+inline std::vector<std::pair<run_id, lumi_id> > GetRunLumis(const std::map<std::pair<run_id, lumi_id>, T> &lumimap)
 {
 	std::vector<std::pair<run_id, lumi_id> > result;
+	for (typename std::map<std::pair<run_id, lumi_id>, T>::const_iterator it = lumimap.begin(); it != lumimap.end(); ++it)
+		result.push_back(it->first);
+	return result;
+}
+
+std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
+{
 	switch (lumiInfoType)
 	{
 	case GEN:
-		for (std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata>::const_iterator it = lumimap_mc.begin(); it != lumimap_mc.end(); ++it)
-			result.push_back(it->first);
-		break;
+		return ::GetRunLumis(lumimap_mc);
 	case STD:
-		for (std::map<std::pair<run_id, lumi_id>, KLumiMetadata>::const_iterator it = lumimap_std.begin(); it != lumimap_std.end(); ++it)
-			result.push_back(it->first);
-		break;
+		return ::GetRunLumis(lumimap_std);
 	case DATA:
-		for (std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata>::const_iterator it = lumimap_data.begin(); it != lumimap_data.end(); ++it)
-			result.push_back(it->first);
-		break;
+		return ::GetRunLumis(lumimap_data);
 	}
-	return result;
+	return std::vector<std::pair<run_id, lumi_id> >();
 }
 
 template<>
