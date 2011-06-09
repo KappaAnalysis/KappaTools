@@ -64,6 +64,22 @@ inline void correctJets(std::vector<T> *jets, FactorizedJetCorrector *jec,
 }
 
 template<typename T>
+inline void correctJets(std::vector<T> *jets, FactorizedJetCorrector *jec,
+	const double rho, const int npv, const double area)
+{
+	if (jec == 0)
+		return;
+	for (size_t i = 0; i < jets->size(); ++i)
+	{
+		jec->setRho(rho);
+		jec->setNPV(npv);
+		jets->at(i).area = area;
+		correctSingleJet(jets, i, jec);
+	}
+	sort_pt(jets);
+}
+
+template<typename T>
 inline void applySingleJetJES(std::vector<T> *jets, const int idx, const double jes = 1)
 {
 	T &tmp = jets->at(idx);

@@ -27,6 +27,8 @@ struct FileInterface
 	T *Get();
 	template<typename T>
 	T *Get(run_id run, lumi_id lumi);
+	template<typename T>
+	inline T *Get(KEventMetadata *meta_event);
 
 	// Get event content of files
 	template<typename T>

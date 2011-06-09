@@ -2,7 +2,7 @@
 #define KAPPA_EVENTLOGGER_H
 
 #include <iostream>
-#include "DataFormats/interface/KMetadata.h"
+#include <DataFormats/interface/KMetadata.h>
 
 class EventID
 {

@@ -102,3 +102,9 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 	}
 	return result;
 }
+
+template<typename T>
+inline T *FileInterface::Get(KEventMetadata *meta_event)
+{
+	return this->Get<T>(meta_event->nRun, meta_event->nLumi);
+}

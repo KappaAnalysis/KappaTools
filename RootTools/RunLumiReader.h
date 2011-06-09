@@ -1,5 +1,5 @@
-#include <DataFormats/src/classes.h>
 #include <set>
+#include <DataFormats/interface/Kappa.h>
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter);
 
