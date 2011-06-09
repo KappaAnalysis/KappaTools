@@ -90,11 +90,11 @@ std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 	{
 		os << "All runs with ";
 		if (m.passRunLow > 0)
-			os << "run<=" << m.passRunLow << "";
+			os << "run <= " << m.passRunLow << "";
 		if ((m.passRunLow > 0) && (m.passRunHigh > 0))
 			os << " and ";
 		if (m.passRunHigh > 0)
-			os << "run>=" << m.passRunHigh << "";
+			os << "run >= " << m.passRunHigh << "";
 		os << " are automatically accepted" << std::endl;
 	}
 	return os;

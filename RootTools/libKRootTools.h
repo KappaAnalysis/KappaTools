@@ -11,7 +11,7 @@
 #include "RunLumiReader.h"
 #include "SortTools.h"
 
-#ifdef JEC
+#ifdef USE_JEC
 #include "JECTools.h"
 #endif
 
