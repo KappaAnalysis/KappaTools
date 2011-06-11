@@ -124,3 +124,11 @@ bool in(const char x, const std::string &y)
 {
 	return y.find_first_of(x) != std::string::npos;
 }
+
+std::string basename(const std::string &input)
+{
+	std::vector<std::string> tmp = split(input, "/");
+	if (tmp.size() == 0)
+		return "";
+	return tmp[tmp.size() - 1];
+}

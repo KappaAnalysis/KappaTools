@@ -39,6 +39,8 @@ bool in(const char x, const std::string y);
 template<>
 bool in(const char x, const std::string &y);
 
+std::string basename(const std::string &input);
+
 #include "StringTools.hxx"
 
 #endif
