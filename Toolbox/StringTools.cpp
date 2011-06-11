@@ -88,3 +88,39 @@ bool parse<bool>(const std::string &s, bool)
 	std::cerr << "Parse error - invalid bool: " << s;
 	return false;
 }
+
+std::string lstrip(const std::string &input, const std::string &rm)
+{
+	size_t pos = 0;
+	if (input.size() == 0)
+		return input;
+	while (in(input[pos], rm))
+		pos++;
+	return input.substr(pos);
+}
+
+std::string rstrip(const std::string &input, const std::string &rm)
+{
+	size_t pos = input.size();
+	if (pos == 0)
+		return input;
+	while (in(input[--pos], rm) && (pos > 0));
+	return input.substr(0, pos + 1);
+}
+
+std::string strip(const std::string &input, const std::string &rm)
+{
+	return rstrip(lstrip(input, rm), rm);
+}
+
+template<>
+bool in(const char x, const std::string y)
+{
+	return y.find_first_of(x) != std::string::npos;
+}
+
+template<>
+bool in(const char x, const std::string &y)
+{
+	return y.find_first_of(x) != std::string::npos;
+}

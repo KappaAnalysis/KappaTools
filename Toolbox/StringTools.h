@@ -28,6 +28,17 @@ std::string toupper(std::string s);
 std::vector<std::string> split(const std::string &str, const std::string &delim, const size_t maxSize = 0);
 std::vector<std::string> tokenize(const std::string &str, const std::string &delim = " ", const bool escape = false);
 
+std::string lstrip(const std::string &input, const std::string &rm);
+std::string rstrip(const std::string &input, const std::string &rm);
+std::string strip(const std::string &input, const std::string &rm);
+
+template<typename T1, typename T2>
+bool in(T1 x, T2 y);
+template<>
+bool in(const char x, const std::string y);
+template<>
+bool in(const char x, const std::string &y);
+
 #include "StringTools.hxx"
 
 #endif
