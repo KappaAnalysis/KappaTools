@@ -50,6 +50,22 @@ std::map<std::string, T*> DirObjectsMap(const TDirectory *dir)
 	return objects;
 }
 
+template<typename T>
+std::map<std::string, T*> DirObjectsMap(const TDirectory *dir, std::string filter)
+{
+	// Used on open file to read eg. Directory entries - uses GetList, since Key::ReadObj crashes
+	std::map<std::string, T*> objects;
+	TIter iter(dir->GetList());
+	while (TObject *obj = iter())
+	{
+		if (filter == "")
+			objects[obj->GetName()] = (T*)obj;
+		else if (obj->ClassName() == filter)
+			objects[obj->GetName()] = (T*)obj;
+	}
+	return objects;
+}
+
 std::vector<std::string> DirObjects(const TDirectory *dir, std::string filter);
 std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, const bool inherited = false);
 
