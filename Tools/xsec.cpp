@@ -6,7 +6,7 @@
 
 using namespace std;
 
-static VersionInfo version("Average xsec calculator", QUOTE(SVN_REV));
+static VersionInfo version("Average xsec calculator", QUOTE(VCS_REVISION));
 
 int main(int argc, char **argv)
 {
