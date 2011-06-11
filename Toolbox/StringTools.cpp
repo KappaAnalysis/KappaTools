@@ -16,12 +16,12 @@ string toupper(string s)
 	return s;
 }
 
-vector<string> tokenize1(const string &str, const string &delim)
+vector<string> split(const string &str, const string &delim, const size_t maxSize)
 {
 	vector<string> tokens;
 
 	size_t p0 = 0, p1 = string::npos;
-	while (p0 != string::npos)
+	while ((p0 != string::npos) && ((maxSize == 0) || (tokens.size() < maxSize)))
 	{
 		p1 = str.find_first_of(delim, p0);
 		if (p1 != p0)
@@ -31,15 +31,17 @@ vector<string> tokenize1(const string &str, const string &delim)
 		}
 		p0 = str.find_first_not_of(delim, p1);
 	}
+	if (p0 != string::npos)
+		tokens.push_back(str.substr(p0));
 	return tokens;
 }
 
 vector<string> tokenize(const string &str, const string &delim, const bool escape)
 {
 	if (!escape)
-		return tokenize1(str, delim);
+		return split(str, delim);
 	vector<string> result;
-	vector<string> esc = tokenize1(str, "'");
+	vector<string> esc = split(str, "'");
 	for (unsigned int i = 0; i < esc.size(); i++)
 		if (i % 2 == 1)
 		{
@@ -50,7 +52,7 @@ vector<string> tokenize(const string &str, const string &delim, const bool escap
 		}
 		else
 		{
-			vector<string> tok = tokenize1(esc[i], delim);
+			vector<string> tok = split(esc[i], delim);
 			copy(tok.begin(), tok.end(), back_inserter(result));
 		}
 	return result;
