@@ -13,38 +13,24 @@ template<typename T>
 std::vector<T> seq(T start, T inc, T last);
 
 template<typename Tlambda, typename Tin>
-std::vector<std::string> strmap(const Tlambda &lambda, const Tin &list)
-{
-	std::vector<std::string> tmp;
-	for (typename Tin::const_iterator it = list.begin(); it != list.end(); ++it)
-		tmp.insert(tmp.end(), lambda(*it));
-	return tmp;
-}
-
-template<typename Tlambda, typename Tin>
-Tin mymap(const Tlambda &lambda, const Tin &list)
-{
-	Tin tmp;
-	for (typename Tin::const_iterator it = list.begin(); it != list.end(); ++it)
-		tmp.insert(tmp.end(), lambda(*it));
-	return tmp;
-}
+std::vector<std::string> strmap(const Tlambda &lambda, const Tin &list);
 
 template<typename Tin>
-std::string join(const std::string delim, const Tin &cont)
-{
-	if (cont.empty())
-		return "";
-	std::string tmp;
-	typename Tin::const_iterator last = cont.end();
-	for (typename Tin::const_iterator it = cont.begin(); it != cont.end();)
-	{
-		tmp += str(*it);
-		if (++it != last)
-			tmp += delim;
-	}
-	return tmp;
-}
+std::vector<std::string> fmtmap(const std::string &str, const Tin &list, const std::string &param = "$1");
+
+template<typename Tlambda, typename Tin>
+Tin mymap(const Tlambda &lambda, const Tin &list);
+
+template<typename Tin>
+std::string join(const std::string delim, const Tin &cont);
+
+template<typename Tin, typename Tp1>
+std::vector<Tp1> getFirst(const Tin &in);
+template<typename Tin, typename Tp1>
+std::vector<Tp1> getSecond(const Tin &in);
+
+template<typename Tin, typename Tout>
+Tout convert(const Tin &in);
 
 #include "VectorTools.hxx"
 

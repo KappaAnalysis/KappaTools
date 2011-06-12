@@ -132,3 +132,44 @@ std::string basename(const std::string &input)
 		return "";
 	return tmp[tmp.size() - 1];
 }
+
+// sort variable names in descending order
+static const bool cmp(const std::pair<std::string, std::string> &a, const std::pair<std::string, std::string> &b)
+{
+	return a.first.length() > b.first.length();
+}
+
+std::string substVars(std::string in, std::vector<std::pair<std::string, std::string> > vars)
+{
+	// Sort temp varlist (long names to the front)
+	sort(vars.begin(), vars.end(), cmp);
+	// Variable substitution
+	for (size_t i = 0; i < vars.size(); i++)
+	{
+		in = replaceall(in, "${" + vars[i].first + "}", vars[i].second);
+		in = replaceall(in, "$" + vars[i].first, vars[i].second);
+	}
+	return in;
+}
+
+std::string replace(const std::string &input, const std::string &find, const std::string &replace)
+{
+	int pos = input.find(find);
+	if (pos < 0)
+		return input;
+	std::string temp = input;
+	temp.replace(pos, find.size(), replace);
+	return temp;
+}
+
+std::string replaceall(const std::string &input, const std::string &find, const std::string &replace)
+{
+	int pos = 0;
+	std::string temp = input;
+	while ((pos = temp.find(find, pos)) >= 0)
+	{
+		temp.replace(pos, find.size(), replace);
+		pos = pos - find.size() + replace.size() + 1;
+	}
+	return temp;
+}
