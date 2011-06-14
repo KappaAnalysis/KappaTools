@@ -1,3 +1,6 @@
+#ifndef KAPPA_DISPLAYTOOLS_H
+#define KAPPA_DISPLAYTOOLS_H
+
 #include <DataFormats/interface/Kappa.h>
 #include <DataFormats/interface/KDebug.h>
 #include <stdlib.h>
@@ -45,3 +48,5 @@ void displayMatching(const T1 *baseObj, const T2 *targetObj, const std::vector<i
 		std::cout << targetObj->at(j).p4 << " -> " << baseObj->at(k).p4 << std::endl;
 	}
 }
+
+#endif

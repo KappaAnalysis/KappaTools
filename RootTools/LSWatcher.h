@@ -1,5 +1,5 @@
-#ifndef LSWATCHER_H
-#define LSWATCHER_H
+#ifndef KAPPA_LSWATCHER_H
+#define KAPPA_LSWATCHER_H
 
 #include <DataFormats/interface/KMetadata.h>
 

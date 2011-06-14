@@ -1,5 +1,5 @@
-#ifndef ROOTTOOLS_H
-#define ROOTTOOLS_H
+#ifndef KAPPA_ROOTTOOLS_H
+#define KAPPA_ROOTTOOLS_H
 
 #include "Directory.h"
 #include "DisplayTools.h"

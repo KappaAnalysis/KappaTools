@@ -1,3 +1,6 @@
+#ifndef KAPPA_RUNLUMIREADER_H
+#define KAPPA_RUNLUMIREADER_H
+
 #include <set>
 #include <DataFormats/interface/Kappa.h>
 
@@ -38,3 +41,5 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
+
+#endif
