@@ -1,4 +1,4 @@
-include ../Makefile.user
+include $(BASEDIR)/Makefile.user
 
 PROGRAM_ALL  = $(PROGRAM) $(PROGRAM_CUSTOM)
 LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
