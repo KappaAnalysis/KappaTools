@@ -2,8 +2,8 @@
 #define KMuonHLTCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KMuon.h"
-#include "DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KMuon.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
 
 namespace KappaTools
 {

@@ -1,4 +1,4 @@
-include ../Makefile.base
+include $(BASEDIR)/Makefile.base
 
 CXXFLAGS += $(shell ${ROOTSYS}/bin/root-config --cflags)
 LDFLAGS += $(shell ${ROOTSYS}/bin/root-config --libs) \

@@ -3,8 +3,8 @@
 
 #include "TMath.h"
 #include "BaseCut.h"
-#include "DataFormats/interface/KBasic.h"
-#include "DataFormats/interface/KTrack.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KTrack.h"
 
 namespace KappaTools
 {

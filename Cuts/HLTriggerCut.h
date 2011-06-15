@@ -2,7 +2,7 @@
 #define KHLTriggerCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
 #include <boost/algorithm/string/regex.hpp>
 #include <vector>
 

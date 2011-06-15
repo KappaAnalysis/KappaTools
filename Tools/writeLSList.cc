@@ -1,6 +1,6 @@
 #include "TChain.h"
-#include "DataFormats/interface/KMetadata.h"
-#include "Toolbox/CmdLineSetup.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
+#include "../Toolbox/CmdLineSetup.h"
 #include <iomanip>
 
 void run(std::string filename)

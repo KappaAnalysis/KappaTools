@@ -2,7 +2,7 @@
 #define KTrackHitsCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KTrack.h"
+#include "Kappa/DataFormats/interface/KTrack.h"
 
 namespace KappaTools
 {

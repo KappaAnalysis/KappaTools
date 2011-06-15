@@ -6,7 +6,7 @@
 #include "TMath.h"
 #include "TDirectory.h"
 #include "BasePlot.h"
-#include "DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
 
 namespace KappaTools
 {

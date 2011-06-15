@@ -1,7 +1,7 @@
 #ifndef KAPPA_BASEPLOT_H
 #define KAPPA_BASEPLOT_H
 
-#include "TDirectory.h"
+#include <TDirectory.h>
 //#include <iostream>
 
 namespace KappaTools

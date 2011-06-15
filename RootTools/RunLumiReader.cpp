@@ -1,8 +1,8 @@
 #include "RunLumiReader.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "Toolbox/IOHelper.h"
-#include "Toolbox/StringTools.h"
+#include "../Toolbox/IOHelper.h"
+#include "../Toolbox/StringTools.h"
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter)
 {

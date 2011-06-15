@@ -6,9 +6,9 @@
 #include <TChain.h>
 #include <list>
 
-#include <Toolbox/IOHelper.h>
-#include <Toolbox/ProgressMonitor.h>
-#include <DataFormats/interface/Kappa.h>
+#include "../Toolbox/IOHelper.h"
+#include "../Toolbox/ProgressMonitor.h"
+#include <Kappa/DataFormats/interface/Kappa.h>
 #include "Directory.h"
 
 typedef unsigned int run_id;

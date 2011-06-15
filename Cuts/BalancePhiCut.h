@@ -2,8 +2,8 @@
 #define KBalancePhiCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KLorentzVector.h"
-#include "Math/GenVector/VectorUtil.h"
+#include "Kappa/DataFormats/interface/KLorentzVector.h"
+#include <Math/GenVector/VectorUtil.h>
 #include "../Objects/Zmumu.h"
 
 namespace KappaTools

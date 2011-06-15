@@ -1,8 +1,8 @@
-#include "DataFormats/interface/KMetadata.h"
-#include "KappaTools/RootTools/RunLumiReader.h"
-#include "KappaTools/RootTools/FileInterface.h"
-#include "Toolbox/Version.h"
-#include "Toolbox/CmdLineSetup.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
+#include "../RootTools/RunLumiReader.h"
+#include "../RootTools/FileInterface.h"
+#include "../Toolbox/Version.h"
+#include "../Toolbox/CmdLineSetup.h"
 
 using namespace std;
 

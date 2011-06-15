@@ -6,8 +6,8 @@
 #include "TMath.h"
 #include "TDirectory.h"
 #include "BasePlot.h"
-#include "DataFormats/interface/KBasic.h"
-#include "DataFormats/interface/KJetMET.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KJetMET.h"
 
 namespace KappaTools
 {

@@ -4,7 +4,7 @@
 #include "BaseCut.h"
 #include <vector>
 #include <algorithm>
-#include "DataFormats/interface/KMuon.h"
+#include "Kappa/DataFormats/interface/KMuon.h"
 
 namespace KappaTools
 {

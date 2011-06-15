@@ -1,8 +1,8 @@
 #ifndef KAPPA_DISPLAYTOOLS_H
 #define KAPPA_DISPLAYTOOLS_H
 
-#include <DataFormats/interface/Kappa.h>
-#include <DataFormats/interface/KDebug.h>
+#include <Kappa/DataFormats/interface/Kappa.h>
+#include <Kappa/DataFormats/interface/KDebug.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <cstring>
