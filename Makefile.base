@@ -22,10 +22,22 @@ ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++
-CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC -I$(shell cd $(BASEDIR)/..; pwd) -I$(BASEDIR)/external
-LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L. -L$(BASEDIR)/lib
+CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC
+LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L.
+
+# Local libs
+#CXXFLAGS += -I$(BASEDIR) - can cause problems with doxygen - better use relative includes
+LDFLAGS  += -L$(BASEDIR)/lib
 LDFLAGS  += -Wl,-rpath,$(BASEDIR)/lib
-LDFLAGS  += -Wl,-rpath,$(BASEDIR)/../Kappa/lib
+# External packages
+CXXFLAGS += -I$(BASEDIR)/external
+LDFLAGS  += -L$(BASEDIR)/external/lib
+LDFLAGS  += -Wl,-rpath,$(BASEDIR)/external/lib
+# Kappa
+KAPPADIR = $(shell cd $(BASEDIR)/..; pwd)
+CXXFLAGS += -I$(KAPPADIR)
+LDFLAGS  += -L$(KAPPADIR)/Kappa/lib
+LDFLAGS  += -Wl,-rpath,$(KAPPADIR)/Kappa/lib
 
 all: $(PROGRAM_ALL)
 

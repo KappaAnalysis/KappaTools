@@ -74,7 +74,7 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 		current_event = new KEventMetadata();
 		break;
 	case DATA:
-		cout << endl << "Data source: data" << endl;
+		cout << endl << "Data source: Detector" << endl;
 		lumimap_data = GetLumis<KDataLumiMetadata>();
 		current_event = new KEventMetadata();
 		break;
