@@ -1,6 +1,7 @@
 #include "StringTools.h"
 #include <algorithm>
 #include <stdlib.h>
+#include "VectorTools.h"
 
 using namespace std;
 
@@ -131,6 +132,17 @@ std::string basename(const std::string &input)
 	if (tmp.size() == 0)
 		return "";
 	return tmp[tmp.size() - 1];
+}
+
+std::string dirname(const std::string &input)
+{
+	std::vector<std::string> tmp = split(input, "/");
+	if (tmp.size() == 0)
+		return "";
+	tmp.pop_back();
+	if (input[0] == '/')
+		return "/" + join("/", tmp);
+	return join("/", tmp);
 }
 
 // sort variable names in descending order

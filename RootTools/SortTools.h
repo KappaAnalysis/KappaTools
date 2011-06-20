@@ -1,6 +1,8 @@
 #ifndef KAPPA_SORTTOOLS_H
 #define KAPPA_SORTTOOLS_H
 
+#include <algorithm>
+
 template<typename T>
 struct KLVSorter_pt
 {

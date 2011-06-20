@@ -44,6 +44,7 @@ template<>
 bool in(const char x, const std::string &y);
 
 std::string basename(const std::string &input);
+std::string dirname(const std::string &input);
 std::string substVars(std::string in, const std::vector<std::pair<std::string, std::string> > &vars);
 
 #include "StringTools.hxx"
