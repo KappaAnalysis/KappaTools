@@ -27,6 +27,8 @@ template<typename T>
 std::ostream &operator<<(std::ostream &os, const std::set<T> &s);
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const std::vector<T> &v);
+template<typename T1, typename T2>
+std::ostream &operator<<(std::ostream &os, const std::pair<T1, T2> &p);
 
 #include "IOHelper.hxx"
 
