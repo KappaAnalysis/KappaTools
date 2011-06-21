@@ -43,6 +43,8 @@ bool in(const char x, const std::string y);
 template<>
 bool in(const char x, const std::string &y);
 
+bool startswith(const std::string &input, const std::string search);
+
 std::string basename(const std::string &input);
 std::string dirname(const std::string &input);
 std::string substVars(std::string in, const std::vector<std::pair<std::string, std::string> > &vars);
