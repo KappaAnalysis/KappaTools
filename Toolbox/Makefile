@@ -4,7 +4,7 @@ LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o IOHelper.o Version.o Cm
 PROGRAM  = libKToolbox.so libKToolbox.a example.bin example.sbin $(LIBFILES)
 #------------------------------------------------------------------------------
 
-include $(BASEDIR)/Makefile.root
+include $(BASEDIR)/Makefile.base
 COPTS += -pedantic
 
 %.bin: %.o
