@@ -46,11 +46,11 @@ void RunLumiSelector::addJSONFile(const std::string json)
 	readLumiFilter(json, lumifilter);
 }
 
-std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
+std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair()
 {
 	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
-	std::map<run_id,lumirange>::reverse_iterator iter = lumifilter.rbegin();
-	return std::make_pair<run_id,lumi_id>(iter->first, iter->second.rbegin()->second);
+	std::map<run_id, lumirange>::reverse_iterator iter = lumifilter.rbegin();
+	return std::make_pair(iter->first, iter->second.rbegin()->second);
 }
 
 void RunLumiSelector::printJSON(std::ostream &os)
