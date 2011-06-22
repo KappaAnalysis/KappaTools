@@ -11,3 +11,5 @@ PROGRAM  = libKCuts.so libKCuts.a $(LIBFILES)
 #------------------------------------------------------------------------------
 
 include $(BASEDIR)/Makefile.root
+
+LDFLAGS += -lboost_regex

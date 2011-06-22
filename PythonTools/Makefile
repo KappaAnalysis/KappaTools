@@ -6,8 +6,8 @@ PROGRAM  = libKPythonTools.so libKPythonTools.a test.bin $(LIBFILES)
 
 include $(BASEDIR)/Makefile.base
 
-CXXFLAGS += -I /usr/include/python2.7
-LDFLAGS += -lboost_python -lpython2.7 -lKToolbox
+CXXFLAGS += $(shell python-config --includes)
+LDFLAGS += -lboost_python $(shell python-config --libs) -lKToolbox
 
 %.bin: %.o
 	$(CXX) $(LDFLAGS) -lKToolbox -lKPythonTools -o $@ $^
