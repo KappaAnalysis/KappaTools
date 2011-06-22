@@ -35,6 +35,17 @@ int main()
 	pc.put<std::string>("in1", "putted string");
 	pc.put<int>("in2", 123);
 	pc.put<double>("in3", 3.14159);
+	std::vector<int> tmp1;
+	tmp1.push_back(1);
+	tmp1.push_back(4);
+	tmp1.push_back(9);
+	tmp1.push_back(16);
+	pc.put("in4", tmp1);
+	std::map<std::string, double> tmp2;
+	tmp2["TEST"] = 12.3;
+	tmp2["KEY"] = 987.1;
+	pc.put("in5", tmp2);
+	pc.put("in6", std::make_pair("TUPLE", 42));
 	pc.loadConfig("test.py");
 
 	std::cout << pc.get<std::string>("string") << std::endl;

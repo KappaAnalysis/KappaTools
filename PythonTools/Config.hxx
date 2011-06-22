@@ -7,7 +7,7 @@ void PythonConfig::put(const std::string &name, const T &obj)
 	runtime = getattr(main_module, "runtime", true);
 	try
 	{
-		setattr(runtime, name, obj);
+		setattr(runtime, name, put(obj));
 	}
 	catch(boost::python::error_already_set const &)
 	{
@@ -15,6 +15,36 @@ void PythonConfig::put(const std::string &name, const T &obj)
 		PyErr_Print();
 		exit(1);
 	}
+}
+
+template<typename T>
+boost::python::object PythonConfig::put(const T &obj)
+{
+	return boost::python::object(obj);
+}
+
+template<typename T>
+boost::python::object PythonConfig::put(const std::vector<T> &obj)
+{
+	boost::python::list result;
+	for (typename std::vector<T>::const_iterator it = obj.begin(); it != obj.end(); ++it)
+		result.append(put(*it));
+	return result;
+}
+
+template<typename Tk, typename Tv>
+boost::python::object PythonConfig::put(const std::map<Tk, Tv> &obj)
+{
+	boost::python::dict result;
+	for (typename std::map<Tk, Tv>::const_iterator it = obj.begin(); it != obj.end(); ++it)
+		result[put(it->first)] = put(it->second);
+	return result;
+}
+
+template<typename T1, typename T2>
+boost::python::object PythonConfig::put(const std::pair<T1, T2> &obj)
+{
+	return boost::python::make_tuple(put(obj.first), put(obj.second));
 }
 
 template<typename T>

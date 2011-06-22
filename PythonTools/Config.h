@@ -33,6 +33,15 @@ private:
 	void InitPython();
 
 	template<typename T>
+	boost::python::object put(const T &obj);
+	template<typename T>
+	boost::python::object put(const std::vector<T> &obj);
+	template<typename Tk, typename Tv>
+	boost::python::object put(const std::map<Tk, Tv> &obj);
+	template<typename T1, typename T2>
+	boost::python::object put(const std::pair<T1, T2> &obj);
+
+	template<typename T>
 	bool get(const boost::python::object &obj, T &output);
 	template<typename T>
 	bool get(const boost::python::object &obj, std::vector<T> &output);
