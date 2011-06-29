@@ -32,6 +32,8 @@ struct FileInterface
 
 	// Get event content of files
 	template<typename T>
+	T *Get(const std::string &name, const bool check);
+	template<typename T>
 	T *Get(const std::string &name, const std::string altName = "", const bool check = true);
 	template<typename T>
 	std::vector<std::string> GetNames(bool inherited = false);
