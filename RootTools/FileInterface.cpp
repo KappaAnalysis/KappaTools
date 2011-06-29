@@ -91,7 +91,7 @@ void FileInterface::SpeedupTree(long cache)
 		return;
 	for (int i = 0; i < branches->GetEntries(); ++i)
 	{
-		TBranch *b = (TBranch*)branches->At(i);
+		TBranch *b = dynamic_cast<TBranch*>(branches->At(i));
 		if (b->GetAddress() == 0)
 		{
 			UInt_t found = 0;

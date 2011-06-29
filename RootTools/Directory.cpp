@@ -23,7 +23,7 @@ std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, cons
 	std::string reqName = req->GetName();
 	for (int i = 0; i < branches->GetEntries(); ++i)
 	{
-		TBranch *b = (TBranch*)branches->At(i);
+		TBranch *b = dynamic_cast<TBranch*>(branches->At(i));
 		TClass *cur = TClass::GetClass(b->GetClassName());
 		if ((cur == req) || (inherited && cur->InheritsFrom(req)))
 			result.push_back(b->GetName());
