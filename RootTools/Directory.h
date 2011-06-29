@@ -22,51 +22,19 @@ private:
 	TFile *file;
 };
 
-template<typename T>
-std::vector<T*> DirObjects(const TDirectory *dir)
-{
-	std::vector<T*> objects;
-	TIter iter(dir->GetListOfKeys());
-	while (TKey *key = (TKey*)iter())
-	{
-		TObject *obj = key->ReadObj();
-		if (obj->InheritsFrom(T::Class()))
-			objects.push_back((T*)obj);
-	}
-	return objects;
-}
+std::map<std::string, TObject*> GetDirObjectsMap(TDirectory *dir);
 
 template<typename T>
-std::map<std::string, T*> DirObjectsMap(const TDirectory *dir)
+std::map<std::string, T*> GetDirObjectsMap(TDirectory *dir)
 {
-	std::map<std::string, T*> objects;
-	TIter iter(dir->GetListOfKeys());
-	while (TKey *key = (TKey*)iter())
-	{
-		TObject *obj = key->ReadObj();
-		if (obj->InheritsFrom(T::Class()))
-			objects[key->GetName()] = (T*)obj;
-	}
-	return objects;
+	std::map<std::string, T*> result;
+	std::map<std::string, TObject*> objects = GetDirObjectsMap(dir);
+	for (std::map<std::string, TObject*>::const_iterator it = objects.begin(); it != objects.end(); ++it)
+		if (it->second->InheritsFrom(T::Class()))
+			result[it->first] = dynamic_cast<T*>(it->second);
+	return result;
 }
 
-template<typename T>
-std::map<std::string, T*> DirObjectsMap(const TDirectory *dir, std::string filter)
-{
-	// Used on open file to read eg. Directory entries - uses GetList, since Key::ReadObj crashes
-	std::map<std::string, T*> objects;
-	TIter iter(dir->GetList());
-	while (TObject *obj = iter())
-	{
-		if (filter == "")
-			objects[obj->GetName()] = (T*)obj;
-		else if (obj->ClassName() == filter)
-			objects[obj->GetName()] = (T*)obj;
-	}
-	return objects;
-}
-
-std::vector<std::string> DirObjects(const TDirectory *dir, std::string filter);
 std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, const bool inherited = false);
 
 #endif
