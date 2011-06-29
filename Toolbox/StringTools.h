@@ -44,6 +44,7 @@ template<>
 bool in(const char x, const std::string &y);
 
 bool startswith(const std::string &input, const std::string search);
+bool endswith(const std::string &input, const std::string search);
 
 std::string basename(const std::string &input);
 std::string dirname(const std::string &input);

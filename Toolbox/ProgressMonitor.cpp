@@ -37,7 +37,7 @@ bool ProgressMonitor::Update()
 bool ProgressMonitor::Update(const unsigned long cPos)
 {
 	this->cPos = cPos;
-	if (bShow && (this->cPos % 1000 == 0))
+	if (bShow && (cPos % 1000 == 0))
 	{
 		cout << "\rStatus: ";
 		cout << *this;

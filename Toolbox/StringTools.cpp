@@ -131,6 +131,11 @@ bool startswith(const std::string &input, const std::string search)
 	return input.find(search) == 0;
 }
 
+bool endswith(const std::string &input, const std::string search)
+{
+	return input.find(search) == input.size() - search.size();
+}
+
 std::string basename(const std::string &input)
 {
 	std::vector<std::string> tmp = split(input, "/");

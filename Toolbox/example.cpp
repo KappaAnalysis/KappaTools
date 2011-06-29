@@ -48,6 +48,10 @@ int main(int argc, char **argv)
 	cout << str(123) << " " << str(1.23) << endl;
 	/////////////////////////////////////////////////////////
 	string s = "TesT";
+	cout << startswith("Hallo Welt", "Hallo") << " - ";
+	cout << startswith("Hallo Welt", "Welt") << " - ";
+	cout << endswith("Hallo Welt", "Hallo") << " - ";
+	cout << endswith("Hallo Welt", "Welt") << endl;
 	cout << tolower(s) << " " << toupper(s) << endl;
 	/////////////////////////////////////////////////////////
 
@@ -73,6 +77,18 @@ int main(int argc, char **argv)
 	cout << mymap(myadd, sd) << endl;
 	cout << strmap(myconv, mymap(myadd, sd)) << endl;
 	cout << endl;
+	/////////////////////////////////////////////////////////
+
+	// VectorTools.h ////////////////////////////////////////
+	map<std::string, int> redict;
+	redict["Hello"] = 1;
+	redict["World"] = 2;
+	redict["Test"] = 3;
+	redict["Entry"] = 4;
+	redict["Entries"] = 5;
+	cout << match("e", redict) << endl;
+	cout << match("e|l", redict) << endl;
+	cout << match("Entr.*", redict) << endl;
 	/////////////////////////////////////////////////////////
 
 	return 0;

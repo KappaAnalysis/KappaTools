@@ -80,3 +80,27 @@ Tout convert(const Tin &in)
 		result.insert(result.end(), (typename Tout::value_type)*it);
 	return result;
 }
+
+template<typename Tk, typename Tv>
+std::vector<Tv> match(const std::string &pattern, const std::map<Tk, Tv> &in,
+	const boost::regex::flag_type flags)
+{
+	std::vector<Tv> result;
+	boost::regex regexObj(pattern, flags);
+	for (typename std::map<Tk, Tv>::const_iterator it = in.begin(); it != in.end(); ++it)
+		if (boost::regex_search(it->first, regexObj))
+			result.push_back(it->second);
+	return result;
+}
+
+template<typename Tk, typename Tv>
+std::vector<Tk> match_keys(const std::string &pattern, const std::map<Tk, Tv> &in,
+	const boost::regex::flag_type flags)
+{
+	std::vector<Tk> result;
+	boost::regex regexObj(pattern, flags);
+	for (typename std::map<Tk, Tv>::const_iterator it = in.begin(); it != in.end(); ++it)
+		if (boost::regex_search(it->first, regexObj))
+			result.push_back(it->first);
+	return result;
+}
