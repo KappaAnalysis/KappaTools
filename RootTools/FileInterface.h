@@ -32,7 +32,7 @@ struct FileInterface
 
 	// Get event content of files
 	template<typename T>
-	T *Get(const std::string &name, const bool check);
+	T *Get(const std::string &name, const bool check, const bool def = false);
 	template<typename T>
 	T *Get(const std::string &name, const std::string altName = "", const bool check = true);
 	template<typename T>

@@ -28,9 +28,12 @@ KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
 
 // Get event content from files
 template<typename T>
-T *FileInterface::Get(const std::string &name, const bool check)
+T *FileInterface::Get(const std::string &name, const bool check, const bool def)
 {
-	return Get<T>(name, "", check);
+	T *result = Get<T>(name, "", check);
+	if ((result == 0) && def)
+		return new T();
+	return result;
 }
 
 template<typename T>
