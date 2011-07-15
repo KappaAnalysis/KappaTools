@@ -1,3 +1,4 @@
+#ifdef USE_JEC
 #ifndef KAPPA_JECTOOLS_H
 #define KAPPA_JECTOOLS_H
 
@@ -100,4 +101,5 @@ inline void correctJets(std::vector<T> *jets,
 	sort_pt(jets);
 }
 
+#endif
 #endif
