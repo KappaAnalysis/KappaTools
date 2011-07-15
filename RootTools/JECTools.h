@@ -69,10 +69,14 @@ inline void correctSingleJet(KDataPFJet &jet, FactorizedJetCorrector *jec)
 template<typename T>
 inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center)
 {
-	if (jv != jec_center)
+	if ((unc != 0) && (jv != jec_center))
 	{
 		setupFactorProvider(jet, unc);
-		jet.p4 *= unc->getUncertainty(jv == jec_up);
+		if (jv == jec_up)
+			jet.p4 *= (1 + unc->getUncertainty(true));
+		else
+
+			jet.p4 *= (1 - unc->getUncertainty(false));
 	}
 }
 
@@ -91,8 +95,7 @@ inline void correctJets(std::vector<T> *jets,
 		if (area > 0)
 			jet.area = area;
 		correctSingleJet(jet, jec);
-		if (unc != 0)
-			applyUncertainty(jet, unc, jv);
+		applyUncertainty(jet, unc, jv);
 	}
 	sort_pt(jets);
 }
