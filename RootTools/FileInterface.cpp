@@ -159,6 +159,12 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	return tmp;
 }
 
+bool FileInterface::isMC() const
+{
+	return (lumiInfoType == GEN);
+}
+
+
 bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 {
 	switch (lumiInfoType)
