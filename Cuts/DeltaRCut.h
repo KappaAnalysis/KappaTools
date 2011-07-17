@@ -2,9 +2,9 @@
 #define KDeltaRCut_h
 
 #include "BaseCut.h"
-#include "Math/GenVector/VectorUtil.h"
-#include "DataFormats/interface/KBasic.h"
-#include "DataFormats/interface/KLorentzVector.h"
+#include <Math/GenVector/VectorUtil.h>
+#include "Kappa/DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KLorentzVector.h"
 
 namespace KappaTools
 {

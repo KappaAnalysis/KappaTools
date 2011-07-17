@@ -28,6 +28,15 @@ KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
 
 // Get event content from files
 template<typename T>
+T *FileInterface::Get(const std::string &name, const bool check, const bool def)
+{
+	T *result = Get<T>(name, "", check);
+	if ((result == 0) && def)
+		return new T();
+	return result;
+}
+
+template<typename T>
 T *FileInterface::Get(const std::string &name, const std::string altName, const bool check)
 {
 	return static_cast<T*>(GetInternal(eventdata, TypeName<T>::name(), name, altName, check));
@@ -101,4 +110,10 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 		std::cout << std::endl;
 	}
 	return result;
+}
+
+template<typename T>
+inline T *FileInterface::Get(KEventMetadata *meta_event)
+{
+	return this->Get<T>(meta_event->nRun, meta_event->nLumi);
 }

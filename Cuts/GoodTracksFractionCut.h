@@ -3,7 +3,7 @@
 
 #include "BaseCut.h"
 #include <vector>
-#include "DataFormats/interface/KTrack.h"
+#include "Kappa/DataFormats/interface/KTrack.h"
 
 namespace KappaTools
 {

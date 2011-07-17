@@ -7,11 +7,10 @@
 #include "TFile.h"
 #include "TChain.h"
 
-#include "../Toolbox/ProgressMonitor.h"
-#include "DataFormats/interface/KMetadata.h"
 #include "../RootTools/FileInterface.h"
-#include "Toolbox/CmdLineSetup.h"
-#include "RootTools/RunLumiReader.h"
+#include "../RootTools/RunLumiReader.h"
+#include "../Toolbox/CmdLineSetup.h"
+#include "../Toolbox/ProgressMonitor.h"
 
 bool abortProgram = false;
 

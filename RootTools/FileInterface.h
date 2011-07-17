@@ -6,9 +6,9 @@
 #include <TChain.h>
 #include <list>
 
-#include <Toolbox/IOHelper.h>
-#include <Toolbox/ProgressMonitor.h>
-#include <DataFormats/interface/Kappa.h>
+#include "../Toolbox/IOHelper.h"
+#include "../Toolbox/ProgressMonitor.h"
+#include <Kappa/DataFormats/interface/Kappa.h>
 #include "Directory.h"
 
 typedef unsigned int run_id;
@@ -27,8 +27,12 @@ struct FileInterface
 	T *Get();
 	template<typename T>
 	T *Get(run_id run, lumi_id lumi);
+	template<typename T>
+	inline T *Get(KEventMetadata *meta_event);
 
 	// Get event content of files
+	template<typename T>
+	T *Get(const std::string &name, const bool check, const bool def = false);
 	template<typename T>
 	T *Get(const std::string &name, const std::string altName = "", const bool check = true);
 	template<typename T>

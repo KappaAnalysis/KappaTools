@@ -2,7 +2,7 @@
 #define KMuonQualityCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KMuon.h"
+#include "Kappa/DataFormats/interface/KMuon.h"
 
 namespace KappaTools
 {

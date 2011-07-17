@@ -4,7 +4,7 @@
 #include "BaseCut.h"
 #include <stdlib.h>
 #include <stack>
-#include "DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
 
 namespace KappaTools
 {

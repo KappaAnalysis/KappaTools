@@ -1,6 +1,8 @@
 #ifndef KAPPA_SORTTOOLS_H
 #define KAPPA_SORTTOOLS_H
 
+#include <algorithm>
+
 template<typename T>
 struct KLVSorter_pt
 {
@@ -16,7 +18,8 @@ struct KLVSorter_E
 template<typename T>
 inline void sort_pt(std::vector<T> *v)
 {
-	std::sort(v->begin(), v->end(), KLVSorter_pt<T>());
+	static KLVSorter_pt<T> sorter;
+	std::sort(v->begin(), v->end(), sorter);
 }
 
 #endif

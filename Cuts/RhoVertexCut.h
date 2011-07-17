@@ -2,7 +2,7 @@
 #define KRhoVertexCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
 
 namespace KappaTools
 {

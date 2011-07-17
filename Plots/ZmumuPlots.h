@@ -9,10 +9,11 @@
 #include "JetPlots.h"
 #include "TNtuple.h"
 
-#include "DataFormats/interface/KMuon.h"
-#include "DataFormats/interface/KJetMET.h"
+#include "Kappa/DataFormats/interface/KMuon.h"
+#include "Kappa/DataFormats/interface/KJetMET.h"
 #include "../Objects/Zmumu.h"
-#include "Math/GenVector/VectorUtil.h"
+#include <Math/GenVector/VectorUtil.h>
+
 namespace KappaTools
 {
 	template <typename JetType, typename METType>

@@ -1,10 +1,10 @@
-#include <TChain.h>
-#include "RootTools/FileInterface.h"
-#include "RootTools/EventLogger.h"
-#include "DataFormats/interface/KDebug.h"
-#include "Toolbox/CmdLineSetup.h"
-#include "Toolbox/ProgressMonitor.h"
 #include <set>
+#include <TChain.h>
+#include "../Toolbox/CmdLineSetup.h"
+#include "../Toolbox/ProgressMonitor.h"
+#include "../RootTools/EventLogger.h"
+#include "../RootTools/FileInterface.h"
+#include "Kappa/DataFormats/interface/KDebug.h"
 
 using namespace std;
 
@@ -32,10 +32,7 @@ int main(int argc, char* argv[])
 
 	FileInterface kpFi(filenames, false, 2);
 	TChain &theChain = kpFi.eventdata;
-	KEventMetadata *metadata;
-	KGenEventMetadata *kGen;
-	kpFi.AssignEventPtr(&metadata, &kGen);
-
+	KEventMetadata *metadata = kpFi.Get<KEventMetadata>();
 	EventLogger<std::set<EventID> > log;
 
 	//now code the super-sophisticated event loop.

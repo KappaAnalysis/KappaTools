@@ -3,7 +3,7 @@
 
 #include "BaseCut.h"
 #include <vector>
-#include "DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
 
 namespace KappaTools
 {

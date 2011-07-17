@@ -1,5 +1,8 @@
-#include <DataFormats/src/classes.h>
+#ifndef KAPPA_RUNLUMIREADER_H
+#define KAPPA_RUNLUMIREADER_H
+
 #include <set>
+#include <Kappa/DataFormats/interface/Kappa.h>
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter);
 
@@ -38,3 +41,5 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
+
+#endif

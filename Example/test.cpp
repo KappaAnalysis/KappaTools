@@ -1,7 +1,7 @@
-#include "../Kappa/DataFormats/interface/Kappa.h"
-#include "../Kappa/DataFormats/interface/KDebug.h"
-#include "RootTools/FileInterface.h"
-#include "Toolbox/IOHelper.h"
+#include "Kappa/DataFormats/interface/Kappa.h"
+#include "Kappa/DataFormats/interface/KDebug.h"
+#include "../Toolbox/libKToolbox.h"
+#include "../RootTools/libKRootTools.h"
 
 using namespace std;
 
@@ -26,8 +26,11 @@ int main(int argc, char **argv)
 		if (!pm.Update()) break;
 		fi.eventdata.GetEntry(iEvent);
 
-		KLumiMetadata *meta_lumi = fi.Get<KLumiMetadata>(meta_event->nRun, meta_event->nLumi);
-		KGenLumiMetadata *meta_lumi_gen = fi.Get<KGenLumiMetadata>(meta_event->nRun, meta_event->nLumi);
+		static LSWatcher lsWatcher;
+		if (lsWatcher.Changed(meta_event))
+			cout << "Reading new lumi metadata!" << endl;
+		KLumiMetadata *meta_lumi = fi.Get<KLumiMetadata>(meta_event);
+		KGenLumiMetadata *meta_lumi_gen = fi.Get<KGenLumiMetadata>(meta_event);
 
 		cout << "Event metadata: " << *meta_event << endl;
 		if (meta_lumi_gen)

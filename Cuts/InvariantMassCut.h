@@ -2,10 +2,10 @@
 #define KInvariantMassCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KLorentzVector.h"
-#include "DataFormats/interface/KBasic.h"
-#include "DataFormats/interface/KMuon.h"
-#include "DataFormats/interface/KJetMET.h"
+#include "Kappa/DataFormats/interface/KLorentzVector.h"
+#include "Kappa/DataFormats/interface/KBasic.h"
+#include "Kappa/DataFormats/interface/KMuon.h"
+#include "Kappa/DataFormats/interface/KJetMET.h"
 
 namespace KappaTools
 {

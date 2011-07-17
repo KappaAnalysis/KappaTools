@@ -1,4 +1,5 @@
 #------------------------------------------------------------------------------
+BASEDIR ?= $(shell cd ..; pwd)
 LIBFILES = BalancePhiCut.o BalancePtCut.o BaseCut.o ChargeCut.o CutFlow.o \
 	CutGroup.o DeltaRCut.o EtaCut.o EventFilterCut.o ExistenceCut.o \
 	GoodTracksFractionCut.o HLTriggerCut.o InvariantMassCut.o IsolationCut.o \
@@ -9,4 +10,4 @@ LIBFILES = BalancePhiCut.o BalancePtCut.o BaseCut.o ChargeCut.o CutFlow.o \
 PROGRAM  = libKCuts.so libKCuts.a $(LIBFILES)
 #------------------------------------------------------------------------------
 
-include ../Makefile.root
+include $(BASEDIR)/Makefile.root

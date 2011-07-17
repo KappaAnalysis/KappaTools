@@ -1,7 +1,9 @@
 #------------------------------------------------------------------------------
-LIBFILES = libKRootTools.o FileInterface.o LumiMetadataProvider.o DisplayTools.o \
-	Directory.o EventLogger.o RunLumiReader.o ../../Kappa/DataFormats/test/KDebug.o
+BASEDIR ?= $(shell cd ..; pwd)
+LIBFILES = libKRootTools.o FileInterface.o DisplayTools.o \
+	Directory.o EventLogger.o JetID.o JECTools.o LSWatcher.o RunLumiReader.o \
+	$(BASEDIR)/../Kappa/DataFormats/test/KDebug.o
 PROGRAM  = libKRootTools.so libKRootTools.a $(LIBFILES)
 #------------------------------------------------------------------------------
 
-include ../Makefile.root
+include $(BASEDIR)/Makefile.root

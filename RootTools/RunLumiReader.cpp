@@ -1,8 +1,8 @@
 #include "RunLumiReader.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "Toolbox/IOHelper.h"
-#include "Toolbox/StringTools.h"
+#include "../Toolbox/IOHelper.h"
+#include "../Toolbox/StringTools.h"
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter)
 {
@@ -46,11 +46,11 @@ void RunLumiSelector::addJSONFile(const std::string json)
 	readLumiFilter(json, lumifilter);
 }
 
-std::pair<run_id,lumi_id> RunLumiSelector::getMaxRunLumiPair()
+std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair()
 {
 	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
-	std::map<run_id,lumirange>::reverse_iterator iter = lumifilter.rbegin();
-	return std::make_pair<run_id,lumi_id>(iter->first, iter->second.rbegin()->second);
+	std::map<run_id, lumirange>::reverse_iterator iter = lumifilter.rbegin();
+	return std::make_pair(iter->first, iter->second.rbegin()->second);
 }
 
 void RunLumiSelector::printJSON(std::ostream &os)
@@ -90,11 +90,11 @@ std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
 	{
 		os << "All runs with ";
 		if (m.passRunLow > 0)
-			os << "run<=" << m.passRunLow << "";
+			os << "run <= " << m.passRunLow << "";
 		if ((m.passRunLow > 0) && (m.passRunHigh > 0))
 			os << " and ";
 		if (m.passRunHigh > 0)
-			os << "run>=" << m.passRunHigh << "";
+			os << "run >= " << m.passRunHigh << "";
 		os << " are automatically accepted" << std::endl;
 	}
 	return os;

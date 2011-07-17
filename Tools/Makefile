@@ -1,8 +1,9 @@
 #------------------------------------------------------------------------------
+BASEDIR ?= $(shell cd ..; pwd)
 PROGRAM  = triggerPrescale.sbin writeLSList.sbin duplicateEventChecker.sbin xsec.sbin
 #------------------------------------------------------------------------------
 
-include ../Makefile.root
+include $(BASEDIR)/Makefile.root
 
-%.sbin: %.o ../lib/libKRootTools.a ../../Kappa/DataFormats/test/libKappa.o ../lib/libKToolbox.a
+%.sbin: %.o $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
 	$(CXX) $(LDFLAGS) -o $@ $^

@@ -1,12 +1,12 @@
-#include "DataFormats/interface/KMetadata.h"
-#include "KappaTools/RootTools/RunLumiReader.h"
-#include "KappaTools/RootTools/FileInterface.h"
-#include "Toolbox/Version.h"
-#include "Toolbox/CmdLineSetup.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
+#include "../RootTools/RunLumiReader.h"
+#include "../RootTools/FileInterface.h"
+#include "../Toolbox/Version.h"
+#include "../Toolbox/CmdLineSetup.h"
 
 using namespace std;
 
-static VersionInfo version("Average xsec calculator", QUOTE(SVN_REV));
+static VersionInfo version("Average xsec calculator", QUOTE(VCS_REVISION));
 
 int main(int argc, char **argv)
 {
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	{
 		run_id run = lumis[l].first;
 		lumi_id lumi = lumis[l].second;
-		xsec += fi.GetGenLumiMetadata(run, lumi)->xSectionInt;
+		xsec += fi.Get<KGenLumiMetadata>(run, lumi)->xSectionInt;
 	}
 	cout << "Average xsec: " << xsec / lumis.size() << endl;
 

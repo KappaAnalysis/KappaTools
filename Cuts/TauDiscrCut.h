@@ -2,8 +2,8 @@
 #define KTauDiscrCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KTau.h"
-#include "DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KTau.h"
+#include "Kappa/DataFormats/interface/KMetadata.h"
 
 namespace KappaTools
 {

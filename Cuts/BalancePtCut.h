@@ -2,7 +2,7 @@
 #define KBalancePtCut_h
 
 #include "BaseCut.h"
-#include "DataFormats/interface/KLorentzVector.h"
+#include "Kappa/DataFormats/interface/KLorentzVector.h"
 #include "../Objects/Zmumu.h"
 
 namespace KappaTools
