@@ -9,6 +9,8 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 	Z_mass->Sumw2();
 	Z_mass_fine				= new TH1D("Z_mass_fine","m_{Z #rightarrow #mu #mu mass}", 200, 0., 200.);
 	Z_mass_fine->Sumw2();
+	Z_mass_fine_zoom		= new TH1D("Z_mass_fine_zoom","m_{Z #rightarrow #mu #mu mass}", 200, 60., 120.);
+	Z_mass_fine_zoom->Sumw2();
 	Z_mass_low 				= new TH1D("Z_mass_low","m_{Z #rightarrow #mu #mu mass}", 50, 0., 75.);
 	Z_mass_low->Sumw2();
 	Z_mass_zoom 			= new TH1D("Z_mass_zoom","m_{Z #rightarrow #mu #mu mass}", 60, 60., 120.);
@@ -64,6 +66,7 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 	Z_mass_low->Fill(z.mass(), weight);
 	Z_mass_zoom->Fill(z.mass(), weight);
 	Z_mass_fine->Fill(z.mass(), weight);
+	Z_mass_fine_zoom->Fill(z.mass(), weight);
 
 	Z_eta->Fill(z.eta(), weight);
 	Z_y->Fill(z.Rapidity(), weight);
