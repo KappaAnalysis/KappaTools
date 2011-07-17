@@ -136,6 +136,12 @@ int main(int argc, char* argv[])
 		hlTrigger.push_back("HLT_Mu3");
 		hlTrigger.push_back("HLT_Mu5");
 		hlTrigger.push_back("HLT_Mu9");
+		hlTrigger.push_back("HLT_Mu15");
+		//hlTrigger.push_back("HLT_Mu15_v1");
+		hlTrigger.push_back("HLT_Mu15_v2");
+		hlTrigger.push_back("HLT_Mu15_v3");
+		hlTrigger.push_back("HLT_Mu20_v1");
+		hlTrigger.push_back("HLT_Mu20_v2");
 		hlTrigger.push_back("HLT_DoubleMu3");
 		hlTrigger.push_back("HLT_Jet15U");
 		hlTrigger.push_back("HLT_Jet30U");
