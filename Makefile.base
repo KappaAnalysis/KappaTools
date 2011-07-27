@@ -5,8 +5,8 @@ LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
 
 ifndef VCS_REVISION
 GIT_REVISION = $(shell git log -n1 --pretty=oneline 2> /dev/null | cut -d " " -f 1)
-SVN_REVISION = $(shell svnversion 2> /dev/null)
-VCS_REVISION = $(if $(GIT_REVISION),$(GIT_REVISION),$(SVN_REVISION))
+SVN_REVISION = $(shell svnversion 2> /dev/null | grep -v exported)
+VCS_REVISION = $(if $(SVN_REVISION),$(SVN_REVISION),$(GIT_REVISION))
 endif
 
 ifndef MYPREFIX
