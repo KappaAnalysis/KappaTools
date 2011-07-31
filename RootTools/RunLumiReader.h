@@ -3,6 +3,7 @@
 
 #include <set>
 #include <Kappa/DataFormats/interface/Kappa.h>
+#include "../RootTools/FileInterface.h"
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter);
 
@@ -28,6 +29,16 @@ public:
 			else
 				if ((lumi >= itLumis->first) && (lumi <= itLumis->second))
 					return true;
+		return false;
+	}
+	bool isCompatible(const FileInterface &fi)
+	{
+		if (lumifilter.empty())
+			return true;
+		std::vector<std::pair<run_id, lumi_id> > lumiList = fi.GetRunLumis();
+		for (std::vector<std::pair<run_id, lumi_id> >::const_iterator it = lumiList.begin(); it != lumiList.end(); ++it)
+			if (accept(it->first, it->second))
+				return true;
 		return false;
 	}
 	std::pair<run_id, run_id> getBoundaries()
