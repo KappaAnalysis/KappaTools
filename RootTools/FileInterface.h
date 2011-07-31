@@ -43,6 +43,7 @@ struct FileInterface
 	// Get lumi list
 	std::vector<std::pair<run_id, lumi_id> > GetRunLumis() const;
 
+	bool isCompatible(const std::pair<run_id, run_id> &runRange);
 	bool isCompatible(unsigned int minRun, unsigned int maxRun);
 	bool isMC() const;
 private:

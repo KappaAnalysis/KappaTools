@@ -173,6 +173,11 @@ inline bool isCompatible(const std::map<std::pair<run_id, lumi_id>, T> &lumimap,
 	return false;
 }
 
+bool FileInterface::isCompatible(const std::pair<run_id, run_id> &runRange)
+{
+	return isCompatible(runRange.first, runRange.second);
+}
+
 bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 {
 	switch (lumiInfoType)
