@@ -20,8 +20,6 @@ namespace KappaTools
 		jet_phi					= new TH1D(("phi"),"#phi of muon", 50, -3.5, 3.5);
 		jet_phi->Sumw2();
 
-		n90 = new TH1D("n90","number of constituents carrying 0.9 of the energy", 50, 0, 50);
-		n90->Sumw2();
 		nConstituents = new TH1D("nConstituents","number of constituents", 50, 0, 50);
 		nConstituents->Sumw2();
 		emFraction = new TH1D("emFraction", "electromagnetic fraction", 50, 0., 1.);
@@ -45,7 +43,6 @@ namespace KappaTools
 		jet_eta_zoom->Fill(jet->p4.eta(), weight);
 		jet_phi->Fill(jet->p4.phi(), weight);
 
-		n90->Fill(jet->n90, weight);
 		nConstituents->Fill(jet->nConst, weight);
 		//emFraction->Fill(jet->fEM, weight);
 		//hadFraction->Fill(1.-jet->fEM, weight);
