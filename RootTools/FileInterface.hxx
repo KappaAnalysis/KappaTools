@@ -2,7 +2,7 @@
 template<typename T>
 T *FileInterface::Get()
 {
-	std::cerr << "Unsupported event type: " << TypeName<T>::name() << std::endl;
+	std::cerr << "Unsupported event metadata type: " << TypeName<T>::name() << std::endl;
 	return 0;
 }
 
@@ -30,7 +30,7 @@ KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
 template<typename T>
 T *FileInterface::Get(const std::string &name, const bool check, const bool def)
 {
-	T *result = Get<T>(name, "", check);
+	T *result = static_cast<T*>(GetInternal(eventdata, TypeName<T>::name(), name, "", check));
 	if ((result == 0) && def)
 		return new T();
 	return result;
