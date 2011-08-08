@@ -4,12 +4,29 @@
 #include <Kappa/DataFormats/interface/KJetMET.h>
 
 template<typename T>
-bool jetIDLoose(const T &jet)
+struct JetIDLoose
 {
-	return true;
-}
+	typedef const T &argument_type;
+	bool operator()(const T &jet) const { return true; }
+};
 
 template<>
-bool jetIDLoose(const class KDataJet &jet);
+struct JetIDLoose<KDataJet>
+{
+	typedef const KDataJet &argument_type;
+	bool operator()(const KDataJet &jet) const;
+};
+
+template<>
+struct JetIDLoose<KDataPFJet>
+{
+	typedef const KDataPFJet &argument_type;
+	bool operator()(const KDataPFJet &jet) const;
+};
+
+template<typename T>
+bool jetIDTight(const T &jet);
+template<>
+bool jetIDTight(const KDataPFJet &jet);
 
 #endif
