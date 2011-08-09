@@ -82,7 +82,7 @@ struct CmdLineOptionVector : public CmdLineOption
 		value.clear();
 		if (arg == "")
 			return;
-		std::vector<std::string> tmp = tokenize(arg, ",");
+		std::vector<std::string> tmp = split(arg, ",");
 		for (size_t i = 0; i < tmp.size(); ++i)
 			value.push_back(parse<T>(tmp[i]));
 	}
