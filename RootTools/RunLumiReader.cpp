@@ -46,6 +46,32 @@ void RunLumiSelector::addJSONFile(const std::string json)
 	readLumiFilter(json, lumifilter);
 }
 
+bool RunLumiSelector::isCompatible(const FileInterface &fi)
+{
+	if (lumifilter.empty())
+		return true;
+	std::vector<std::pair<run_id, lumi_id> > lumiList = fi.GetRunLumis();
+	for (std::vector<std::pair<run_id, lumi_id> >::const_iterator it = lumiList.begin(); it != lumiList.end(); ++it)
+		if (accept(it->first, it->second))
+			return true;
+	return false;
+}
+
+std::pair<run_id, run_id> RunLumiSelector::getBoundaries()
+{
+	run_id min = std::numeric_limits<run_id>::max(), max = std::numeric_limits<run_id>::min();
+	if (lumifilter.size() == 0)
+		return std::make_pair(max, min);
+	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::const_iterator it = lumifilter.begin(); it != lumifilter.end(); ++it)
+	{
+		if (it->first < min)
+			min = it->first;
+		if (it->first > max)
+			max = it->first;
+	}
+	return std::make_pair(min, max);
+}
+
 std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair()
 {
 	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
@@ -74,8 +100,9 @@ void RunLumiSelector::printJSON(std::ostream &os)
 	os << "}" << std::endl << std::endl;
 }
 
-const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > & RunLumiSelector::getRunLumiMap(){
-  return lumifilter;
+const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > & RunLumiSelector::getRunLumiMap() const
+{
+	return lumifilter;
 }
 
 std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
@@ -83,7 +110,7 @@ std::ostream &operator<<(std::ostream &os, const std::pair<lumi_id, lumi_id> &p)
 	return os << p.first << "-" << p.second;
 }
 
-std::ostream &operator<<(std::ostream &os, RunLumiSelector &m)
+std::ostream &operator<<(std::ostream &os, const RunLumiSelector &m)
 {
 	os << "Accepted runs / lumis:" << std::endl << m.lumifilter << std::endl;
 	if ((m.passRunLow > 0) || (m.passRunHigh > 0))

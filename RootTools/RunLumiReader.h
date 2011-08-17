@@ -31,40 +31,18 @@ public:
 					return true;
 		return false;
 	}
-	bool isCompatible(const FileInterface &fi)
-	{
-		if (lumifilter.empty())
-			return true;
-		std::vector<std::pair<run_id, lumi_id> > lumiList = fi.GetRunLumis();
-		for (std::vector<std::pair<run_id, lumi_id> >::const_iterator it = lumiList.begin(); it != lumiList.end(); ++it)
-			if (accept(it->first, it->second))
-				return true;
-		return false;
-	}
-	std::pair<run_id, run_id> getBoundaries()
-	{
-		run_id min=std::numeric_limits<run_id>::max(), max = std::numeric_limits<run_id>::min();
-		if (lumifilter.size()==0)
-			return std::make_pair(max, min);
-		for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::const_iterator it = lumifilter.begin(); it != lumifilter.end(); ++it)
-		{
-			if (it->first < min)
-				min = it->first;
-			if (it->first > max)
-				max = it->first;
-		}
-		return std::make_pair(min, max);
-	}
+	bool isCompatible(const FileInterface &fi);
+	std::pair<run_id, run_id> getBoundaries();
 	std::pair<run_id, lumi_id> getMaxRunLumiPair();
 
 	void printJSON(std::ostream &os = std::cout);
-	const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > & getRunLumiMap();
-	friend std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
+	const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &getRunLumiMap() const;
+	friend std::ostream &operator<<(std::ostream &os, const RunLumiSelector &m);
 private:
 	run_id passRunLow, passRunHigh;
 	std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > lumifilter;
 };
 
-std::ostream &operator<<(std::ostream &os, RunLumiSelector &m);
+std::ostream &operator<<(std::ostream &os, const RunLumiSelector &m);
 
 #endif
