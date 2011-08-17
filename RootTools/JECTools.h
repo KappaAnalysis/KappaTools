@@ -4,8 +4,11 @@
 
 #include <CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h>
 #include <CondFormats/JetMETObjects/interface/JetCorrectionUncertainty.h>
+#include <CondFormats/JetMETObjects/interface/JetCorrectorParameters.h>
 #include <Kappa/DataFormats/interface/Kappa.h>
 #include "SortTools.h"
+#include "../Toolbox/IOHelper.h"
+#include "../Toolbox/Math.h"
 
 enum JECValueType { jec_center, jec_up, jec_down };
 
@@ -100,6 +103,51 @@ inline void correctJets(std::vector<T> *jets,
 	}
 	sort_pt(jets);
 }
+
+class JECService
+{
+public:
+	JECService(const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
+		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(0), JEU(0)
+	{
+		std::cout << yellow << " * Loading jet energy corrections..." << reset << std::endl << "\t";
+		std::vector<JetCorrectorParameters> jecVec;
+		for (size_t i = 0; i < level.size(); ++i)
+		{
+			std::cout << level[i] << " ";
+			jecVec.push_back(JetCorrectorParameters(prefix + level[i] + ".txt"));
+		}
+		JEC = new FactorizedJetCorrector(jecVec);
+		std::cout << std::endl;
+
+		std::cout << yellow << " * Loading jet energy uncertainties..." << reset << std::endl;
+		JEU = new JetCorrectionUncertainty(prefix + "Uncertainty.txt");
+		if (jeuDir > 0)
+			jeuType = jec_up;
+		else if (jeuDir < 0)
+			jeuType = jec_down;
+		else
+			jeuType = jec_center;
+	}
+
+	~JECService()
+	{
+		delete JEU;
+		delete JEC;
+	}
+
+	template<typename T>
+	inline void correct(T *jets, const KVertexSummary *vs, const KJetArea *ja)
+	{
+		correctJets(jets, JEC, JEU, ja->median, vs->nVertices, area, jeuType);
+	}
+
+private:
+	double area;
+	JECValueType jeuType;
+	FactorizedJetCorrector *JEC;
+	JetCorrectionUncertainty *JEU;
+};
 
 #endif
 #endif
