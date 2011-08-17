@@ -21,13 +21,13 @@ namespace
 			// TODO: A better way would probably be to do exactly that for
 			// the TClass data members in FileInterface::GetInternal, if
 			// possible (needs further investigation).
-			if(name == "KDataLV")
+			if (name == "KDataLV")
 				*out++ = "p4";
-			else if(name == "covariance")
+			else if (name == "covariance")
 				*out++ = "covariance";
-			else if(name == "position")
+			else if (name == "position")
 				*out++ = "position";
-			else if(subbranch->IsFolder())
+			else if (subbranch->IsFolder())
 				out = GetListOfAllBranches(subbranch, out);
 			else
 				*out++ = lmBranch->At(i)->GetName();
@@ -147,7 +147,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	// This check does not yet work with vector
 	if ((string(classBranch->GetName()).find("vector") == std::string::npos) && membersDifference.size() && check)
 	{
-		cerr << "Dictionary is not consistent with file content!" << endl;
+		cerr << "Dictionary for class " << cname << " is not consistent with file content!" << endl;
 		cerr << "Branch content: " << membersBranch << endl;
 		cerr << "  Dict content: " << membersDict << endl;
 		return 0;
