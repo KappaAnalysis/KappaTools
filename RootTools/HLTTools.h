@@ -7,54 +7,70 @@
 class HLTTools
 {
 private:
+	std::map<std::string, std::string> nameCache;
+	std::map<std::string, std::string>::iterator itCache;
+	std::map<std::string, size_t> posCache;
 	KLumiMetadata * lumiMetadata;
 public:
 	HLTTools(KLumiMetadata * lumiMetadata = 0)
 	{
-		this->lumiMetadata = lumiMetadata;
+		if (lumiMetadata)
+			setLumiMetadata(lumiMetadata);
 	}
 	void setLumiMetadata(KLumiMetadata * lumiMetadata)
 	{
 		this->lumiMetadata = lumiMetadata;
+		nameCache.clear();
+		posCache.clear();
+		for (size_t idx=0; idx < lumiMetadata->hltNames.size(); ++idx)
+		{
+			posCache[lumiMetadata->hltNames[idx]] = idx;
+			nameCache[lumiMetadata->hltNames[idx]] = lumiMetadata->hltNames[idx];
+		}
 	}
-	bool isHLTDefect()
+	bool isHLTDefect() const
 	{
 		if (!lumiMetadata)
 			return true;
 		for (size_t idx = 1; idx < lumiMetadata->hltNames.size(); idx++)
-			if (lumiMetadata->hltPrescales[idx] == 0)
+			if (!lumiMetadata->hltPrescales[idx])
 				return true;
 		return false;
 	}
-	bool isPrescaled(std::string hltName)
+	bool isPrescaled(const std::string &hltName)
 	{
 		return (getPrescale(hltName) > 1);
 	}
-	bool isAvailable(std::string hltName)
+	bool isAvailable(const std::string &hltName)
 	{
 		return (getHLTName(hltName) != "");
 	}
-	int getPrescale(std::string hltName)
+	int getPrescale(const std::string &hltName)
 	{
 		if (!lumiMetadata)
 			return 0;
 		std::string tmpHLTName = getHLTName(hltName);
 		if (tmpHLTName == "")
 			return 0;
-		return lumiMetadata->hltPrescales[find(lumiMetadata->hltNames.begin(), lumiMetadata->hltNames.end(), tmpHLTName) - lumiMetadata->hltNames.begin()];
+		return lumiMetadata->hltPrescales[posCache[tmpHLTName]];
 	}
-	std::string getHLTName(std::string hltName)
+	std::string getHLTName(const std::string &hltName)
 	{
+		itCache = nameCache.find(hltName);
+		if (itCache != nameCache.end())
+			return itCache->second;
+
 		if (!lumiMetadata)
 			return "";
-		std::vector<std::string>::iterator endIt = lumiMetadata->hltNames.end();
-		std::vector<std::string>::iterator curIt = find(lumiMetadata->hltNames.begin(), endIt, hltName);
-		if (curIt != endIt)
-			return *curIt;
+
+		std::vector<std::string>::const_iterator endIt = lumiMetadata->hltNames.end();
 		boost::regex pattern(hltName+"(_v[[:digit:]]+)?$", boost::regex::icase | boost::regex::extended);
-		for (curIt = lumiMetadata->hltNames.begin(); curIt != endIt; ++curIt)
+		for (std::vector<std::string>::const_iterator curIt = lumiMetadata->hltNames.begin(); curIt != endIt; ++curIt)
 			if (boost::regex_search(*curIt, pattern))
+			{
+				nameCache[hltName] = *curIt;
 				return *curIt;
+			}
 		return "";
 	}
 };
