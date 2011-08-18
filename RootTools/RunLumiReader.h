@@ -31,11 +31,11 @@ public:
 					return true;
 		return false;
 	}
-	bool isCompatible(const FileInterface &fi);
-	std::pair<run_id, run_id> getBoundaries();
-	std::pair<run_id, lumi_id> getMaxRunLumiPair();
+	bool isCompatible(const FileInterface &fi) const;
+	std::pair<run_id, run_id> getBoundaries() const;
+	std::pair<run_id, lumi_id> getMaxRunLumiPair() const;
 
-	void printJSON(std::ostream &os = std::cout);
+	void printJSON(std::ostream &os = std::cout) const;
 	const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &getRunLumiMap() const;
 	friend std::ostream &operator<<(std::ostream &os, const RunLumiSelector &m);
 private:

@@ -46,7 +46,7 @@ void RunLumiSelector::addJSONFile(const std::string json)
 	readLumiFilter(json, lumifilter);
 }
 
-bool RunLumiSelector::isCompatible(const FileInterface &fi)
+bool RunLumiSelector::isCompatible(const FileInterface &fi) const
 {
 	if (lumifilter.empty())
 		return true;
@@ -57,7 +57,7 @@ bool RunLumiSelector::isCompatible(const FileInterface &fi)
 	return false;
 }
 
-std::pair<run_id, run_id> RunLumiSelector::getBoundaries()
+std::pair<run_id, run_id> RunLumiSelector::getBoundaries() const
 {
 	run_id min = std::numeric_limits<run_id>::max(), max = std::numeric_limits<run_id>::min();
 	if (lumifilter.size() == 0)
@@ -72,20 +72,20 @@ std::pair<run_id, run_id> RunLumiSelector::getBoundaries()
 	return std::make_pair(min, max);
 }
 
-std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair()
+std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair() const
 {
 	typedef std::set<std::pair<lumi_id, lumi_id> > lumirange;
-	std::map<run_id, lumirange>::reverse_iterator iter = lumifilter.rbegin();
+	std::map<run_id, lumirange>::const_reverse_iterator iter = lumifilter.rbegin();
 	return std::make_pair(iter->first, iter->second.rbegin()->second);
 }
 
-void RunLumiSelector::printJSON(std::ostream &os)
+void RunLumiSelector::printJSON(std::ostream &os) const
 {
 	os << std::endl << "{";
-	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::iterator it1 = lumifilter.begin(); it1 != lumifilter.end(); )
+	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::const_iterator it1 = lumifilter.begin(); it1 != lumifilter.end(); )
 	{
 		os << "\""<< (*it1).first << "\": [";
-		for (std::set<std::pair<lumi_id, lumi_id> >::iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end(); )
+		for (std::set<std::pair<lumi_id, lumi_id> >::const_iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end(); )
 		{
 			os << "[" << (*it2).first << "," << (*it2).second << "]";
 			it2++;
