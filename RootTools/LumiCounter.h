@@ -43,7 +43,7 @@ public:
 			alreadyAddedSum.insert(tmpPair);
 		}
 
-		if (alreadyAddedCat[category].find(tmpPair) == alreadyAddedCat[category].end())
+		if (category != "" && alreadyAddedCat[category].find(tmpPair) == alreadyAddedCat[category].end())
 		{
 			catLumi[category] += lumi->getLumi();
 			alreadyAddedCat[category].insert(tmpPair);
