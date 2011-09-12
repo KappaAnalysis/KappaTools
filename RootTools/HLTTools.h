@@ -8,7 +8,7 @@ class HLTTools
 {
 private:
 	std::map<std::string, std::string> nameCache;
-	std::map<std::string, std::string>::iterator itCache;
+	std::map<std::string, std::string>::iterator itCache, nameCacheEndIt;
 	std::map<std::string, size_t> posCache;
 	KLumiMetadata * lumiMetadata;
 public:
@@ -27,6 +27,7 @@ public:
 			posCache[lumiMetadata->hltNames[idx]] = idx;
 			nameCache[lumiMetadata->hltNames[idx]] = lumiMetadata->hltNames[idx];
 		}
+		nameCacheEndIt = nameCache.end();
 	}
 	bool isHLTDefect() const
 	{
@@ -57,7 +58,7 @@ public:
 	std::string getHLTName(const std::string &hltName)
 	{
 		itCache = nameCache.find(hltName);
-		if (itCache != nameCache.end())
+		if (itCache != nameCacheEndIt)
 			return itCache->second;
 
 		if (!lumiMetadata)
@@ -69,10 +70,19 @@ public:
 			if (boost::regex_search(*curIt, pattern))
 			{
 				nameCache[hltName] = *curIt;
+				nameCacheEndIt = nameCache.end();
 				return *curIt;
 			}
 		return "";
 	}
+	size_t getHLTPosition(const std::string &hltName)
+	{
+		std::string tmpHLTName = getHLTName(hltName);
+		if (tmpHLTName == "")
+			return 0;
+		return posCache[tmpHLTName];
+	}
+
 };
 
 #endif
