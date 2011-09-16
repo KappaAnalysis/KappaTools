@@ -84,17 +84,17 @@ void RunLumiSelector::printJSON(std::ostream &os) const
 	os << std::endl << "{";
 	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::const_iterator it1 = lumifilter.begin(); it1 != lumifilter.end(); )
 	{
-		os << "\""<< (*it1).first << "\": [";
-		for (std::set<std::pair<lumi_id, lumi_id> >::const_iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end(); )
+		os << "\"" << it1->first << "\": [";
+		for (std::set<std::pair<lumi_id, lumi_id> >::const_iterator it2 = it1->second.begin(); it2 != it1->second.end(); )
 		{
-			os << "[" << (*it2).first << "," << (*it2).second << "]";
+			os << "[" << it2->first << "," << it2->second << "]";
 			it2++;
-			if (it2!=(*it1).second.end())
+			if (it2 != it1->second.end())
 				os << ", ";
 		}
 		os << "]";
 		it1++;
-		if (it1!=lumifilter.end())
+		if (it1 != lumifilter.end())
 			os << ", ";
 	}
 	os << "}" << std::endl << std::endl;

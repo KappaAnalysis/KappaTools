@@ -126,6 +126,18 @@ bool in(const char x, const std::string &y)
 	return y.find_first_of(x) != std::string::npos;
 }
 
+template<>
+bool in(const std::string x, const std::vector<std::string> &y)
+{
+	return std::find(y.begin(), y.end(), x) != y.end();
+}
+
+template<>
+bool in(const std::string &x, const std::vector<std::string> &y)
+{
+	return std::find(y.begin(), y.end(), x) != y.end();
+}
+
 bool startswith(const std::string &input, const std::string search)
 {
 	return input.find(search) == 0;

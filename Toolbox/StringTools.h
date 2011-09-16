@@ -37,11 +37,15 @@ std::string rstrip(const std::string &input, const std::string &rm);
 std::string strip(const std::string &input, const std::string &rm);
 
 template<typename T1, typename T2>
-bool in(T1 x, T2 y);
+bool in(const T1 x, const T2 y);
 template<>
 bool in(const char x, const std::string y);
 template<>
 bool in(const char x, const std::string &y);
+template<>
+bool in(const std::string x, const std::vector<std::string> &y);
+template<>
+bool in(const std::string &x, const std::vector<std::string> &y);
 
 bool startswith(const std::string &input, const std::string search);
 bool endswith(const std::string &input, const std::string search);
