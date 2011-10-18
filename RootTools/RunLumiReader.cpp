@@ -79,6 +79,40 @@ std::pair<run_id, lumi_id> RunLumiSelector::getMaxRunLumiPair() const
 	return std::make_pair(iter->first, iter->second.rbegin()->second);
 }
 
+std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > RunLumiSelector::getMinimalJSON(const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumiSrc)
+{
+	std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > lumiRet;
+	for (std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > >::const_iterator it1 = lumiSrc.begin(); it1 != lumiSrc.end(); )
+	{
+		lumi_id firstLumi = 0;
+		lumi_id lastLumi = 0;
+		for (std::set<std::pair<lumi_id, lumi_id> >::const_iterator it2 = it1->second.begin(); it2 != it1->second.end(); )
+		{
+			if (firstLumi == 0)
+			{
+				firstLumi = it2->first;
+				lastLumi = it2->second;
+			}
+			else
+			{
+				if (lastLumi + 1 == it2->first)
+					lastLumi = it2->second;
+				else
+				{
+					lumiRet[it1->first].insert(std::make_pair(firstLumi, lastLumi));
+					firstLumi = it2->first;
+					lastLumi = it2->second;
+				}
+			}
+			it2++;
+			if (it2 == it1->second.end())
+				lumiRet[it1->first].insert(std::make_pair(firstLumi, lastLumi));
+		}
+		it1++;
+	}
+	return lumiRet;
+}
+
 void RunLumiSelector::printJSON(std::ostream &os) const
 {
 	RunLumiSelector::printJSON(os, lumifilter);
