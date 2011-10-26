@@ -67,7 +67,6 @@ void KappaTools::ZmumuObjects<JetType, METType>::printMuonInformation(KDataMuon 
 	std::cout << "\t\t #valid tracker hits:   " << (muon->track.nValidPixelHits+muon->track.nValidStripHits) << "" << std::endl;
 	std::cout << "\t\t #valid pixel hits:     " << muon->track.nValidPixelHits << "" << std::endl;
 	std::cout << "\t\t #valid muon hits (glb) " << muon->globalTrack.nValidMuonHits << "" << std::endl;
-	std::cout << "\t\t vertex:                " << muon->vertex.position << "" << std::endl;
 	std::cout << "\t\t ecal iso 03:           " << muon->ecalIso03 << "" << std::endl;
 	std::cout << "\t\t hcal iso 03:           " << muon->hcalIso03 << "" << std::endl;
 	std::cout << "\t\t track iso 03:          " << muon->trackIso03 << "" << std::endl;
