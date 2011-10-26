@@ -80,14 +80,14 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 			for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
 			{
 				const double m = match_metric[idxBase][idxTarget];
-				if ((!isnan(m)) && ((m < best_m) || isnan(best_m)))
+				if ((!std::isnan(m)) && ((m < best_m) || std::isnan(best_m)))
 				{
 					bestBase = idxBase; bestTarget = idxTarget; best_m = m;
 				}
 			}
 
 		// Add matched connection, if all objects are matched => EXIT
-		if (isnan(best_m))
+		if (std::isnan(best_m))
 			break;
 		// Invalidate metrics of matched objects
 		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
