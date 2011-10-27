@@ -104,11 +104,15 @@ inline void correctJets(std::vector<T> *jets,
 	sort_pt(jets);
 }
 
+#include "FileInterface.h"
+
 class JECService
 {
 public:
-	JECService(const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
-		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(0), JEU(0)
+	JECService(FileInterface &fi, const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
+		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(0), JEU(0),
+			vs(fi.Get<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
+			ja(fi.Get<KJetArea>("KT6Area", true, true))
 	{
 		std::cout << yellow << " * Loading jet energy corrections..." << reset << std::endl << "\t";
 		std::vector<JetCorrectorParameters> jecVec;
@@ -137,7 +141,7 @@ public:
 	}
 
 	template<typename T>
-	inline void correct(T *jets, const KVertexSummary *vs, const KJetArea *ja)
+	inline void correct(T *jets)
 	{
 		correctJets(jets, JEC, JEU, ja->median, vs->nVertices, area, jeuType);
 	}
@@ -147,6 +151,8 @@ private:
 	JECValueType jeuType;
 	FactorizedJetCorrector *JEC;
 	JetCorrectionUncertainty *JEU;
+	KVertexSummary *vs;
+	KJetArea *ja;
 };
 
 #endif

@@ -29,4 +29,13 @@ bool jetIDTight(const T &jet);
 template<>
 bool jetIDTight(const KDataPFJet &jet);
 
+template<typename T>
+struct JetIDLooseFail
+{
+	typedef const T &argument_type;
+	bool operator()(const T &jet) const { return !selector(jet); }
+private:
+	JetIDLoose<T> selector;
+};
+
 #endif
