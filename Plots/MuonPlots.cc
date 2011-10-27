@@ -57,14 +57,6 @@ namespace KappaTools
 		muon_numberOfChambers	= new TH1D(prefix+"numberOfChambers","number of muon chambers", 20, -0.5, 19.5);
 		muon_numberOfChambers->Sumw2();
 
-		vertex_chi2				= new TH1D(prefix+"vertex_chi2","#chi^{2}_{\\mathrm{vertex}}", 50, 0., 50.);
-		vertex_chi2->Sumw2();
-		vertex_ndof				= new TH1D(prefix+"vertex_ndof","\\mathrm{ndof}_{\\mathrm{vertex}}", 25, 0., 25.);
-		vertex_ndof->Sumw2();
-		vertex_chi2norm			= new TH1D(prefix+"vertex_chi2norm","#chi^{2} / \\mathrm{ndof}", 10, 0., 10.);
-		vertex_chi2norm->Sumw2();
-		vertex_chi2prob			= new TH1D(prefix+"vertex_chi2prob","\\mathrm{prob}(#chi^{2})", 50, 0., 1.);
-		vertex_chi2prob->Sumw2();
 		vertex_zdist			= new TH1D(prefix+"vertex_zdist","d(\\mathrm{PV},\\mu)", 50, 0., 1.);
 		vertex_zdist->Sumw2();
 
@@ -175,11 +167,6 @@ namespace KappaTools
 		muon_hcalIso05->Fill(muon->hcalIso05, weight);
 		muon_trackIso05->Fill(muon->trackIso05, weight);
 		muon_sumPtIso05->Fill(muon->sumPtIso05, weight);
-
-		vertex_chi2->Fill(muon->vertex.chi2, weight);
-		vertex_ndof->Fill(muon->vertex.nDOF, weight);
-		vertex_chi2norm->Fill(muon->vertex.chi2/muon->vertex.nDOF, weight);
-		vertex_chi2prob->Fill(TMath::Prob(muon->vertex.chi2, static_cast<int>(muon->vertex.nDOF)), weight);
 
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);
 

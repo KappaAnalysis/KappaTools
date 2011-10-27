@@ -8,5 +8,5 @@ include $(BASEDIR)/Makefile.root
 %.bin: %.o
 	$(CXX) $(LDFLAGS) -lKToolbox -lKRootTools -lKappa -L$(BASEDIR)/../Kappa/DataFormats/test/ -o $@ $^
 
-%.sbin: %.o $(BASEDIR)/lib/libKToolbox.a $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o
+%.sbin: %.o $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
 	$(CXX) $(LDFLAGS) -o $@ $^
