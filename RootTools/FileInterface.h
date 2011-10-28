@@ -54,6 +54,7 @@ private:
 	std::map<std::pair<run_id, lumi_id>, KGenLumiMetadata> lumimap_mc;
 	std::map<std::pair<run_id, lumi_id>, KLumiMetadata> lumimap_std;
 	std::map<std::pair<run_id, lumi_id>, KDataLumiMetadata> lumimap_data;
+	std::map<std::string, void*> objCache;
 
 	template<typename T>
 	std::map<std::pair<run_id, lumi_id>, T> GetLumis();

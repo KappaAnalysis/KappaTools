@@ -122,6 +122,9 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 		std::cerr << "Requested branch not found: " << name << std::endl;
 		return 0;
 	}
+	// Allow multiple get requests
+	if (objCache.count(selected))
+		return objCache[selected];
 
 	branch = chain.GetBranch(selected.c_str());
 	TClass *classRequest = TClass::GetClass(cname);
@@ -156,6 +159,7 @@ void *FileInterface::GetInternal(TChain &chain, const char *cname, const std::st
 	void *tmp = classBranch->New();
 	vBranchHolder.push_back(tmp);
 	chain.SetBranchAddress(selected.c_str(), &(vBranchHolder.back()));
+	objCache[selected] = tmp;
 	return tmp;
 }
 
