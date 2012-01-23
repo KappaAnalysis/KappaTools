@@ -47,6 +47,11 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	eventdata.SetBranchAddress("KEventMetadata", &current_event);
 }
 
+FileInterface::~FileInterface()
+{
+	delete current_event;
+}
+
 template<typename T>
 inline bool isCompatible(const std::map<std::pair<run_id, lumi_id>, T> &lumimap, unsigned int minRun, unsigned int maxRun)
 {
