@@ -21,7 +21,7 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 		std::cout << "Reading lumi sections: " << std::endl;
 
 	// Connect to lumi tree
-	T *meta_lumi = 0;
+	T *meta_lumi = new T();
 	lumidata.SetBranchAddress("KLumiMetadata", &meta_lumi);
 
 	// Collect lumi infos
@@ -64,10 +64,6 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 				<< std::setw(4) << it->second.second  << std::endl;
 		std::cout << std::endl;
 	}
-	
-	if (meta_lumi)
-		delete meta_lumi;
-
 	return result;
 }
 
