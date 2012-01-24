@@ -114,6 +114,8 @@ public:
 			vs(fi.Get<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
 			ja(fi.Get<KJetArea>("KT6Area", true, true))
 	{
+		if (R < 0)
+			area = -1;
 		std::cout << yellow << " * Loading jet energy corrections..." << reset << std::endl << "\t";
 		std::vector<JetCorrectorParameters> jecVec;
 		for (size_t i = 0; i < level.size(); ++i)

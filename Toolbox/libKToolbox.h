@@ -6,6 +6,5 @@
 #include "IOHelper.h"
 #include "ProgressMonitor.h"
 #include "StringTools.h"
-#include "Version.h"
 
 #endif

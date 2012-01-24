@@ -2,7 +2,6 @@
 #include <getopt.h>
 #include <string.h>
 #include <iomanip>
-#include "Version.h"
 #include "IOHelper.h"
 
 using namespace std;
@@ -123,7 +122,6 @@ void CmdLineBase::PrintVersion(string arg)
 {
 	cout << "Subsystem versions:" << endl;
 	cout << "-------------------" << endl << endl;
-	VersionInfo::print(cout);
 	exit(1);
 }
 

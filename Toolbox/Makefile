@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 BASEDIR ?= $(shell cd ..; pwd)
-LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o IOHelper.o Version.o CmdLineSetup.o
+LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o IOHelper.o CmdLineSetup.o
 PROGRAM  = libKToolbox.so libKToolbox.a example.bin example.sbin $(LIBFILES)
 #------------------------------------------------------------------------------
 

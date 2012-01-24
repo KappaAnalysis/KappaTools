@@ -1,12 +1,9 @@
 #include "Kappa/DataFormats/interface/KMetadata.h"
 #include "../RootTools/RunLumiReader.h"
 #include "../RootTools/FileInterface.h"
-#include "../Toolbox/Version.h"
 #include "../Toolbox/CmdLineSetup.h"
 
 using namespace std;
-
-static VersionInfo version("Average xsec calculator", QUOTE(VCS_REVISION));
 
 int main(int argc, char **argv)
 {
