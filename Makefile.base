@@ -36,7 +36,10 @@ LDFLAGS  += -Wl,-rpath,$(BASEDIR)/lib
 CXXFLAGS += -I$(BASEDIR)/external
 LDFLAGS  += -L$(BASEDIR)/external/lib
 LDFLAGS  += -Wl,-rpath,$(BASEDIR)/external/lib
+ifndef NO_BOOST_LIB
 LDFLAGS  += -lboost_regex
+CXXFLAGS += -D HAS_BOOST_LIB=true
+endif
 # Kappa
 KAPPADIR = $(shell cd $(BASEDIR)/..; pwd)
 CXXFLAGS += -I$(KAPPADIR)
