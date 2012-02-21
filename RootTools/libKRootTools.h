@@ -5,6 +5,7 @@
 #include "DisplayTools.h"
 #include "EventLogger.h"
 #include "FileInterface.h"
+#include "FileInterface2.h"
 #include "JetID.h"
 #include "LSWatcher.h"
 #include "Matching.h"

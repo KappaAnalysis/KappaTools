@@ -2,14 +2,24 @@
 #include "Kappa/DataFormats/interface/KDebug.h"
 #include "../Toolbox/libKToolbox.h"
 #include "../RootTools/libKRootTools.h"
+#include "../RootTools/FileInterface2.h"
+#include "../RootTools/ScaleService.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
 	std::cout << "Loading files..." << std::endl;
+	vector<string> files;
+	for (int i = 1; i < argc; ++i)
+		files.push_back(argv[i]);
 	std::cout.flush();
-	FileInterface fi(vector<string>(1, argv[1]));
+	std::cout << files << endl;
+	ScaleServiceFactory ssf;
+	FileInterface2 fi(files, 0, false, 2, &ssf, "output");
+	ssf.registerLF("Tmp.csv");
+	ssf.finish(fi.GetEntries(), 1, 1);
+
 	std::cout << "finished" << std::endl;
 	vector<string> names = fi.GetNames<KDataLVs>();
 	cout << names << endl << endl;
@@ -20,15 +30,16 @@ int main(int argc, char **argv)
 	KDataBeamSpot *bs = fi.Get<KDataBeamSpot>("offlineBeamSpot");
 
 	std::map<std::string, KDataLVs*> tomap;
-	for (int i = 0; i < names.size(); ++i)
+	for (size_t i = 0; i < names.size(); ++i)
 		tomap[names[i]] = fi.Get<KDataLVs>(names[i]);
 
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
-//	KGenEventMetadata *meta_event_gen = fi.Get<KGenEventMetadata>();
 
 //	long long nEvents = min((long long)3, fi.eventdata.GetEntries());
 	long long nEvents = fi.eventdata.GetEntries();
+	std::cout << nEvents << std::endl;
 	ProgressMonitor pm(nEvents);
+	fi.SpeedupTree();
 	for (long long iEvent = 0; iEvent < nEvents; ++iEvent)
 	{
 		if (!pm.Update()) break;
@@ -51,15 +62,15 @@ int main(int argc, char **argv)
 		cout << "Jets: " << jets->size() << " => " << *jets << endl;
 		if (bs)
 			cout << "Beamspot: " << *bs << endl << endl;
-		for (int i = 0; i < names.size(); ++i)
+		for (std::map<std::string, KDataLVs*>::iterator it = tomap.begin(); it != tomap.end(); ++it)
 		{
-			if (tomap[names[i]]->size() > 0)
+			if (it->second->size() > 0)
 			{
-				cout << names[i] << " " << tomap[names[i]]->size() << endl;
-				cout << *tomap[names[i]] << endl;
+				cout << it->first << " " << it->second->size() << endl;
+				cout << *(it->second) << endl;
 			}
 		}
-		for (int i = 0; i < meta_lumi->hltNames.size(); ++i)
+		for (size_t i = 0; i < meta_lumi->hltNames.size(); ++i)
 			if (meta_event->bitsHLT & (1ul << i))
 				cout << meta_lumi->hltNames[i] << " ";
 		cout << endl;

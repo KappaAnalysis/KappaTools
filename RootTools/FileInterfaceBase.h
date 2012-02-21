@@ -6,19 +6,33 @@
 #include <TChain.h>
 #include <list>
 
-#include "../Toolbox/IOHelper.h"
 #include <Kappa/DataFormats/interface/Kappa.h>
-#include "Directory.h"
+#include "BranchHolder.h"
 
 class FileInterfaceBase
 {
 public:
-	enum DataType {STD, GEN, DATA} lumiInfoType;
+	enum DataType {STD, GEN, DATA, INVALID} lumiInfoType;
 	FileInterfaceBase(int verbose = 2);
+	void ClearCache()
+	{
+		for (std::map<std::string, BranchHolder*>::iterator it = branches.begin(); it != branches.end(); ++it)
+			delete it->second;
+		branches.clear();
+	}
 	void Init(TChain *_eventchain, DataType _lumiInfoType);
 
 	void SpeedupTree(long cache = 0);
 	TChain *eventchain;
+
+	inline long long GetEntries()
+	{
+		return eventchain->GetEntries();
+	}
+	inline void GetEntry(size_t entry)
+	{
+		eventchain->GetEntry(entry);
+	}
 
 	// Functions for getting metadata objects
 	template<typename T>
@@ -26,9 +40,7 @@ public:
 
 	// Get event content of files
 	template<typename T>
-	T *Get(const std::string &name, const bool check, const bool def = false);
-	template<typename T>
-	T *Get(const std::string &name, const std::string altName = "", const bool check = true);
+	T *Get(const std::string &name, const bool check = true, const bool def = false);
 	template<typename T>
 	std::vector<std::string> GetNames(bool inherited = false);
 	template<typename T>
@@ -39,11 +51,10 @@ public:
 protected:
 	int verbosity;
 	KEventMetadata *current_event;
+	std::map<std::string, BranchHolder*> branches;
 
-	std::list<void*> vBranchHolder;
-	std::map<std::string, void*> objCache;
-
-	void *GetInternal(TChain *chain, const char *cname, const std::string &name, const std::string altName = "", const bool check = true);
+	void *GetInternal(TTree *tree, std::map<std::string, BranchHolder*> &bmap,
+		const std::string cname, const std::string &name, const bool check = true);
 };
 
 #include "FileInterfaceBase.hxx"

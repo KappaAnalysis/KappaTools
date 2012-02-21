@@ -2,29 +2,17 @@
 template<typename T>
 T *FileInterfaceBase::Get()
 {
-	std::cerr << "Unsupported event metadata type: " << TypeName<T>::name() << std::endl;
-	return 0;
+	return Get<T>("KEventMetadata");
 }
-
-template<>
-KEventMetadata *FileInterfaceBase::Get();
-template<>
-KGenEventMetadata *FileInterfaceBase::Get();
 
 // Get event content from files
 template<typename T>
 T *FileInterfaceBase::Get(const std::string &name, const bool check, const bool def)
 {
-	T *result = static_cast<T*>(GetInternal(eventchain, TypeName<T>::name(), name, "", check));
+	T *result = static_cast<T*>(GetInternal(eventchain, branches, TypeName<T>::name(), name, check));
 	if ((result == 0) && def)
 		return new T();
 	return result;
-}
-
-template<typename T>
-T *FileInterfaceBase::Get(const std::string &name, const std::string altName, const bool check)
-{
-	return static_cast<T*>(GetInternal(eventchain, TypeName<T>::name(), name, altName, check));
 }
 
 template<typename T>

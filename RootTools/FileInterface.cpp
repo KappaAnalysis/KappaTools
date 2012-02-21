@@ -19,32 +19,26 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	if (b)
 	{
 		if (string(b->GetClassName()) == "KGenLumiMetadata")
+		{
 			Init(&eventdata, GEN);
-		if (string(b->GetClassName()) == "KDataLumiMetadata")
+			lumimap_mc = GetLumis<KGenLumiMetadata>();
+		}
+		else if (string(b->GetClassName()) == "KDataLumiMetadata")
+		{
 			Init(&eventdata, DATA);
-		if (string(b->GetClassName()) == "KLumiMetadata")
+			lumimap_data = GetLumis<KDataLumiMetadata>();
+		}
+		else if (string(b->GetClassName()) == "KLumiMetadata")
+		{
 			Init(&eventdata, STD);
+			lumimap_std = GetLumis<KLumiMetadata>();
+		}
 	}
-
-	switch (lumiInfoType)
+	else
 	{
-	case GEN:
-		cout << endl << "Data source: Monte Carlo" << endl;
-		lumimap_mc = GetLumis<KGenLumiMetadata>();
-		current_event = new KGenEventMetadata();
-		break;
-	case STD:
-		cout << endl << "Data source: default" << endl;
-		lumimap_std = GetLumis<KLumiMetadata>();
-		current_event = new KEventMetadata();
-		break;
-	case DATA:
-		cout << endl << "Data source: Detector" << endl;
-		lumimap_data = GetLumis<KDataLumiMetadata>();
-		current_event = new KEventMetadata();
-		break;
+		std::cerr << "Can't determine file type (Data/MC/Standard)" << std::endl;
+		exit(1);
 	}
-	eventdata.SetBranchAddress("KEventMetadata", &current_event);
 }
 
 template<typename T>
