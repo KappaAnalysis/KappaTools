@@ -1,61 +1,64 @@
 #include "StringTools.h"
 #include <algorithm>
-#include "VectorTools.h"
 #include <cstdlib>
 #include <stdarg.h>
 #include <stdio.h>
 
-using namespace std;
+void reportParseError(const std::string &s)
+{
+	std::cerr << "Parse error: " << s;
+	exit(0);
+}
 
-string tolower(string s)
+std::string tolower(std::string s)
 {
 	transform(s.begin(), s.end(), s.begin(), (int(*)(int))tolower);
 	return s;
 }
 
-string toupper(string s)
+std::string toupper(std::string s)
 {
 	transform(s.begin(), s.end(), s.begin(), (int(*)(int))toupper);
 	return s;
 }
 
-vector<string> split(const string &str, const string &delim, const size_t maxSize)
+std::vector<std::string> split(const std::string &str, const std::string &delim, const size_t maxSize)
 {
-	vector<string> tokens;
+	std::vector<std::string> tokens;
 
-	size_t p0 = 0, p1 = string::npos;
-	while ((p0 != string::npos) && ((maxSize == 0) || (tokens.size() < maxSize)))
+	size_t p0 = 0, p1 = std::string::npos;
+	while ((p0 != std::string::npos) && ((maxSize == 0) || (tokens.size() < maxSize)))
 	{
 		p1 = str.find_first_of(delim, p0);
 		if (p1 != p0)
 		{
-			string token = str.substr(p0, p1 - p0);
+			std::string token = str.substr(p0, p1 - p0);
 			tokens.push_back(token);
 		}
 		p0 = str.find_first_not_of(delim, p1);
 	}
-	if (p0 != string::npos)
+	if (p0 != std::string::npos)
 		tokens.push_back(str.substr(p0));
 	return tokens;
 }
 
-vector<string> tokenize(const string &str, const string &delim, const bool escape)
+std::vector<std::string> tokenize(const std::string &str, const std::string &delim, const bool escape)
 {
 	if (!escape)
 		return split(str, delim);
-	vector<string> result;
-	vector<string> esc = split(str, "'");
+	std::vector<std::string> result;
+	std::vector<std::string> esc = split(str, "'");
 	for (unsigned int i = 0; i < esc.size(); i++)
 		if (i % 2 == 1)
 		{
-			if (delim.find_first_of(*(esc[i - 1].rbegin())) == string::npos)
+			if (delim.find_first_of(*(esc[i - 1].rbegin())) == std::string::npos)
 				result.back() += esc[i];
 			else
 				result.push_back(esc[i]);
 		}
 		else
 		{
-			vector<string> tok = split(esc[i], delim);
+			std::vector<std::string> tok = split(esc[i], delim);
 			copy(tok.begin(), tok.end(), back_inserter(result));
 		}
 	return result;
@@ -76,7 +79,7 @@ std::string parse<std::string>(const std::string &s, bool)
 }
 
 template <>
-bool parse<bool>(const std::string &s, bool)
+bool parse<bool>(const std::string &s, bool fail)
 {
 	static const std::string s_true[] = {"true", "yes", "y", "1"};
 	static const std::string s_false[] = {"false", "no", "n", "0"};
@@ -88,11 +91,12 @@ bool parse<bool>(const std::string &s, bool)
 	for (size_t i = 0; i < sizeof(s_false) / sizeof(std::string); ++i)
 		if (s_false[i] == tmp)
 			return false;
-	std::cerr << "Parse error - invalid bool: " << s;
+	if (fail)
+		reportParseError(s);
 	return false;
 }
 
-std::string lstrip(const std::string &input, const std::string &rm)
+std::string lstrip(const std::string &input, const std::string rm)
 {
 	size_t pos = 0;
 	if (input.size() == 0)
@@ -102,7 +106,7 @@ std::string lstrip(const std::string &input, const std::string &rm)
 	return input.substr(pos);
 }
 
-std::string rstrip(const std::string &input, const std::string &rm)
+std::string rstrip(const std::string &input, const std::string rm)
 {
 	size_t pos = input.size();
 	if (pos == 0)
@@ -111,7 +115,7 @@ std::string rstrip(const std::string &input, const std::string &rm)
 	return input.substr(0, pos + 1);
 }
 
-std::string strip(const std::string &input, const std::string &rm)
+std::string strip(const std::string &input, const std::string rm)
 {
 	return rstrip(lstrip(input, rm), rm);
 }

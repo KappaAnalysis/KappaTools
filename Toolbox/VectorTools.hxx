@@ -36,22 +36,6 @@ Tin mymap(const Tlambda &lambda, const Tin &list)
 	return result;
 }
 
-template<typename Tin>
-std::string join(const std::string delim, const Tin &cont)
-{
-	if (cont.empty())
-		return "";
-	std::string result;
-	typename Tin::const_iterator last = cont.end();
-	for (typename Tin::const_iterator it = cont.begin(); it != cont.end();)
-	{
-		result += str(*it);
-		if (++it != last)
-			result += delim;
-	}
-	return result;
-}
-
 template<typename Tin, typename Tp1>
 std::vector<Tp1> getFirst(const Tin &in)
 {

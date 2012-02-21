@@ -22,9 +22,6 @@ std::vector<std::string> fmtmap(const std::string &str, const Tin &list, const s
 template<typename Tlambda, typename Tin>
 Tin mymap(const Tlambda &lambda, const Tin &list);
 
-template<typename Tin>
-std::string join(const std::string delim, const Tin &cont);
-
 template<typename Tin, typename Tp1>
 std::vector<Tp1> getFirst(const Tin &in);
 template<typename Tin, typename Tp1>
