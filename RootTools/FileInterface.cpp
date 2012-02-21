@@ -66,6 +66,8 @@ bool FileInterface::isCompatible(unsigned int minRun, unsigned int maxRun)
 		return ::isCompatible(lumimap_std, minRun, maxRun);
 	case DATA:
 		return ::isCompatible(lumimap_data, minRun, maxRun);
+	default:
+		break;
 	}
 	return false;
 }
@@ -89,6 +91,8 @@ std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
 		return ::GetRunLumis(lumimap_std);
 	case DATA:
 		return ::GetRunLumis(lumimap_data);
+	default:
+		break;
 	}
 	return std::vector<std::pair<run_id, lumi_id> >();
 }
@@ -104,6 +108,8 @@ KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
 		return &(lumimap_std[std::make_pair(run, lumi)]);
 	case DATA:
 		return &(lumimap_data[std::make_pair(run, lumi)]);
+	default:
+		break;
 	}
 	return 0;
 }
