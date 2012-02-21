@@ -43,6 +43,8 @@ bool ProgressMonitor::Update(const unsigned long cPos)
 		cout << *this;
 		cout.flush();
 	}
+	if (!bShow && (cPos % 50000 == 0))
+		cout << *this << endl;
 	return !bAbort;
 }
 
