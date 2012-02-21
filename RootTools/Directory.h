@@ -36,5 +36,7 @@ std::map<std::string, T*> GetDirObjectsMap(TDirectory *dir)
 }
 
 std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, const bool inherited = false);
+bool CheckBranch(TBranch *branch, const std::string cname, bool checkDict);
+bool CheckType(const std::string req, const std::string cur);
 
 #endif
