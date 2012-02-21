@@ -1,7 +1,9 @@
 #include "StringTools.h"
 #include <algorithm>
-#include <stdlib.h>
 #include "VectorTools.h"
+#include <cstdlib>
+#include <stdarg.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -206,4 +208,26 @@ std::string replaceall(const std::string &input, const std::string &find, const 
 		pos = pos - find.size() + replace.size() + 1;
 	}
 	return temp;
+}
+
+stlprintf::stlprintf(const char *format, ...)
+{
+	va_list args;
+	va_start (args, format);
+	char *tmp = 0;
+	if (vasprintf (&tmp, format, args) < 0)
+		tmp = 0;
+	va_end (args);
+	if (tmp)
+		str = tmp;
+}
+
+stlprintf::operator const char*() const
+{
+	return str.c_str();
+}
+
+stlprintf::operator const std::string() const
+{
+	return str;
 }

@@ -54,6 +54,16 @@ std::string basename(const std::string &input);
 std::string dirname(const std::string &input);
 std::string substVars(std::string in, const std::vector<std::pair<std::string, std::string> > &vars);
 
+class stlprintf
+{
+public:
+	stlprintf(const char *format, ...);
+	operator const char*() const;
+	operator const std::string() const;
+private:
+	std::string str;
+};
+
 #include "StringTools.hxx"
 
 #endif
