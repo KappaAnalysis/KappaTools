@@ -5,8 +5,6 @@
 #include <Math/VectorUtil.h>
 #include "../Toolbox/IOHelper.h"
 
-using namespace std;
-
 struct matchSort_deltaR
 {
 	matchSort_deltaR(const double dR = 0.3) : maxDeltaR(dR) {};
