@@ -18,6 +18,7 @@ std::vector<int> seq(int start, int last)
 	return result;
 }
 
+#ifdef HAS_BOOST_LIB
 std::vector<std::string> match(const std::string &pattern, const std::vector<std::string> &in,
 	const boost::regex::flag_type flags)
 {
@@ -28,3 +29,4 @@ std::vector<std::string> match(const std::string &pattern, const std::vector<std
 			result.push_back(*it);
 	return result;
 }
+#endif

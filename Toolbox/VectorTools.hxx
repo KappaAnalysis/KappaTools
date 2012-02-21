@@ -81,6 +81,7 @@ Tout convert(const Tin &in)
 	return result;
 }
 
+#ifdef HAS_BOOST_LIB
 template<typename Tk, typename Tv>
 std::vector<Tv> match(const std::string &pattern, const std::map<Tk, Tv> &in,
 	const boost::regex::flag_type flags)
@@ -104,3 +105,4 @@ std::vector<Tk> match_keys(const std::string &pattern, const std::map<Tk, Tv> &i
 			result.push_back(it->first);
 	return result;
 }
+#endif

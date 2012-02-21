@@ -84,9 +84,11 @@ int main(int argc, char **argv)
 	redict["Test"] = 3;
 	redict["Entry"] = 4;
 	redict["Entries"] = 5;
+#ifdef HAS_BOOST_LIB
 	cout << match("e", redict) << endl;
 	cout << match("e|l", redict) << endl;
 	cout << match("Entr.*", redict) << endl;
+#endif
 	/////////////////////////////////////////////////////////
 
 	return 0;
