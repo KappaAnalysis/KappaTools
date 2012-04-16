@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	KDataBeamSpot *bs = fi.Get<KDataBeamSpot>("offlineBeamSpot");
 
 	std::map<std::string, KDataLVs*> tomap;
-	for (int i = 0; i < names.size(); ++i)
+	for (size_t i = 0; i < names.size(); ++i)
 		tomap[names[i]] = fi.Get<KDataLVs>(names[i]);
 
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 		cout << "Jets: " << jets->size() << " => " << *jets << endl;
 		if (bs)
 			cout << "Beamspot: " << *bs << endl << endl;
-		for (int i = 0; i < names.size(); ++i)
+		for (size_t i = 0; i < names.size(); ++i)
 		{
 			if (tomap[names[i]]->size() > 0)
 			{
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 				cout << *tomap[names[i]] << endl;
 			}
 		}
-		for (int i = 0; i < meta_lumi->hltNames.size(); ++i)
+		for (size_t i = 0; i < meta_lumi->hltNames.size(); ++i)
 			if (meta_event->bitsHLT & (1ul << i))
 				cout << meta_lumi->hltNames[i] << " ";
 		cout << endl;
