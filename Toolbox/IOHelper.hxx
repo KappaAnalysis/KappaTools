@@ -11,30 +11,33 @@ void printMatrix(T **matrix, const size_t x, const size_t y, const size_t width)
 	std::cout << std::endl;
 }
 
-template<typename T1, typename T2>
-std::ostream &operator<<(std::ostream &os, const std::map<T1, T2> &m)
+namespace __gnu_cxx
 {
-	struct MapStrClass
+	template<typename T1, typename T2>
+	std::ostream &operator<<(std::ostream &os, const std::map<T1, T2> &m)
 	{
-		static std::string pstr(const std::pair<const T1, T2> &x) { return str(x.first) + ": " + str(x.second); }
-	};
-	return os << "{" << join(", ", strmap(MapStrClass::pstr, m)) << "}";
-}
+		struct MapStrClass
+		{
+			static std::string pstr(const std::pair<const T1, T2> &x) { return str<T1>(x.first) + ": " + str<T2>(x.second); }
+		};
+		return os << "{" << join(", ", strmap(MapStrClass::pstr, m)) << "}";
+	}
 
-template<typename T>
-std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
-{
-	return os << "{" << join(", ", s) << "}";
-}
+	template<typename T>
+	std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
+	{
+		return os << "{" << join(", ", s) << "}";
+	}
 
-template<typename T>
-std::ostream &operator<<(std::ostream &os, const std::vector<T> &v)
-{
-	return os << "[" << join(", ", v) << "]";
-}
+	template<typename T>
+	std::ostream &operator<<(std::ostream &os, const std::vector<T> &v)
+	{
+		return os << "[" << join(", ", v) << "]";
+	}
 
-template<typename T1, typename T2>
-std::ostream &operator<<(std::ostream &os, const std::pair<T1, T2> &p)
-{
-	return os << "(" << p.first << ", " << p.second << ")";
+	template<typename T1, typename T2>
+	std::ostream &operator<<(std::ostream &os, const std::pair<T1, T2> &p)
+	{
+		return os << "(" << p.first << ", " << p.second << ")";
+	}
 }
