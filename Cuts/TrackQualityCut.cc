@@ -30,9 +30,7 @@ namespace KappaTools
 		if (!obj)
 			return false;
 
-		double val = getDecisionValue();
-
-		return (obj->quality & mask);
+		return (getDecisionValue() & mask);
 	}
 
 	template <typename T>

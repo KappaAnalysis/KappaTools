@@ -35,7 +35,7 @@ namespace KappaTools
 		void setCut(int mask_);
 
 		virtual bool getInternalDecision();
-		double getDecisionValue();
+		inline double getDecisionValue();
 	};
 }
 #endif

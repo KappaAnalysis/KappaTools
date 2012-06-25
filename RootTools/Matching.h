@@ -14,7 +14,7 @@ struct matchSort_deltaR
 	{
 		const double val = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
 		return val <= maxDeltaR ? val : NAN;
-	};
+	}
 
 	const double maxDeltaR;
 };
@@ -29,7 +29,7 @@ struct matchSort_deltaRdeltaPtRel
 		const double val1 = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
 		const double val2 = std::abs(obj1.p4.pt() - obj2.p4.pt()) / obj2.p4.pt();
 		return (val1 < maxDeltaR && val2 < maxDeltaPtRel) ? val1 : NAN;
-	};
+	}
 
 	const double maxDeltaR, maxDeltaPtRel;
 };
