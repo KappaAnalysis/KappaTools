@@ -33,9 +33,9 @@ std::string replaceall(const std::string &input, const std::string &find, const 
 std::vector<std::string> split(const std::string &str, const std::string &delim, const size_t maxSize = 0);
 std::vector<std::string> tokenize(const std::string &str, const std::string &delim = " ", const bool escape = false);
 
-std::string lstrip(const std::string &input, const std::string rm = "\0\n\r ");
-std::string rstrip(const std::string &input, const std::string rm = "\0\n\r ");
-std::string strip(const std::string &input, const std::string rm = "\0\n\r ");
+std::string lstrip(const std::string &input, const std::string rm = std::string(" \n\r\0", 4));
+std::string rstrip(const std::string &input, const std::string rm = std::string(" \n\r\0", 4));
+std::string strip(const std::string &input, const std::string rm = std::string(" \n\r\0", 4));
 
 template<typename T1, typename T2>
 bool in(const T1 x, const T2 y);
@@ -57,6 +57,8 @@ std::string substVars(std::string in, const std::vector<std::pair<std::string, s
 
 template<typename Tin>
 std::string join(const std::string delim, const Tin &cont);
+template<typename Tin, typename Tas>
+std::string joinAs(const std::string delim, const Tin &cont);
 
 class stlprintf
 {

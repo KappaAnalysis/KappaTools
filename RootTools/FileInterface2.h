@@ -46,9 +46,9 @@ public:
 	inline T *Get(KEventMetadata *meta_event);
 
 	TChain eventdata;
-private:
+
+protected:
 	TChain *lumidata;
-	int verbosity;
 	std::string current_file;
 	std::map<std::string, BranchHolder*> meta_branches;
 	std::map<std::pair<run_id, lumi_id>, size_t> lumiIdxMap;

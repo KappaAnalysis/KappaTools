@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	vector<string> files = CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version);
+	vector<string> files = CmdLineBase::ParseArgs(argc, argv, OPT_Help);
 
 	// Loading files
 	FileInterface fi(files, false, 0);

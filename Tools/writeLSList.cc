@@ -32,7 +32,7 @@ void run(std::string filename)
 
 int main(int argc, char* argv[])
 {
-	std::vector<std::string> filenames = CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version);
+	std::vector<std::string> filenames = CmdLineBase::ParseArgs(argc, argv, OPT_Help);
 
 	for (std::vector<std::string>::iterator it = filenames.begin(); it != filenames.end();it++)
 		run(*it);

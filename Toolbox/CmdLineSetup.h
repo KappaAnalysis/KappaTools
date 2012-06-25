@@ -6,8 +6,8 @@
 #include "StringTools.h"
 
 // Command line option uses either no argument / requires it / is optional
-enum CmdLineOptionArg { CL_None = 0, CL_Req = 1, CL_Opt = 2};
-enum CmdLinePresets { OPT_None = 0, OPT_Help = 1, OPT_Version = 2, OPT_Show = 4 };
+enum CmdLineOptionArg { CL_None = 0, CL_Req = 1, CL_Opt = 2 };
+enum CmdLinePresets { OPT_None = 0, OPT_Help = 1, OPT_Show = 2 };
 
 // Base class for command line options
 struct CmdLineOption
@@ -149,8 +149,13 @@ struct CmdLineBase
 	static std::string basename;
 	static std::vector<std::string> ParseArgs(const int argc, char **argv, int presets = OPT_None);
 private:
+	static bool displayParams;
+	static bool displayHelp;
 	static size_t pWidth;
 	static std::vector<CmdLineOption*> options;
+
+	static void SetParamShow(std::string arg = "");
+	static void SetPrintHelp(std::string arg = "");
 };
 
 #endif

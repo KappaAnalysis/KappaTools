@@ -6,7 +6,6 @@
 
 using namespace std;
 
-const unsigned long updateInterval = 1000;
 bool ProgressMonitor::bAbort = false;
 
 void ProgressMonitor::CatchSignal(int sig)
@@ -14,7 +13,8 @@ void ProgressMonitor::CatchSignal(int sig)
 	bAbort = true;
 }
 
-ProgressMonitor::ProgressMonitor(const unsigned long nPos, const bool bInstant)
+ProgressMonitor::ProgressMonitor(const unsigned long nPos, const bool bInstant, const unsigned long _updateInterval)
+	: updateInterval(_updateInterval)
 {
 	bShow = isatty(1);
 	signal(SIGINT, CatchSignal);
@@ -90,7 +90,7 @@ ostream &operator<<(ostream &os, ProgressMonitor &pm)
 		<< (int)realSpeed << " / s" << " - ";
 	if (pm.bInstant)
 	{
-		const double curSpeed = updateInterval / (double)(now.tv_sec - pm.tLastUpdate.tv_sec + 1.0e-6 * (now.tv_usec - pm.tLastUpdate.tv_usec));
+		const double curSpeed = pm.updateInterval / (double)(now.tv_sec - pm.tLastUpdate.tv_sec + 1.0e-6 * (now.tv_usec - pm.tLastUpdate.tv_usec));
 		gettimeofday(&(pm.tLastUpdate), 0);
 		os << (int)curSpeed << " / s" << " - ";
 	}

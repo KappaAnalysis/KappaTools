@@ -27,7 +27,7 @@ private:
     double weights3D[50][50][50];
 
 	TH1F *puDistrData;
-	TH1F *puDistrMC;	
+	TH1F *puDistrMC;
 public:
 	PUReweighter(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC, float scaleFactor = 1.);
 

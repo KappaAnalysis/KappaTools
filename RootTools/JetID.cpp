@@ -20,12 +20,12 @@ bool JetIDLoose<KDataPFJet>::operator()(const class KDataPFJet &jet) const
 		(jet.nConst > 1)
 		)
 	{
-		if (fabs(jet.p4.eta()) > 2.4)
+		if (fabs(jet.p4.eta()) < 2.4)
 		{
 			if (
 				(jet.chargedEMFraction < 0.99) &&
 				(jet.chargedHadFraction > 0) &&
-				(jet.chargedEMFraction + jet.chargedHadFraction > 0)
+				(jet.nCharged > 0)
 				)
 				return true;
 			return false;
@@ -44,7 +44,7 @@ bool jetIDTight(const KDataPFJet &jet)
 		(jet.nConst > 1)
 		)
 	{
-		if (fabs(jet.p4.eta()) > 2.4)
+		if (fabs(jet.p4.eta()) < 2.4)
 		{
 			if (
 				(jet.chargedEMFraction < 0.99) &&

@@ -35,7 +35,6 @@ public:
 	std::pair<run_id, run_id> getBoundaries() const;
 	std::pair<run_id, lumi_id> getMaxRunLumiPair() const;
 
-
 	void printJSON(std::ostream &os = std::cout) const;
 	static void printJSON(std::ostream &os,
 		const std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumiSrc);

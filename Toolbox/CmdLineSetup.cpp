@@ -2,13 +2,15 @@
 #include <getopt.h>
 #include <string.h>
 #include <iomanip>
-#include "IOHelper.h"
+#include <cstdlib>
 
 using namespace std;
 
 size_t CmdLineBase::pWidth = 0;
-std::string CmdLineBase::basename = "";
+string CmdLineBase::basename = "";
 vector<CmdLineOption*> CmdLineBase::options;
+bool CmdLineBase::displayParams = false;
+bool CmdLineBase::displayHelp = false;
 
 CmdLineOption::CmdLineOption(const char s, const string l,
 	const string h, const CmdLineOptionArg a)
@@ -93,16 +95,19 @@ void CmdLineBase::DefaultAction(CmdLineInfo *info)
 
 void CmdLineBase::Show(string arg)
 {
-	OStreamGuard guard(cout);
-	cout << "Used parameters: " << endl;
+	displayParams = true;
+	stringstream ss;
+	ss << "Used parameters: " << endl;
 	for (size_t i = 0; i < options.size(); ++i)
 	{
 		if (options[i]->PrintOption() == "")
 			continue;
-		cout << "\t" << setw(pWidth) << options[i]->longName
+		ss << "\t" << setw(pWidth) << options[i]->longName
 			<< " = " << options[i]->PrintOption() << endl;
 	}
-	cout << endl;
+	if (arg != "")
+		ss << "Additional parameters:" << endl << "\t" << arg << endl;
+	cout << ss.str() << endl;
 }
 
 void CmdLineBase::PrintHelp(string arg)
@@ -118,30 +123,18 @@ void CmdLineBase::PrintHelp(string arg)
 	exit(1);
 }
 
-void CmdLineBase::PrintVersion(string arg)
-{
-	cout << "Subsystem versions:" << endl;
-	cout << "-------------------" << endl << endl;
-	exit(1);
-}
-
 vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 {
 	basename = string(argv[0]);
-	if (presets & OPT_Version)
-	{
-		static CmdLineOptionCallback clVersion('V', "version",
-			"Print version", CmdLineBase::PrintVersion);
-	}
 	if (presets & OPT_Help)
 	{
 		static CmdLineOptionCallback clHelp('h', "help",
-			"Print help", CmdLineBase::PrintHelp);
+			"Print help", CmdLineBase::SetPrintHelp);
 	}
 	if (presets & OPT_Show)
 	{
 		static CmdLineOptionCallback clParams('P', "parameters",
-			"Print parameters", CmdLineBase::Show);
+			"Print parameters", CmdLineBase::SetParamShow);
 	}
 
 	CmdLineInfo opt;
@@ -151,5 +144,19 @@ vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 	vector<string> leftover;
 	for (int i = optind; i < argc; i++)
 		leftover.push_back(argv[i]);
+	if (displayParams)
+		Show(join(", ", leftover));
+	if (displayHelp)
+		PrintHelp();
 	return leftover;
+}
+
+void CmdLineBase::SetParamShow(string arg)
+{
+	displayParams = true;
+}
+
+void CmdLineBase::SetPrintHelp(string arg)
+{
+	displayHelp = true;
 }

@@ -5,3 +5,4 @@ libupdate:
 install:
 
 clean:
+	@rm -f *.so *.a

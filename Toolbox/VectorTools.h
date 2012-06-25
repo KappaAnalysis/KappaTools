@@ -13,6 +13,9 @@ std::vector<int> seq(int start, int last);
 template<typename T>
 std::vector<T> seq(T start, T inc, T last);
 
+template<typename TK, typename TV>
+std::map<TV, TK> invertMap(const std::map<TK, TV> &in);
+
 template<typename Tlambda, typename Tin>
 std::vector<std::string> strmap(const Tlambda &lambda, const Tin &list);
 
@@ -40,6 +43,32 @@ std::vector<Tk> match_keys(const std::string &pattern, const std::map<Tk, Tv> &i
 std::vector<std::string> match(const std::string &pattern, const std::vector<std::string> &in,
 	const boost::regex::flag_type flags = boost::regex::extended);
 #endif
+
+template<typename T>
+void multiResize(std::vector<T> &v, size_t s1)
+{
+	v.resize(s1);
+}
+
+template<typename T>
+void multiResize(std::vector<std::vector<T> > &v, size_t s1, size_t s2)
+{
+	v.resize(s1);
+	for (size_t i1 = 0; i1 < s1; ++i1)
+		v[i1].resize(s2);
+}
+
+template<typename T>
+void multiResize(std::vector<std::vector<T> > &v, size_t s1, size_t s2, size_t s3)
+{
+	v.resize(s1);
+	for (size_t i1 = 0; i1 < s1; ++i1)
+	{
+		v[i1].resize(s2);
+		for (size_t i2 = 0; i2 < s2; ++i2)
+			v[i1][i2].resize(s3);
+	}
+}
 
 #include "VectorTools.hxx"
 

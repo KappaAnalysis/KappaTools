@@ -7,6 +7,15 @@ std::vector<T> seq(T start, T inc, T last)
 	return result;
 }
 
+template<typename TK, typename TV>
+std::map<TV, TK> invertMap(const std::map<TK, TV> &in)
+{
+	std::map<TV, TK> result;
+	for (typename std::map<TK, TV>::const_iterator it = in.begin(); it != in.end(); ++it)
+		result[it->second] = it->first;
+	return result;
+}
+
 template<typename Tlambda, typename Tin>
 std::vector<std::string> strmap(const Tlambda &lambda, const Tin &list)
 {

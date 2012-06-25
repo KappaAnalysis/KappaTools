@@ -11,11 +11,11 @@ void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiMet
 		return;
 	switch (dt)
 	{
-		case FileInterfaceBase::DataType::DATA:
-			ss->registerLM(static_cast<KDataLumiMetadata*>(meta_lumi));
+		case FileInterfaceBase::DATA:
+			ss->registerData(static_cast<KDataLumiMetadata*>(meta_lumi));
 			break;
-		case FileInterfaceBase::DataType::GEN:
-			ss->registerLM(static_cast<KGenLumiMetadata*>(meta_lumi));
+		case FileInterfaceBase::GEN:
+			ss->registerMC(static_cast<KGenLumiMetadata*>(meta_lumi));
 			break;
 		default:
 			break;
@@ -24,7 +24,7 @@ void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiMet
 
 FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *rls,
 	bool shuffle, int verbose, ScaleServiceFactory *ss, std::string reportFn)
-	: eventdata("Events"), lumidata(0), verbosity(verbose), current_file()
+	: FileInterfaceBase(verbose), eventdata("Events"), lumidata(0), current_file()
 {
 	if (shuffle)
 		random_shuffle(files.begin(), files.end());
@@ -86,7 +86,8 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 
 	if (reportFn != "")
 	{
-		ofstream(string(reportFn + ".usedFiles").c_str(), fstream::out) << join("\n", usedFiles) << std::endl;
+		ofstream uf(string(reportFn + ".usedFiles").c_str(), fstream::out);
+		uf << join("\n", usedFiles) << std::endl;
 		ofstream fs(string(reportFn + ".json").c_str(), fstream::out);
 		RunLumiSelector::printJSON(fs, usedLumis);
 	}
@@ -97,6 +98,8 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 		exit(1);
 	}
 	Init(&eventdata, dtAll);
+	GetEntry(0);
+	GetMetaEntry();
 }
 
 void FileInterface2::GetMetaEntry()

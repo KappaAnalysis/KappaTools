@@ -30,3 +30,19 @@ std::string join(const std::string delim, const Tin &cont)
 	}
 	return result;
 }
+
+template<typename Tin, typename Tas>
+std::string joinAs(const std::string delim, const Tin &cont)
+{
+	if (cont.empty())
+		return "";
+	std::string result;
+	typename Tin::const_iterator last = cont.end();
+	for (typename Tin::const_iterator it = cont.begin(); it != cont.end();)
+	{
+		result += str(static_cast<Tas>(*it));
+		if (++it != last)
+			result += delim;
+	}
+	return result;
+}

@@ -101,7 +101,7 @@ std::string lstrip(const std::string &input, const std::string rm)
 	size_t pos = 0;
 	if (input.size() == 0)
 		return input;
-	while (in(input[pos], rm))
+	while ((pos < input.size()) && in(input[pos], rm))
 		pos++;
 	return input.substr(pos);
 }

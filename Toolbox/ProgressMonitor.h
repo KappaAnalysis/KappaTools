@@ -7,7 +7,7 @@
 class ProgressMonitor
 {
 public:
-	ProgressMonitor(const unsigned long nPos = 0, const bool bInstant = false);
+	ProgressMonitor(const unsigned long nPos = 0, const bool bInstant = false, const unsigned long updateInterval = 1000);
 	~ProgressMonitor();
 	bool Update();
 	bool Update(const unsigned long cPos);
@@ -16,6 +16,7 @@ public:
 private:
 	bool bShow, bInstant;
 	unsigned long nPos, cPos;
+	const unsigned long updateInterval;
 	struct timeval tStartTime, tLastUpdate;
 	static bool bAbort;
 	static void CatchSignal(int);

@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
 	CmdLineOptionVector<std::string> optJsonFiles('j', "json", "String", "");
 	CmdLineOptionVector<std::string> optHLTs('t', "hlt", "String", "");
 
-	std::vector<std::string> filenames = CmdLineBase::ParseArgs(argc, argv, OPT_Help | OPT_Version);
+	std::vector<std::string> filenames = CmdLineBase::ParseArgs(argc, argv, OPT_Help);
 	CmdLineBase::Show("");
 
 	//opts.outputFile = optOutputFile.Value();
