@@ -1,7 +1,8 @@
 #------------------------------------------------------------------------------
 BASEDIR ?= $(shell cd ..; pwd)
-LIBFILES = libKToolbox.o ProgressMonitor.o StringTools.o IOHelper.o CmdLineSetup.o
-PROGRAM  = libKToolbox.so libKToolbox.a example.bin example.sbin $(LIBFILES)
+LIBFILES = $(subst cpp,o,$(shell ls *.cpp))
+PROGRAM  = libKToolbox.so libKToolbox.a \
+	$(subst cc,bin,$(shell ls *.cc)) $(subst cc,sbin,$(shell ls *.cc)) $(LIBFILES)
 #------------------------------------------------------------------------------
 
 include $(BASEDIR)/Makefile.base

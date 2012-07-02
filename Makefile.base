@@ -1,8 +1,5 @@
 include $(BASEDIR)/Makefile.user
 
-PROGRAM_ALL  = $(PROGRAM) $(PROGRAM_CUSTOM)
-LIBFILES_ALL = $(LIBFILES_CUSTOM) $(LIBFILES)
-
 ifndef VCS_REVISION
 GIT_REVISION = $(shell git log -n1 --pretty=oneline 2> /dev/null | cut -d " " -f 1)
 SVN_REVISION = $(shell svnversion 2> /dev/null | grep -v exp | grep -v versioniertes)
@@ -14,7 +11,8 @@ MYPREFIX = $(HOME)
 endif
 
 ifndef COPTS
-COPTS    = -g -O
+COPTS    = -g -O0
+COPTS    = -O2
 endif
 
 ifndef ARCH
@@ -46,22 +44,22 @@ CXXFLAGS += -I$(KAPPADIR)
 LDFLAGS  += -L$(KAPPADIR)/Kappa/lib
 LDFLAGS  += -Wl,-rpath,$(KAPPADIR)/Kappa/lib
 
-all: $(PROGRAM_ALL)
+all: $(PROGRAM)
 
 %.o: %.cc %.cpp %.hxx %.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.so: $(LIBFILES_ALL)
+%.so: $(LIBFILES)
 	$(CXX) $(LDFLAGS) -shared -o $@ $^
 	mkdir -p $(BASEDIR)/lib
 	-test ! $@ -ef $(BASEDIR)/lib/`basename $@` && cp $@ $(BASEDIR)/lib
 
-%.a: $(LIBFILES_ALL)
+%.a: $(LIBFILES)
 	ar rcs $@ $^
 	mkdir -p $(BASEDIR)/lib
 	-test ! $@ -ef $(BASEDIR)/lib/`basename $@` && cp $@ $(BASEDIR)/lib
 
-install: $(PROGRAM_ALL)
+install: $(PROGRAM)
 
 clean:
-	@rm -f $(PROGRAM_ALL) $(LIBFILES_ALL)
+	@rm -f $(PROGRAM) $(LIBFILES)
