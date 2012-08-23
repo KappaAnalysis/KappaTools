@@ -111,12 +111,12 @@ private:
 class ScaleServiceFactory
 {
 public:
-	ScaleServiceFactory(const bool _doPrescales = true, TH1D *pu_data = 0, TH1D *pu_mc = 0);
+	ScaleServiceFactory(const bool _doPrescales = true, TH1D *pu_data = 0, TH1D *pu_mc = 0) {};
 
-	void registerMC(KGenLumiMetadata *meta_lumi);
-	void registerData(KDataLumiMetadata *meta_lumi);
-	void registerLF(std::string lumiPath);
-	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1);
+	void registerMC(KGenLumiMetadata *meta_lumi) {};
+	void registerData(KDataLumiMetadata *meta_lumi) {};
+	void registerLF(std::string lumiPath) {};
+	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) {};
 
 private:
 	bool doPrescales;
