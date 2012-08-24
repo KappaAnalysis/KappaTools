@@ -116,7 +116,7 @@ public:
 	void registerMC(KGenLumiMetadata *meta_lumi) {};
 	void registerData(KDataLumiMetadata *meta_lumi) {};
 	void registerLF(std::string lumiPath) {};
-	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) {};
+	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) { return 0; };
 
 private:
 	bool doPrescales;
