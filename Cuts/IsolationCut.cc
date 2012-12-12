@@ -104,17 +104,17 @@ namespace KappaTools
 		if (isoType == SUMPTISO)
 		{
 			if (coneSize == 0.3)
-				retValue = obj->sumPtIso03;
+				retValue = obj->trackIso03;
 			if (coneSize == 0.5)
-				retValue = obj->sumPtIso05;
+				retValue = obj->trackIso05;
 		}
 
 		if (isoType == RELCOMBISO)
 		{
 			if (coneSize == 0.3)
-				retValue = (obj->sumPtIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
+				retValue = (obj->trackIso03 + obj->hcalIso03 + obj->ecalIso03) / obj->p4.pt();
 			if (coneSize == 0.5)
-				retValue = (obj->sumPtIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
+				retValue = (obj->trackIso05 + obj->hcalIso05 + obj->ecalIso05) / obj->p4.pt();
 		}
 
 #ifdef KAPPA_FEATURE_JETAREA

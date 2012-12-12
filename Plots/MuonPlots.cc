@@ -157,8 +157,8 @@ namespace KappaTools
 		muon_ecalIso03->Fill(muon->ecalIso03, weight);
 		muon_hcalIso03->Fill(muon->hcalIso03, weight);
 		muon_trackIso03->Fill(muon->trackIso03, weight);
-		muon_sumPtIso03->Fill(muon->sumPtIso03, weight);
-		muon_relCombIso03->Fill((muon->ecalIso03+muon->hcalIso03+muon->sumPtIso03)/muon->p4.pt(), weight);
+		muon_sumPtIso03->Fill(muon->trackIso03, weight);
+		muon_relCombIso03->Fill((muon->ecalIso03+muon->hcalIso03+muon->trackIso03)/muon->p4.pt(), weight);
 		muon_relCombPFIso04->Fill((muon->pfIso04)/muon->p4.pt(), weight);
 
 		muon_pfIso04->Fill(muon->pfIso04, weight);
@@ -166,7 +166,7 @@ namespace KappaTools
 		muon_ecalIso05->Fill(muon->ecalIso05, weight);
 		muon_hcalIso05->Fill(muon->hcalIso05, weight);
 		muon_trackIso05->Fill(muon->trackIso05, weight);
-		muon_sumPtIso05->Fill(muon->sumPtIso05, weight);
+		muon_sumPtIso05->Fill(muon->trackIso05, weight);
 
 		muon_numberOfChambers->Fill(muon->numberOfChambers, weight);
 
