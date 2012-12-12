@@ -157,9 +157,9 @@ template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataJet, KDataMET>,
 template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET>, KDataPFJet>;
 template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KDataPFJet>;
 
-template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataJet, KDataMET>, KappaTools::ZmumuObjects<KDataJet, KDataMET>, KParton>;
-template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET>, KParton>;
-template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KParton>;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataJet, KDataMET>, KappaTools::ZmumuObjects<KDataJet, KDataMET>, KGenParticle>;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataMET>, KGenParticle>;
+template class KappaTools::PlotsByPt<KappaTools::ZmumuPlots<KDataPFJet, KDataPFMET>, KappaTools::ZmumuObjects<KDataPFJet, KDataPFMET>, KGenParticle>;
 
 template class KappaTools::PlotsByPt<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;
 template class KappaTools::PlotsByEta<KappaTools::MuonPlotsByType<KappaTools::StandardMuonPlots>, KDataMuon, KDataMuon >;

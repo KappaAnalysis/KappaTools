@@ -79,10 +79,10 @@ namespace KappaTools
 	};
 
 	template <>
-	int ChargeCut<KParton>::getInternalDecisionValue()
+	int ChargeCut<KGenParticle>::getInternalDecisionValue()
 	{
 		int sum = 0;
-		for (std::vector< KParton * >::iterator it = obj.begin(); it != obj.end(); it++)
+		for (std::vector< KGenParticle * >::iterator it = obj.begin(); it != obj.end(); it++)
 			sum += (*it)->charge();
 		return sum;
 	};
@@ -95,4 +95,4 @@ namespace KappaTools
 }
 
 template class KappaTools::ChargeCut<KDataMuon>;
-template class KappaTools::ChargeCut<KParton>;
+template class KappaTools::ChargeCut<KGenParticle>;
