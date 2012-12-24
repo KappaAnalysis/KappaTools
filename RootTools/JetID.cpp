@@ -1,6 +1,6 @@
 #include "JetID.h"
 
-bool JetIDLoose<KDataJet>::operator()(const class KDataJet &jet) const
+bool JetIDLoose<KDataJet>::operator()(const struct KDataJet &jet) const
 {
 	if (
 		((fabs(jet.p4.eta()) > 2.6) || (jet.fEM > 0.01)) &&		// Remove HCAL noise for |eta|
@@ -12,7 +12,7 @@ bool JetIDLoose<KDataJet>::operator()(const class KDataJet &jet) const
 		return false;
 }
 
-bool JetIDLoose<KDataPFJet>::operator()(const class KDataPFJet &jet) const
+bool JetIDLoose<KDataPFJet>::operator()(const struct KDataPFJet &jet) const
 {
 	if (
 		(jet.neutralEMFraction < 0.99) &&
