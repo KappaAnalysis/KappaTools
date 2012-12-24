@@ -23,7 +23,6 @@ namespace KappaTools
 			TH1D * eta, * eta_zoom;
 			TH1D * phi;
 
-			TH1D * charge;
 			TH1D * chi2;
 			TH1D * ndof;
 			TH1D * chi2norm;

@@ -119,10 +119,6 @@ public:
 	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) { return 0; };
 
 private:
-	bool doPrescales;
-	unsigned long long mc_counter;
-	double sum_int, sum_ext, sum_lumi_est, sum_lumi_db;
-
 	std::map<run_id, std::map<lumi_id, double> > recorded;
 
 	std::map<std::string, hlt_prescale_id> prescaleIDs;

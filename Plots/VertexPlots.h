@@ -16,7 +16,6 @@ namespace KappaTools
 
 			TH1D * pos_xy, * pos_z, * pos_rho;
 
-			TH1D * isFake;
 			TH1D * nTracks;
 
 			TH1D * chi2;

@@ -23,8 +23,7 @@ private:
 	void initTruthMatrix(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC);
 	void initApproxMatrix(std::vector<std::string> inputFilesData, float scaleFactor = 1.);
 	
-	double weightsFall11[50];
-    double weights3D[50][50][50];
+	double weights3D[50][50][50];
 
 	TH1F *puDistrData;
 	TH1F *puDistrMC;

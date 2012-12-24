@@ -36,8 +36,6 @@ namespace KappaTools
 			TH1D * muon_eta, * muon_eta_zoom, * muon_phi;
 			TH2D * muon_eta_phi, * muon_eta_zoom_phi;
 
-			TH1D * muon_hasVertex;
-
 			TH1D * muon_ecalIso03;
 			TH1D * muon_hcalIso03;
 			TH1D * muon_trackIso03;
@@ -53,10 +51,6 @@ namespace KappaTools
 
 			TH1D * muon_numberOfChambers;
 
-			TH1D * vertex_chi2;
-			TH1D * vertex_ndof;
-			TH1D * vertex_chi2norm;
-			TH1D * vertex_chi2prob;
 			TH1D * vertex_zdist;
 
 			TH1D * IP, * IP_zoom;
