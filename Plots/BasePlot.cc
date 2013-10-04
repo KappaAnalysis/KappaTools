@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "BasePlot.h"
 
 KappaTools::BasePlot::BasePlot()

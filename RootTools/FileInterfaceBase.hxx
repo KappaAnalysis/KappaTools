@@ -1,3 +1,7 @@
+/* Copyright (c) 2011 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 // Get event metadata objects
 template<typename T>
 T *FileInterfaceBase::Get()

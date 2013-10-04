@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "StandardP4Plots.h"
 
 KappaTools::TriggerP4Plots::TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory) : StandardP4Plots::StandardP4Plots(tmpFile, tmpDirectory)

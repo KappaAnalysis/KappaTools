@@ -1,3 +1,8 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 template<typename T>
 void printMatrix(T **matrix, const size_t x, const size_t y, const size_t width)
 {

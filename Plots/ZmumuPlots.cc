@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "ZmumuPlots.h"
 
 template <typename JetType, typename METType>

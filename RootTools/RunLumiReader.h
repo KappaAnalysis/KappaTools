@@ -1,3 +1,9 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Andreas Oehler <andreasoehler@gmx.net>
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #ifndef KAPPA_RUNLUMIREADER_H
 #define KAPPA_RUNLUMIREADER_H
 

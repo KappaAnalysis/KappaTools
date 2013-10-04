@@ -1,3 +1,7 @@
+/* Copyright (c) 2011 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #ifndef KAPPA_LSWATCHER_H
 #define KAPPA_LSWATCHER_H
 

@@ -1,3 +1,7 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #include "BranchHolder.h"
 #include <iostream>
 

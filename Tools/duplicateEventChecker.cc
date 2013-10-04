@@ -1,3 +1,8 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Andreas Oehler <andreasoehler@gmx.net>
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #include <set>
 #include <TChain.h>
 #include "../Toolbox/CmdLineSetup.h"

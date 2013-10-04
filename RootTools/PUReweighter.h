@@ -1,3 +1,8 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #ifndef PUREWEIGHTER_H
 #define PUREWEIGHTER_H
 

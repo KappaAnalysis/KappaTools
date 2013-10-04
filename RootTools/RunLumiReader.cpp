@@ -1,3 +1,9 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Andreas Oehler <andreasoehler@gmx.net>
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "RunLumiReader.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>

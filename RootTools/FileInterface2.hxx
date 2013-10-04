@@ -1,3 +1,7 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 // Get lumi metadata objects
 template<typename T>
 T *FileInterface2::GetMeta(std::string name, const bool check, const bool def)

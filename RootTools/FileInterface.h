@@ -1,3 +1,10 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Andreas Oehler <andreasoehler@gmx.net>
+ *   Armin Burgmeier <burgmeier@ekp.uni-karlsruhe.de>
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #ifndef KAPPA_FILEINTERFACE_H
 #define KAPPA_FILEINTERFACE_H
 

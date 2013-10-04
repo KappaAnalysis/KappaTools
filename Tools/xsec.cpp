@@ -1,3 +1,7 @@
+/* Copyright (c) 2011 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #include "Kappa/DataFormats/interface/KMetadata.h"
 #include "../RootTools/RunLumiReader.h"
 #include "../RootTools/FileInterface.h"

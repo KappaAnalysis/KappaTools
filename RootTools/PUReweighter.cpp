@@ -1,3 +1,7 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "PUReweighter.h"
 
 PUReweighter::PUReweighter(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC, float scaleFactor)

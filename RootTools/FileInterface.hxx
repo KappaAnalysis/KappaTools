@@ -1,3 +1,8 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 // Get lumi metadata objects
 template<typename T>
 T *FileInterface::Get(run_id run, lumi_id lumi)

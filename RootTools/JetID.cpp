@@ -1,3 +1,8 @@
+/* Copyright (c) 2011 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "JetID.h"
 
 bool JetIDLoose<KDataJet>::operator()(const struct KDataJet &jet) const

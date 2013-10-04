@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #ifdef USE_JEC
 #ifndef KAPPA_JECTOOLS_H
 #define KAPPA_JECTOOLS_H

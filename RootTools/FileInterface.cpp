@@ -1,3 +1,10 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Andreas Oehler <andreasoehler@gmx.net>
+ *   Armin Burgmeier <burgmeier@ekp.uni-karlsruhe.de>
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "FileInterface.h"
 
 using namespace std;

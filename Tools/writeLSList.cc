@@ -1,3 +1,8 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "TChain.h"
 #include "Kappa/DataFormats/interface/KMetadata.h"
 #include "../Toolbox/CmdLineSetup.h"

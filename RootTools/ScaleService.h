@@ -1,3 +1,8 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #ifndef SCALESERVICE_H
 #define SCALESERVICE_H
 

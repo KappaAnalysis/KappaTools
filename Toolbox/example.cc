@@ -1,3 +1,7 @@
+/* Copyright (c) 2012 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #define DEBUG
 #include "libKToolbox.h"
 #include <iostream>

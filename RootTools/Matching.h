@@ -1,3 +1,9 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ *   Thomas Hauth <Thomas.Hauth@cern.ch>
+ */
+
 #ifndef KAPPA_MATCHING_H
 #define KAPPA_MATCHING_H
 

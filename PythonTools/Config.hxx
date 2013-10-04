@@ -1,3 +1,7 @@
+/* Copyright (c) 2011 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 template<typename T>
 void PythonConfig::put(const std::string &name, const T &obj)
 {

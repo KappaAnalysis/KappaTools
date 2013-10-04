@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #include <TRandom3.h>
 #include <Kappa/DataFormats/interface/Kappa.h>
 #include <Kappa/DataFormats/interface/KDebug.h>

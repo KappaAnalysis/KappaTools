@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 template<typename T>
 std::vector<T> seq(T start, T inc, T last)
 {

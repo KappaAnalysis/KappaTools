@@ -1,3 +1,9 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Joram Berger <joram.berger@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #include "MuonPlots.h"
 
 namespace KappaTools

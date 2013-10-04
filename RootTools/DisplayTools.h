@@ -1,3 +1,7 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ */
+
 #ifndef KAPPA_DISPLAYTOOLS_H
 #define KAPPA_DISPLAYTOOLS_H
 

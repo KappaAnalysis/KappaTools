@@ -1,3 +1,8 @@
+/* Copyright (c) 2010 - All Rights Reserved
+ *   Fred Stober <stober@cern.ch>
+ *   Manuel Zeise <zeise@cern.ch>
+ */
+
 #ifndef TBCMDLINESETUP_H
 #define TBCMDLINESETUP_H
 
