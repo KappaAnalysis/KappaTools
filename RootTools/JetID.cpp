@@ -40,8 +40,7 @@ bool JetIDLoose<KDataPFJet>::operator()(const struct KDataPFJet &jet) const
 	return false;
 }
 
-template<>
-bool jetIDTight(const KDataPFJet &jet)
+bool JetIDTight<KDataPFJet>::operator()(const class KDataPFJet &jet) const
 {
 	if (
 		(jet.neutralEMFraction < 0.90) &&
@@ -54,7 +53,7 @@ bool jetIDTight(const KDataPFJet &jet)
 			if (
 				(jet.chargedEMFraction < 0.99) &&
 				(jet.chargedHadFraction > 0) &&
-				(jet.chargedEMFraction + jet.chargedHadFraction > 0)
+				(jet.nCharged > 0)
 				)
 				return true;
 			return false;

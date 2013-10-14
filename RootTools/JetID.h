@@ -30,9 +30,18 @@ struct JetIDLoose<KDataPFJet>
 };
 
 template<typename T>
-bool jetIDTight(const T &jet);
+struct JetIDTight
+{
+	typedef const T &argument_type;
+	bool operator()(const T &jet) const { return true; }
+};
+
 template<>
-bool jetIDTight(const KDataPFJet &jet);
+struct JetIDTight<KDataPFJet>
+{
+	typedef const KDataPFJet &argument_type;
+	bool operator()(const KDataPFJet &jet) const;
+};
 
 template<typename T>
 struct JetIDLooseFail
