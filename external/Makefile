@@ -5,13 +5,13 @@ all: $(SUBDIR) libupdate
 BOOSTVER = 1_44_0
 
 boost:
-	wget http://switch.dl.sourceforge.net/project/boost/boost/1.44.0/boost_$(BOOSTVER).tar.bz2 -O boost.tar.bz2
-	tar -xvjf boost.tar.bz2
-	rm boost.tar.bz2
-	ln -fs boost_$(BOOSTVER)/boost boost
+	ln -s $(shell ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/include/boost
+	ln -s $(shell ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/lib
 
 libupdate:
 
 install:
 
 clean:
+	rm -f boost
+	rm -f lib
