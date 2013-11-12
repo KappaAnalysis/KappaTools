@@ -1,7 +1,7 @@
 #include <TFile.h>
 #include <iostream>
-#include "PlotTools/PlotInterface.h"
-#include "KappaTools/RootTools/libKRootTools.h"
+#include "PlotInterface.h"
+#include "../RootTools/libKRootTools.h"
 
 using namespace std;
 

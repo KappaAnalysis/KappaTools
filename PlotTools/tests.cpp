@@ -1,8 +1,8 @@
 #include <TFile.h>
 #include <iostream>
-#include "PlotTools/PlotInterface.h"
-#include "PlotTools/Plot_Run.h"
-#include "KappaTools/RootTools/libKRootTools.h"
+#include "PlotInterface.h"
+#include "Plot_Run.h"
+#include "../RootTools/libKRootTools.h"
 
 using namespace std;
 

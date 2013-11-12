@@ -7,5 +7,5 @@ PROGRAM  = libKPlotTools.so libKPlotTools.a tests.sbin tests1.sbin $(LIBFILES)
 include $(BASEDIR)/Makefile.root
 
 %.sbin: %.o
-	$(CXX) $(LDFLAGS) -lPlotTools -o $@ $^ \
+	$(CXX) $(LDFLAGS) -lKPlotTools -o $@ $^ \
 	$(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
