@@ -2,7 +2,7 @@ include $(BASEDIR)/Makefile.user
 
 ifndef VCS_REVISION
 GIT_REVISION = $(shell git log -n1 --pretty=oneline 2> /dev/null | cut -d " " -f 1)
-SVN_REVISION = $(shell svnversion 2> /dev/null | grep -v exp | grep -v versioniertes)
+SVN_REVISION = $(shell svnversion 2> /dev/null | grep -v exp | grep -v version)
 VCS_REVISION = $(if $(SVN_REVISION),$(SVN_REVISION),$(GIT_REVISION))
 endif
 

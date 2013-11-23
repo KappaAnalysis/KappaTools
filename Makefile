@@ -1,4 +1,4 @@
-SUBDIR   = external Toolbox RootTools Example Tools lib
+SUBDIR   = external Toolbox RootTools PlotTools Example Tools lib
 
 all: $(SUBDIR)
 	for DIR in $(SUBDIR); do \
