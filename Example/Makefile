@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 BASEDIR ?= $(shell cd ..; pwd)
-PROGRAM  = minimal.sbin
+PROGRAM  = minimal.sbin minimal_disc.sbin
 #------------------------------------------------------------------------------
 
 include $(BASEDIR)/Makefile.root
