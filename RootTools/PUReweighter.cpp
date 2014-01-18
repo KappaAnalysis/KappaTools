@@ -170,13 +170,21 @@ void PUReweighter::initTruthMatrix(std::vector<std::string> inputFilesData, std:
 
 void PUReweighter::initApproxMatrix(std::vector<std::string> inputFiles, float scaleFactor)
 {
-	TH1F *Data_distr_ = 0;
+	if (inputFiles.empty())
+	{
+		std::cout << "You did not provide any input files to PUReweighter::initApproxMatrix()!" << std::endl;
+		std::cout << "Please check. Terminating." << std::endl;
+		return;
+	}
+
+	TH1F *Data_distr_ = nullptr;
+
 	for (std::vector<std::string>::const_iterator it = inputFiles.begin(); it != inputFiles.end(); ++it)
 	{
 		std::cout << *it << "\n";
 		TFile *file_ = TFile::Open(it->c_str());
 		TH1F *tmpDistr = (TH1F *) file_->Get("pileup");
-		if (Data_distr_ == 0)
+		if (Data_distr_ == nullptr)
 		{
 			Data_distr_ = new TH1F("Data_distr_", "", tmpDistr->GetNbinsX(), tmpDistr->GetBinLowEdge(1), tmpDistr->GetBinLowEdge(tmpDistr->GetNbinsX()+1));
 			Data_distr_->SetDirectory(0);
@@ -184,6 +192,13 @@ void PUReweighter::initApproxMatrix(std::vector<std::string> inputFiles, float s
 		Data_distr_->Add(tmpDistr);
 		file_->Close();
 		delete file_;
+	}
+
+	if (Data_distr_ == nullptr)
+	{
+		std::cout << "Data distribution could not be initialized in PUReweighter::initApproxMatrix()." << std::endl;
+		std::cout << "Please check. Terminating." << std::endl;
+		return;
 	}
 
     Data_distr_->Scale(1.0 / Data_distr_->Integral());
