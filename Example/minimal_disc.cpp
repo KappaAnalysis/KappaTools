@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	KDataPFJets *jets = fi.Get<KDataPFJets>(names[0]);
 	KDataPFTaus *taus = fi.Get<KDataPFTaus>("hpsPFTaus");
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
-	KLumiMetadata *meta_lumi = fi.GetMeta<KLumiMetadata>("KLumiMetadata");
+	//KLumiMetadata *meta_lumi = fi.GetMeta<KLumiMetadata>("KLumiMetadata");
 	KTauDiscriminatorMetadata *meta_taudisc = fi.GetMeta<KTauDiscriminatorMetadata>("hpsPFTaus");
 
 	// Interface for output / booking histograms
