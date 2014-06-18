@@ -1,3 +1,6 @@
+
+#include "StringTools.h"
+
 template<typename T>
 ivector<T>::ivector()
 {

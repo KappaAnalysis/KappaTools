@@ -53,7 +53,7 @@ _S &_S::operator +(const double x)
 	if (myp >= 0)
 		mystring += str(x, myp);
 	else
-		mystring += str(x);
+		mystring += KappaTools::str(x);
 	return *this;
 }
 
@@ -65,7 +65,7 @@ _S &_S::operator +(const bool x)
 
 const char *randomstr(const string prefix)
 {
-	return gStringPool.AddObject(prefix + str(rand())).c_str();
+	return gStringPool.AddObject(prefix + KappaTools::str(rand())).c_str();
 }
 
 string str(const double &i, const int p)

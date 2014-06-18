@@ -37,14 +37,14 @@ pair<string, string> sround(edouble x)
 		return make_pair(str(fround(x.first, -p), y), str(err, y));	
 	}
 	else
-		return make_pair(str(x.first), str(x.second));	
+		return make_pair(KappaTools::str(x.first), KappaTools::str(x.second));	
 }
 
 string str(edouble x, int p)
 {
 	pair<string, string> tmp;
 	if (p > 0)
-		tmp = make_pair(str(fround_p(x.first, p)), str(fround_p(x.second, p)));
+		tmp = make_pair(KappaTools::str(fround_p(x.first, p)), KappaTools::str(fround_p(x.second, p)));
 	else
 		tmp = sround(x);
 	return tmp.first + " +/- " + tmp.second;

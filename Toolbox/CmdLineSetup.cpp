@@ -149,7 +149,7 @@ vector<string> CmdLineBase::ParseArgs(const int argc, char **argv, int presets)
 	for (int i = optind; i < argc; i++)
 		leftover.push_back(argv[i]);
 	if (displayParams)
-		Show(join(", ", leftover));
+		Show(KappaTools::join(", ", leftover));
 	if (displayHelp)
 		PrintHelp();
 	return leftover;
