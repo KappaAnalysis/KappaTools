@@ -36,7 +36,7 @@ std::vector<std::string> fmtmap(const std::string &pattern, const Tin &list, con
 	std::vector<std::string> result;
 	result.reserve(list.size());
 	for (typename Tin::const_iterator it = list.begin(); it != list.end(); ++it)
-		result.push_back(replaceall(pattern, param, str(*it)));
+		result.push_back(KappaTools::replaceall(pattern, param, KappaTools::str(*it)));
 	return result;
 }
 

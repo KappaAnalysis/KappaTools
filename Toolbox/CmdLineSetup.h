@@ -45,8 +45,8 @@ struct CmdLineOptionValue : public CmdLineOption
 	operator const T() const { return value; }
 	const T &Value() const { return value; }
 
-	virtual void FoundOption(std::string arg = "") { value = parse<T>(arg); }
-	virtual std::string PrintOption() const { return str(value); }
+	virtual void FoundOption(std::string arg = "") { value = KappaTools::parse<T>(arg); }
+	virtual std::string PrintOption() const { return KappaTools::str(value); }
 private:
 	T value;
 };
@@ -63,8 +63,8 @@ struct CmdLineOptionValue<std::string> : public CmdLineOption
 	operator const std::string() const { return value; }
 	const std::string &Value() const { return value; }
 
-	virtual void FoundOption(std::string arg = "") { value = parse<std::string>(arg); }
-	virtual std::string PrintOption() const { return str(value); }
+	virtual void FoundOption(std::string arg = "") { value = KappaTools::parse<std::string>(arg); }
+	virtual std::string PrintOption() const { return KappaTools::str(value); }
 private:
 	std::string value;
 };
@@ -87,9 +87,9 @@ struct CmdLineOptionVector : public CmdLineOption
 		value.clear();
 		if (arg == "")
 			return;
-		std::vector<std::string> tmp = split(arg, ",");
+		std::vector<std::string> tmp = KappaTools::split(arg, ",");
 		for (size_t i = 0; i < tmp.size(); ++i)
-			value.push_back(parse<T>(tmp[i]));
+			value.push_back(KappaTools::parse<T>(tmp[i]));
 	}
 	virtual std::string PrintOption() const
 	{
@@ -97,8 +97,8 @@ struct CmdLineOptionVector : public CmdLineOption
 		if (value.size() > 0)
 		{
 			for (size_t i = 0; i < value.size() - 1; ++i)
-				tmp += str(value[i]) + ", ";
-			tmp += str(value[value.size() - 1]);
+				tmp += KappaTools::str(value[i]) + ", ";
+			tmp += KappaTools::str(value[value.size() - 1]);
 		}
 		return tmp;
 	}
@@ -118,7 +118,7 @@ struct CmdLineOptionSwitch : public CmdLineOption
 	const T &Value() const { return value; }
 
 	virtual void FoundOption(std::string arg = "") { value = !value; }
-	virtual std::string PrintOption() const { return str(value); }
+	virtual std::string PrintOption() const { return KappaTools::str(value); }
 private:
 	T value;
 };

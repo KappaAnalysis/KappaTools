@@ -23,21 +23,21 @@ namespace __gnu_cxx
 	{
 		struct MapStrClass
 		{
-			static std::string pstr(const std::pair<const T1, T2> &x) { return str<T1>(x.first) + ": " + str<T2>(x.second); }
+			static std::string pstr(const std::pair<const T1, T2> &x) { return KappaTools::str<T1>(x.first) + ": " + KappaTools::str<T2>(x.second); }
 		};
-		return os << "{" << join(", ", strmap(MapStrClass::pstr, m)) << "}";
+		return os << "{" << KappaTools::join(", ", strmap(MapStrClass::pstr, m)) << "}";
 	}
 
 	template<typename T>
 	std::ostream &operator<<(std::ostream &os, const std::set<T> &s)
 	{
-		return os << "{" << join(", ", s) << "}";
+		return os << "{" << KappaTools::join(", ", s) << "}";
 	}
 
 	template<typename T>
 	std::ostream &operator<<(std::ostream &os, const std::vector<T> &v)
 	{
-		return os << "[" << join(", ", v) << "]";
+		return os << "[" << KappaTools::join(", ", v) << "]";
 	}
 
 	template<typename T1, typename T2>

@@ -3,16 +3,16 @@
  */
 
 template <typename T>
-T parse(const std::string &s, bool fail)
+T KappaTools::parse(const std::string &s, bool fail)
 {
 	T x; char temp; std::istringstream str(s);
 	if (!(str >> x) || (fail && str.get(temp)))
-		reportParseError(s);
+		KappaTools::reportParseError(s);
 	return x;
 }
 
 template <typename T>
-std::string str(const T &i)
+std::string KappaTools::str(const T &i)
 {
 	std::ostringstream str;
 	str << i;
@@ -20,7 +20,7 @@ std::string str(const T &i)
 }
 
 template<typename Tin>
-std::string join(const std::string delim, const Tin &cont)
+std::string KappaTools::join(const std::string delim, const Tin &cont)
 {
 	if (cont.empty())
 		return "";
@@ -36,7 +36,7 @@ std::string join(const std::string delim, const Tin &cont)
 }
 
 template<typename Tin, typename Tas>
-std::string joinAs(const std::string delim, const Tin &cont)
+std::string KappaTools::joinAs(const std::string delim, const Tin &cont)
 {
 	if (cont.empty())
 		return "";

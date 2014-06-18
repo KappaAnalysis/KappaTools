@@ -7,26 +7,27 @@
 #include <cstdlib>
 #include <stdarg.h>
 #include <stdio.h>
+#include <cctype>
 
-void reportParseError(const std::string &s)
+void KappaTools::reportParseError(const std::string &s)
 {
 	std::cerr << "Parse error: " << s;
 	exit(0);
 }
 
-std::string tolower(std::string s)
+std::string KappaTools::tolower(std::string s)
 {
-	transform(s.begin(), s.end(), s.begin(), (int(*)(int))tolower);
+	transform(s.begin(), s.end(), s.begin(), (int(*)(int))::tolower);
 	return s;
 }
 
-std::string toupper(std::string s)
+std::string KappaTools::toupper(std::string s)
 {
-	transform(s.begin(), s.end(), s.begin(), (int(*)(int))toupper);
+	transform(s.begin(), s.end(), s.begin(), (int(*)(int))::toupper);
 	return s;
 }
 
-std::vector<std::string> split(const std::string &str, const std::string &delim, const size_t maxSize)
+std::vector<std::string> KappaTools::split(const std::string &str, const std::string &delim, const size_t maxSize)
 {
 	std::vector<std::string> tokens;
 
@@ -46,7 +47,7 @@ std::vector<std::string> split(const std::string &str, const std::string &delim,
 	return tokens;
 }
 
-std::vector<std::string> tokenize(const std::string &str, const std::string &delim, const bool escape)
+std::vector<std::string> KappaTools::tokenize(const std::string &str, const std::string &delim, const bool escape)
 {
 	if (!escape)
 		return split(str, delim);
@@ -62,14 +63,14 @@ std::vector<std::string> tokenize(const std::string &str, const std::string &del
 		}
 		else
 		{
-			std::vector<std::string> tok = split(esc[i], delim);
+			std::vector<std::string> tok = KappaTools::split(esc[i], delim);
 			copy(tok.begin(), tok.end(), back_inserter(result));
 		}
 	return result;
 }
 
 template <>
-std::string str<bool>(const bool &i)
+std::string KappaTools::str<bool>(const bool &i)
 {
 	if (i)
 		return "true";
@@ -77,18 +78,18 @@ std::string str<bool>(const bool &i)
 }
 
 template <>
-std::string parse<std::string>(const std::string &s, bool)
+std::string KappaTools::parse<std::string>(const std::string &s, bool)
 {
 	return s;
 }
 
 template <>
-bool parse<bool>(const std::string &s, bool fail)
+bool KappaTools::parse<bool>(const std::string &s, bool fail)
 {
 	static const std::string s_true[] = {"true", "yes", "y", "1"};
 	static const std::string s_false[] = {"false", "no", "n", "0"};
 
-	const std::string tmp = tolower(s);
+	const std::string tmp = KappaTools::tolower(s);
 	for (size_t i = 0; i < sizeof(s_true) / sizeof(std::string); ++i)
 		if (s_true[i] == tmp)
 			return true;
@@ -96,11 +97,11 @@ bool parse<bool>(const std::string &s, bool fail)
 		if (s_false[i] == tmp)
 			return false;
 	if (fail)
-		reportParseError(s);
+		KappaTools::reportParseError(s);
 	return false;
 }
 
-std::string lstrip(const std::string &input, const std::string rm)
+std::string KappaTools::lstrip(const std::string &input, const std::string rm)
 {
 	size_t pos = 0;
 	if (input.size() == 0)
@@ -110,7 +111,7 @@ std::string lstrip(const std::string &input, const std::string rm)
 	return input.substr(pos);
 }
 
-std::string rstrip(const std::string &input, const std::string rm)
+std::string KappaTools::rstrip(const std::string &input, const std::string rm)
 {
 	size_t pos = input.size();
 	if (pos == 0)
@@ -119,46 +120,46 @@ std::string rstrip(const std::string &input, const std::string rm)
 	return input.substr(0, pos + 1);
 }
 
-std::string strip(const std::string &input, const std::string rm)
+std::string KappaTools::strip(const std::string &input, const std::string rm)
 {
 	return rstrip(lstrip(input, rm), rm);
 }
 
 template<>
-bool in(const char x, const std::string y)
+bool KappaTools::in(const char x, const std::string y)
 {
 	return y.find_first_of(x) != std::string::npos;
 }
 
 template<>
-bool in(const char x, const std::string &y)
+bool KappaTools::in(const char x, const std::string &y)
 {
 	return y.find_first_of(x) != std::string::npos;
 }
 
 template<>
-bool in(const std::string x, const std::vector<std::string> &y)
+bool KappaTools::in(const std::string x, const std::vector<std::string> &y)
 {
 	return std::find(y.begin(), y.end(), x) != y.end();
 }
 
 template<>
-bool in(const std::string &x, const std::vector<std::string> &y)
+bool KappaTools::in(const std::string &x, const std::vector<std::string> &y)
 {
 	return std::find(y.begin(), y.end(), x) != y.end();
 }
 
-bool startswith(const std::string &input, const std::string search)
+bool KappaTools::startswith(const std::string &input, const std::string search)
 {
 	return input.find(search) == 0;
 }
 
-bool endswith(const std::string &input, const std::string search)
+bool KappaTools::endswith(const std::string &input, const std::string search)
 {
 	return input.find(search) == input.size() - search.size();
 }
 
-std::string basename(const std::string &input)
+std::string KappaTools::basename(const std::string &input)
 {
 	std::vector<std::string> tmp = split(input, "/");
 	if (tmp.size() == 0)
@@ -166,7 +167,7 @@ std::string basename(const std::string &input)
 	return tmp[tmp.size() - 1];
 }
 
-std::string dirname(const std::string &input)
+std::string KappaTools::dirname(const std::string &input)
 {
 	std::vector<std::string> tmp = split(input, "/");
 	if (tmp.size() == 0)
@@ -190,13 +191,13 @@ std::string substVars(std::string in, std::vector<std::pair<std::string, std::st
 	// Variable substitution
 	for (size_t i = 0; i < vars.size(); i++)
 	{
-		in = replaceall(in, "${" + vars[i].first + "}", vars[i].second);
-		in = replaceall(in, "$" + vars[i].first, vars[i].second);
+		in = KappaTools::replaceall(in, "${" + vars[i].first + "}", vars[i].second);
+		in = KappaTools::replaceall(in, "$" + vars[i].first, vars[i].second);
 	}
 	return in;
 }
 
-std::string replace(const std::string &input, const std::string &find, const std::string &replace)
+std::string KappaTools::replace(const std::string &input, const std::string &find, const std::string &replace)
 {
 	int pos = input.find(find);
 	if (pos < 0)
@@ -206,7 +207,7 @@ std::string replace(const std::string &input, const std::string &find, const std
 	return temp;
 }
 
-std::string replaceall(const std::string &input, const std::string &find, const std::string &replace)
+std::string KappaTools::replaceall(const std::string &input, const std::string &find, const std::string &replace)
 {
 	int pos = 0;
 	std::string temp = input;
@@ -218,7 +219,7 @@ std::string replaceall(const std::string &input, const std::string &find, const 
 	return temp;
 }
 
-stlprintf::stlprintf(const char *format, ...)
+KappaTools::stlprintf::stlprintf(const char *format, ...)
 {
 	va_list args;
 	va_start (args, format);
@@ -230,12 +231,12 @@ stlprintf::stlprintf(const char *format, ...)
 		str = tmp;
 }
 
-stlprintf::operator const char*() const
+KappaTools::stlprintf::operator const char*() const
 {
 	return str.c_str();
 }
 
-stlprintf::operator const std::string() const
+KappaTools::stlprintf::operator const std::string() const
 {
 	return str;
 }

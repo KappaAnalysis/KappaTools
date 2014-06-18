@@ -10,7 +10,7 @@
 using namespace std;
 
 double myadd(const double &x) { return x + 12.5; }
-std::string myconv(const double &x) { return "XXX" + str(x); }
+std::string myconv(const double &x) { return "XXX" + KappaTools::str(x); }
 
 // Not an ideal example on how to use CmdLineBase...
 struct CmdLineSetup
@@ -44,17 +44,17 @@ int main(int argc, char **argv)
 	/////////////////////////////////////////////////////////
 
 	// StringTools.h ////////////////////////////////////////
-	cout << parse<int>("123") << " " << parse<double>("1.23") << endl;
-	cout << parse<bool>("yes") << " " << parse<bool>("false") << endl;
-	cout << str("TEST1") << " " << str(string("TEST2")) << endl;
-	cout << str(123) << " " << str(1.23) << endl;
+	cout << KappaTools::parse<int>("123") << " " << KappaTools::parse<double>("1.23") << endl;
+	cout << KappaTools::parse<bool>("yes") << " " << KappaTools::parse<bool>("false") << endl;
+	cout << KappaTools::str("TEST1") << " " << KappaTools::str(string("TEST2")) << endl;
+	cout << KappaTools::str(123) << " " << KappaTools::str(1.23) << endl;
 	/////////////////////////////////////////////////////////
 	string s = "TesT";
-	cout << startswith("Hallo Welt", "Hallo") << " - ";
-	cout << startswith("Hallo Welt", "Welt") << " - ";
-	cout << endswith("Hallo Welt", "Hallo") << " - ";
-	cout << endswith("Hallo Welt", "Welt") << endl;
-	cout << tolower(s) << " " << toupper(s) << endl;
+	cout << KappaTools::startswith("Hallo Welt", "Hallo") << " - ";
+	cout << KappaTools::startswith("Hallo Welt", "Welt") << " - ";
+	cout << KappaTools::endswith("Hallo Welt", "Hallo") << " - ";
+	cout << KappaTools::endswith("Hallo Welt", "Welt") << endl;
+	cout << KappaTools::tolower(s) << " " << KappaTools::toupper(s) << endl;
 	/////////////////////////////////////////////////////////
 
 	// IOHelper.h ///////////////////////////////////////////
@@ -70,12 +70,12 @@ int main(int argc, char **argv)
 	vs.push_back("A.2"); vs.push_back("B.4"); vs.push_back("C.6");
 	cout << vs << endl;
 	/////////////////////////////////////////////////////////
-	cout << str<string>("123456") << endl;
-	string tmp = join(".-.", sd);
+	cout << KappaTools::str<string>("123456") << endl;
+	string tmp = KappaTools::join(".-.", sd);
 	cout << tmp << endl;
 	/////////////////////////////////////////////////////////
 	cout << strmap(myconv, sd) << endl;
-	cout << strmap(str<double>, sd) << endl;
+	cout << strmap(KappaTools::str<double>, sd) << endl;
 	cout << mymap(myadd, sd) << endl;
 	cout << strmap(myconv, mymap(myadd, sd)) << endl;
 	cout << endl;

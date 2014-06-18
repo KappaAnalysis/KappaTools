@@ -8,7 +8,7 @@ using namespace std;
 
 
 double myadd(const double &x) { return x + 12.5; }
-std::string myconv(const double &x) { return "XXX" + str(x); }
+std::string myconv(const double &x) { return "XXX" + KappaTools::str(x); }
 
 std::string check(std::string cmd, std::string is, std::string should)
 {
@@ -80,12 +80,12 @@ int main(int argc, char **argv)
 
 	// String.h /////////////////////////////////////////////
 	cout << randomstr() << " " << randomstr("TEST") << endl;
-	cout << parse<int>("123") << " " << parse<double>("1.23") << endl;
-	cout << parse<bool>("yes") << " " << parse<bool>("false") << endl;
-	cout << str("TEST1") << " " << str(string("TEST2")) << endl;
-	cout << str(123) << " " << str(1.23) << endl;
+	cout << KappaTools::parse<int>("123") << " " << KappaTools::parse<double>("1.23") << endl;
+	cout << KappaTools::parse<bool>("yes") << " " << KappaTools::parse<bool>("false") << endl;
+	cout << KappaTools::str("TEST1") << " " << KappaTools::str(string("TEST2")) << endl;
+	cout << KappaTools::str(123) << " " << KappaTools::str(1.23) << endl;
 	const double x = 1.23456;
-	cout << str(x, 3) << " " << x << " " << str(x) << endl;
+	cout << str(x, 3) << " " << x << " " << KappaTools::str(x) << endl;
 	/////////////////////////////////////////////////////////
 	cout << _S() + "TEST " + 123 + " " + x + " " + true << endl;
 	cout << _S("TEST ").SetPrecision(0) + x << " " << true << endl;
@@ -93,29 +93,29 @@ int main(int argc, char **argv)
 	string s = "TesT";
 	cout << _S(s).SetPrecision(2) + " " + x << " " << true << endl;
 	/////////////////////////////////////////////////////////
-	cout << tolower(s) << " " << toupper(s) << endl;
-	cout << replace(s, "Te", "Be") << endl;
-	cout << replace(s + s, "Te", "Be") << endl;
-	cout << replaceall(s + s, "Te", "Be") << endl;
+	cout << KappaTools::tolower(s) << " " << KappaTools::toupper(s) << endl;
+	cout << KappaTools::replace(s, "Te", "Be") << endl;
+	cout << KappaTools::replace(s + s, "Te", "Be") << endl;
+	cout << KappaTools::replaceall(s + s, "Te", "Be") << endl;
 	/////////////////////////////////////////////////////////
 	const string t = "THIS*IS-A GOOD'*'TEST::FOR,THE TOKENIZER";
 	cout << t << endl;
-	vector<string> tok = tokenize(t, " :*");
+	vector<string> tok = KappaTools::tokenize(t, " :*");
 	cout << tok.size();
 	copy(tok.begin(), tok.end(), ostream_iterator<string>(cout, "\t"));
 	cout << endl;
-	tok = tokenize(t, " :*-,", true);
+	tok = KappaTools::tokenize(t, " :*-,", true);
 	copy(tok.begin(), tok.end(), ostream_iterator<string>(cout, "\t"));
 	cout << endl;
 	/////////////////////////////////////////////////////////
-	cout << in('x', string("TEST")) << endl;
-	cout << in('T', string("TEST")) << endl;
-	cout << check("lstrip(\"TTTTEST\", \"TS\")", lstrip("TTTTEST", "TS"), "EST") << endl;
-	cout << check("lstrip(\"TTTTEST\", \"ET\")", lstrip("TTTTEST", "ET"), "ST") << endl;
-	cout << check("rstrip(\"TTTTEST\", \"TS\")", rstrip("TTTTEST", "TS"), "TTTTE") << endl;
-	cout << check("rstrip(\"TTTTEST\", \"ET\")", rstrip("TTTTEST", "ET"), "TTTTES") << endl;
-	cout << check("strip(\"TTTTEST\", \"TS\")", strip("TTTTEST", "TS"), "E") << endl;
-	cout << check("strip(\"TTTTEST\", \"ET\")", strip("TTTTEST", "ET"), "S") << endl;
+	cout << KappaTools::in('x', string("TEST")) << endl;
+	cout << KappaTools::in('T', string("TEST")) << endl;
+	cout << check("lstrip(\"TTTTEST\", \"TS\")", KappaTools::lstrip("TTTTEST", "TS"), "EST") << endl;
+	cout << check("lstrip(\"TTTTEST\", \"ET\")", KappaTools::lstrip("TTTTEST", "ET"), "ST") << endl;
+	cout << check("rstrip(\"TTTTEST\", \"TS\")", KappaTools::rstrip("TTTTEST", "TS"), "TTTTE") << endl;
+	cout << check("rstrip(\"TTTTEST\", \"ET\")", KappaTools::rstrip("TTTTEST", "ET"), "TTTTES") << endl;
+	cout << check("strip(\"TTTTEST\", \"TS\")", KappaTools::strip("TTTTEST", "TS"), "E") << endl;
+	cout << check("strip(\"TTTTEST\", \"ET\")", KappaTools::strip("TTTTEST", "ET"), "S") << endl;
 	/////////////////////////////////////////////////////////
 
 	// Text.h ///////////////////////////////////////////////
@@ -135,17 +135,17 @@ int main(int argc, char **argv)
 	vs.push_back("A.2"); vs.push_back("B.4"); vs.push_back("C.6");
 	cout << vs << endl;
 	/////////////////////////////////////////////////////////
-	cout << str<string>("123456") << endl;
-	string tmp = join(".-.", sd);
+	cout << KappaTools::str<string>("123456") << endl;
+	string tmp = KappaTools::join(".-.", sd);
 	cout << tmp << endl;
 	/////////////////////////////////////////////////////////
 	cout << sd << endl;
 	cout << convert<set<double>, vector<double> >(sd) << endl;
 	/////////////////////////////////////////////////////////
 	cout << strmap(myconv, sd) << endl;
-	cout << strmap(str<double>, sd) << endl;
+	cout << strmap(KappaTools::str<double>, sd) << endl;
 	cout << fmtmap(string("This is a double: $DOUBLE"), sd, string("$DOUBLE")) << endl;
-	cout << join("...\n", fmtmap(string("double: $DOUBLE"), sd, string("$DOUBLE"))) << endl;
+	cout << KappaTools::join("...\n", fmtmap(string("double: $DOUBLE"), sd, string("$DOUBLE"))) << endl;
 	cout << mymap(myadd, sd) << endl;
 	cout << strmap(myconv, mymap(myadd, sd)) << endl;
 	cout << endl;

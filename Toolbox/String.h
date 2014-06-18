@@ -17,7 +17,7 @@ public:
 	template<typename T>
 	_S &operator +(const T x)
 	{
-		mystring += str<T>(x);
+		mystring += KappaTools::str<T>(x);
 		return *this;
 	}
 	_S &operator +(const _S x);
