@@ -67,37 +67,37 @@ public:
 	template<typename T>
 	T *clone(const std::string name, T *base)
 	{
-		return insert<T>(name, RawPlotInterface::clone<T>(basename(name), base));
+		return insert<T>(name, RawPlotInterface::clone<T>(KappaTools::basename(name), base));
 	}
 
 	template<typename T, typename P1>
 	T *book(const std::string name, const P1 p1)
 	{
-		return insert<T>(name, RawPlotInterface::book<T>(basename(name), p1));
+		return insert<T>(name, RawPlotInterface::book<T>(KappaTools::basename(name), p1));
 	}
 
 	template<typename T, typename P1, typename P2>
 	T *book(const std::string name, const P1 p1, const P2 p2)
 	{
-		return insert<T>(name, RawPlotInterface::book<T>(basename(name), p1, p2));
+		return insert<T>(name, RawPlotInterface::book<T>(KappaTools::basename(name), p1, p2));
 	}
 
 	template<typename T, typename P1, typename P2, typename P3>
 	T *book(const std::string name, const P1 p1, const P2 p2, const P3 p3)
 	{
-		return insert<T>(name, RawPlotInterface::book<T>(basename(name), p1, p2, p3));
+		return insert<T>(name, RawPlotInterface::book<T>(KappaTools::basename(name), p1, p2, p3));
 	}
 
 	template<typename T, typename P1, typename P2, typename P3, typename P4>
 	T *book(const std::string name, const P1 p1, const P2 p2, const P3 p3, const P4 p4)
 	{
-		return insert<T>(name, RawPlotInterface::book<T>(basename(name), p1, p2, p3, p4));
+		return insert<T>(name, RawPlotInterface::book<T>(KappaTools::basename(name), p1, p2, p3, p4));
 	}
 
 	template<typename T, typename P1, typename P2, typename P3, typename P4, typename P5>
 	T *book(const std::string name, const P1 p1, const P2 p2, const P3 p3, const P4 p4, const P5 p5)
 	{
-		return insert<T>(name, RawPlotInterface::book<T>(basename(name), p1, p2, p3, p4, p5));
+		return insert<T>(name, RawPlotInterface::book<T>(KappaTools::basename(name), p1, p2, p3, p4, p5));
 	}
 
 	template<typename T>
@@ -106,7 +106,7 @@ public:
 		std::string _dir;
 		if (splitDirFromName(name, _dir))
 			return dir(_dir).insert(name, plot);
-		plot->SetName(_S(basename(name)));
+		plot->SetName(_S(KappaTools::basename(name)));
 		return insert<T>(plot);
 	}
 

@@ -17,16 +17,16 @@ void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<
 	read_json(json, pt);
 	for (ptree::const_iterator itRun = pt.begin(); itRun != pt.end(); ++itRun)
 	{
-		run_id run = parse<run_id>(itRun->first);
+		run_id run = KappaTools::parse<run_id>(itRun->first);
 		for (ptree::const_iterator itLumiList = itRun->second.begin(); itLumiList != itRun->second.end(); ++itLumiList)
 		{
 			lumi_id lumi_low = 0, lumi_high = 0;
 			for (ptree::const_iterator itLumiRange = itLumiList->second.begin(); itLumiRange != itLumiList->second.end(); ++itLumiRange)
 			{
 				if (lumi_low == 0)
-					lumi_low = parse<lumi_id>(itLumiRange->second.data());
+					lumi_low = KappaTools::parse<lumi_id>(itLumiRange->second.data());
 				else if (lumi_high == 0)
-					lumi_high = parse<lumi_id>(itLumiRange->second.data());
+					lumi_high = KappaTools::parse<lumi_id>(itLumiRange->second.data());
 			}
 			lumifilter[run].insert(std::make_pair(lumi_low, lumi_high));
 		}

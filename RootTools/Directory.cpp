@@ -65,7 +65,7 @@ void GetListOfAllDataMembers(TClass *cls, std::set<std::string> &result, std::st
 			if (m->IsBasic() || m->IsSTLContainer())
 			{
 				for (int j = 0; j < m->GetArrayDim(); ++j)
-					name += "[" + str(m->GetMaxIndex(j)) + "]";
+					name += "[" + KappaTools::str(m->GetMaxIndex(j)) + "]";
 				result.insert(name);
 			}
 			else

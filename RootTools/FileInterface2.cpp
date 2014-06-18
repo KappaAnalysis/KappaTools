@@ -91,7 +91,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 	if (reportFn != "")
 	{
 		ofstream uf(string(reportFn + ".usedFiles").c_str(), fstream::out);
-		uf << join("\n", usedFiles) << std::endl;
+		uf << KappaTools::join("\n", usedFiles) << std::endl;
 		ofstream fs(string(reportFn + ".json").c_str(), fstream::out);
 		RunLumiSelector::printJSON(fs, usedLumis);
 	}

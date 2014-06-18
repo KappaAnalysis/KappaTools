@@ -62,9 +62,9 @@ int main(int argc, char **argv)
 		{
 			const KDataPFTau &tau = taus->at(i);
 			std::cout << tau << std::endl;
-			for (size_t j = 0; j < meta_taudisc->discriminatorNames.size(); ++j)
+			for (size_t j = 0; j < meta_taudisc->binaryDiscriminatorNames.size(); ++j)
 			{
-				std::string dname = meta_taudisc->discriminatorNames[j];
+				std::string dname = meta_taudisc->binaryDiscriminatorNames[j];
 				std::cout << "\t" << dname << ": " << ((tau.hasID(dname, meta_taudisc) == true) ? "accepted" : "not accepted") << std::endl;
 			}
 		}

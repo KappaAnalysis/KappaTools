@@ -52,7 +52,7 @@ PlotInterface PlotInterface::dir(std::string name)
 {
 	// Handle absolute paths
 	if (name.find_first_of("/") == 0)
-		return PlotInterface(plotfile, plotfile, fot).dir(strip(name, "/"));
+		return PlotInterface(plotfile, plotfile, fot).dir(KappaTools::strip(name, "/"));
 	std::string _dir;
 	if (splitDirFromName(name, _dir))
 		return dir(_dir).dir(name);
@@ -66,10 +66,10 @@ PlotInterface PlotInterface::dir(std::string name)
 bool PlotInterface::splitDirFromName(std::string &name, std::string &dir)
 {
 	bool absolute = (name.find_first_of("/") == 0);
-	name = strip(name, "/");
-	if (in('/', name))
+	name = KappaTools::strip(name, "/");
+	if (KappaTools::in('/', name))
 	{
-		std::vector<std::string> tmp = split(name, "/", 1);
+		std::vector<std::string> tmp = KappaTools::split(name, "/", 1);
 		dir = absolute ? "/" + tmp[0] : tmp[0];
 		name = tmp[1];
 		return true;

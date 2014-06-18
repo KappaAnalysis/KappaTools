@@ -195,5 +195,5 @@ ivector<T1> ConvertVector(const ivector<T2> &in)
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const ivector<T> &v)
 {
-	return os << join(ivector<T>::delimeter, v);
+	return os << KappaTools::join(ivector<T>::delimeter, v);
 }
