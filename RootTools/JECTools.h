@@ -75,23 +75,22 @@ inline void correctSingleJet(KDataPFJet &jet, FactorizedJetCorrector *jec)
 // Functions to apply correction + uncertainty to a single jet:
 
 template<typename T>
-inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center)
+inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center, float shift = 1.0)
 {
 	if ((unc != 0) && (jv != jec_center))
 	{
 		setupFactorProvider(jet, unc);
 		if (jv == jec_up)
-			jet.p4 *= (1 + unc->getUncertainty(true));
+			jet.p4 *= (1 + (std::abs(shift) * unc->getUncertainty(true)));
 		else
-
-			jet.p4 *= (1 - unc->getUncertainty(false));
+			jet.p4 *= (1 - (std::abs(shift) * unc->getUncertainty(false)));
 	}
 }
 
 template<typename T>
 inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
-	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center)
+	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center, float shift = 1.0)
 {
 	if (jec == 0)
 		return;
@@ -103,7 +102,7 @@ inline void correctJets(std::vector<T> *jets,
 		if (area > 0)
 			jet.area = area;
 		correctSingleJet(jet, jec);
-		applyUncertainty(jet, unc, jv);
+		applyUncertainty(jet, unc, jv, shift);
 	}
 	sort_pt(jets);
 }
