@@ -53,6 +53,7 @@ template<typename T>
 inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec)
 {
 	setupFactorProvider(jet, jec);
+	jec->setJetA(jet.area);
 	jet.p4 *= jec->getCorrection();
 }
 
