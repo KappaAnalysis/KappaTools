@@ -16,7 +16,7 @@
 
 enum JECValueType { jec_center, jec_up, jec_down };
 
-// Functions to setup the FactorizedJetCorrector / JetCorrectionUncertainty object
+// Function to setup the FactorizedJetCorrector / JetCorrectionUncertainty object
 
 template<typename Tprov, typename Tjet>
 inline void setupFactorProvider(const Tjet &jet, Tprov *prov)
@@ -27,46 +27,10 @@ inline void setupFactorProvider(const Tjet &jet, Tprov *prov)
 	prov->setJetPhi(jet.p4.phi());
 }
 
-template<typename Tprov>
-inline void setupFactorProvider(const KDataJet &jet, Tprov *prov)
-{
-	prov->setJetEta(jet.p4.eta());
-	prov->setJetPt(jet.p4.pt());
-	prov->setJetE(jet.p4.E());
-	prov->setJetPhi(jet.p4.phi());
-	prov->setJetEMF(jet.fEM);
-}
-
-template<typename Tprov>
-inline void setupFactorProvider(const KDataPFJet &jet, Tprov *prov)
-{
-	prov->setJetEta(jet.p4.eta());
-	prov->setJetPt(jet.p4.pt());
-	prov->setJetE(jet.p4.E());
-	prov->setJetPhi(jet.p4.phi());
-	prov->setJetEMF(jet.neutralEMFraction + jet.chargedEMFraction);
-}
-
-// Functions to correct a single jet with the FactorizedJetCorrector
+// Function to correct a single jet with the FactorizedJetCorrector
 
 template<typename T>
 inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec)
-{
-	setupFactorProvider(jet, jec);
-	jec->setJetA(jet.area);
-	jet.p4 *= jec->getCorrection();
-}
-
-template<>
-inline void correctSingleJet(KDataJet &jet, FactorizedJetCorrector *jec)
-{
-	setupFactorProvider(jet, jec);
-	jec->setJetA(jet.area);
-	jet.p4 *= jec->getCorrection();
-}
-
-template<>
-inline void correctSingleJet(KDataPFJet &jet, FactorizedJetCorrector *jec)
 {
 	setupFactorProvider(jet, jec);
 	jec->setJetA(jet.area);
