@@ -40,22 +40,26 @@ inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec)
 // Functions to apply correction + uncertainty to a single jet:
 
 template<typename T>
-inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center, float shift = 1.0)
+inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, float shift = 0.0)
 {
-	if ((unc != 0) && (jv != jec_center))
+	if ((unc != 0) && (shift != 0.0))
 	{
 		setupFactorProvider(jet, unc);
-		if (jv == jec_up)
-			jet.p4 *= (1 + (std::abs(shift) * unc->getUncertainty(true)));
-		else
-			jet.p4 *= (1 - (std::abs(shift) * unc->getUncertainty(false)));
+		jet.p4 *= (1.0 + (shift * unc->getUncertainty(shift > 0.0)));
 	}
+}
+
+template<typename T>
+inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center)
+{
+	float shift = (jv == jec_up ? 0.0 : (jv == jec_up ? 1.0 : -1.0));
+	applyUncertainty(jet, unc, shift);
 }
 
 template<typename T>
 inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
-	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center, float shift = 1.0)
+	const double rho, const int npv, const double area = -1, float shift = 0.0)
 {
 	if (jec == 0)
 		return;
@@ -67,9 +71,18 @@ inline void correctJets(std::vector<T> *jets,
 		if (area > 0)
 			jet.area = area;
 		correctSingleJet(jet, jec);
-		applyUncertainty(jet, unc, jv, shift);
+		applyUncertainty(jet, unc, shift);
 	}
 	sort_pt(jets);
+}
+
+template<typename T>
+inline void correctJets(std::vector<T> *jets,
+	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
+	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center)
+{
+	float shift = (jv == jec_up ? 0.0 : (jv == jec_up ? 1.0 : -1.0));
+	correctJets(jets, jec, unc, rho, npv, area, shift);
 }
 
 #include "FileInterface.h"
