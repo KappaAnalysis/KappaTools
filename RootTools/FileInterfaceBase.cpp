@@ -4,6 +4,8 @@
 
 #include "FileInterfaceBase.h"
 
+#include "TEnv.h"
+
 using namespace std;
 
 FileInterfaceBase::FileInterfaceBase(int verbose) :
@@ -35,26 +37,29 @@ void FileInterfaceBase::SpeedupTree(long cache)
 	if (cache > 0)
 		eventchain->SetCacheSize(cache);
 	TObjArray *branches = eventchain->GetListOfBranches();
-	if (branches == 0)
-		return;
-	for (int i = 0; i < branches->GetEntries(); ++i)
+	if (branches != 0)
 	{
-		TBranch *b = dynamic_cast<TBranch*>(branches->At(i));
-		if (b->GetAddress() == 0)
+		for (int i = 0; i < branches->GetEntries(); ++i)
 		{
-			UInt_t found = 0;
-			string btype = b->GetClassName();
-			string bname;
-			if (btype.find("vector") == 0)
-				bname = string(b->GetName()) + ".*";
+			TBranch *b = dynamic_cast<TBranch*>(branches->At(i));
+			if (b->GetAddress() == 0)
+			{
+				UInt_t found = 0;
+				string btype = b->GetClassName();
+				string bname;
+				if (btype.find("vector") == 0)
+					bname = string(b->GetName()) + ".*";
+				else
+					bname = b->GetName();
+				eventchain->SetBranchStatus(bname.c_str(), 0, &found);
+			}
 			else
-				bname = b->GetName();
-			eventchain->SetBranchStatus(bname.c_str(), 0, &found);
+				if (cache > 0)
+					eventchain->AddBranchToCache(b); // TODO: still needed?
 		}
-		else
-			if (cache > 0)
-				eventchain->AddBranchToCache(b);
 	}
+	eventchain->AddBranchToCache("*", true);
+	gEnv->SetValue("TFile.AsyncPrefetching", 1);
 }
 
 void *FileInterfaceBase::GetInternal(TTree *tree, std::map<std::string, BranchHolder*> &bmap,
