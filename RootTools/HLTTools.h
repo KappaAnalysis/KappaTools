@@ -11,9 +11,10 @@
 class HLTTools
 {
 private:
-	std::map<std::string, std::string> nameCache;
-	std::map<std::string, std::string>::iterator itCache, nameCacheEndIt;
-	std::map<std::string, size_t> posCache;
+	mutable std::map<std::string, std::string> nameCache;
+	mutable std::map<std::string, std::string>::iterator itCache;
+	mutable std::map<std::string, std::string>::iterator nameCacheEndIt;
+	mutable std::map<std::string, size_t> posCache;
 	KLumiMetadata * lumiMetadata;
 public:
 	HLTTools(KLumiMetadata * lumiMetadata = 0)
@@ -42,15 +43,15 @@ public:
 				return true;
 		return false;
 	}
-	bool isPrescaled(const std::string &hltName)
+	bool isPrescaled(const std::string &hltName) const
 	{
 		return (getPrescale(hltName) > 1);
 	}
-	bool isAvailable(const std::string &hltName)
+	bool isAvailable(const std::string &hltName) const
 	{
 		return (getHLTName(hltName) != "");
 	}
-	int getPrescale(const std::string &hltName)
+	int getPrescale(const std::string &hltName) const
 	{
 		if (!lumiMetadata)
 			return 0;
@@ -59,7 +60,7 @@ public:
 			return 0;
 		return lumiMetadata->hltPrescales[posCache[tmpHLTName]];
 	}
-	std::string getHLTName(const std::string &hltName)
+	std::string getHLTName(const std::string &hltName) const
 	{
 		itCache = nameCache.find(hltName);
 		if (itCache != nameCacheEndIt)
@@ -79,7 +80,7 @@ public:
 			}
 		return "";
 	}
-	size_t getHLTPosition(const std::string &hltName)
+	size_t getHLTPosition(const std::string &hltName) const
 	{
 		std::string tmpHLTName = getHLTName(hltName);
 		if (tmpHLTName == "")
