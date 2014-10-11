@@ -42,50 +42,54 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 		if (verbosity)
 			cout << "Loading ... " << files[f] << endl;
 
-		// 1) Load lumi data from single file
-		TChain lumicheck("Lumis");
-		lumicheck.Add(files[f].c_str());
-		BranchHolder bh(&lumicheck, "KLumiMetadata");
-		KLumiMetadata *meta_lumi = (KLumiMetadata*)bh.ptr;
-
-		DataType dt = INVALID;
-		if (bh.ClassName() == "KGenLumiMetadata")
-			dt = GEN;
-		if (bh.ClassName() == "KDataLumiMetadata")
-			dt = DATA;
-		if (bh.ClassName() == "KLumiMetadata")
-			dt = STD;
-
-		// 2) acceptance with run selector
-		bool accept = (rls == 0);
-		for (int l = 0; l < lumicheck.GetEntries(); ++l)
+		if ((ss != 0) || (reportFn != ""))
 		{
-			lumicheck.GetEntry(l);
-			if (rls)
+			// 1) Load lumi data from single file
+			TChain lumicheck("Lumis");
+			lumicheck.Add(files[f].c_str());
+			BranchHolder bh(&lumicheck, "KLumiMetadata");
+			KLumiMetadata *meta_lumi = (KLumiMetadata*)bh.ptr;
+
+			DataType dt = INVALID;
+			if (bh.ClassName() == "KGenLumiMetadata")
+				dt = GEN;
+			if (bh.ClassName() == "KDataLumiMetadata")
+				dt = DATA;
+			if (bh.ClassName() == "KLumiMetadata")
+				dt = STD;
+
+			// 2) acceptance with run selector
+			bool accept = (rls == 0);
+			for (int l = 0; l < lumicheck.GetEntries(); ++l)
 			{
-				if (rls->accept(meta_lumi->nRun, meta_lumi->nLumi))
+				lumicheck.GetEntry(l);
+				if (rls)
 				{
-					accept = true;
+					if (rls->accept(meta_lumi->nRun, meta_lumi->nLumi))
+					{
+						accept = true;
+						usedLumis[meta_lumi->nRun].insert(make_pair(meta_lumi->nLumi, meta_lumi->nLumi));
+						updateSSF(ss, dt, meta_lumi);
+					}
+				}
+				else
+				{
 					usedLumis[meta_lumi->nRun].insert(make_pair(meta_lumi->nLumi, meta_lumi->nLumi));
 					updateSSF(ss, dt, meta_lumi);
 				}
 			}
-			else
-			{
-				usedLumis[meta_lumi->nRun].insert(make_pair(meta_lumi->nLumi, meta_lumi->nLumi));
-				updateSSF(ss, dt, meta_lumi);
-			}
+			if (!accept)
+				continue;
+
+			usedLumis = RunLumiSelector::getMinimalJSON(usedLumis);
+			if (dtAll == INVALID)
+				dtAll = dt;
+			assert(dtAll == dt);
 		}
-		if (!accept)
-			continue;
 
 		// 3) add accepted files to chain / persistent lumi info list
 		usedFiles.push_back(files[f]);
 		eventdata.Add(files[f].c_str());
-		usedLumis = RunLumiSelector::getMinimalJSON(usedLumis);
-		if (dtAll == INVALID)
-			dtAll = dt;
-		assert(dtAll == dt);
 	}
 
 	if (reportFn != "")
