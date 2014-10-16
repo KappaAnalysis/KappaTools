@@ -20,7 +20,7 @@ ARCH     = $(if $(findstring x86_64,$(shell uname -m)),-m64,-m32)
 endif
 
 CXX      = g++
-CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC
+CXXFLAGS = $(ARCH) $(COPTS) -D VCS_REVISION=$(VCS_REVISION) -Wall -fPIC -Wno-unused-local-typedefs
 LDFLAGS  = $(ARCH) $(COPTS) $(SYSLIBS) -L.
 
 GCCVER   = $(shell gcc -dumpversion | cut -d "." -f -2 | sed "s/\.//")
