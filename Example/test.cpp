@@ -26,17 +26,17 @@ int main(int argc, char **argv)
 	ssf.finish(fi.GetEntries(), 1, 1);
 
 	std::cout << "finished" << std::endl;
-	vector<string> names = fi.GetNames<KDataLVs>();
+	vector<string> names = fi.GetNames<KLVs>();
 	cout << names << endl << endl;
 	if (names.size() == 0)
 		return -1;
 
-	KDataLVs *jets = fi.Get<KDataLVs>(names[0]);
+	KLVs *jets = fi.Get<KLVs>(names[0]);
 	KDataBeamSpot *bs = fi.Get<KDataBeamSpot>("offlineBeamSpot");
 
-	std::map<std::string, KDataLVs*> tomap;
+	std::map<std::string, KLVs*> tomap;
 	for (size_t i = 0; i < names.size(); ++i)
-		tomap[names[i]] = fi.Get<KDataLVs>(names[i]);
+		tomap[names[i]] = fi.Get<KLVs>(names[i]);
 
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
 
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 		cout << "Jets: " << jets->size() << " => " << *jets << endl;
 		if (bs)
 			cout << "Beamspot: " << *bs << endl << endl;
-		for (std::map<std::string, KDataLVs*>::iterator it = tomap.begin(); it != tomap.end(); ++it)
+		for (std::map<std::string, KLVs*>::iterator it = tomap.begin(); it != tomap.end(); ++it)
 		{
 			if (it->second->size() > 0)
 			{

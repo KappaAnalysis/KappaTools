@@ -29,7 +29,7 @@ public:
 		}
 	}
 
-	inline void Fill(const KDataLV &jet, const double weight)
+	inline void Fill(const KLV &jet, const double weight)
 	{
 		const double pt = jet.p4.pt();
 		const double eta = jet.p4.eta();
