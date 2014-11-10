@@ -27,7 +27,7 @@ namespace KappaTools
 
 			StandardP4Plots(TDirectory * tmpFile, TString tmpDirectory);
 
-			void process(RMLV p4, double weight = 1.0);
+			void process(RMDLV p4, double weight = 1.0);
 			void final();
 	};
 	
@@ -39,8 +39,8 @@ namespace KappaTools
 		TH2D * pt_eta;
 
 		TriggerP4Plots(TDirectory * tmpFile, TString tmpDirectory);
-		void process(RMLV p4, double weight = 1.0);
-		void process(RMDataLV p4, double weight = 1.0);
+		void process(RMDLV p4, double weight = 1.0);
+		void process(RMFLV p4, double weight = 1.0);
 		void final();
 	};
 }

@@ -65,7 +65,7 @@ KappaTools::ZmumuPlots<JetType, METType>::ZmumuPlots(TDirectory * tmpFile, TStri
 template <typename JetType, typename METType>
 void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<JetType, METType> * zmumu, double weight)
 {
-	RMLV z = zmumu->getDiMu();
+	RMDLV z = zmumu->getDiMu();
 	Z_mass->Fill(z.mass(), weight);
 	Z_mass_low->Fill(z.mass(), weight);
 	Z_mass_zoom->Fill(z.mass(), weight);
@@ -92,7 +92,7 @@ void KappaTools::ZmumuPlots<JetType, METType>::process(KappaTools::ZmumuObjects<
 
 		if (zmumu->getMET())
 		{
-			RMLV met = (RMLV)zmumu->getMET()->p4;
+			RMDLV met = (RMDLV)zmumu->getMET()->p4;
 			double Rmpf=1 + (met.x()*z.x() + met.y()*z.y())/z.perp2();
 			jet_response_mpf->Fill(Rmpf, weight);
 		}

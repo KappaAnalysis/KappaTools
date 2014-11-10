@@ -25,11 +25,11 @@ KappaTools::TriggerP4Plots::TriggerP4Plots(TDirectory * tmpFile, TString tmpDire
 	pt_eta->Sumw2();
 }
 
-void KappaTools::TriggerP4Plots::process(RMDataLV p4, double weight)
+void KappaTools::TriggerP4Plots::process(RMFLV p4, double weight)
 {
-	process((RMLV) p4, weight);
+	process((RMDLV) p4, weight);
 }
-void KappaTools::TriggerP4Plots::process(RMLV p4, double weight)
+void KappaTools::TriggerP4Plots::process(RMDLV p4, double weight)
 {
 	pt_binned->Fill(p4.pt(), weight);
 	eta_binned->Fill(p4.eta(), weight);
@@ -71,7 +71,7 @@ KappaTools::StandardP4Plots::StandardP4Plots(TDirectory * tmpFile, TString tmpDi
 	eta_zoom_phi->Sumw2();
 }
 
-void KappaTools::StandardP4Plots::process(RMLV p4, double weight)
+void KappaTools::StandardP4Plots::process(RMDLV p4, double weight)
 {
 	pt->Fill(p4.pt(), weight);
 	pt_low->Fill(p4.pt(), weight);
