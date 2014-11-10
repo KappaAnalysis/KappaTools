@@ -5,26 +5,26 @@
 #include "DisplayTools.h"
 #include <bitset>
 
-void displayWeight(KGenLumiMetadata *metaLumi, KGenEventMetadata *metaEvent)
+void displayWeight(KGenLumiInfo *infoLumi, KGenEventInfo *infoEvent)
 {
-	std::cout << "Ext: " << metaLumi->xSectionExt << " Int: " << metaLumi->xSectionInt
-		<< " W: " << metaEvent->weight << std::endl;
+	std::cout << "Ext: " << infoLumi->xSectionExt << " Int: " << infoLumi->xSectionInt
+		<< " W: " << infoEvent->weight << std::endl;
 }
 
-void displayBits(KEventMetadata *meta)
+void displayBits(KEventInfo *info)
 {
 	std::cout << "      " << " 6 6 5 5 5 5 5 4 4 4 4 4 3 3 3 3 3 2 2 2 2 2 1 1 1 1 1" << std::endl;
 	std::cout << "      " << " 2 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 0" << std::endl;
 	std::cout << "      " << "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+" << std::endl;
-	std::cout << "  L1: " << std::bitset<64>(meta->bitsL1) << std::endl;
-	std::cout << " HLT: " << std::bitset<64>(meta->bitsHLT) << std::endl;
-	std::cout << "Flag: " << std::bitset<64>(meta->bitsUserFlags) << std::endl;
+	std::cout << "  L1: " << std::bitset<64>(info->bitsL1) << std::endl;
+	std::cout << " HLT: " << std::bitset<64>(info->bitsHLT) << std::endl;
+	std::cout << "Flag: " << std::bitset<64>(info->bitsUserFlags) << std::endl;
 }
 
-void displayHLT(KLumiMetadata *metaLumi, KEventMetadata *metaEvent)
+void displayHLT(KLumiInfo *infoLumi, KEventInfo *infoEvent)
 {
-	for (size_t hltIdx = 0; hltIdx < metaLumi->hltNames.size(); ++hltIdx)
-		if (metaEvent->bitsHLT & ((unsigned long long)1 << hltIdx))
-			std::cout << hltIdx << ":" << metaLumi->hltNames[hltIdx] << " ";
+	for (size_t hltIdx = 0; hltIdx < infoLumi->hltNames.size(); ++hltIdx)
+		if (infoEvent->bitsHLT & ((unsigned long long)1 << hltIdx))
+			std::cout << hltIdx << ":" << infoLumi->hltNames[hltIdx] << " ";
 		std::cout << std::endl;
 }

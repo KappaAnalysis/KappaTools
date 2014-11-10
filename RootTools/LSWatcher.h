@@ -11,7 +11,7 @@ class LSWatcher
 {
 public:
 	LSWatcher();
-	bool Changed(KEventMetadata *meta_event = 0);
+	bool Changed(KEventInfo *meta_event = 0);
 private:
 	bool changed;
 	run_id run;

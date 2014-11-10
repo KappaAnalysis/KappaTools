@@ -404,22 +404,22 @@ float PUReweighter::getWeightApprox(unsigned int bxM1, unsigned int bx0, unsigne
 }
 
 #ifdef WITH_KAPPA
-float PUReweighter::getWeight(KGenEventMetadata * metadata)
+float PUReweighter::getWeight(KGenEventInfo * info)
 {
-	if (metadata->numPUInteractionsTruth != -1)
-		return getWeightTruth(metadata);
+	if (info->numPUInteractionsTruth != -1)
+		return getWeightTruth(info);
 	else
-		return getWeightApprox(metadata);	
+		return getWeightApprox(info);
 }
 
-float PUReweighter::getWeightTruth(KGenEventMetadata * metadata)
+float PUReweighter::getWeightTruth(KGenEventInfo * info)
 {
-	return getWeightTruth(metadata->numPUInteractionsTruth);
+	return getWeightTruth(info->numPUInteractionsTruth);
 }
 
-float PUReweighter::getWeightApprox(KGenEventMetadata * metadata)
+float PUReweighter::getWeightApprox(KGenEventInfo * info)
 {
-	return getWeightApprox(metadata->numPUInteractionsM1, metadata->numPUInteractions0, metadata->numPUInteractionsP1);
+	return getWeightApprox(info->numPUInteractionsM1, info->numPUInteractions0, info->numPUInteractionsP1);
 }
 #endif
 

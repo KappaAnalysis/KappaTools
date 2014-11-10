@@ -54,7 +54,7 @@ public:
 
 protected:
 	int verbosity;
-	KEventMetadata *current_event;
+	KEventInfo *current_event;
 	std::map<std::string, BranchHolder*> branches;
 
 	void *GetInternal(TTree *tree, std::map<std::string, BranchHolder*> &bmap,

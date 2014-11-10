@@ -15,31 +15,31 @@ private:
 	mutable std::map<std::string, std::string>::iterator itCache;
 	mutable std::map<std::string, std::string>::iterator nameCacheEndIt;
 	mutable std::map<std::string, size_t> posCache;
-	KLumiMetadata * lumiMetadata;
+	KLumiInfo * lumiInfo;
 public:
-	HLTTools(KLumiMetadata * lumiMetadata = 0)
+	HLTTools(KLumiInfo * lumiInfo = 0)
 	{
-		if (lumiMetadata)
-			setLumiMetadata(lumiMetadata);
+		if (lumiInfo)
+			setLumiInfo(lumiInfo);
 	}
-	void setLumiMetadata(KLumiMetadata * lumiMetadata)
+	void setLumiInfo(KLumiInfo * lumiInfo)
 	{
-		this->lumiMetadata = lumiMetadata;
+		this->lumiInfo = lumiInfo;
 		nameCache.clear();
 		posCache.clear();
-		for (size_t idx=0; idx < lumiMetadata->hltNames.size(); ++idx)
+		for (size_t idx=0; idx < lumiInfo->hltNames.size(); ++idx)
 		{
-			posCache[lumiMetadata->hltNames[idx]] = idx;
-			nameCache[lumiMetadata->hltNames[idx]] = lumiMetadata->hltNames[idx];
+			posCache[lumiInfo->hltNames[idx]] = idx;
+			nameCache[lumiInfo->hltNames[idx]] = lumiInfo->hltNames[idx];
 		}
 		nameCacheEndIt = nameCache.end();
 	}
 	bool isHLTDefect() const
 	{
-		if (!lumiMetadata)
+		if (!lumiInfo)
 			return true;
-		for (size_t idx = 1; idx < lumiMetadata->hltNames.size(); idx++)
-			if (!lumiMetadata->hltPrescales[idx])
+		for (size_t idx = 1; idx < lumiInfo->hltNames.size(); idx++)
+			if (!lumiInfo->hltPrescales[idx])
 				return true;
 		return false;
 	}
@@ -53,12 +53,12 @@ public:
 	}
 	int getPrescale(const std::string &hltName) const
 	{
-		if (!lumiMetadata)
+		if (!lumiInfo)
 			return 0;
 		std::string tmpHLTName = getHLTName(hltName);
 		if (tmpHLTName == "")
 			return 0;
-		return lumiMetadata->hltPrescales[posCache[tmpHLTName]];
+		return lumiInfo->hltPrescales[posCache[tmpHLTName]];
 	}
 	std::string getHLTName(const std::string &hltName) const
 	{
@@ -66,12 +66,12 @@ public:
 		if (itCache != nameCacheEndIt)
 			return itCache->second;
 
-		if (!lumiMetadata)
+		if (!lumiInfo)
 			return "";
 
-		std::vector<std::string>::const_iterator endIt = lumiMetadata->hltNames.end();
+		std::vector<std::string>::const_iterator endIt = lumiInfo->hltNames.end();
 		boost::regex pattern(hltName+"(_v[[:digit:]]+)?$", boost::regex::icase | boost::regex::extended);
-		for (std::vector<std::string>::const_iterator curIt = lumiMetadata->hltNames.begin(); curIt != endIt; ++curIt)
+		for (std::vector<std::string>::const_iterator curIt = lumiInfo->hltNames.begin(); curIt != endIt; ++curIt)
 			if (boost::regex_search(*curIt, pattern))
 			{
 				nameCache[hltName] = *curIt;

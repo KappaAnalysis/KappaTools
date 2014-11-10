@@ -47,7 +47,7 @@ public:
 	template<typename T>
 	T *Get(run_id run, lumi_id lumi);
 	template<typename T>
-	inline T *Get(KEventMetadata *meta_event);
+	inline T *Get(KEventInfo *meta_event);
 
 	TChain eventdata;
 

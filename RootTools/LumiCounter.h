@@ -30,12 +30,12 @@ public:
 			catLumi[category] = 0;
 	}
 
-	void process(const KDataLumiMetadata * lumi, const std::string category = "")
+	void process(const KDataLumiInfo * lumi, const std::string category = "")
 	{
 		count(lumi, category);
 	}
 
-	void count(const KDataLumiMetadata * lumi, const std::string category = "")
+	void count(const KDataLumiInfo * lumi, const std::string category = "")
 	{
 		if (!lumi)
 			return;

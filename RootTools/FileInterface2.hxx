@@ -35,12 +35,12 @@ template<typename T>
 T *FileInterface2::Get(run_id run, lumi_id lumi)
 {
 	GetMetaEntry(run, lumi);
-	return GetMeta<T>("KLumiMetadata");
+	return GetMeta<T>("KLumiInfo");
 }
 
 template<typename T>
-inline T *FileInterface2::Get(KEventMetadata *meta_event)
+inline T *FileInterface2::Get(KEventInfo *info_event)
 {
-	GetMetaEntry(meta_event->nRun, meta_event->nLumi);
-	return GetMeta<T>("KLumiMetadata");
+	GetMetaEntry(info_event->nRun, info_event->nLumi);
+	return GetMeta<T>("KLumiInfo");
 }

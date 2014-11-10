@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 	for (size_t i = 0; i < names.size(); ++i)
 		tomap[names[i]] = fi.Get<KLVs>(names[i]);
 
-	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
+	KEventInfo *meta_event = fi.Get<KEventInfo>();
 
 //	long long nEvents = min((long long)3, fi.eventdata.GetEntries());
 	long long nEvents = fi.eventdata.GetEntries();
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
 		static LSWatcher lsWatcher;
 		if (lsWatcher.Changed(meta_event))
 			cout << "Reading new lumi metadata!" << endl;
-		KLumiMetadata *meta_lumi = fi.Get<KLumiMetadata>(meta_event);
-		KGenLumiMetadata *meta_lumi_gen = fi.Get<KGenLumiMetadata>(meta_event);
+		KLumiInfo *meta_lumi = fi.Get<KLumiInfo>(meta_event);
+		KGenLumiInfo *meta_lumi_gen = fi.Get<KGenLumiInfo>(meta_event);
 
 		if (meta_event->bitsHLT == 0)
 			continue;

@@ -9,17 +9,17 @@
 
 using namespace std;
 
-void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiMetadata *meta_lumi)
+void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiInfo *info_lumi)
 {
 	if (!ss)
 		return;
 	switch (dt)
 	{
 		case FileInterfaceBase::DATA:
-			ss->registerData(static_cast<KDataLumiMetadata*>(meta_lumi));
+			ss->registerData(static_cast<KDataLumiInfo*>(info_lumi));
 			break;
 		case FileInterfaceBase::GEN:
-			ss->registerMC(static_cast<KGenLumiMetadata*>(meta_lumi));
+			ss->registerMC(static_cast<KGenLumiInfo*>(info_lumi));
 			break;
 		default:
 			break;
@@ -47,15 +47,15 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 			// 1) Load lumi data from single file
 			TChain lumicheck("Lumis");
 			lumicheck.Add(files[f].c_str());
-			BranchHolder bh(&lumicheck, "KLumiMetadata");
-			KLumiMetadata *meta_lumi = (KLumiMetadata*)bh.ptr;
+			BranchHolder bh(&lumicheck, "KLumiInfo");
+			KLumiInfo *info_lumi = (KLumiInfo*)bh.ptr;
 
 			DataType dt = INVALID;
-			if (bh.ClassName() == "KGenLumiMetadata")
+			if (bh.ClassName() == "KGenLumiInfo")
 				dt = GEN;
-			if (bh.ClassName() == "KDataLumiMetadata")
+			if (bh.ClassName() == "KDataLumiInfo")
 				dt = DATA;
-			if (bh.ClassName() == "KLumiMetadata")
+			if (bh.ClassName() == "KLumiInfo")
 				dt = STD;
 
 			// 2) acceptance with run selector
@@ -65,17 +65,17 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 				lumicheck.GetEntry(l);
 				if (rls)
 				{
-					if (rls->accept(meta_lumi->nRun, meta_lumi->nLumi))
+					if (rls->accept(info_lumi->nRun, info_lumi->nLumi))
 					{
 						accept = true;
-						usedLumis[meta_lumi->nRun].insert(make_pair(meta_lumi->nLumi, meta_lumi->nLumi));
-						updateSSF(ss, dt, meta_lumi);
+						usedLumis[info_lumi->nRun].insert(make_pair(info_lumi->nLumi, info_lumi->nLumi));
+						updateSSF(ss, dt, info_lumi);
 					}
 				}
 				else
 				{
-					usedLumis[meta_lumi->nRun].insert(make_pair(meta_lumi->nLumi, meta_lumi->nLumi));
-					updateSSF(ss, dt, meta_lumi);
+					usedLumis[info_lumi->nRun].insert(make_pair(info_lumi->nLumi, info_lumi->nLumi));
+					updateSSF(ss, dt, info_lumi);
 				}
 			}
 			if (!accept)
@@ -129,11 +129,11 @@ void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 			delete lumidata;
 		lumidata = newLumiData;
 		// Rebuild lumi index map
-		KLumiMetadata *meta_lumi = GetMeta<KLumiMetadata>("KLumiMetadata", true, false);
+		KLumiInfo *info_lumi = GetMeta<KLumiInfo>("KLumiInfo", true, false);
 		for (int i = 0; i < lumidata->GetEntries(); ++i)
 		{
 			lumidata->GetEntry(i);
-			lumiIdxMap[make_pair(meta_lumi->nRun, meta_lumi->nLumi)] = i;
+			lumiIdxMap[make_pair(info_lumi->nRun, info_lumi->nLumi)] = i;
 		}
 		current_file = eventdata.GetFile()->GetName();
 	}

@@ -22,23 +22,23 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 		lumidata.Add(files[i].c_str());
 	}
 
-	TBranch *b = lumidata.GetBranch("KLumiMetadata");
+	TBranch *b = lumidata.GetBranch("KLumiInfo");
 	if (b)
 	{
-		if (string(b->GetClassName()) == "KGenLumiMetadata")
+		if (string(b->GetClassName()) == "KGenLumiInfo")
 		{
 			Init(&eventdata, GEN);
-			lumimap_mc = GetLumis<KGenLumiMetadata>();
+			lumimap_mc = GetLumis<KGenLumiInfo>();
 		}
-		else if (string(b->GetClassName()) == "KDataLumiMetadata")
+		else if (string(b->GetClassName()) == "KDataLumiInfo")
 		{
 			Init(&eventdata, DATA);
-			lumimap_data = GetLumis<KDataLumiMetadata>();
+			lumimap_data = GetLumis<KDataLumiInfo>();
 		}
-		else if (string(b->GetClassName()) == "KLumiMetadata")
+		else if (string(b->GetClassName()) == "KLumiInfo")
 		{
 			Init(&eventdata, STD);
-			lumimap_std = GetLumis<KLumiMetadata>();
+			lumimap_std = GetLumis<KLumiInfo>();
 		}
 	}
 	else
@@ -99,7 +99,7 @@ std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
 }
 
 template<>
-KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 {
 	switch (lumiInfoType)
 	{
@@ -116,7 +116,7 @@ KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KGenLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+KGenLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 {
 	if (lumiInfoType == GEN)
 		return &(lumimap_mc[std::make_pair(run, lumi)]);
@@ -124,7 +124,7 @@ KGenLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi)
+KDataLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 {
 	if (lumiInfoType == DATA)
 		return &(lumimap_data[std::make_pair(run, lumi)]);

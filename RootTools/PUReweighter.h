@@ -27,7 +27,7 @@ class PUReweighter
 private:
 	void initTruthMatrix(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC);
 	void initApproxMatrix(std::vector<std::string> inputFilesData, float scaleFactor = 1.);
-	
+
 	double weights3D[50][50][50];
 
 	TH1F *puDistrData;
@@ -36,9 +36,9 @@ public:
 	PUReweighter(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC, float scaleFactor = 1.);
 
 #ifdef WITH_KAPPA
-	float getWeight(KGenEventMetadata * metadata);
-	float getWeightTruth(KGenEventMetadata * metadata);
-	float getWeightApprox(KGenEventMetadata * metadata);
+	float getWeight(KGenEventInfo * info);
+	float getWeightTruth(KGenEventInfo * info);
+	float getWeightApprox(KGenEventInfo * info);
 #endif
 
 	float getWeightTruth(float mean);

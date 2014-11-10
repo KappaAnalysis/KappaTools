@@ -17,7 +17,7 @@ void FileInterfaceBase::Init(TChain *_eventchain, FileInterfaceBase::DataType _l
 {
 	eventchain = _eventchain;
 	lumiInfoType = _lumiInfoType;
-	current_event = Get<KEventMetadata>("KEventMetadata");
+	current_event = Get<KEventInfo>("KEventInfo");
 	assert(current_event != 0);
 	switch (lumiInfoType)
 	{

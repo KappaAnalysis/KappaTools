@@ -12,9 +12,9 @@
 class EventID
 {
 public:
-	EventID(const KEventMetadata *metadata) :
-		nEvent(metadata->nEvent), nLumi(metadata->nLumi),
-		nRun(metadata->nRun), nBX(metadata->nBX) {};
+	EventID(const KEventInfo *eventinfo) :
+		nEvent(eventinfo->nEvent), nLumi(eventinfo->nLumi),
+		nRun(eventinfo->nRun), nBX(eventinfo->nBX) {};
 
 	bool operator<(const EventID &other) const
 	{
@@ -44,8 +44,8 @@ class EventLogger
 public:
 	EventLogger() {}
 	void clear() { store.clear(); }
-	bool has(const KEventMetadata *metadata) { return store.find(typename TContainer::value_type(metadata)) != store.end(); }
-	void put(const KEventMetadata *metadata) { store.insert(store.begin(), typename TContainer::value_type(metadata)); }
+	bool has(const KEventInfo *eventinfo) { return store.find(typename TContainer::value_type(eventinfo)) != store.end(); }
+	void put(const KEventInfo *eventinfo) { store.insert(store.begin(), typename TContainer::value_type(eventinfo)); }
 	void print()
 	{
 		for (typename TContainer::const_iterator it = store.begin(); it != store.end(); ++it)

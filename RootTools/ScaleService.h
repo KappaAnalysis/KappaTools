@@ -28,14 +28,14 @@ public:
 
 	void print();
 
-	inline int prescale_DataDB(size_t hltIdx, KLumiMetadata *meta_lumi) const
+	inline int prescale_DataDB(size_t hltIdx, KLumiInfo *info_lumi) const
 	{
 		std::map<std::string, hlt_prescale_id>::const_iterator itIdx =
-			prescaleIDs.find(meta_lumi->hltNames[hltIdx]);
+			prescaleIDs.find(info_lumi->hltNames[hltIdx]);
 		assert(itIdx != prescaleIDs.end());
 		hlt_prescale_id psIdx = itIdx->second;
 
-		run_id nRun = meta_lumi->nRun;
+		run_id nRun = info_lumi->nRun;
 		std::map<run_id, std::map<hlt_prescale_id, int> >::const_iterator itPSRun =
 			prescale.find(nRun);
 		assert(itPSRun != prescale.end());
@@ -53,7 +53,7 @@ public:
 			itPSDRun->second.find(psIdx);
 		if (itPSDHLT == itPSDRun->second.end())
 			return ps;
-		lumi_id nLumi = meta_lumi->nLumi;
+		lumi_id nLumi = info_lumi->nLumi;
 		std::map<lumi_id, int>::const_iterator itPSDLumi =
 			itPSDHLT->second.find(nLumi);
 		if (itPSDLumi == itPSDHLT->second.end())
@@ -61,26 +61,26 @@ public:
 		return itPSDLumi->second;
 	}
 
-	inline double weight_Data(size_t hltIdx, KLumiMetadata *meta_lumi)
+	inline double weight_Data(size_t hltIdx, KLumiInfo *info_lumi)
 	{
-		int ps_meta = meta_lumi->hltPrescales[hltIdx];
+		int ps_info = info_lumi->hltPrescales[hltIdx];
 		if (prescaleIDs.size() == 0)
-			return ps_meta;
-		int ps_db = prescale_DataDB(hltIdx, meta_lumi);
-		if (ps_db != ps_meta)
+			return ps_info;
+		int ps_db = prescale_DataDB(hltIdx, info_lumi);
+		if (ps_db != ps_info)
 		{
-//			std::cerr << "Differing prescales found! " << ps_db << " " << ps_meta << " in "
-//				<< meta_lumi->nRun << ":" << meta_lumi->nLumi << std::endl;
-			brokenPS[meta_lumi->nRun].insert(meta_lumi->nLumi);
+//			std::cerr << "Differing prescales found! " << ps_db << " " << ps_info << " in "
+//				<< info_lumi->nRun << ":" << info_lumi->nLumi << std::endl;
+			brokenPS[info_lumi->nRun].insert(info_lumi->nLumi);
 //			exit(1);
 		}
-//		assert(ps_db == ps_meta);
-		return ps_meta;
+//		assert(ps_db == ps_info);
+		return ps_info;
 	}
 
-	inline double weight_MC(KGenEventMetadata *meta_event_gen) const
+	inline double weight_MC(KGenEventInfo *info_event_gen) const
 	{
-		return meta_event_gen->weight * pileup_weight[int(meta_event_gen->numPUInteractionsTruth)];
+		return info_event_gen->weight * pileup_weight[int(info_event_gen->numPUInteractionsTruth)];
 	}
 
 	inline double scale_Data() const
@@ -118,8 +118,8 @@ class ScaleServiceFactory
 public:
 	ScaleServiceFactory(const bool _doPrescales = true, TH1D *pu_data = 0, TH1D *pu_mc = 0) {};
 
-	void registerMC(KGenLumiMetadata *meta_lumi) {};
-	void registerData(KDataLumiMetadata *meta_lumi) {};
+	void registerMC(KGenLumiInfo *info_lumi) {};
+	void registerData(KDataLumiInfo *info_lumi) {};
 	void registerLF(std::string lumiPath) {};
 	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) { return 0; };
 

@@ -12,11 +12,11 @@ T *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
 template<>
-KGenLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+KGenLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
 template<>
-KDataLumiMetadata *FileInterface::Get(run_id run, lumi_id lumi);
+KDataLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
 
 template<typename T>
 std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
@@ -26,8 +26,8 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 		std::cout << "Reading lumi sections: " << std::endl;
 
 	// Connect to lumi tree
-	BranchHolder bLM(&lumidata, "KLumiMetadata", "", false);
-	T *meta_lumi = static_cast<T*>(bLM.ptr);
+	BranchHolder bLM(&lumidata, "KLumiInfo", "", false);
+	T *info_lumi = static_cast<T*>(bLM.ptr);
 
 	// Collect lumi infos
 	std::map<std::pair<run_id, lumi_id>, T> result;
@@ -42,16 +42,16 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 			if (pm.get())
 				pm->Update();
 			lumidata.GetEntry(i);
-			result[std::make_pair(meta_lumi->nRun, meta_lumi->nLumi)] = *meta_lumi;
+			result[std::make_pair(info_lumi->nRun, info_lumi->nLumi)] = *info_lumi;
 			if (verbosity > 2)
-				std::cout << "(" << meta_lumi->nRun << ":" << meta_lumi->nLumi << ") ";
+				std::cout << "(" << info_lumi->nRun << ":" << info_lumi->nLumi << ") ";
 
 			// Determine start/end of lumi section for run
-			if (run_start_end.find(meta_lumi->nRun) == run_start_end.end())
-				run_start_end[meta_lumi->nRun] = std::make_pair((lumi_id)-1, 0);
-			run_start_end[meta_lumi->nRun] = std::make_pair(
-				std::min(run_start_end[meta_lumi->nRun].first, meta_lumi->nLumi),
-				std::max(run_start_end[meta_lumi->nRun].second, meta_lumi->nLumi)
+			if (run_start_end.find(info_lumi->nRun) == run_start_end.end())
+				run_start_end[info_lumi->nRun] = std::make_pair((lumi_id)-1, 0);
+			run_start_end[info_lumi->nRun] = std::make_pair(
+				std::min(run_start_end[info_lumi->nRun].first, info_lumi->nLumi),
+				std::max(run_start_end[info_lumi->nRun].second, info_lumi->nLumi)
 			);
 		}
 	}
@@ -73,7 +73,7 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 }
 
 template<typename T>
-inline T *FileInterface::Get(KEventMetadata *meta_event)
+inline T *FileInterface::Get(KEventInfo *info_event)
 {
-	return this->Get<T>(meta_event->nRun, meta_event->nLumi);
+	return this->Get<T>(info_event->nRun, info_event->nLumi);
 }

@@ -43,8 +43,8 @@ void showPrescales(std::vector<std::string> filenames, std::vector<std::string> 
 	}
 
 	TBranch * b_lumimetadata;
-	KLumiMetadata * m_lumimetadata = new KLumiMetadata();
-	lumis_tree->SetBranchAddress("KLumiMetadata", &m_lumimetadata, &b_lumimetadata);
+	KLumiInfo * m_lumimetadata = new KLumiInfo();
+	lumis_tree->SetBranchAddress("KLumiInfo", &m_lumimetadata, &b_lumimetadata);
 	lumis_tree->AddBranchToCache(b_lumimetadata);
 
 	std::cout << "retrieving number of lumi sections..." << std::endl;

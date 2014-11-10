@@ -9,7 +9,7 @@ LSWatcher::LSWatcher()
 {
 }
 
-bool LSWatcher::Changed(KEventMetadata *meta_event)
+bool LSWatcher::Changed(KEventInfo *meta_event)
 {
 	if (meta_event)
 	{

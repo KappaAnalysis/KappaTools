@@ -16,8 +16,8 @@ void run(std::string filename)
 	lumis_tree->Add(filename.c_str());
 
 	TBranch * b_lumimetadata;
-	KDataLumiMetadata * m_lumimetadata = new KDataLumiMetadata();
-	lumis_tree->SetBranchAddress("KLumiMetadata", &m_lumimetadata, &b_lumimetadata);
+	KDataLumiInfo * m_lumimetadata = new KDataLumiInfo();
+	lumis_tree->SetBranchAddress("KLumiInfo", &m_lumimetadata, &b_lumimetadata);
 	lumis_tree->AddBranchToCache(b_lumimetadata);
 
 	Long64_t nentries = lumis_tree->GetEntries();

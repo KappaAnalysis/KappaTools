@@ -11,9 +11,9 @@
 #include <stddef.h>
 #include <cstring>
 
-void displayWeight(KGenLumiMetadata *metaLumi, KGenEventMetadata *metaEvent);
-void displayBits(KEventMetadata *meta);
-void displayHLT(KLumiMetadata *metaLumi, KEventMetadata *metaEvent);
+void displayWeight(KGenLumiInfo *infoLumi, KGenEventInfo *infoEvent);
+void displayBits(KEventInfo *info);
+void displayHLT(KLumiInfo *infoLumi, KEventInfo *infoEvent);
 
 template<typename T>
 void displayLVs(const std::vector<T> &vec, size_t maxN = 0)

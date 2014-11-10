@@ -29,9 +29,9 @@ int main(int argc, char **argv)
 	// Retrieve first PFJet collection and per event / per lumi metadata
 	KBasicJets *jets = fi.Get<KBasicJets>(names[0]);
 	KTaus *taus = fi.Get<KTaus>("hpsPFTaus");
-	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
-	//KLumiMetadata *meta_lumi = fi.GetMeta<KLumiMetadata>("KLumiMetadata");
-	KTauDiscriminatorMetadata *meta_taudisc = fi.GetMeta<KTauDiscriminatorMetadata>("hpsPFTaus");
+	KEventInfo *meta_event = fi.Get<KEventInfo>();
+	//KLumiInfo *meta_lumi = fi.GetMeta<KLumiInfo>("KLumiInfo");
+	KTauMetadata *meta_taudisc = fi.GetMeta<KTauMetadata>("hpsPFTaus");
 
 	// Interface for output / booking histograms
 	PlotInterface pi("output.root", PlotInterface::reset);
