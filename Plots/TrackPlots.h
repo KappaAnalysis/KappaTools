@@ -50,7 +50,7 @@ namespace KappaTools
 
 			// TDirectory
 			void process(KDataTrack * track, KDataVertex * pv, double weight = 1.);
-			void process(KDataTrack * track, KDataBeamSpot * bs, double weight = 1.);
+			void process(KDataTrack * track, KBeamSpot * bs, double weight = 1.);
 			void process(KDataTrack * track, double weight = 1.);
 			void final();
 	};

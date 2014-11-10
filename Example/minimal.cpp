@@ -22,11 +22,11 @@ int main(int argc, char **argv)
 
 	FileInterface2Adv fi(files);
 
-	std::vector<std::string> names = fi.GetNames<KDataPFJets>();
+	std::vector<std::string> names = fi.GetNames<KBasicJets>();
 	cout << "Available PF Jets: " << names << endl;
 
 	// Retrieve first PFJet collection and per event / per lumi metadata
-	KDataPFJets *jets = fi.Get<KDataPFJets>(names[0]);
+	KBasicJets *jets = fi.Get<KBasicJets>(names[0]);
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
 	//KLumiMetadata *meta_lumi = fi.GetMeta<KLumiMetadata>("KLumiMetadata");
 

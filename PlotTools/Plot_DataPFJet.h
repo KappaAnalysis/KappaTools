@@ -21,7 +21,7 @@ public:
 		area = pi.book<TH1D>("area", "area - " + title, bin_area);
 	}
 
-	inline void Fill(const KDataPFJet &jet, const double weight)
+	inline void Fill(const KBasicJet &jet, const double weight)
 	{
 		Plot_LV::Fill(jet, weight);
 		nEMF->Fill(jet.neutralEMFraction, weight);

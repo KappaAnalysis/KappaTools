@@ -16,17 +16,17 @@ struct JetIDLoose
 };
 
 template<>
-struct JetIDLoose<KDataJet>
+struct JetIDLoose<KCaloJet>
 {
-	typedef const KDataJet &argument_type;
-	bool operator()(const KDataJet &jet) const;
+	typedef const KCaloJet &argument_type;
+	bool operator()(const KCaloJet &jet) const;
 };
 
 template<>
-struct JetIDLoose<KDataPFJet>
+struct JetIDLoose<KBasicJet>
 {
-	typedef const KDataPFJet &argument_type;
-	bool operator()(const KDataPFJet &jet) const;
+	typedef const KBasicJet &argument_type;
+	bool operator()(const KBasicJet &jet) const;
 };
 
 template<typename T>
@@ -37,10 +37,10 @@ struct JetIDTight
 };
 
 template<>
-struct JetIDTight<KDataPFJet>
+struct JetIDTight<KBasicJet>
 {
-	typedef const KDataPFJet &argument_type;
-	bool operator()(const KDataPFJet &jet) const;
+	typedef const KBasicJet &argument_type;
+	bool operator()(const KBasicJet &jet) const;
 };
 
 template<typename T>

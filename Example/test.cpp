@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 		return -1;
 
 	KLVs *jets = fi.Get<KLVs>(names[0]);
-	KDataBeamSpot *bs = fi.Get<KDataBeamSpot>("offlineBeamSpot");
+	KBeamSpot *bs = fi.Get<KBeamSpot>("offlineBeamSpot");
 
 	std::map<std::string, KLVs*> tomap;
 	for (size_t i = 0; i < names.size(); ++i)

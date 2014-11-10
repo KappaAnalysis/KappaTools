@@ -120,7 +120,7 @@ namespace KappaTools
 		innerTrack->process(&muon->innerTrack, pv, weight);
 		globalTrack->process(&muon->globalTrack, pv, weight);
 	}
-	void StandardMuonPlots::process(KDataMuon * muon, KDataBeamSpot * bs, double weight)
+	void StandardMuonPlots::process(KDataMuon * muon, KBeamSpot * bs, double weight)
 	{
 		if (!muon)
 			return;

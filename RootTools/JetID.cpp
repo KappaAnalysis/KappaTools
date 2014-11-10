@@ -5,7 +5,7 @@
 
 #include "JetID.h"
 
-bool JetIDLoose<KDataJet>::operator()(const struct KDataJet &jet) const
+bool JetIDLoose<KCaloJet>::operator()(const struct KCaloJet &jet) const
 {
 	if (
 		((fabs(jet.p4.eta()) > 2.6) || (jet.fEM > 0.01)) &&		// Remove HCAL noise for |eta|
@@ -17,7 +17,7 @@ bool JetIDLoose<KDataJet>::operator()(const struct KDataJet &jet) const
 		return false;
 }
 
-bool JetIDLoose<KDataPFJet>::operator()(const struct KDataPFJet &jet) const
+bool JetIDLoose<KBasicJet>::operator()(const struct KBasicJet &jet) const
 {
 	if (
 		(jet.neutralEMFraction < 0.99) &&
@@ -40,7 +40,7 @@ bool JetIDLoose<KDataPFJet>::operator()(const struct KDataPFJet &jet) const
 	return false;
 }
 
-bool JetIDTight<KDataPFJet>::operator()(const class KDataPFJet &jet) const
+bool JetIDTight<KBasicJet>::operator()(const class KBasicJet &jet) const
 {
 	if (
 		(jet.neutralEMFraction < 0.90) &&

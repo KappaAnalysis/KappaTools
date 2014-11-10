@@ -22,13 +22,13 @@ int main(int argc, char **argv)
 
 	FileInterface2Adv fi(files);
 
-	std::vector<std::string> names = fi.GetNames<KDataPFJets>();
+	std::vector<std::string> names = fi.GetNames<KBasicJets>();
 	cout << "Available PF Jets: " << names << endl;
-	cout << "Available PF Taus: " << fi.GetNames<KDataPFTaus>() << endl;
+	cout << "Available PF Taus: " << fi.GetNames<KTaus>() << endl;
 
 	// Retrieve first PFJet collection and per event / per lumi metadata
-	KDataPFJets *jets = fi.Get<KDataPFJets>(names[0]);
-	KDataPFTaus *taus = fi.Get<KDataPFTaus>("hpsPFTaus");
+	KBasicJets *jets = fi.Get<KBasicJets>(names[0]);
+	KTaus *taus = fi.Get<KTaus>("hpsPFTaus");
 	KEventMetadata *meta_event = fi.Get<KEventMetadata>();
 	//KLumiMetadata *meta_lumi = fi.GetMeta<KLumiMetadata>("KLumiMetadata");
 	KTauDiscriminatorMetadata *meta_taudisc = fi.GetMeta<KTauDiscriminatorMetadata>("hpsPFTaus");
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 		// Example how to read tau discriminator information
 		for (size_t i = 0; i < taus->size(); ++i)
 		{
-			const KDataPFTau &tau = taus->at(i);
+			const KTau &tau = taus->at(i);
 			std::cout << tau << std::endl;
 			for (size_t j = 0; j < meta_taudisc->binaryDiscriminatorNames.size(); ++j)
 			{

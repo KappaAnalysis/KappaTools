@@ -61,7 +61,7 @@ namespace KappaTools
 	}
 
 	template <>
-	void StandardJetPlots<KDataPFJet>::initSpecific()
+	void StandardJetPlots<KBasicJet>::initSpecific()
 	{
 		neutralEmFraction = new TH1D("neutralEmFraction", "neutral electromagnetic fraction", 50, 0., 1.);
 		neutralEmFraction->Sumw2();
@@ -79,7 +79,7 @@ namespace KappaTools
 	}
 
 	template <>
-	void StandardJetPlots<KDataPFJet>::processSpecific(KDataPFJet * jet, KDataVertex * pv, double weight)
+	void StandardJetPlots<KBasicJet>::processSpecific(KBasicJet * jet, KDataVertex * pv, double weight)
 	{
 		if (!jet)
 			return;
@@ -95,5 +95,5 @@ namespace KappaTools
 	}
 }
 
-template class KappaTools::StandardJetPlots<KDataJet>;
-template class KappaTools::StandardJetPlots<KDataPFJet>;
+template class KappaTools::StandardJetPlots<KCaloJet>;
+template class KappaTools::StandardJetPlots<KBasicJet>;

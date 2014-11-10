@@ -102,7 +102,7 @@ namespace KappaTools
 
 			// TDirectory
 			void process(KDataMuon * muon, KDataVertex * pv, double weight = 1.);
-			void process(KDataMuon * muon, KDataBeamSpot * bs, double weight = 1.);
+			void process(KDataMuon * muon, KBeamSpot * bs, double weight = 1.);
 			void process(KDataMuon * muon, double weight = 1.);
 			void final();
 	};

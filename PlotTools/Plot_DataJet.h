@@ -25,7 +25,7 @@ public:
 		noiseHCAL = pi.book<TH1D>("noiseHCAL", "noiseHCAL - " + title, bin_jets);
 	}
 
-	inline void Fill(const KDataJet &jet, const double weight)
+	inline void Fill(const KCaloJet &jet, const double weight)
 	{
 		Plot_LV::Fill(jet, weight);
 		emf->Fill(jet.emf, weight);

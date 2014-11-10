@@ -73,7 +73,7 @@ namespace KappaTools
 
 		process(track, weight);
 	}
-	void StandardTrackPlots::process(KDataTrack * track, KDataBeamSpot * pv, double weight)
+	void StandardTrackPlots::process(KDataTrack * track, KBeamSpot * pv, double weight)
 	{
 		if (!track || track->nDOF == 0)
 			return;
