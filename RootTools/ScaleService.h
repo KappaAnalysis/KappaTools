@@ -80,7 +80,7 @@ public:
 
 	inline double weight_MC(KGenEventInfo *info_event_gen) const
 	{
-		return info_event_gen->weight * pileup_weight[int(info_event_gen->numPUInteractionsTruth)];
+		return info_event_gen->weight * pileup_weight[int(info_event_gen->nPUMean)];
 	}
 
 	inline double scale_Data() const

@@ -31,7 +31,7 @@ namespace KappaTools
 		chi2prob->Sumw2();
 	}
 
-	void StandardVertexPlots::process(KDataVertex * pv, double weight)
+	void StandardVertexPlots::process(KVertex * pv, double weight)
 	{
 		if (!pv)
 			return;

@@ -10,7 +10,7 @@
 #include "TH2D.h"
 #include "TDirectory.h"
 #include "BasePlot.h"
-#include "Kappa/DataFormats/interface/KLorentzVector.h"
+#include "Kappa/DataFormats/interface/KRoot.h"
 
 namespace KappaTools
 {

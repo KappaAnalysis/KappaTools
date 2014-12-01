@@ -93,7 +93,7 @@ public:
 	JECService(FileInterface &fi, const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
 		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(0), JEU(0),
 			vs(fi.Get<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
-			ja(fi.Get<KJetArea>("KT6Area", true, true))
+			ja(fi.Get<KPileupDensity>("KT6Area", true, true))
 	{
 		if (R < 0)
 			area = -1;
@@ -126,7 +126,7 @@ public:
 	template<typename T>
 	inline void correct(T *jets)
 	{
-		correctJets(jets, JEC, JEU, ja->median, vs->nVertices, area, jeuType);
+		correctJets(jets, JEC, JEU, ja->rho, vs->nVertices, area, jeuType);
 	}
 
 private:
@@ -135,7 +135,7 @@ private:
 	FactorizedJetCorrector *JEC;
 	JetCorrectionUncertainty *JEU;
 	KVertexSummary *vs;
-	KJetArea *ja;
+	KPileupDensity *ja;
 };
 
 #endif

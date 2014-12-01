@@ -7,7 +7,7 @@
 #define KAPPA_EVENTLOGGER_H
 
 #include <iostream>
-#include <Kappa/DataFormats/interface/KMetadata.h>
+#include <Kappa/DataFormats/interface/KInfo.h>
 
 class EventID
 {

@@ -49,9 +49,9 @@ namespace KappaTools
 			StandardTrackPlots(TDirectory * tmpFile_, TString tmpDirectory_, TString prefix="");
 
 			// TDirectory
-			void process(KDataTrack * track, KDataVertex * pv, double weight = 1.);
-			void process(KDataTrack * track, KBeamSpot * bs, double weight = 1.);
-			void process(KDataTrack * track, double weight = 1.);
+			void process(KTrack * track, KVertex * pv, double weight = 1.);
+			void process(KTrack * track, KBeamSpot * bs, double weight = 1.);
+			void process(KTrack * track, double weight = 1.);
 			void final();
 	};
 }

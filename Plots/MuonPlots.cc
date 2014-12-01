@@ -95,7 +95,7 @@ namespace KappaTools
 
 		tmpDirectory->cd();
 	}
-	void StandardMuonPlots::process(KDataMuon * muon, KDataVertex * pv, double weight)
+	void StandardMuonPlots::process(KMuon * muon, KVertex * pv, double weight)
 	{
 		if (!muon)
 			return;
@@ -120,7 +120,7 @@ namespace KappaTools
 		innerTrack->process(&muon->innerTrack, pv, weight);
 		globalTrack->process(&muon->globalTrack, pv, weight);
 	}
-	void StandardMuonPlots::process(KDataMuon * muon, KBeamSpot * bs, double weight)
+	void StandardMuonPlots::process(KMuon * muon, KBeamSpot * bs, double weight)
 	{
 		if (!muon)
 			return;
@@ -145,7 +145,7 @@ namespace KappaTools
 		innerTrack->process(&muon->innerTrack, bs, weight);
 		globalTrack->process(&muon->globalTrack, bs, weight);
 	}
-	void StandardMuonPlots::process(KDataMuon * muon, double weight)
+	void StandardMuonPlots::process(KMuon * muon, double weight)
 	{
 		if (!muon)
 			return;
@@ -207,7 +207,7 @@ namespace KappaTools
 	}
 
 	template <typename T>
-	void MuonPlotsByType<T>::process(KDataMuon * muon, KDataVertex * pv, double weight)
+	void MuonPlotsByType<T>::process(KMuon * muon, KVertex * pv, double weight)
 	{
 		if (!muon)
 			return;

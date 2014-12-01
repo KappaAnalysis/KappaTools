@@ -28,17 +28,17 @@ namespace KappaTools
 
 			// pfjet-specific:
 			TH1D * neutralEmFraction, * chargedEmFraction;
-			TH1D * neutralHadFraction, * chargedHadFraction;
+			TH1D * neutralHadronFraction, * chargedHadronFraction;
 
 			// calojet-specific:
 
 			void initSpecific();
-			void processSpecific(JetType * jet, KDataVertex * pv, double weight);
+			void processSpecific(JetType * jet, KVertex * pv, double weight);
 		public:
 			StandardJetPlots(TDirectory * tmpFile, TString tmpDirectory="");
 
 			// TDirectory
-			void process(JetType * jet, KDataVertex * pv = 0, double weight = 1.);
+			void process(JetType * jet, KVertex * pv = 0, double weight = 1.);
 			void final();
 	};
 	/*

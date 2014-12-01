@@ -36,7 +36,7 @@ namespace KappaTools
 	}
 
 	template <typename JetType>
-	void StandardJetPlots<JetType>::process(JetType * jet, KDataVertex * pv, double weight)
+	void StandardJetPlots<JetType>::process(JetType * jet, KVertex * pv, double weight)
 	{
 		if (!jet)
 			return;
@@ -48,7 +48,7 @@ namespace KappaTools
 		jet_eta_zoom->Fill(jet->p4.eta(), weight);
 		jet_phi->Fill(jet->p4.phi(), weight);
 
-		nConstituents->Fill(jet->nConst, weight);
+		nConstituents->Fill(jet->nConstituents, weight);
 		//emFraction->Fill(jet->fEM, weight);
 		//hadFraction->Fill(1.-jet->fEM, weight);
 
@@ -67,10 +67,10 @@ namespace KappaTools
 		neutralEmFraction->Sumw2();
 		chargedEmFraction = new TH1D("chargedEmFraction", "charged electromagnetic fraction", 50, 0., 1.);
 		chargedEmFraction->Sumw2();
-		neutralHadFraction = new TH1D("neutralHadFraction", "neutral electromagnetic fraction", 50, 0., 1.);
-		neutralHadFraction->Sumw2();
-		chargedHadFraction = new TH1D("chargedHadFraction", "charged electromagnetic fraction", 50, 0., 1.);
-		chargedHadFraction->Sumw2();
+		neutralHadronFraction = new TH1D("neutralHadronFraction", "neutral electromagnetic fraction", 50, 0., 1.);
+		neutralHadronFraction->Sumw2();
+		chargedHadronFraction = new TH1D("chargedHadronFraction", "charged electromagnetic fraction", 50, 0., 1.);
+		chargedHadronFraction->Sumw2();
 	}
 
 	template <typename JetType>
@@ -79,18 +79,18 @@ namespace KappaTools
 	}
 
 	template <>
-	void StandardJetPlots<KBasicJet>::processSpecific(KBasicJet * jet, KDataVertex * pv, double weight)
+	void StandardJetPlots<KBasicJet>::processSpecific(KBasicJet * jet, KVertex * pv, double weight)
 	{
 		if (!jet)
 			return;
-		neutralEmFraction->Fill(jet->neutralEMFraction, weight);
-		chargedEmFraction->Fill(jet->chargedEMFraction, weight);
-		neutralHadFraction->Fill(jet->neutralHadFraction, weight);
-		chargedHadFraction->Fill(jet->chargedHadFraction, weight);
+		neutralEmFraction->Fill(jet->photonFraction, weight);
+		chargedEmFraction->Fill(jet->electronFraction, weight);
+		neutralHadronFraction->Fill(jet->neutralHadronFraction, weight);
+		chargedHadronFraction->Fill(jet->chargedHadronFraction, weight);
 	}
 
 	template <typename JetType>
-	void StandardJetPlots<JetType>::processSpecific(JetType * jet, KDataVertex * pv, double weight)
+	void StandardJetPlots<JetType>::processSpecific(JetType * jet, KVertex * pv, double weight)
 	{
 	}
 }

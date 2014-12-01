@@ -16,7 +16,7 @@ public:
 		cHadF = pi.book<TH1D>("cHadF", "charged hadronic fraction - " + title, bin_ratiom11);
 
 		nCharged = pi.book<TH1D>("nCharged", "nCharged - " + title, bin_jets);
-		nConst = pi.book<TH1D>("nConst", "nConst - " + title, bin_jets);
+		nConstituents = pi.book<TH1D>("nConstituents", "nConstituents - " + title, bin_jets);
 
 		area = pi.book<TH1D>("area", "area - " + title, bin_area);
 	}
@@ -24,20 +24,20 @@ public:
 	inline void Fill(const KBasicJet &jet, const double weight)
 	{
 		Plot_LV::Fill(jet, weight);
-		nEMF->Fill(jet.neutralEMFraction, weight);
-		cEMF->Fill(jet.chargedEMFraction, weight);
+		nEMF->Fill(jet.photonFraction, weight);
+		cEMF->Fill(jet.electronFraction, weight);
 
-		nHadF->Fill(jet.neutralHadFraction, weight);
-		cHadF->Fill(jet.chargedHadFraction, weight);
+		nHadF->Fill(jet.neutralHadronFraction, weight);
+		cHadF->Fill(jet.chargedHadronFraction, weight);
 
 		nCharged->Fill(jet.nCharged, weight);
-		nConst->Fill(jet.nConst, weight);
+		nConstituents->Fill(jet.nConstituents, weight);
 
 		area->Fill(jet.area, weight);
 	}
 
 private:
-	TH1D *area, *nCharged, *nConst;
+	TH1D *area, *nCharged, *nConstituents;
 	TH1D *nEMF, *cEMF;
 	TH1D *nHadF, *cHadF;
 };

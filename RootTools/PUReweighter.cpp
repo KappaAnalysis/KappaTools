@@ -406,7 +406,7 @@ float PUReweighter::getWeightApprox(unsigned int bxM1, unsigned int bx0, unsigne
 #ifdef WITH_KAPPA
 float PUReweighter::getWeight(KGenEventInfo * info)
 {
-	if (info->numPUInteractionsTruth != -1)
+	if (info->nPUMean != -1)
 		return getWeightTruth(info);
 	else
 		return getWeightApprox(info);
@@ -414,12 +414,12 @@ float PUReweighter::getWeight(KGenEventInfo * info)
 
 float PUReweighter::getWeightTruth(KGenEventInfo * info)
 {
-	return getWeightTruth(info->numPUInteractionsTruth);
+	return getWeightTruth(info->nPUMean);
 }
 
 float PUReweighter::getWeightApprox(KGenEventInfo * info)
 {
-	return getWeightApprox(info->numPUInteractionsM1, info->numPUInteractions0, info->numPUInteractionsP1);
+	return getWeightApprox(info->nPUm1, info->nPU, info->nPUp1);
 }
 #endif
 

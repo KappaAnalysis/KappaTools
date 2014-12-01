@@ -19,7 +19,7 @@
 
 
 #ifdef WITH_KAPPA
-#include <Kappa/DataFormats/interface/KMetadata.h>
+#include <Kappa/DataFormats/interface/KInfo.h>
 #endif
 
 class PUReweighter

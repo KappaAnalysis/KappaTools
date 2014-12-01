@@ -101,9 +101,9 @@ namespace KappaTools
 			StandardMuonPlots(TDirectory * tmpFile, TString tmpDirectory, TString prefix="");
 
 			// TDirectory
-			void process(KDataMuon * muon, KDataVertex * pv, double weight = 1.);
-			void process(KDataMuon * muon, KBeamSpot * bs, double weight = 1.);
-			void process(KDataMuon * muon, double weight = 1.);
+			void process(KMuon * muon, KVertex * pv, double weight = 1.);
+			void process(KMuon * muon, KBeamSpot * bs, double weight = 1.);
+			void process(KMuon * muon, double weight = 1.);
 			void final();
 	};
 
@@ -119,7 +119,7 @@ namespace KappaTools
 			T * realGlobalMuons;
 		public:
 			MuonPlotsByType(TDirectory * tmpFile, TString tmpDirectory);
-			void process(KDataMuon * muon, KDataVertex * pv = 0, double weight = 1.);
+			void process(KMuon * muon, KVertex * pv = 0, double weight = 1.);
 			void final();
 	};
 }

@@ -17,7 +17,7 @@ public:
 
 		n90 = pi.book<TH1D>("n90", "n90 - " + title, bin_jets);
 		n90Hits = pi.book<TH1D>("n90Hits", "n90Hits - " + title, bin_jets);
-		nConst = pi.book<TH1D>("nConst", "nConst - " + title, bin_jets);
+		nConstituents = pi.book<TH1D>("nConstituents", "nConstituents - " + title, bin_jets);
 		nTracksAtCalo = pi.book<TH1D>("nTracksAtCalo", "nTracksAtCalo - " + title, bin_jets);
 		nTracksAtVertex = pi.book<TH1D>("nTracksAtVertex", "nTracksAtVertex - " + title, bin_jets);
 
@@ -36,7 +36,7 @@ public:
 
 		n90->Fill(jet.n90, weight);
 		n90Hits->Fill(jet.n90Hits, weight);
-		nConst->Fill(jet.nConst, weight);
+		nConstituents->Fill(jet.nConstituents, weight);
 		nTracksAtCalo->Fill(jet.nTracksAtCalo, weight);
 		nTracksAtVertex->Fill(jet.nTracksAtVertex, weight);
 
@@ -52,7 +52,7 @@ private:
 	TH1D *fRBX;
 	TH1D *nTracksAtCalo;
 	TH1D *nTracksAtVertex;
-	TH1D *nConst;
+	TH1D *nConstituents;
 };
 
 #endif

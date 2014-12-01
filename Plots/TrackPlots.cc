@@ -66,21 +66,21 @@ namespace KappaTools
 		quality->Sumw2();
 	}
 
-	void StandardTrackPlots::process(KDataTrack * track, KDataVertex * pv, double weight)
+	void StandardTrackPlots::process(KTrack * track, KVertex * pv, double weight)
 	{
 		if (!track || track->nDOF == 0)
 			return;
 
 		process(track, weight);
 	}
-	void StandardTrackPlots::process(KDataTrack * track, KBeamSpot * pv, double weight)
+	void StandardTrackPlots::process(KTrack * track, KBeamSpot * pv, double weight)
 	{
 		if (!track || track->nDOF == 0)
 			return;
 
 		process(track, weight);
 	}
-	void StandardTrackPlots::process(KDataTrack * track, double weight)
+	void StandardTrackPlots::process(KTrack * track, double weight)
 	{
 		if (!track || track->nDOF == 0)
 			return;

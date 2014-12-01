@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 			for (size_t j = 0; j < meta_taudisc->binaryDiscriminatorNames.size(); ++j)
 			{
 				std::string dname = meta_taudisc->binaryDiscriminatorNames[j];
-				std::cout << "\t" << dname << ": " << ((tau.hasID(dname, meta_taudisc) == true) ? "accepted" : "not accepted") << std::endl;
+				std::cout << "\t" << dname << ": " << ((tau.getId(dname, meta_taudisc) == true) ? "accepted" : "not accepted") << std::endl;
 			}
 		}
 

@@ -5,7 +5,7 @@
 #ifndef KAPPA_LSWATCHER_H
 #define KAPPA_LSWATCHER_H
 
-#include <Kappa/DataFormats/interface/KMetadata.h>
+#include <Kappa/DataFormats/interface/KInfo.h>
 
 class LSWatcher
 {

@@ -32,7 +32,7 @@ namespace KappaTools
 			StandardVertexPlots(TDirectory * tmpFile, TString tmpDirectory="");
 
 			// TDirectory
-			void process(KDataVertex * pv, double weight = 1.);
+			void process(KVertex * pv, double weight = 1.);
 			void final();
 	};
 }

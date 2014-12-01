@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "Kappa/DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KInfo.h"
 #include "../RootTools/RunLumiReader.h"
 #include "../RootTools/FileInterface.h"
 #include "../Toolbox/CmdLineSetup.h"

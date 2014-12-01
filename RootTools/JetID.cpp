@@ -20,16 +20,16 @@ bool JetIDLoose<KCaloJet>::operator()(const struct KCaloJet &jet) const
 bool JetIDLoose<KBasicJet>::operator()(const struct KBasicJet &jet) const
 {
 	if (
-		(jet.neutralEMFraction < 0.99) &&
-		(jet.neutralHadFraction < 0.99) &&
-		(jet.nConst > 1)
+		(jet.photonFraction < 0.99) &&
+		(jet.neutralHadronFraction < 0.99) &&
+		(jet.nConstituents > 1)
 		)
 	{
 		if (fabs(jet.p4.eta()) < 2.4)
 		{
 			if (
-				(jet.chargedEMFraction < 0.99) &&
-				(jet.chargedHadFraction > 0) &&
+				(jet.electronFraction < 0.99) &&
+				(jet.chargedHadronFraction > 0) &&
 				(jet.nCharged > 0)
 				)
 				return true;
@@ -43,16 +43,16 @@ bool JetIDLoose<KBasicJet>::operator()(const struct KBasicJet &jet) const
 bool JetIDTight<KBasicJet>::operator()(const class KBasicJet &jet) const
 {
 	if (
-		(jet.neutralEMFraction < 0.90) &&
-		(jet.neutralHadFraction < 0.90) &&
-		(jet.nConst > 1)
+		(jet.photonFraction < 0.90) &&
+		(jet.neutralHadronFraction < 0.90) &&
+		(jet.nConstituents > 1)
 		)
 	{
 		if (fabs(jet.p4.eta()) < 2.4)
 		{
 			if (
-				(jet.chargedEMFraction < 0.99) &&
-				(jet.chargedHadFraction > 0) &&
+				(jet.electronFraction < 0.99) &&
+				(jet.chargedHadronFraction > 0) &&
 				(jet.nCharged > 0)
 				)
 				return true;

@@ -4,7 +4,7 @@
  */
 
 #include "TChain.h"
-#include "Kappa/DataFormats/interface/KMetadata.h"
+#include "Kappa/DataFormats/interface/KInfo.h"
 #include "../Toolbox/CmdLineSetup.h"
 #include <iomanip>
 
