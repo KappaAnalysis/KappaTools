@@ -22,7 +22,7 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 		lumidata.Add(files[i].c_str());
 	}
 
-	TBranch *b = lumidata.GetBranch("KLumiInfo");
+	TBranch *b = lumidata.GetBranch("lumiInfo");
 	if (b)
 	{
 		if (string(b->GetClassName()) == "KGenLumiInfo")

@@ -47,7 +47,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 			// 1) Load lumi data from single file
 			TChain lumicheck("Lumis");
 			lumicheck.Add(files[f].c_str());
-			BranchHolder bh(&lumicheck, "KLumiInfo");
+			BranchHolder bh(&lumicheck, "lumiInfo");
 			KLumiInfo *info_lumi = (KLumiInfo*)bh.ptr;
 
 			DataType dt = INVALID;
@@ -129,7 +129,7 @@ void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 			delete lumidata;
 		lumidata = newLumiData;
 		// Rebuild lumi index map
-		KLumiInfo *info_lumi = GetMeta<KLumiInfo>("KLumiInfo", true, false);
+		KLumiInfo *info_lumi = GetMeta<KLumiInfo>("lumiInfo", false, false);
 		for (int i = 0; i < lumidata->GetEntries(); ++i)
 		{
 			lumidata->GetEntry(i);
