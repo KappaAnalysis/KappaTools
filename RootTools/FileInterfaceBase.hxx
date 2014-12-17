@@ -6,7 +6,7 @@
 template<typename T>
 T *FileInterfaceBase::Get()
 {
-	return Get<T>("KEventInfo");
+	return Get<T>("eventInfo");
 }
 
 // Get event content from files
