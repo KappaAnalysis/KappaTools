@@ -16,6 +16,11 @@ struct BranchHolder
 	std::string ClassName();
 	void UpdateTree(TTree *newTree);
 
+	template<typename T>
+	T *Get()
+	{
+		return static_cast<T*>(ptr);
+	}
 	void *ptr;
 private:
 	TTree *tree;
