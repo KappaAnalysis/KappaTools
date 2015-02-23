@@ -52,7 +52,12 @@ inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, float shift 
 template<typename T>
 inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECValueType jv = jec_center)
 {
-	float shift = (jv == jec_up ? 0.0 : (jv == jec_up ? 1.0 : -1.0));
+	float shift = 0.0;
+	if (jv == jec_up)
+		shift = 1.0;
+	else if (jv == jec_down)
+		shift = -1.0;
+
 	applyUncertainty(jet, unc, shift);
 }
 
@@ -81,7 +86,12 @@ inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
 	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center)
 {
-	float shift = (jv == jec_up ? 0.0 : (jv == jec_up ? 1.0 : -1.0));
+	float shift = 0.0;
+	if (jv == jec_up)
+		shift = 1.0;
+	else if (jv == jec_down)
+		shift = -1.0;
+
 	correctJets(jets, jec, unc, rho, npv, area, shift);
 }
 
