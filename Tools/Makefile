@@ -6,4 +6,4 @@ PROGRAM  = triggerPrescale.sbin writeLSList.sbin duplicateEventChecker.sbin xsec
 include $(BASEDIR)/Makefile.root
 
 %.sbin: %.o
-	$(CXX) $(LDFLAGS) -o $@ $^ $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
+	$(CXX) $(LDFLAGS) -o $@ $^ $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/../Kappa/DataFormats/test/Hash.o $(BASEDIR)/lib/libKToolbox.a

@@ -11,4 +11,4 @@ include $(BASEDIR)/Makefile.root
 	$(CXX) $(LDFLAGS) -lKToolbox -lKRootTools -lKappa -L$(BASEDIR)/../Kappa/DataFormats/test/ -o $@ $^
 
 %.sbin: %.o
-	$(CXX) $(LDFLAGS) -o $@ $^ $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/lib/libKPlotTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
+	$(CXX) $(LDFLAGS) -o $@ $^ $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/lib/libKPlotTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/../Kappa/DataFormats/test/Hash.o $(BASEDIR)/lib/libKToolbox.a

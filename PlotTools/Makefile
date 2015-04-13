@@ -8,4 +8,4 @@ include $(BASEDIR)/Makefile.root
 
 %.sbin: %.o
 	$(CXX) $(LDFLAGS) -lKPlotTools -o $@ $^ \
-	$(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/lib/libKToolbox.a
+	$(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/../Kappa/DataFormats/test/Hash.o $(BASEDIR)/lib/libKToolbox.a
