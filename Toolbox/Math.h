@@ -12,25 +12,25 @@ static const double M_PI = 3.141592653589793238;
 typedef std::pair<double, double> edouble;
 
 template <typename T>
-inline const int sgn(const T a)
+inline int sgn(const T a)
 {
 	return (a > T(0)) - (a < T(0));
 }
 
 template<typename T>
-inline const T sqr(const T a)
+inline T sqr(const T a)
 {
 	return a * a;
 }
 
 template<typename T>
-inline const T min(const T a, const T b, const T c)
+inline T min(const T a, const T b, const T c)
 {
 	return std::min(std::min(a, b), c);
 }
 
 template<typename T>
-inline const T max(const T a, const T b, const T c)
+inline T max(const T a, const T b, const T c)
 {
 	return std::max(std::max(a, b), c);
 }
