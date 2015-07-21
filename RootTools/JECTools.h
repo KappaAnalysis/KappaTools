@@ -40,12 +40,12 @@ inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec)
 // Functions to apply correction + uncertainty to a single jet:
 
 template<typename T>
-inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, float shift = 0.0)
+inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, float shift = 0.0f)
 {
-	if ((unc != 0) && (shift != 0.0))
+	if ((unc != 0) && (std::abs(shift) < 0.00001f))
 	{
 		setupFactorProvider(jet, unc);
-		jet.p4 *= (1.0 + (shift * unc->getUncertainty(shift > 0.0)));
+		jet.p4 *= static_cast<float>(1.0f + (shift * unc->getUncertainty(shift > 0.0f)));
 	}
 }
 
@@ -54,9 +54,9 @@ inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECVal
 {
 	float shift = 0.0;
 	if (jv == jec_up)
-		shift = 1.0;
+		shift = 1.0f;
 	else if (jv == jec_down)
-		shift = -1.0;
+		shift = -1.0f;
 
 	applyUncertainty(jet, unc, shift);
 }
@@ -64,13 +64,13 @@ inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, const JECVal
 template<typename T>
 inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
-	const double rho, const int npv, const double area = -1, float shift = 0.0, bool sort = true)
+	const double rho, const int npv, const float area = -1, float shift = 0.0, bool sort = true)
 {
 	if (jec == 0)
 		return;
 	for (size_t idx = 0; idx < jets->size(); ++idx)
 	{
-		jec->setRho(rho);
+		jec->setRho(static_cast<float>(rho));
 		jec->setNPV(npv);
 		T &jet = jets->at(idx);
 		if (area > 0)
@@ -85,13 +85,13 @@ inline void correctJets(std::vector<T> *jets,
 template<typename T>
 inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
-	const double rho, const int npv, const double area = -1, const JECValueType jv = jec_center, bool sort = true)
+	const double rho, const int npv, const float area = -1, const JECValueType jv = jec_center, bool sort = true)
 {
 	float shift = 0.0;
 	if (jv == jec_up)
-		shift = 1.0;
+		shift = 1.0f;
 	else if (jv == jec_down)
-		shift = -1.0;
+		shift = -1.0f;
 
 	correctJets(jets, jec, unc, rho, npv, area, shift, sort);
 }
