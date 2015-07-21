@@ -17,7 +17,7 @@ private:
 	mutable std::map<std::string, size_t> posCache;
 	KLumiInfo * lumiInfo;
 public:
-	HLTTools(KLumiInfo * lumiInfo = 0)
+	HLTTools(KLumiInfo * lumiInfo = nullptr)
 	{
 		if (lumiInfo)
 			setLumiInfo(lumiInfo);

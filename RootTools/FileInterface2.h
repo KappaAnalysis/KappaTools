@@ -19,8 +19,8 @@
 class FileInterface2 : public FileInterfaceBase
 {
 public:
-	FileInterface2(std::vector<std::string> files, class RunLumiSelector *rls = 0,
-		bool shuffle = false, int verbose = 2, class ScaleServiceFactory *ss = 0, std::string reportFn = "");
+	FileInterface2(std::vector<std::string> files, class RunLumiSelector *rls = nullptr,
+		bool shuffle = false, int verbose = 2, class ScaleServiceFactory *ss = nullptr, std::string reportFn = "");
 	~FileInterface2()
 	{
 		for (std::map<std::string, BranchHolder*>::iterator it = meta_branches.begin(); it != meta_branches.end(); ++it)

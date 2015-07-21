@@ -56,7 +56,7 @@ template<typename T1, typename T2, typename TMetricClass>
 std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base_size,
 	const std::vector<T2> &target, const size_t target_size, const TMetricClass &metricFct)
 {
-	double **match_metric = 0;
+	double **match_metric = nullptr;
 	std::vector<int> result(target_size, -1);
 
 	// Build m x n Matrix with dR
