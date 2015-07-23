@@ -30,14 +30,14 @@ CXXFLAGS += -std=$(shell test $(GCCVER) -gt 42 && echo "c++0x" || echo "c++98")
 #CXXFLAGS += -I$(BASEDIR) - can cause problems with doxygen - better use relative includes
 LDFLAGS  += -L$(BASEDIR)/lib
 LDFLAGS  += -Wl,-rpath,$(BASEDIR)/lib
-# External packages
-CXXFLAGS += -I$(BASEDIR)/external
-LDFLAGS  += -L$(BASEDIR)/external/lib
-LDFLAGS  += -Wl,-rpath,$(BASEDIR)/external/lib
-ifndef NO_BOOST_LIB
-LDFLAGS  += -lboost_regex -L$(BASEDIR)/external/boost/lib/
-CXXFLAGS += -D HAS_BOOST_LIB=true -I$(BASEDIR)/external/boost/include/
-endif
+
+# Boost
+# Use Boost from CMSSW if CMSSW env available otherwise fall back to system boost
+BOOST_LIBDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/LIBDIR=//p')
+BOOST_INCDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/INCLUDE=//p')
+LDFLAGS  += -lboost_regex -L$(BOOST_LIBDIR)
+CXXFLAGS += -I$(BOOST_INCDIR)
+
 # Kappa
 KAPPADIR = $(shell cd $(BASEDIR)/..; pwd)
 CXXFLAGS += -I$(KAPPADIR)

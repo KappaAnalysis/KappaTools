@@ -37,7 +37,6 @@ std::vector<Tp1> getSecond(const Tin &in);
 template<typename Tin, typename Tout>
 Tout convert(const Tin &in);
 
-#ifdef HAS_BOOST_LIB
 template<typename Tk, typename Tv>
 std::vector<Tv> match(const std::string &pattern, const std::map<Tk, Tv> &in,
 	const boost::regex::flag_type flags = boost::regex::extended);
@@ -46,7 +45,6 @@ std::vector<Tk> match_keys(const std::string &pattern, const std::map<Tk, Tv> &i
 	const boost::regex::flag_type flags = boost::regex::extended);
 std::vector<std::string> match(const std::string &pattern, const std::vector<std::string> &in,
 	const boost::regex::flag_type flags = boost::regex::extended);
-#endif
 
 template<typename T>
 void multiResize(std::vector<T> &v, size_t s1)
