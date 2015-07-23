@@ -8,7 +8,7 @@ include $(BASEDIR)/Makefile.root
 #CXXFLAGS += -I$(BASEDIR)/external/hepmc/include/
 
 %.bin: %.o
-	$(CXX) $(LDFLAGS) -lKToolbox -lKRootTools -lKappa -L$(BASEDIR)/../Kappa/DataFormats/test/ -o $@ $^
+	$(CXX) $^ -o $@ -lKappa -lKToolbox -lKRootTools -L$(BASEDIR)/../Kappa/DataFormats/test/ $(LDFLAGS)
 
 %.sbin: %.o
-	$(CXX) $(LDFLAGS) -o $@ $^ $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/lib/libKPlotTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/../Kappa/DataFormats/test/Hash.o $(BASEDIR)/lib/libKToolbox.a
+	$(CXX) $^ -o $@  $(BASEDIR)/lib/libKRootTools.a $(BASEDIR)/lib/libKPlotTools.a $(BASEDIR)/../Kappa/DataFormats/test/libKappa.o $(BASEDIR)/../Kappa/DataFormats/test/Hash.o $(BASEDIR)/lib/libKToolbox.a $(LDFLAGS)
