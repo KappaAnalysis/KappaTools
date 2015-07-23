@@ -34,7 +34,7 @@ LDFLAGS  += -Wl,-rpath,$(BASEDIR)/lib
 # Use Boost from CMSSW if CMSSW env available otherwise fall back to system boost
 BOOST_LIBDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/LIBDIR=//p')
 BOOST_INCDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/INCLUDE=//p')
-ifndef BOOST_INCDIR
+ifdef BOOST_INCDIR
 LDFLAGS  += -lboost_regex -L$(BOOST_LIBDIR)
 CXXFLAGS += -I$(BOOST_INCDIR)
 endif
