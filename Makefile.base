@@ -1,3 +1,4 @@
+BASEDIR=../
 include $(BASEDIR)/Makefile.user
 
 ifndef VCS_REVISION
@@ -47,10 +48,10 @@ LDFLAGS  += -Wl,-rpath,$(KAPPADIR)/Kappa/lib
 all: $(PROGRAM)
 
 %.o: %.cc %.cpp %.hxx %.h
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.so: $(LIBFILES)
-	$(CXX) $(LDFLAGS) -shared -o $@ $^
+	 $(CXX) -shared -o $@ $^$(LDFLAGS) 
 	mkdir -p $(BASEDIR)/lib
 	-test ! $@ -ef $(BASEDIR)/lib/`basename $@` && cp $@ $(BASEDIR)/lib
 
