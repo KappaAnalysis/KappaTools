@@ -8,7 +8,7 @@ PROGRAM  = libKToolbox.so libKToolbox.a \
 include $(BASEDIR)/Makefile.base
 COPTS += -pedantic
 
-%.bin: %.o
+%.bin: %.o libKToolbox.so
 	$(CXX) -o $@ $^ -lKToolbox $(LDFLAGS)
 
 %.sbin: %.o libKToolbox.a
