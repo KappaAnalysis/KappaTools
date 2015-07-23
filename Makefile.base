@@ -51,7 +51,7 @@ all: $(PROGRAM)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.so: $(LIBFILES)
-	 $(CXX) -shared -o $@ $^$(LDFLAGS) 
+	 $(CXX) -shared -o $@ $^ $(LDFLAGS)
 	mkdir -p $(BASEDIR)/lib
 	-test ! $@ -ef $(BASEDIR)/lib/`basename $@` && cp $@ $(BASEDIR)/lib
 
