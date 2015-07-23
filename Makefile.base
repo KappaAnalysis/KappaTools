@@ -32,12 +32,10 @@ LDFLAGS  += -Wl,-rpath,$(BASEDIR)/lib
 
 # Boost
 # Use Boost from CMSSW if CMSSW env available otherwise fall back to system boost
-BOOST_LIBDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/LIBDIR=//p')
-BOOST_INCDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/INCLUDE=//p')
-ifdef BOOST_INCDIR
-LDFLAGS  += -lboost_regex -L$(BOOST_LIBDIR)
-CXXFLAGS += -I$(BOOST_INCDIR)
-endif
+BOOST_LIBDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/LIBDIR=/-L/p')
+BOOST_INCDIR = $(shell test ! -z $(CMSSW_BASE) && cd $(CMSSW_BASE) && scram tool info boost | sed -n 's/INCLUDE=/-I/p')
+LDFLAGS  += -lboost_regex $(BOOST_LIBDIR)
+CXXFLAGS += $(BOOST_INCDIR)
 
 # Kappa
 KAPPADIR = $(shell cd $(BASEDIR)/..; pwd)

@@ -9,7 +9,7 @@ include $(BASEDIR)/Makefile.base
 COPTS += -pedantic
 
 %.bin: %.o
-	$(CXX) -o $@ $^ -lKToolbox -lboost_regex $(LDFLAGS)
+	$(CXX) -o $@ $^ -lKToolbox $(LDFLAGS)
 
 %.sbin: %.o libKToolbox.a
-	$(CXX) -o $@ $^ $(LDFLAGS) -lboost_regex
+	$(CXX) -o $@ $^ $(LDFLAGS)
