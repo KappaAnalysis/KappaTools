@@ -14,6 +14,3 @@ clean: $(SUBDIR)
 	for DIR in $(SUBDIR); do \
 		$(MAKE) $(MFLAGS) -C $$DIR clean || exit 1; \
 	done
-
-doc:
-	doxygen doxygen.cfg
