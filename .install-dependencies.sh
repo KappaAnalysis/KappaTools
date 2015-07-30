@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+cd ..
+
 # Install Root
 wget http://www-ekp.physik.uni-karlsruhe.de/~sieber/root_5.34.07-1_amd64.deb || exit 1
 sudo dpkg -i root_5.34.07-1_amd64.deb || exit 1
