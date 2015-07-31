@@ -13,7 +13,13 @@ BranchHolder::BranchHolder(TTree *_tree, const std::string _bname, std::string c
 	{
 		if (cname == "")
 			cname = branch->GetClassName();
-		branch->SetAddress(&ptr);
+		// Consistency check
+		if (CheckBranch(branch, cname, check))
+		{
+			// Allocate correct instance and set pointer
+			ptr = TClass::GetClass(branch->GetClassName())->New();
+			tree->SetBranchAddress(bname.c_str(), &ptr);
+		}
 	}
 	else
 		std::cerr << "Requested branch not found: " << bname << std::endl;
@@ -32,7 +38,8 @@ void BranchHolder::UpdateTree(TTree *newTree)
 	if (ptr)
 	{
 		TBranch *branch = tree->GetBranch(bname.c_str());
-		branch->SetAddress(&ptr);
+		tree->ResetBranchAddress(branch);
+		newTree->SetBranchAddress(bname.c_str(), &ptr);
 	}
 	tree = newTree;
 }
