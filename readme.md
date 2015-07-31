@@ -11,9 +11,12 @@ compiles on its own. Cross-dependencies should be avoided.
 - **Example**: Examples how to build a simple analysis reading
   ĸappa files.
 - **PlotTools**: A library to create root histograms and plots
-  in C++ code.
-- **Plots**: Plots of specific quantities
-- **PythonTools**: ?
+  in C++ code. The Artus tree approach differs from that but
+  analyses with huge numbers of events might (partially) come back to
+  histograms at some point.
+- **Plots**: Plots of specific muon and jet quantities.
+  This code was used by Manuel Zeise for Z analyses.
+- **PythonTools**: A C++ interface class to a python generated config.
 - **RootTools**: This is a library of tools depending on 
   [ROOT](https://root.cern.ch/drupal/). It contains the file
   interface to ĸappa files, jet correction and jet ID tools, etc.
