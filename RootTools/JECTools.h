@@ -69,19 +69,22 @@ inline void correctJets(std::vector<T> *jets,
 	for (size_t idx = 0; idx < jets->size(); ++idx)
 	{
 		T &jet = jets->at(idx);
-		if (area > 0)
+		if (std::abs(jet.p4.Eta()) < 5.4)
 		{
-			jet.area = area;
-		}
-		if (jec != nullptr)
-		{
-			jec->setRho(static_cast<float>(rho));
-			jec->setNPV(npv);
-			correctSingleJet(jet, jec);
-		}
-		if (unc != nullptr)
-		{
-			applyUncertainty(jet, unc, shift);
+			if (area > 0)
+			{
+				jet.area = area;
+			}
+			if (jec != nullptr)
+			{
+				jec->setRho(static_cast<float>(rho));
+				jec->setNPV(npv);
+				correctSingleJet(jet, jec);
+			}
+			if (unc != nullptr)
+			{
+				applyUncertainty(jet, unc, shift);
+			}
 		}
 	}
 	if (sort)
