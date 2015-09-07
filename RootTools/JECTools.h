@@ -66,20 +66,28 @@ inline void correctJets(std::vector<T> *jets,
 	FactorizedJetCorrector *jec, JetCorrectionUncertainty *unc,
 	const double rho, const int npv, const float area = -1, float shift = 0.0, bool sort = true)
 {
-	if (jec == 0)
-		return;
 	for (size_t idx = 0; idx < jets->size(); ++idx)
 	{
-		jec->setRho(static_cast<float>(rho));
-		jec->setNPV(npv);
 		T &jet = jets->at(idx);
 		if (area > 0)
+		{
 			jet.area = area;
-		correctSingleJet(jet, jec);
-		applyUncertainty(jet, unc, shift);
+		}
+		if (jec != nullptr)
+		{
+			jec->setRho(static_cast<float>(rho));
+			jec->setNPV(npv);
+			correctSingleJet(jet, jec);
+		}
+		if (unc != nullptr)
+		{
+			applyUncertainty(jet, unc, shift);
+		}
 	}
 	if (sort)
+	{
 		sort_pt(jets);
+	}
 }
 
 template<typename T>
