@@ -11,15 +11,15 @@
 class ProgressMonitor
 {
 public:
-	ProgressMonitor(const unsigned long nPos = 0, const bool bInstant = false, const unsigned long updateInterval = 1000);
+	ProgressMonitor(const long long nPos = 0, const bool bInstant = false, const unsigned long updateInterval = 1000);
 	~ProgressMonitor();
 	bool Update();
-	bool Update(const unsigned long cPos);
-	void IncMax(const unsigned long nPos);
+	bool Update(const long long cPos);
+	void IncMax(const long long nPos);
 	void Reset();
 private:
 	bool bShow, bInstant;
-	unsigned long nPos, cPos;
+	long long nPos, cPos;
 	const unsigned long updateInterval;
 	struct timeval tStartTime, tLastUpdate;
 	static bool bAbort;

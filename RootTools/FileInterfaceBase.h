@@ -33,7 +33,7 @@ public:
 	{
 		return eventchain->GetEntries();
 	}
-	inline void GetEntry(size_t entry)
+	inline void GetEntry(long long entry)
 	{
 		eventchain->GetEntry(entry);
 	}

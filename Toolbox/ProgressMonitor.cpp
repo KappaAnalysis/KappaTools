@@ -18,7 +18,7 @@ void ProgressMonitor::CatchSignal(int sig)
 	bAbort = true;
 }
 
-ProgressMonitor::ProgressMonitor(const unsigned long nPos, const bool bInstant, const unsigned long _updateInterval)
+ProgressMonitor::ProgressMonitor(const long long nPos, const bool bInstant, const unsigned long _updateInterval)
 	: updateInterval(_updateInterval)
 {
 	bShow = isatty(1);
@@ -41,7 +41,7 @@ bool ProgressMonitor::Update()
 	return Update(++(this->cPos));
 }
 
-bool ProgressMonitor::Update(const unsigned long cPos)
+bool ProgressMonitor::Update(const long long cPos)
 {
 	this->cPos = cPos;
 	if (bShow && (cPos % updateInterval == 0))
@@ -55,7 +55,7 @@ bool ProgressMonitor::Update(const unsigned long cPos)
 	return !bAbort;
 }
 
-void ProgressMonitor::IncMax(const unsigned long nPos)
+void ProgressMonitor::IncMax(const long long nPos)
 {
 	this->nPos += nPos;
 	Reset();
