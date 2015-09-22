@@ -77,7 +77,8 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 	for (size_t t = 0; t < target_size; ++t)
 	{
 		// Find matrix entry with smallest metric
-		int bestBase = -1, bestTarget = -1;
+		int bestBase = -1;
+		unsigned int bestTarget = -1u;
 		double best_m = NAN;
 		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
 			for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
@@ -85,7 +86,9 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 				const double m = match_metric[idxBase][idxTarget];
 				if ((!std::isnan(m)) && ((m < best_m) || std::isnan(best_m)))
 				{
-					bestBase = idxBase; bestTarget = idxTarget; best_m = m;
+					bestBase = static_cast<int>(idxBase);
+					bestTarget = idxTarget;
+					best_m = m;
 				}
 			}
 
@@ -97,7 +100,7 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 			match_metric[idxBase][bestTarget] = NAN;
 		for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
 			match_metric[bestBase][idxTarget] = NAN;
-		result[bestTarget] = bestBase;
+		result[bestTarget] = static_cast<int>(bestBase);
 	}
 
 	for (unsigned int i = 0; i < base_size; ++i)

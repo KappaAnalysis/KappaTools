@@ -27,7 +27,7 @@ public:
 		this->lumiInfo = lumiInfo;
 		nameCache.clear();
 		posCache.clear();
-		for (size_t idx=0; idx < lumiInfo->hltNames.size(); ++idx)
+		for (size_t idx = 0; idx < lumiInfo->hltNames.size(); ++idx)
 		{
 			posCache[lumiInfo->hltNames[idx]] = idx;
 			nameCache[lumiInfo->hltNames[idx]] = lumiInfo->hltNames[idx];
@@ -51,7 +51,7 @@ public:
 	{
 		return (getHLTName(hltName) != "");
 	}
-	int getPrescale(const std::string &hltName) const
+	unsigned int getPrescale(const std::string &hltName) const
 	{
 		if (!lumiInfo)
 			return 0;
