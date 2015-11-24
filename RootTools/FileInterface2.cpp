@@ -139,7 +139,7 @@ void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 	}
 	if (lumiIdxMap.count(make_pair(run, lumi)) == 1)
 		lumidata->GetEntry(lumiIdxMap[make_pair(run, lumi)]);
-	else
+	else if (eventdata.GetEntries() > 0)
 	{
 		std::cerr << "Lumi section " << run << ":" << lumi << " not found or unique!" << std::endl;
 		std::cerr << eventdata.GetFile() << " " << eventdata.GetFileNumber() << " " << current_file << std::endl;
