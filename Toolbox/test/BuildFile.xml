@@ -1,0 +1,5 @@
+<bin name="KappaTools_Toolbox_tests" file="tests.cc">
+	<use name="KappaTools/Toolbox" />
+	<use name="root"/>
+	<use name="boost"/>
+</bin>

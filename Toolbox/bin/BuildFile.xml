@@ -1,0 +1,7 @@
+<bin name="KappaTools_Toolbox_example" file="example.cc">
+	<use name="KappaTools/Toolbox" />
+	<use name="root" />
+	<use name="boost" />
+	<Flags CXXFLAGS="-g" />
+	<Flags LDFLAGS="-rdynamic" />
+</bin>
