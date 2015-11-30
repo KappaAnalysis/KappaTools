@@ -1,5 +1,0 @@
-include $(BASEDIR)/Makefile.base
-
-CXXFLAGS += $(shell root-config --cflags)
-LDFLAGS += $(shell root-config --libs) \
-	-lGenVector -lReflex -lMathCore -lReflexDict
