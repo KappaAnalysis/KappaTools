@@ -21,5 +21,7 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install libboost1.54-all-dev
   - ./.install-dependencies.sh
-install: make
+install:
+  - cmake .
+  - make
 script: make
