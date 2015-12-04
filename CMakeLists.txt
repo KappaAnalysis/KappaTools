@@ -274,6 +274,8 @@ else()
 		KToolbox
 		KRootTools
 		KPlotTools
+		-Llib -lKRootTools
+		-lKToolbox
 		boost_regex
 		${ROOT_LIBRARIES} -lGenVector
 	)

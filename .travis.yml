@@ -25,6 +25,7 @@ before_install:
   - git clone --depth=10 -b development https://github.com/KappaAnalysis/Kappa.git
   - make -C Kappa/DataFormats/test
   - cd KappaTools
+  - export KAPPAPATH=../Kappa
 install:
   - cmake .
   - make
