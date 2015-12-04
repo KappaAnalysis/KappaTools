@@ -1,6 +1,7 @@
 # travis config for KappaTools
 sudo: required
 language: cpp
+services: docker
 notifications:
   email:
     on_success: never # default: change
@@ -16,7 +17,6 @@ addons:
     - g++-4.8
     - clang
 before_install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
   - sudo apt-get -y install libboost1.54-all-dev root-system
   - ls /usr/include/root /usr/lib/*/root5.34
   - python --version
