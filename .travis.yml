@@ -26,6 +26,6 @@ before_install:
   - cd KappaTools
   - export KAPPAPATH=../Kappa
 install:
-  - cmake .
+  - cmake . VERBOSE=1
   - make
 script: ls

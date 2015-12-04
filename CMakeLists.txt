@@ -79,7 +79,7 @@ target_link_libraries(minimal_disc KToolbox KRootTools KPlotTools ${KAPPA} ${BOO
 target_link_libraries(KappaTools_Example_test KToolbox KRootTools KPlotTools ${KAPPA} ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
 target_link_libraries(KappaTools_Example_testMatching KToolbox KRootTools ${KAPPA} ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
 target_link_libraries(KappaTools_PlotTools_tests KToolbox KRootTools KPlotTools ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
-target_link_libraries(KappaTools_PlotTools_tests1 KToolbox KRootTools KPlotTools ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
+target_link_libraries(KappaTools_PlotTools_tests1 KRootTools KPlotTools KToolbox ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
 target_link_libraries(example KToolbox ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
 target_link_libraries(KappaTools_Toolbox_tests KToolbox ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
 target_link_libraries(duplicateEventChecker KToolbox KRootTools ${KAPPA} ${BOOST_REGEX} ${ROOT_LIBRARIES} ${ROOT_GENVECTOR})
