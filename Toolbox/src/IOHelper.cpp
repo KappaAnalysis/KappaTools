@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "IOHelper.h"
+#include "../interface/IOHelper.h"
 
 void printPTree(const boost::property_tree::ptree &pt, const std::string prefix)
 {

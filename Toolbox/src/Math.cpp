@@ -1,5 +1,5 @@
-#include "Math.h"
-#include "String.h"
+#include "../interface/Math.h"
+#include "../interface/String.h"
 #include <cmath>
 
 using namespace std;

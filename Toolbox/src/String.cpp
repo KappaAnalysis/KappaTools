@@ -1,5 +1,5 @@
-#include "String.h"
-#include "Memory.h"
+#include "../interface/String.h"
+#include "../interface/Memory.h"
 #include <algorithm>
 #include <iomanip>
 #include <stdlib.h>

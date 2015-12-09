@@ -5,11 +5,11 @@
 
 #include "Kappa/DataFormats/interface/Kappa.h"
 #include "Kappa/DataFormats/interface/KDebug.h"
-#include "../Toolbox/libKToolbox.h"
-#include "../RootTools/libKRootTools.h"
-#include "../RootTools/FileInterface2Adv.h"
-#include "../PlotTools/PlotInterface.h"
-#include "../PlotTools/Plot_DataPFJet.h"
+#include "../../Toolbox/interface/libKToolbox.h"
+#include "../../RootTools/interface/libKRootTools.h"
+#include "../../RootTools/interface/FileInterface2Adv.h"
+#include "../../PlotTools/interface/PlotInterface.h"
+#include "../../PlotTools/interface/Plot_DataPFJet.h"
 
 using namespace std;
 

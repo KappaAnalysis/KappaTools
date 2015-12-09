@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "FileInterfaceBase.h"
+#include "../interface/FileInterfaceBase.h"
 
 #include "TEnv.h"
 

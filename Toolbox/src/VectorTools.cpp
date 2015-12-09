@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "VectorTools.h"
+#include "../interface/VectorTools.h"
 
 using namespace std;
 

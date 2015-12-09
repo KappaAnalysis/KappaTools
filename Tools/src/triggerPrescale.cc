@@ -12,10 +12,10 @@
 #include "TFile.h"
 #include "TChain.h"
 
-#include "../RootTools/FileInterface.h"
-#include "../RootTools/RunLumiReader.h"
-#include "../Toolbox/CmdLineSetup.h"
-#include "../Toolbox/ProgressMonitor.h"
+#include "../../RootTools/interface/FileInterface.h"
+#include "../../RootTools/interface/RunLumiReader.h"
+#include "../../Toolbox/interface/CmdLineSetup.h"
+#include "../../Toolbox/interface/ProgressMonitor.h"
 
 bool abortProgram = false;
 

@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "DisplayTools.h"
+#include "../interface/DisplayTools.h"
 #include <bitset>
 
 void displayWeight(KGenLumiInfo *infoLumi, KGenEventInfo *infoEvent)

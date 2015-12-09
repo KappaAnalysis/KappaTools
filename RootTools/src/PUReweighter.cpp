@@ -2,7 +2,7 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "PUReweighter.h"
+#include "../interface/PUReweighter.h"
 
 PUReweighter::PUReweighter(std::vector<std::string> inputFilesData, std::vector<std::string> inputFilesMC, float scaleFactor)
 {

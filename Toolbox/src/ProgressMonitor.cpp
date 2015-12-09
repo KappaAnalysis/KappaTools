@@ -6,8 +6,8 @@
 #include <iostream>
 #include <iomanip>
 #include <signal.h>
-#include "ProgressMonitor.h"
-#include "IOHelper.h"
+#include "../interface/ProgressMonitor.h"
+#include "../interface/IOHelper.h"
 
 using namespace std;
 

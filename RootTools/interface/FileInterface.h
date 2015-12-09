@@ -8,8 +8,8 @@
 #ifndef KAPPA_FILEINTERFACE_H
 #define KAPPA_FILEINTERFACE_H
 
-#include "../Toolbox/ProgressMonitor.h"
-#include "../Toolbox/IOHelper.h"
+#include "../../Toolbox/interface/ProgressMonitor.h"
+#include "../../Toolbox/interface/IOHelper.h"
 #include "FileInterfaceBase.h"
 
 class FileInterface : public FileInterfaceBase

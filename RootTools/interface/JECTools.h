@@ -11,8 +11,8 @@
 #include <CondFormats/JetMETObjects/interface/JetCorrectorParameters.h>
 #include <Kappa/DataFormats/interface/Kappa.h>
 #include "SortTools.h"
-#include "../Toolbox/IOHelper.h"
-#include "../Toolbox/Math.h"
+#include "../../Toolbox/interface/IOHelper.h"
+#include "../../Toolbox/interface/Math.h"
 
 enum JECValueType { jec_center, jec_up, jec_down };
 

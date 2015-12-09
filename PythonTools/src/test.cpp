@@ -2,8 +2,8 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "Config.h"
-#include "../Toolbox/IOHelper.h"
+#include "../interface/Config.h"
+#include "../Toolbox/interface/IOHelper.h"
 
 struct TestState
 {

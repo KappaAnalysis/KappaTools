@@ -2,10 +2,10 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "Directory.h"
+#include "../interface/Directory.h"
 #include <assert.h>
 #include "TDataMember.h"
-#include "../Toolbox/IOHelper.h"
+#include "../../Toolbox/interface/IOHelper.h"
 
 std::map<std::string, TObject*> GetDirObjectsMap(TDirectory *dir)
 {

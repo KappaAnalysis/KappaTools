@@ -3,7 +3,7 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "JetID.h"
+#include "../interface/JetID.h"
 
 bool JetIDLoose<KCaloJet>::operator()(const struct KCaloJet &jet) const
 {

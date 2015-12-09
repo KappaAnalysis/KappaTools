@@ -6,7 +6,7 @@
 #define PTCONFIG_H
 
 #include <boost/python.hpp>
-#include "../Toolbox/IOHelper.h"
+#include "../../Toolbox/interface/IOHelper.h"
 #include <map>
 #include <vector>
 #include <iostream>

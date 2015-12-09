@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "LSWatcher.h"
+#include "../interface/LSWatcher.h"
 
 LSWatcher::LSWatcher()
 	: changed(true), run(-1), lumi(-1)

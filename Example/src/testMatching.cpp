@@ -5,8 +5,8 @@
 #include <TRandom3.h>
 #include <Kappa/DataFormats/interface/Kappa.h>
 #include <Kappa/DataFormats/interface/KDebug.h>
-#include "../Toolbox/libKToolbox.h"
-#include "../RootTools/libKRootTools.h"
+#include "../../Toolbox/interface/libKToolbox.h"
+#include "../../RootTools/interface/libKRootTools.h"
 
 using namespace std;
 

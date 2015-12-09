@@ -1,6 +1,6 @@
 #define DEBUG
 //#include <cassert>
-#include "libKToolbox.h"
+#include "../interface/libKToolbox.h"
 #include <iostream>
 #include <iterator>
 

@@ -1,8 +1,8 @@
 #ifndef BINNING_H
 #define BINNING_H
 
-#include "KappaTools/Toolbox/Vector.h"
-#include "KappaTools/Toolbox/Memory.h"
+#include "../../Toolbox/interface/Vector.h"
+#include "../../Toolbox/interface/Memory.h"
 //#include <stdlib.h>
 
 class TAxis;

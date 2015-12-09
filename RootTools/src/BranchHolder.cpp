@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "BranchHolder.h"
+#include "../interface/BranchHolder.h"
 #include <iostream>
 
 BranchHolder::BranchHolder(TTree *_tree, const std::string _bname, std::string cname, const bool check)

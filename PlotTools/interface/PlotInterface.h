@@ -2,8 +2,8 @@
 #define PLOTINTERFACE_H
 
 #include "BookPlots.h"
-#include "KappaTools/RootTools/Directory.h"
-#include "KappaTools/Toolbox/IOHelper.h"
+#include "../../RootTools/interface/Directory.h"
+#include "../../Toolbox/interface/IOHelper.h"
 
 /*
 class PlotHolderBase

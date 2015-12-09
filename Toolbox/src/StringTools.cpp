@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "StringTools.h"
+#include "../interface/StringTools.h"
 #include <algorithm>
 #include <cstdlib>
 #include <stdarg.h>

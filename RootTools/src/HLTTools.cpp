@@ -2,4 +2,4 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "HLTTools.h"
+#include "../interface/HLTTools.h"

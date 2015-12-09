@@ -5,7 +5,7 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "FileInterface.h"
+#include "../interface/FileInterface.h"
 
 using namespace std;
 

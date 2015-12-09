@@ -5,7 +5,7 @@
 
 #include "TChain.h"
 #include "Kappa/DataFormats/interface/KInfo.h"
-#include "../Toolbox/CmdLineSetup.h"
+#include "../../Toolbox/interface/CmdLineSetup.h"
 #include <iomanip>
 
 void run(std::string filename)

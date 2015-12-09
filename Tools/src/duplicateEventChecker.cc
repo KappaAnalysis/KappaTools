@@ -5,10 +5,10 @@
 
 #include <set>
 #include <TChain.h>
-#include "../Toolbox/CmdLineSetup.h"
-#include "../Toolbox/ProgressMonitor.h"
-#include "../RootTools/EventLogger.h"
-#include "../RootTools/FileInterface.h"
+#include "../../Toolbox/interface/CmdLineSetup.h"
+#include "../../Toolbox/interface/ProgressMonitor.h"
+#include "../../RootTools/interface/EventLogger.h"
+#include "../../RootTools/interface/FileInterface.h"
 #include "Kappa/DataFormats/interface/KDebug.h"
 
 using namespace std;

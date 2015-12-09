@@ -1,4 +1,4 @@
-#include "PlotInterface.h"
+#include "../interface/PlotInterface.h"
 #include <TFile.h>
 
 std::map<TFile*, int> PlotInterface::refCount;

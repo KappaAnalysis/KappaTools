@@ -3,7 +3,7 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "EventLogger.h"
+#include "../interface/EventLogger.h"
 
 std::ostream &operator<<(std::ostream &output, const EventID &id)
 {

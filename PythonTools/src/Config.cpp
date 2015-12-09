@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "Config.h"
+#include "../interface/Config.h"
 
 PythonConfig::PythonConfig()
 {

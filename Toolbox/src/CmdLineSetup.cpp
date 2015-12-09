@@ -2,7 +2,7 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "CmdLineSetup.h"
+#include "../interface/CmdLineSetup.h"
 #include <getopt.h>
 #include <string.h>
 #include <iomanip>

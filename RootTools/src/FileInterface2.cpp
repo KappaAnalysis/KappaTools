@@ -2,9 +2,9 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "FileInterface2.h"
-#include "RunLumiReader.h"
-#include "ScaleService.h"
+#include "../interface/FileInterface2.h"
+#include "../interface/RunLumiReader.h"
+#include "../interface/ScaleService.h"
 #include <fstream>
 
 using namespace std;

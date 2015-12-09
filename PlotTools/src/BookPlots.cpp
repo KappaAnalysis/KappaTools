@@ -1,4 +1,4 @@
-#include "BookPlots.h"
+#include "../interface/BookPlots.h"
 
 namespace RawPlotInterface
 {

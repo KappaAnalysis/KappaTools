@@ -3,9 +3,9 @@
  */
 
 #include "Kappa/DataFormats/interface/KInfo.h"
-#include "../RootTools/RunLumiReader.h"
-#include "../RootTools/FileInterface.h"
-#include "../Toolbox/CmdLineSetup.h"
+#include "../../RootTools/interface/RunLumiReader.h"
+#include "../../RootTools/interface/FileInterface.h"
+#include "../../Toolbox/interface/CmdLineSetup.h"
 
 using namespace std;
 

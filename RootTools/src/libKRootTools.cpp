@@ -2,4 +2,4 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "../Toolbox/libKToolbox.h"
+#include "../../Toolbox/interface/libKToolbox.h"

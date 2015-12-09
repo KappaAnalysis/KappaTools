@@ -2,5 +2,5 @@
  *   Manuel Zeise <zeise@cern.ch>
  */
 
-#include "LumiCounter.h"
+#include "../interface/LumiCounter.h"
 

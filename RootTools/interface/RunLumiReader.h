@@ -9,7 +9,7 @@
 
 #include <set>
 #include <Kappa/DataFormats/interface/Kappa.h>
-#include "../RootTools/FileInterface.h"
+#include "FileInterface.h"
 
 void readLumiFilter(const std::string json, std::map<run_id, std::set<std::pair<lumi_id, lumi_id> > > &lumifilter);
 

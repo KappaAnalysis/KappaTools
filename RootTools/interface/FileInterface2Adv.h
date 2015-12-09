@@ -10,8 +10,8 @@
 #include <TChain.h>
 #include <list>
 
-#include "../Toolbox/IOHelper.h"
-#include "../Toolbox/ProgressMonitor.h"
+#include "../../Toolbox/interface/IOHelper.h"
+#include "../../Toolbox/interface/ProgressMonitor.h"
 #include <Kappa/DataFormats/interface/Kappa.h>
 #include "Directory.h"
 #include "FileInterfaceBase.h"

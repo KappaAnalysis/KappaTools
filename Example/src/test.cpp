@@ -5,10 +5,10 @@
 
 #include "Kappa/DataFormats/interface/Kappa.h"
 #include "Kappa/DataFormats/interface/KDebug.h"
-#include "../Toolbox/libKToolbox.h"
-#include "../RootTools/libKRootTools.h"
-#include "../RootTools/FileInterface2.h"
-#include "../RootTools/ScaleService.h"
+#include "../../Toolbox/interface/libKToolbox.h"
+#include "../../RootTools/interface/libKRootTools.h"
+#include "../../RootTools/interface/FileInterface2.h"
+#include "../../RootTools/interface/ScaleService.h"
 
 using namespace std;
 

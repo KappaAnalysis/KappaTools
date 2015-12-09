@@ -2,4 +2,4 @@
  *   Fred Stober <stober@cern.ch>
  */
 
-#include "JECTools.h"
+#include "../interface/JECTools.h"
