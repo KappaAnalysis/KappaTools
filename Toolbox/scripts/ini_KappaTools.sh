@@ -22,8 +22,6 @@ elif [ -n "$ZSH_VERSION" ]; then
 
 fi
 
-export SCRAM_IGNORE_PACKAGES="KappaTools/PythonTools"
-
 export KAPPAPATH=$(readlink -f $KAPPATOOLSPATH/../Kappa)
 
 # configurations needed for compilation of C++ code
