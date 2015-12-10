@@ -3,6 +3,7 @@
  */
 
 #include "../interface/Config.h"
+#include "../../Toolbox/interface/StringTools.h"
 
 PythonConfig::PythonConfig()
 {
@@ -41,7 +42,7 @@ std::vector<std::string> PythonConfig::dir(const std::string &name, const bool h
 	for (int i = 0; i < len(tmp); ++i)
 	{
 		std::string item = boost::python::extract<std::string>(tmp[i]);
-		if ((!startswith(item, "__")) || (!hide))
+		if ((!KappaTools::startswith(item, "__")) || (!hide))
 			result.push_back(item);
 	}
 	return result;
@@ -49,9 +50,9 @@ std::vector<std::string> PythonConfig::dir(const std::string &name, const bool h
 
 boost::python::object PythonConfig::getattr(const boost::python::object &obj, const std::string &name)
 {
-	if (in('.', name))
+	if (KappaTools::in('.', name))
 	{
-		std::vector<std::string> tmp = split(name, ".", 1);
+		std::vector<std::string> tmp = KappaTools::split(name, ".", 1);
 		return getattr(getattr(obj, tmp[0]), tmp[1]);
 	}
 	else

@@ -4,4 +4,4 @@
 
 #include "../../Toolbox/interface/libKToolbox.h"
 
-static VersionInfo versionKPB("Kappa Python Tools", QUOTE(VCS_REVISION));
+// static VersionInfo versionKPB("Kappa Python Tools", QUOTE(VCS_REVISION));
