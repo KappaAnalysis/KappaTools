@@ -1,12 +1,12 @@
 # travis config for KappaTools
 sudo: required
 language: cpp
+services: docker
 notifications:
   email:
-    on_success: never # default: change
-    on_failure: never # default: always
-compiler:
-  - gcc
+    on_success: change
+    on_failure: always
+compiler: gcc
 addons:
   apt:
     sources:
@@ -16,10 +16,16 @@ addons:
     - g++-4.8
     - clang
 before_install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-  - sudo add-apt-repository --yes ppa:boost-latest/ppa
-  - sudo apt-get -qq update
-  - sudo apt-get install libboost1.54-all-dev
-  - ./.install-dependencies.sh
-install: make
-script: make
+  - sudo apt-get -y install libboost1.54-all-dev root-system
+  - ls /usr/include/root /usr/lib/*/root5.34
+  - python --version
+  - root-config --cflags --ldflags
+  - cd ..
+  - git clone --depth=10 -b development https://github.com/KappaAnalysis/Kappa.git
+  - make -C Kappa/DataFormats/test
+  - cd KappaTools
+  - export KAPPAPATH=../Kappa
+install:
+  - cmake .
+  - make VERBOSE=1
+script: ls

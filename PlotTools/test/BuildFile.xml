@@ -1,0 +1,13 @@
+<bin name="KappaTools_PlotTools_tests" file="tests.cpp">
+	<use name="KappaTools/PlotTools" />
+	<use name="KappaTools/RootTools" />
+	<use name="root"/>
+	<use name="boost"/>
+</bin>
+
+<bin name="KappaTools_PlotTools_tests1" file="tests1.cpp">
+	<use name="KappaTools/PlotTools" />
+	<use name="KappaTools/RootTools" />
+	<use name="root"/>
+	<use name="boost"/>
+</bin>

@@ -1,0 +1,15 @@
+<bin name="KappaTools_Example_test" file="test.cpp">
+	<use name="KappaTools/Toolbox" />
+	<use name="KappaTools/RootTools" />
+	<use name="root"/>
+	<use name="boost"/>
+	<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
+</bin>
+
+<bin name="KappaTools_Example_testMatching" file="testMatching.cpp">
+	<use name="KappaTools/Toolbox" />
+	<use name="KappaTools/RootTools" />
+	<use name="root"/>
+	<use name="boost"/>
+	<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
+</bin>
