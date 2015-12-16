@@ -12,3 +12,11 @@ CMakeCache.txt
 CMakeFiles/
 Makefile
 cmake_install.cmake
+KappaTools_*_test*
+duplicateEventChecker
+example
+minimal
+minimal_disc
+triggerPrescale
+writeLSList
+xsec
