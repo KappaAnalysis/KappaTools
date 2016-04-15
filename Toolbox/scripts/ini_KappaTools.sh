@@ -24,7 +24,12 @@ fi
 
 export KAPPAPATH=$(readlink -f $KAPPATOOLSPATH/../Kappa)
 
-# configurations needed for compilation of C++ code
-#export BOOSTPATH=$(ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/
-export LD_LIBRARY_PATH="$KAPPATOOLSPATH/lib:$KAPPAPATH/lib:$LD_LIBRARY_PATH"
-
+if [ -z $CMSSW_BASE ];
+then
+	# configurations needed for compilation of C++ code
+	#export BOOSTPATH=$(ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/
+	export LD_LIBRARY_PATH="$KAPPATOOLSPATH/lib:$KAPPAPATH/lib:$LD_LIBRARY_PATH"
+else
+	cp $KAPPAPATH/DataFormats/test/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
+	scram setup kappa
+fi
