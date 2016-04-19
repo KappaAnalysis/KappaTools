@@ -1,9 +1,0 @@
-<tool name="KappaTools" version="1.0">
-	<lib name="KRootTools"/>
-	<lib name="KToolbox"/>
-	<client>
-		<environment name="KAPPATOOLS_BASE" default="$CMSSW_BASE/src/KappaTools"/>
-		<environment name="LIBDIR" default="$KAPPATOOLS_BASE/lib"/>
-		<environment name="INCLUDEDIR" default="$KAPPATOOLS_BASE/RootTools/"/>
-	</client>
-</tool>
