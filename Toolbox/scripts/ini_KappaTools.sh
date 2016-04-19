@@ -24,7 +24,7 @@ fi
 
 export KAPPAPATH=$(readlink -f $KAPPATOOLSPATH/../Kappa)
 
-if [ -z $CMSSW_BASE ];
+if [[ -z "${CMSSW_BASE}" ]] && [[ ${CMSSW_BASE}* == $(readlink -f .) ]];
 then
 	# configurations needed for compilation of C++ code
 	#export BOOSTPATH=$(ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/
