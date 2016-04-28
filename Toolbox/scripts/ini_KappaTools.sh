@@ -32,5 +32,5 @@ then
 else
 	cp $KAPPAPATH/DataFormats/test/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
 	scram setup kappa
-	symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/
+	command -v symlinks > /dev/null 2>&1 && symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/ > /dev/null 2>&1
 fi
