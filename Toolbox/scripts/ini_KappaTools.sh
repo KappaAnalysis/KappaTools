@@ -32,5 +32,15 @@ then
 else
 	cp $KAPPAPATH/DataFormats/test/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
 	scram setup kappa
-	command -v symlinks > /dev/null 2>&1 && symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/ > /dev/null 2>&1
+	if [ command -v symlinks > /dev/null 2>&1 ]; then
+	    symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/ > /dev/null 2>&1
+	else
+	    for FILE in ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/*; do
+	        if [ -L $FILE ]; then
+                LINKPATH=$(readlink $FILE)
+                rm $FILE
+                ln -s ${LINKPATH/$CMSSW_BASE/..\/..\/..} $FILE
+            fi
+        done
+    fi
 fi
