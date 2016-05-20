@@ -38,7 +38,7 @@ else
 	    for FILE in ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/*; do
 	        if [ -L $FILE ]; then
                 LINKPATH=$(readlink $FILE)
-                rm $FILE
+                rm -f $FILE
                 ln -s ${LINKPATH/$CMSSW_BASE/..\/..\/..} $FILE
             fi
         done
