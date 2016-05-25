@@ -19,7 +19,7 @@ struct matchSort_deltaR
 	double operator()(const T1 &obj1, const T2 &obj2) const
 	{
 		const double val = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
-		return val <= maxDeltaR ? val : NAN;
+		return double(val) <= double(maxDeltaR) ? val : std::numeric_limits<double>::quiet_NaN();
 	}
 
 	const double maxDeltaR;
@@ -34,7 +34,7 @@ struct matchSort_deltaRdeltaPtRel
 	{
 		const double val1 = ROOT::Math::VectorUtil::DeltaR(obj1.p4, obj2.p4);
 		const double val2 = std::abs(obj1.p4.pt() - obj2.p4.pt()) / obj2.p4.pt();
-		return (val1 < maxDeltaR && val2 < maxDeltaPtRel) ? val1 : NAN;
+		return (val1 < maxDeltaR && val2 < maxDeltaPtRel) ? val1 : std::numeric_limits<double>::quiet_NaN();
 	}
 
 	const double maxDeltaR, maxDeltaPtRel;
@@ -79,7 +79,7 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 		// Find matrix entry with smallest metric
 		int bestBase = -1;
 		unsigned int bestTarget = -1u;
-		double best_m = NAN;
+		double best_m = std::numeric_limits<double>::quiet_NaN();
 		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
 			for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
 			{
@@ -97,9 +97,9 @@ std::vector<int> matchSort_Matrix(const std::vector<T1> &base, const size_t base
 			break;
 		// Invalidate metrics of matched objects
 		for (unsigned int idxBase = 0; idxBase < base_size; ++idxBase)
-			match_metric[idxBase][bestTarget] = NAN;
+			match_metric[idxBase][bestTarget] = std::numeric_limits<double>::quiet_NaN();
 		for (unsigned int idxTarget = 0; idxTarget < target_size; ++idxTarget)
-			match_metric[bestBase][idxTarget] = NAN;
+			match_metric[bestBase][idxTarget] = std::numeric_limits<double>::quiet_NaN();
 		result[bestTarget] = static_cast<int>(bestBase);
 	}
 

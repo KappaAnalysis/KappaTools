@@ -42,7 +42,7 @@ inline void correctSingleJet(T &jet, FactorizedJetCorrector *jec)
 template<typename T>
 inline void applyUncertainty(T &jet, JetCorrectionUncertainty *unc, float shift = 0.0f)
 {
-	if ((unc != 0) && (std::abs(shift) > 0.00001f))
+	if ((unc != nullptr) && (std::abs(shift) > 0.00001f))
 	{
 		setupFactorProvider(jet, unc);
 		jet.p4 *= static_cast<float>(1.0f + (shift * unc->getUncertainty(shift > 0.0f)));
@@ -69,7 +69,7 @@ inline void correctJets(std::vector<T> *jets,
 	for (size_t idx = 0; idx < jets->size(); ++idx)
 	{
 		T &jet = jets->at(idx);
-		if (std::abs(jet.p4.Eta()) < 5.4)
+		if (std::abs(jet.p4.Eta()) < 5.4f)
 		{
 			if (area > 0)
 			{

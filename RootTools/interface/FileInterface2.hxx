@@ -9,7 +9,7 @@ T *FileInterface2::GetMeta(std::string name, const bool check, const bool def)
 	if (name == "")
 		name = TypeName<T>::name();
 	T *result = static_cast<T*>(GetInternal(lumidata, meta_branches, TypeName<T>::name(), name, check));
-	if ((result == 0) && def)
+	if ((result == nullptr) && def)
 		return new T();
 	return result;
 }

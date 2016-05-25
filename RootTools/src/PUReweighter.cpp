@@ -258,7 +258,7 @@ void PUReweighter::initApproxMatrix(std::vector<std::string> inputFiles, float s
 				Data_ints[i][j][k] = 0.;
 			}
 
-    double factorial[50];
+    double factorial[51];
     double PowerSer[50];
     double base = 1.;
 

@@ -14,7 +14,7 @@ template<typename T>
 T *FileInterfaceBase::Get(const std::string &name, const bool check, const bool def)
 {
 	T *result = static_cast<T*>(GetInternal(eventchain, branches, TypeName<T>::name(), name, check));
-	if ((result == 0) && def)
+	if ((result == nullptr) && def)
 		return new T();
 	return result;
 }
