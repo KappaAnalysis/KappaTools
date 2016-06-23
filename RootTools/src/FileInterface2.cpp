@@ -89,7 +89,14 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 
 		// 3) add accepted files to chain / persistent lumi info list
 		usedFiles.push_back(files[f]);
-		eventdata.Add(files[f].c_str());
+		bool open_succesfully;
+		open_succesfully = eventdata.Add(files[f].c_str(),-1);
+		if (open_succesfully != 1)
+		{
+			std::cerr << "File " << files[f] << " could not be accessed!" << std::endl;
+			exit(1);
+		}
+	
 	}
 
 	if (reportFn != "")
