@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 		KLumiInfo *meta_lumi = fi.Get<KLumiInfo>(meta_event);
 		KGenLumiInfo *meta_lumi_gen = fi.Get<KGenLumiInfo>(meta_event);
 
-		if (meta_event->bitsHLT == 0)
+		if (meta_event->bitsHLT.size() == 0)
 			continue;
 
 		cout << "Event metadata: " << *meta_event << endl;
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 			}
 		}
 		for (size_t i = 0; i < meta_lumi->hltNames.size(); ++i)
-			if (meta_event->bitsHLT & (1ul << i))
+			if (meta_event->bitsHLT[i])
 				cout << meta_lumi->hltNames[i] << " ";
 		cout << endl;
 		cout << "=========" << endl << endl;
