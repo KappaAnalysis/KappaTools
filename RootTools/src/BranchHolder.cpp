@@ -28,14 +28,12 @@ BranchHolder::BranchHolder(TTree *_tree, const std::string _bname, std::string c
 				ptr = branchClass->New();
 				tree->SetBranchAddress(bname.c_str(), &ptr, branchClass, branchType, true);
 			}
-			else {
+			else 
 				std::cerr << "Unable to get branch information: " << bname << std::endl;
-			}
 		}
 	}
-	else {
+	else 
 		std::cerr << "Requested branch not found: " << bname << std::endl;
-	}
 }
 
 std::string BranchHolder::ClassName()
