@@ -16,13 +16,26 @@ BranchHolder::BranchHolder(TTree *_tree, const std::string _bname, std::string c
 		// Consistency check
 		if (CheckBranch(branch, cname, check))
 		{
-			// Allocate correct instance and set pointer
-			ptr = TClass::GetClass(branch->GetClassName())->New();
-			tree->SetBranchAddress(bname.c_str(), &ptr);
+			// This complicated SetBranchAddress call is neccessary since
+			// the simple tree->SetBranchAddress(bname.c_str(), &ptr) call
+			// triggers a bug in ROOT, which performs a type check on a
+			// zero initialized pointer. Found and fixed by Fred S.
+			TClass *branchClass;
+			EDataType branchType;
+			if (branch->GetExpectedType(branchClass, branchType) == 0)
+			{
+				// Allocate correct instance and set pointer
+				ptr = branchClass->New();
+				tree->SetBranchAddress(bname.c_str(), &ptr, branchClass, branchType, true);
+			}
+			else {
+				std::cerr << "Unable to get branch information: " << bname << std::endl;
+			}
 		}
 	}
-	else
+	else {
 		std::cerr << "Requested branch not found: " << bname << std::endl;
+	}
 }
 
 std::string BranchHolder::ClassName()
