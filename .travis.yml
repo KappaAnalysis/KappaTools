@@ -21,7 +21,7 @@ before_install:
   - python --version
   - root-config --cflags --ldflags
   - cd ..
-  - git clone --depth=10 -b development https://github.com/KappaAnalysis/Kappa.git
+  - git clone --depth=10 https://github.com/KappaAnalysis/Kappa.git
   - make -C Kappa/DataFormats/test
   - cd KappaTools
   - export KAPPAPATH=../Kappa
