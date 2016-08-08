@@ -113,8 +113,11 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 		exit(1);
 	}
 	Init(&eventdata, dtAll);
-	GetEntry(0);
-	GetMetaEntry();
+	if (current_event != 0)
+	{
+		GetEntry(0);
+		GetMetaEntry();
+	}
 }
 
 void FileInterface2::GetMetaEntry()
