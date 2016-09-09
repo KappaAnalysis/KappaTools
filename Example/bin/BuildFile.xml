@@ -1,21 +1,9 @@
-<bin name="minimal" file="minimal.cpp">
-	<use name="KappaTools/Toolbox" />
-	<use name="KappaTools/RootTools" />
-	<use name="KappaTools/PlotTools" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-	<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
-</bin>
-
-<bin name="minimal_disc" file="minimal_disc.cpp">
-	<use name="KappaTools/Toolbox" />
-	<use name="KappaTools/RootTools" />
-	<use name="KappaTools/PlotTools" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-	<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
-</bin>
+<use name="Kappa/DataFormats" />
+<use name="KappaTools/Toolbox" />
+<use name="KappaTools/RootTools" />
+<use name="KappaTools/PlotTools" />
+<use name="root" />
+<use name="boost" />
+<Flags CXXFLAGS="-g" />
+<Flags LDFLAGS="-rdynamic" />
+<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />

@@ -1,35 +1,8 @@
-<bin name="duplicateEventChecker" file="duplicateEventChecker.cc">
-	<use name="KappaTools/Toolbox" />
-	<use name="KappaTools/RootTools" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-	<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
-</bin>
-
-<bin name="triggerPrescale" file="triggerPrescale.cc">
-	<use name="KappaTools/Toolbox" />
-	<use name="KappaTools/RootTools" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-</bin>
-
-<bin name="writeLSList" file="writeLSList.cc">
-	<use name="KappaTools/Toolbox" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-</bin>
-
-<bin name="xsec" file="xsec.cc">
-	<use name="KappaTools/Toolbox" />
-	<use name="KappaTools/RootTools" />
-	<use name="root" />
-	<use name="boost" />
-	<Flags CXXFLAGS="-g" />
-	<Flags LDFLAGS="-rdynamic" />
-</bin>
+<use name="Kappa/DataFormats" />
+<use name="KappaTools/Toolbox" />
+<use name="KappaTools/RootTools" />
+<use name="root" />
+<use name="boost" />
+<Flags CXXFLAGS="-g" />
+<Flags LDFLAGS="-rdynamic" />
+<Flags LDFLAGS="-lKappa" />
