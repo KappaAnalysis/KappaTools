@@ -3,4 +3,4 @@
 <use name="KappaTools/RootTools" />
 <use name="root"/>
 <use name="boost"/>
-<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
+

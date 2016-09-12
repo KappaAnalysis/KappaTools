@@ -6,4 +6,3 @@
 <use name="boost" />
 <Flags CXXFLAGS="-g" />
 <Flags LDFLAGS="-rdynamic" />
-<Flags LDFLAGS="-Lsrc/Kappa/lib -lKappa" />
