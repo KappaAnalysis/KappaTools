@@ -5,3 +5,10 @@
 <use name="boost" />
 <Flags CXXFLAGS="-g" />
 <Flags LDFLAGS="-rdynamic" />
+
+
+<bin name="xsec" file="xsec.cc" />
+<bin name="writeLSList" file="writeLSList.cc" />
+<bin name="triggerPrescale" file="triggerPrescale.cc" />
+<bin name="duplicateEventChecker" file="duplicateEventChecker.cc"/>
+

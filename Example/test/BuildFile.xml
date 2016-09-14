@@ -4,3 +4,5 @@
 <use name="root"/>
 <use name="boost"/>
 
+<bin name="KappaTools_Example_test" file="test.cpp"/>
+<bin name="KappaTools_Example_testMatching" file="testMatching.cpp"/>

@@ -6,3 +6,5 @@
 <use name="boost" />
 <Flags CXXFLAGS="-g" />
 <Flags LDFLAGS="-rdynamic" />
+<bin name="minimal" file="minimal.cpp"/>
+<bin name="minimal_disc" file="minimal_disc.cpp"/>
