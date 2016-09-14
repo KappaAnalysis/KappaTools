@@ -26,7 +26,7 @@ export KAPPAPATH=$(readlink -f $KAPPATOOLSPATH/../Kappa)
 
 if [[ -n ${CMSSW_BASE} ]] && [[ $(dirname $(readlink -mf ${BASH_SOURCE[0]})) == ${CMSSW_BASE}* ]];  # i.e. 'if installed inside CMSSW'
 then
-	cp $KAPPAPATH/DataFormats/test/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
+	cp $KAPPAPATH/DataFormats/scripts/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
 	scram setup kappa
 	if [ command -v symlinks > /dev/null 2>&1 ]; then
 	    symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/ > /dev/null 2>&1
