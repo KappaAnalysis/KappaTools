@@ -24,22 +24,8 @@ fi
 
 export KAPPAPATH=$(readlink -f $KAPPATOOLSPATH/../Kappa)
 
-if [[ -n ${CMSSW_BASE} ]] && [[ $(dirname $(readlink -mf ${BASH_SOURCE[0]})) == ${CMSSW_BASE}* ]];  # i.e. 'if installed inside CMSSW'
+if [[ ! -n ${CMSSW_BASE} ]] || [[ ! $(dirname $(readlink -mf ${BASH_SOURCE[0]})) == ${CMSSW_BASE}* ]];  # i.e. 'if installed inside CMSSW'
 then
-	cp $KAPPAPATH/DataFormats/scripts/kappa.xml $CMSSW_BASE/config/toolbox/${SCRAM_ARCH}/tools/selected/kappa.xml
-	scram setup kappa
-	if [ command -v symlinks > /dev/null 2>&1 ]; then
-	    symlinks -c ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/ > /dev/null 2>&1
-	else
-	    for FILE in ${CMSSW_BASE}/external/${SCRAM_ARCH}/lib/*; do
-	        if [ -L $FILE ]; then
-                LINKPATH=$(readlink $FILE)
-                rm -f $FILE
-                ln -s ${LINKPATH/$CMSSW_BASE/..\/..\/..} $FILE
-            fi
-        done
-    fi
-else
 	# configurations needed for compilation of C++ code
 	#export BOOSTPATH=$(ls /afs/cern.ch/cms/${SCRAM_ARCH}/external/boost/* -d | tail -n 1)/
 	export LD_LIBRARY_PATH="$KAPPATOOLSPATH/lib:$KAPPAPATH/lib:$LD_LIBRARY_PATH"
