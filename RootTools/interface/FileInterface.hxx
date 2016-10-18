@@ -34,12 +34,12 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 	std::map<run_id, std::pair<lumi_id, lumi_id> > run_start_end;
 	if (lumidata.GetEntries() > 0)
 	{
-		std::auto_ptr<ProgressMonitor> pm;
+		ProgressMonitor *pm = 0;
 		if (verbosity > 0)
-			pm.reset(new ProgressMonitor(lumidata.GetEntries()));
+			pm = new ProgressMonitor(lumidata.GetEntries());
 		for (int i = 0; i < lumidata.GetEntries(); ++i)
 		{
-			if (pm.get())
+			if (pm)
 				pm->Update();
 			lumidata.GetEntry(i);
 			result[std::make_pair(info_lumi->nRun, info_lumi->nLumi)] = *info_lumi;
@@ -54,6 +54,8 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 				std::max(run_start_end[info_lumi->nRun].second, info_lumi->nLumi)
 			);
 		}
+		if (pm)
+			delete pm;
 	}
 	if (verbosity > 2)
 		std::cout << std::endl << std::endl;
