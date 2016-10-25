@@ -16,23 +16,40 @@ private:
 	mutable std::map<std::string, std::string>::iterator nameCacheEndIt;
 	mutable std::map<std::string, size_t> posCache;
 	KLumiInfo * lumiInfo;
+	unsigned int akt_nLumi; // trigger will not change in the same lumi section
+	unsigned int akt_nRun; // also check for the rare cases if file will change, but lumi is kept
+	bool refill_hlt; // will be used for the refill of the chaces. Which takes some time O(100 ms)
+	
+	
 public:
 	HLTTools(KLumiInfo * lumiInfo = nullptr)
 	{
-		if (lumiInfo)
-			setLumiInfo(lumiInfo);
+	  akt_nLumi = 0; // just a default value, will be overwritten by first lumi
+	  akt_nRun = 0;// just a default value, will be overwritten by first lumi
+	  refill_hlt = true; // Allways fill the hlt infos in the first run
+	  if (lumiInfo){
+	    setLumiInfo(lumiInfo);
+	  }
 	}
 	void setLumiInfo(KLumiInfo * lumiInfo)
 	{
-		this->lumiInfo = lumiInfo;
-		nameCache.clear();
-		posCache.clear();
-		for (size_t idx = 0; idx < lumiInfo->hltNames.size(); ++idx)
-		{
-			posCache[lumiInfo->hltNames[idx]] = idx;
-			nameCache[lumiInfo->hltNames[idx]] = lumiInfo->hltNames[idx];
+		this->lumiInfo = lumiInfo;		
+		if (lumiInfo->nLumi != akt_nLumi || lumiInfo->nRun != akt_nRun){ // check if lumi or run number has changed
+		  akt_nLumi = lumiInfo->nLumi; // save new lumi
+		  akt_nRun  = lumiInfo->nRun; // save new akt run
+		  refill_hlt = true; // tirgger new refill
 		}
-		nameCacheEndIt = nameCache.end();
+		
+		if (refill_hlt){
+		  nameCache.clear();
+		  posCache.clear();
+		  for (size_t idx = 0; idx < lumiInfo->hltNames.size(); ++idx){
+		    posCache[lumiInfo->hltNames[idx]] = idx;
+		    nameCache[lumiInfo->hltNames[idx]] = lumiInfo->hltNames[idx];
+		  }
+		  nameCacheEndIt = nameCache.end();
+		  refill_hlt = false;	
+		}
 	}
 	bool isHLTDefect() const
 	{
