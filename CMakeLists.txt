@@ -16,6 +16,16 @@ if (DEFINED ENV{CMSSW_RELEASE_BASE})
 	set(CORRECTION_DIR "..")
 	message(STATUS "Looking for boost ${BOOSTVER} inc in CMSSW: found ${BOOST_INCLUDE_DIR}")
 	message(STATUS "Looking for boost ${BOOSTVER} lib in CMSSW: found ${BOOST_LIB_DIR}")
+	FIND_LIBRARY(BOOST_REGEX
+		NAMES boost_regex
+		PATHS
+		${BOOST_LIB_DIR}
+		NO_DEFAULT_PATH
+		)
+else()
+	FIND_LIBRARY(BOOST_REGEX
+		NAMES boost_regex
+		)
 endif()
 
 FIND_LIBRARY(KAPPA
@@ -31,11 +41,6 @@ FIND_LIBRARY(ROOT_GENVECTOR
 	${ROOT_LIBRARY_DIR}
 	)
 
-FIND_LIBRARY(BOOST_REGEX
-	NAMES boost_regex
-	PATHS
-	${BOOST_LIB_DIR}/lib
-	)
 
 set(INCLUDE_DIRECTORIES
 	${ROOT_INCLUDE_DIR}
