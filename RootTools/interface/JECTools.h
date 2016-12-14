@@ -107,12 +107,12 @@ inline void correctJets(std::vector<T> *jets,
 	correctJets(jets, jec, unc, rho, npv, area, shift, sort);
 }
 
-#include "FileInterface.h"
+#include "FileInterfaceBase.h"
 
 class JECService
 {
 public:
-	JECService(FileInterface &fi, const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
+	JECService(FileInterfaceBase &fi, const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0)
 		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(nullptr), JEU(nullptr),
 			vs(fi.Get<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
 			ja(fi.Get<KPileupDensity>("KT6Area", true, true))
