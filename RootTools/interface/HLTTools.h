@@ -8,12 +8,10 @@ class HLTTools
 {
 private:
 	mutable std::map<std::string, std::string> nameCache;
-	mutable std::map<std::string, std::string>::iterator itCache;
-	mutable std::map<std::string, std::string>::iterator nameCacheEndIt;
 	mutable std::map<std::string, size_t> posCache;
 	KLumiInfo * lumiInfo;
-	unsigned int akt_nLumi; // trigger will not change in the same lumi section
-	unsigned int akt_nRun; // also check for the rare cases if file will change, but lumi is kept
+	unsigned int currentNLumi; // trigger will not change in the same lumi section
+	unsigned int currentNRun; // also check for the rare cases if file will change, but lumi is kept
 	bool refill_hlt; // will be used for the refill of the chaces. Which takes some time O(100 ms)
 	
 	
