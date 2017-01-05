@@ -6,6 +6,7 @@
 #include <assert.h>
 #include "TDataMember.h"
 #include "../../Toolbox/interface/IOHelper.h"
+#include "TVirtualCollectionProxy.h"
 
 std::map<std::string, TObject*> GetDirObjectsMap(TDirectory *dir)
 {
@@ -83,8 +84,13 @@ bool CheckType(const std::string req, const std::string cur)
 	assert(cur != "");
 	TClass *classRequest = TClass::GetClass(req.c_str());
 	TClass *classCurrent = TClass::GetClass(cur.c_str());
-
-	if (classCurrent->InheritsFrom(classRequest))
+	
+	if (classRequest->GetCollectionType()==ROOT::ESTLType::kSTLvector  &&  classCurrent->GetCollectionType()==ROOT::ESTLType::kSTLvector ){
+	  classRequest = classRequest->GetCollectionProxy()->GetValueClass();
+	  classCurrent = classCurrent->GetCollectionProxy()->GetValueClass();
+	}
+	
+	if (classCurrent->InheritsFrom(classRequest)) 
 		return true;
 	std::cerr << "Incompatible types! Requested: " << req << " Found: " << cur << std::endl;
 	return false;
