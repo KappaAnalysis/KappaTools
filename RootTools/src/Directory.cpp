@@ -6,7 +6,11 @@
 #include <assert.h>
 #include "TDataMember.h"
 #include "../../Toolbox/interface/IOHelper.h"
+#if CMSSW_MAJOR_VERSION >= 8
 #include "TVirtualCollectionProxy.h"
+#endif
+
+
 
 std::map<std::string, TObject*> GetDirObjectsMap(TDirectory *dir)
 {
@@ -85,10 +89,12 @@ bool CheckType(const std::string req, const std::string cur)
 	TClass *classRequest = TClass::GetClass(req.c_str());
 	TClass *classCurrent = TClass::GetClass(cur.c_str());
 	
+	#if CMSSW_MAJOR_VERSION >= 8
 	if (classRequest->GetCollectionType()==ROOT::ESTLType::kSTLvector  &&  classCurrent->GetCollectionType()==ROOT::ESTLType::kSTLvector ){
 	  classRequest = classRequest->GetCollectionProxy()->GetValueClass();
 	  classCurrent = classCurrent->GetCollectionProxy()->GetValueClass();
 	}
+	#endif	
 	
 	if (classCurrent->InheritsFrom(classRequest)) 
 		return true;
