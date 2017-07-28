@@ -11,7 +11,7 @@
 #include <stddef.h>
 #include <cstring>
 
-void displayWeight(KGenLumiInfo *infoLumi, KGenEventInfo *infoEvent);
+void displayWeight(KGenRunInfo *infoLumi, KGenEventInfo *infoEvent);
 void displayBits(KEventInfo *info);
 void displayHLT(KLumiInfo *infoLumi, KEventInfo *infoEvent);
 

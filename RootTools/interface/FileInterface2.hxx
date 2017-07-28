@@ -44,3 +44,14 @@ inline T *FileInterface2::Get(KEventInfo *info_event)
 	GetMetaEntry(info_event->nRun, info_event->nLumi);
 	return GetMeta<T>("lumiInfo");
 }
+// Get run metadata objects
+template<typename T>
+T *FileInterface2::GetRun(std::string name, const bool check, const bool def)
+{
+	if (name == "")
+		name = TypeName<T>::name();
+	T *result = static_cast<T*>(GetInternal(rundata, run_branches, TypeName<T>::name(), name, check));
+	if ((result == nullptr) && def)
+		return new T();
+	return result;
+}

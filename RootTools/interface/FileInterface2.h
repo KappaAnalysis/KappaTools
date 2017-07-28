@@ -26,6 +26,9 @@ public:
 		for (std::map<std::string, BranchHolder*>::iterator it = meta_branches.begin(); it != meta_branches.end(); ++it)
 			delete it->second;
 		meta_branches.clear();
+		for (std::map<std::string, BranchHolder*>::iterator it = run_branches.begin(); it != run_branches.end(); ++it)
+			delete it->second;
+		run_branches.clear();
 		ClearCache();
 		delete lumidata;
 	}
@@ -34,6 +37,8 @@ public:
 	// Functions for accessing metadata objects
 	void GetMetaEntry();
 	void GetMetaEntry(run_id run, lumi_id lumi);
+	void GetRunEntry();
+	void GetRunEntry(run_id run);
 
 	// Functions for getting metadata objects
 	template<typename T>
@@ -42,6 +47,10 @@ public:
 	std::vector<std::string> GetMetaNames(bool inherited = false);
 	template<typename T>
 	std::map<std::string, T*> GetMetaAll(bool inherited = false);
+
+	// Functions for getting metadata objects
+	template<typename T>
+	T *GetRun(std::string name, const bool check = true, const bool def = false);
 
 	// Functions for getting metadata objects - old style
 	template<typename T>
@@ -53,8 +62,11 @@ public:
 
 protected:
 	TChain *lumidata;
+	TChain *rundata;
 	std::string current_file;
+	std::string current_run_file;
 	std::map<std::string, BranchHolder*> meta_branches;
+	std::map<std::string, BranchHolder*> run_branches;
 	std::map<std::pair<run_id, lumi_id>, size_t> lumiIdxMap;
 };
 

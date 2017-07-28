@@ -14,7 +14,7 @@ T *FileInterface::Get(run_id run, lumi_id lumi)
 template<>
 KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
 template<>
-KGenLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
+KGenRunInfo *FileInterface::Get(run_id run, lumi_id lumi);
 template<>
 KDataLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
 

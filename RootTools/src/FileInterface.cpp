@@ -10,7 +10,7 @@
 using namespace std;
 
 FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
-	eventdata("Events"), lumidata("Lumis"), verbosity(verbose)
+	eventdata("Events"), lumidata("Lumis"), rundata("Runs"), verbosity(verbose)
 {
 	if (shuffle)
 		random_shuffle(files.begin(), files.end());
@@ -20,17 +20,13 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 			cout << "Loading ... " << files[i] << endl;
 		eventdata.Add(files[i].c_str());
 		lumidata.Add(files[i].c_str());
+		rundata.Add(files[i].c_str());
 	}
 
 	TBranch *b = lumidata.GetBranch("lumiInfo");
 	if (b)
 	{
-		if (string(b->GetClassName()) == "KGenLumiInfo")
-		{
-			Init(&eventdata, GEN);
-			lumimap_mc = GetLumis<KGenLumiInfo>();
-		}
-		else if (string(b->GetClassName()) == "KDataLumiInfo")
+		if (string(b->GetClassName()) == "KDataLumiInfo")
 		{
 			Init(&eventdata, DATA);
 			lumimap_data = GetLumis<KDataLumiInfo>();
@@ -104,7 +100,8 @@ KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 	switch (lumiInfoType)
 	{
 	case GEN:
-		return &(lumimap_mc[std::make_pair(run, lumi)]);
+		//return &(lumimap_mc[std::make_pair(run, lumi)]);
+		return &(lumimap_std[std::make_pair(run, lumi)]);
 	case STD:
 		return &(lumimap_std[std::make_pair(run, lumi)]);
 	case DATA:
@@ -116,7 +113,7 @@ KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KGenLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
+KGenRunInfo *FileInterface::Get(run_id run, lumi_id lumi)
 {
 	if (lumiInfoType == GEN)
 		return &(lumimap_mc[std::make_pair(run, lumi)]);

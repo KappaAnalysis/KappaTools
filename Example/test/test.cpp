@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 		if (lsWatcher.Changed(meta_event))
 			cout << "Reading new lumi metadata!" << endl;
 		KLumiInfo *meta_lumi = fi.Get<KLumiInfo>(meta_event);
-		KGenLumiInfo *meta_lumi_gen = fi.Get<KGenLumiInfo>(meta_event);
+		KGenRunInfo *meta_lumi_gen = fi.Get<KGenRunInfo>(meta_event);
 
 		if (meta_event->bitsHLT.size() == 0)
 			continue;

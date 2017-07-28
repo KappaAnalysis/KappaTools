@@ -118,7 +118,7 @@ class ScaleServiceFactory
 public:
 	ScaleServiceFactory(const bool _doPrescales = true, TH1D *pu_data = 0, TH1D *pu_mc = 0) {};
 
-	void registerMC(KGenLumiInfo *info_lumi) {};
+	void registerMC(KLumiInfo *info_lumi) {};
 	void registerData(KDataLumiInfo *info_lumi) {};
 	void registerLF(std::string lumiPath) {};
 	ScaleService *finish(unsigned long long events, const double userXsec = -1, const double userLumi = -1) { return 0; };

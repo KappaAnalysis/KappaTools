@@ -19,7 +19,7 @@ void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiInf
 			ss->registerData(static_cast<KDataLumiInfo*>(info_lumi));
 			break;
 		case FileInterfaceBase::GEN:
-			ss->registerMC(static_cast<KGenLumiInfo*>(info_lumi));
+			ss->registerMC(info_lumi);
 			break;
 		default:
 			break;
@@ -28,7 +28,7 @@ void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiInf
 
 FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *rls,
 	bool shuffle, int verbose, ScaleServiceFactory *ss, std::string reportFn)
-	: FileInterfaceBase(verbose), eventdata("Events"), lumidata(0), current_file()
+	: FileInterfaceBase(verbose), eventdata("Events"), lumidata(0), rundata(0), current_file()
 {
 	if (shuffle)
 		random_shuffle(files.begin(), files.end());
@@ -51,7 +51,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 			KLumiInfo *info_lumi = (KLumiInfo*)bh.ptr;
 
 			DataType dt = INVALID;
-			if (bh.ClassName() == "KGenLumiInfo")
+			if (bh.ClassName() == "KGenRunInfo")
 				dt = GEN;
 			if (bh.ClassName() == "KDataLumiInfo")
 				dt = DATA;
@@ -117,6 +117,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 	{
 		GetEntry(0);
 		GetMetaEntry();
+		GetRunEntry();
 	}
 }
 
@@ -157,4 +158,25 @@ void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 		exit(1);
 	}
 	// Check consistency of getMetaNames between files!
+}
+
+void FileInterface2::GetRunEntry()
+{
+	GetRunEntry(current_event->nRun);
+}
+
+void FileInterface2::GetRunEntry(run_id run)
+{
+	if (eventdata.GetFile()->GetName() != current_run_file)
+	{
+		// Update tree reference of booked variables
+		TChain *newRunData = new TChain("Runs");
+		newRunData->Add(eventdata.GetFile()->GetName());
+		for (std::map<std::string, BranchHolder*>::iterator it = run_branches.begin(); it != run_branches.end(); ++it)
+			it->second->UpdateTree(newRunData);
+		if (rundata)
+			delete rundata;
+		rundata = newRunData;
+		current_run_file = eventdata.GetFile()->GetName();
+	}
 }

@@ -35,9 +35,10 @@ public:
 	TChain eventdata;
 private:
 	TChain lumidata;
+	TChain rundata;
 	int verbosity;
 
-	std::map<std::pair<run_id, lumi_id>, KGenLumiInfo> lumimap_mc;
+	std::map<std::pair<run_id, lumi_id>, KGenRunInfo> lumimap_mc;
 	std::map<std::pair<run_id, lumi_id>, KLumiInfo> lumimap_std;
 	std::map<std::pair<run_id, lumi_id>, KDataLumiInfo> lumimap_data;
 
