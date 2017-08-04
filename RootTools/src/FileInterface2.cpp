@@ -177,6 +177,10 @@ void FileInterface2::GetRunEntry(run_id run)
 		if (rundata)
 			delete rundata;
 		rundata = newRunData;
+		// Always get first entry. The Run tree is currently only used to store generator information, on MC there is only run "1".
+		GetRun<KGenRunInfo>("runInfo", false, false);
+		rundata->GetEntry(0);
+		assert(rundata->GetEntries() == 1);
 		current_run_file = eventdata.GetFile()->GetName();
 	}
 }
