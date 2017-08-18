@@ -17,13 +17,13 @@ class FileInterface : public FileInterfaceBase
 public:
 	FileInterface(std::vector<std::string> files, bool shuffle = false, int verbose = 2);
 	~FileInterface();
-	using FileInterfaceBase::Get;
+	using FileInterfaceBase::GetEvent;
 
 	// Functions for getting metadata objects
 	template<typename T>
-	T *Get(run_id run, lumi_id lumi);
+	T *GetEvent(run_id run, lumi_id lumi);
 	template<typename T>
-	inline T *Get(KEventInfo *info_event);
+	inline T *GetEvent(KEventInfo *info_event);
 
 	// Get lumi list
 	std::vector<std::pair<run_id, lumi_id> > GetRunLumis() const;

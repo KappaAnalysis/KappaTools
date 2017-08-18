@@ -100,7 +100,7 @@ std::vector<std::pair<run_id, lumi_id> > FileInterface::GetRunLumis() const
 }
 
 template<>
-KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
+KLumiInfo *FileInterface::GetEvent(run_id run, lumi_id lumi)
 {
 	switch (lumiInfoType)
 	{
@@ -118,7 +118,7 @@ KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KGenRunInfo *FileInterface::Get(run_id run, lumi_id lumi)
+KGenRunInfo *FileInterface::GetEvent(run_id run, lumi_id lumi)
 {
 	if (lumiInfoType == GEN)
 		return &(lumimap_mc[std::make_pair(run, lumi)]);
@@ -126,7 +126,7 @@ KGenRunInfo *FileInterface::Get(run_id run, lumi_id lumi)
 }
 
 template<>
-KDataLumiInfo *FileInterface::Get(run_id run, lumi_id lumi)
+KDataLumiInfo *FileInterface::GetEvent(run_id run, lumi_id lumi)
 {
 	if (lumiInfoType == DATA)
 		return &(lumimap_data[std::make_pair(run, lumi)]);

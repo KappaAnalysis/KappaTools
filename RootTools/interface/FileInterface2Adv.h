@@ -41,7 +41,7 @@ public:
 		if (output_file == 0)
 			return;
 		if (output_event == 0)
-			output_event = CloneTreeContent("Events", branches);
+			output_event = CloneTreeContent("Events", eventBranches);
 		output_event->Fill();
 	}
 
@@ -51,7 +51,7 @@ public:
 		if (output_file == 0)
 			return;
 		if (output_lumi == 0)
-			output_lumi = CloneTreeContent("Lumis", meta_branches);
+			output_lumi = CloneTreeContent("Lumis", lumiBranches);
 		output_lumi->Fill();
 	}
 

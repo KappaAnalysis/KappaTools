@@ -26,19 +26,19 @@ int main(int argc, char **argv)
 	ssf.finish(fi.GetEntries(), 1, 1);
 
 	std::cout << "finished" << std::endl;
-	vector<string> names = fi.GetNames<KLVs>();
+	vector<string> names = fi.GetEventNames<KLVs>();
 	cout << names << endl << endl;
 	if (names.size() == 0)
 		return -1;
 
-	KLVs *jets = fi.Get<KLVs>(names[0]);
-	KBeamSpot *bs = fi.Get<KBeamSpot>("offlineBeamSpot");
+	KLVs *jets = fi.GetEvent<KLVs>(names[0]);
+	KBeamSpot *bs = fi.GetEvent<KBeamSpot>("offlineBeamSpot");
 
 	std::map<std::string, KLVs*> tomap;
 	for (size_t i = 0; i < names.size(); ++i)
-		tomap[names[i]] = fi.Get<KLVs>(names[i]);
+		tomap[names[i]] = fi.GetEvent<KLVs>(names[i]);
 
-	KEventInfo *meta_event = fi.Get<KEventInfo>();
+	KEventInfo *meta_event = fi.GetEvent<KEventInfo>();
 
 //	long long nEvents = min((long long)3, fi.eventdata->GetEntries());
 	long long nEvents = fi.eventdata->GetEntries();
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
 		static LSWatcher lsWatcher;
 		if (lsWatcher.Changed(meta_event))
 			cout << "Reading new lumi metadata!" << endl;
-		KLumiInfo *meta_lumi = fi.Get<KLumiInfo>(meta_event);
-		KGenRunInfo *meta_lumi_gen = fi.Get<KGenRunInfo>(meta_event);
+		KLumiInfo *meta_lumi = fi.GetEvent<KLumiInfo>(meta_event);
+		KGenRunInfo *meta_lumi_gen = fi.GetEvent<KGenRunInfo>(meta_event);
 
 		if (meta_event->bitsHLT.size() == 0)
 			continue;

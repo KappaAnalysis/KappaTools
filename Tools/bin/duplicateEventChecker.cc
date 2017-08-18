@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 
 	FileInterface kpFi(filenames, false, 2);
 	TChain &theChain = kpFi.eventdata;
-	KEventInfo *metadata = kpFi.Get<KEventInfo>();
+	KEventInfo *metadata = kpFi.GetEvent<KEventInfo>();
 	EventLogger<std::set<EventID> > log;
 
 	//now code the super-sophisticated event loop.

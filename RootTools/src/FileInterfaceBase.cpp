@@ -17,7 +17,7 @@ void FileInterfaceBase::Init(TChain* _eventdata, FileInterfaceBase::DataType _lu
 {
 	eventdata = _eventdata;
 	lumiInfoType = _lumiInfoType;
-	current_event = Get<KEventInfo>("eventInfo", false);
+	current_event = GetEvent<KEventInfo>("eventInfo", false);
 	assert((current_event != 0) || (eventdata->GetEntries() == 0));
 	switch (lumiInfoType)
 	{
@@ -36,12 +36,12 @@ void FileInterfaceBase::SpeedupTree(long cache)
 {
 	if (cache > 0)
 		eventdata->SetCacheSize(cache);
-	TObjArray *branches = eventdata->GetListOfBranches();
-	if (branches != 0)
+	TObjArray *eventBranches = eventdata->GetListOfBranches();
+	if (eventBranches != 0)
 	{
-		for (int i = 0; i < branches->GetEntries(); ++i)
+		for (int i = 0; i < eventBranches->GetEntries(); ++i)
 		{
-			TBranch *b = dynamic_cast<TBranch*>(branches->At(i));
+			TBranch *b = dynamic_cast<TBranch*>(eventBranches->At(i));
 			if (b->GetAddress() == 0)
 			{
 				UInt_t found = 0;
