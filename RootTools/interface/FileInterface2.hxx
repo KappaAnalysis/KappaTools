@@ -17,7 +17,7 @@ T *FileInterface2::GetMeta(std::string name, const bool check, const bool def)
 template<typename T>
 std::vector<std::string> FileInterface2::GetMetaNames(bool inherited)
 {
-	return TreeObjects(*lumidata, TypeName<T>::name(), inherited);
+	return TreeObjects(lumidata, TypeName<T>::name(), inherited);
 }
 
 template<typename T>

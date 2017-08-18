@@ -40,15 +40,15 @@ int main(int argc, char **argv)
 
 	KEventInfo *meta_event = fi.Get<KEventInfo>();
 
-//	long long nEvents = min((long long)3, fi.eventdata.GetEntries());
-	long long nEvents = fi.eventdata.GetEntries();
+//	long long nEvents = min((long long)3, fi.eventdata->GetEntries());
+	long long nEvents = fi.eventdata->GetEntries();
 	std::cout << nEvents << std::endl;
 	ProgressMonitor pm(nEvents);
 	fi.SpeedupTree();
 	for (long long iEvent = 0; iEvent < nEvents; ++iEvent)
 	{
 		if (!pm.Update()) break;
-		fi.eventdata.GetEntry(iEvent);
+		fi.eventdata->GetEntry(iEvent);
 
 		static LSWatcher lsWatcher;
 		if (lsWatcher.Changed(meta_event))

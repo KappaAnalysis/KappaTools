@@ -30,9 +30,11 @@ public:
 	bool isCompatible(unsigned int minRun, unsigned int maxRun);
 
 	TChain eventdata;
+	
 private:
 	TChain lumidata;
 	TChain rundata;
+	
 	int verbosity;
 
 	std::map<std::pair<run_id, lumi_id>, KGenRunInfo> lumimap_mc;

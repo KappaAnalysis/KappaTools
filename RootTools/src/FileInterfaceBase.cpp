@@ -13,7 +13,7 @@ FileInterfaceBase::FileInterfaceBase(int verbose) :
 {
 }
 
-void FileInterfaceBase::Init(TChain *_eventdata, FileInterfaceBase::DataType _lumiInfoType)
+void FileInterfaceBase::Init(TChain* _eventdata, FileInterfaceBase::DataType _lumiInfoType)
 {
 	eventdata = _eventdata;
 	lumiInfoType = _lumiInfoType;
@@ -62,7 +62,7 @@ void FileInterfaceBase::SpeedupTree(long cache)
 	gEnv->SetValue("TFile.AsyncPrefetching", 1);
 }
 
-void *FileInterfaceBase::GetInternal(TTree *tree, std::map<std::string, BranchHolder*> &bmap,
+void *FileInterfaceBase::GetInternal(TTree* tree, std::map<std::string, BranchHolder*> &bmap,
 	const std::string cname, const std::string &name, const bool check)
 {
 	// First time access

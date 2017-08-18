@@ -24,10 +24,9 @@ public:
 			delete it->second;
 		branches.clear();
 	}
-	void Init(TChain *_eventdata, DataType _lumiInfoType);
+	void Init(TChain* _eventdata, DataType _lumiInfoType);
 
 	void SpeedupTree(long cache = 0);
-	TChain *eventdata;
 
 	inline long long GetEntries()
 	{
@@ -51,13 +50,15 @@ public:
 	std::map<std::string, T*> GetAll(bool inherited = false);
 
 	bool isMC() const;
+	
+	TChain* eventdata = nullptr;
 
 protected:
 	int verbosity;
 	KEventInfo *current_event;
 	std::map<std::string, BranchHolder*> branches;
 
-	void *GetInternal(TTree *tree, std::map<std::string, BranchHolder*> &bmap,
+	void *GetInternal(TTree* tree, std::map<std::string, BranchHolder*> &bmap,
 		const std::string cname, const std::string &name, const bool check = true);
 };
 

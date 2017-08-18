@@ -28,8 +28,10 @@ void updateSSF(ScaleServiceFactory *ss, FileInterfaceBase::DataType dt, KLumiInf
 
 FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *rls,
 	bool shuffle, int verbose, ScaleServiceFactory *ss, std::string reportFn)
-	: FileInterfaceBase(verbose), eventdata("Events"), lumidata(0), rundata(0), current_file()
+	: FileInterfaceBase(verbose), lumidata(new TChain("Lumis")), rundata(new TChain("Runs")), current_file()
 {
+	eventdata = new TChain("Events");
+	
 	if (shuffle)
 		random_shuffle(files.begin(), files.end());
 
@@ -90,7 +92,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 		// 3) add accepted files to chain / persistent lumi info list
 		usedFiles.push_back(files[f]);
 		bool open_succesfully;
-		open_succesfully = eventdata.Add(files[f].c_str(),-1);
+		open_succesfully = eventdata->Add(files[f].c_str(),-1);
 		if (open_succesfully != 1)
 		{
 			std::cerr << "File " << files[f] << " could not be accessed!" << std::endl;
@@ -112,7 +114,7 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 		std::cerr << "No files to process!" << std::endl;
 		exit(1);
 	}
-	Init(&eventdata, dtAll);
+	Init(eventdata, dtAll);
 	if (current_event != 0)
 	{
 		GetEntry(0);
@@ -130,6 +132,10 @@ FileInterface2::~FileInterface2()
 		delete it->second;
 	run_branches.clear();
 	ClearCache();
+	
+	if (eventdata) delete eventdata;
+	if (lumidata) delete lumidata;
+	if (rundata) delete rundata;
 }
 
 void FileInterface2::GetMetaEntry()
@@ -139,12 +145,12 @@ void FileInterface2::GetMetaEntry()
 
 void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 {
-	if (eventdata.GetFile()->GetName() != current_file)
+	if (eventdata->GetFile()->GetName() != current_file)
 	{
 		lumiIdxMap.clear();
 		// Update tree reference of booked variables
 		TChain *newLumiData = new TChain("Lumis");
-		newLumiData->Add(eventdata.GetFile()->GetName());
+		newLumiData->Add(eventdata->GetFile()->GetName());
 		for (std::map<std::string, BranchHolder*>::iterator it = meta_branches.begin(); it != meta_branches.end(); ++it)
 			it->second->UpdateTree(newLumiData);
 		if (lumidata)
@@ -157,14 +163,14 @@ void FileInterface2::GetMetaEntry(run_id run, lumi_id lumi)
 			lumidata->GetEntry(i);
 			lumiIdxMap[make_pair(info_lumi->nRun, info_lumi->nLumi)] = i;
 		}
-		current_file = eventdata.GetFile()->GetName();
+		current_file = eventdata->GetFile()->GetName();
 	}
 	if (lumiIdxMap.count(make_pair(run, lumi)) == 1)
 		lumidata->GetEntry(lumiIdxMap[make_pair(run, lumi)]);
-	else if (eventdata.GetEntries() > 0)
+	else if (eventdata->GetEntries() > 0)
 	{
 		std::cerr << "Lumi section " << run << ":" << lumi << " not found or unique!" << std::endl;
-		std::cerr << eventdata.GetFile() << " " << eventdata.GetFileNumber() << " " << current_file << std::endl;
+		std::cerr << eventdata->GetFile() << " " << eventdata->GetFileNumber() << " " << current_file << std::endl;
 		std::cerr << lumiIdxMap << endl;
 		exit(1);
 	}
@@ -178,11 +184,11 @@ void FileInterface2::GetRunEntry()
 
 void FileInterface2::GetRunEntry(run_id run)
 {
-	if (eventdata.GetFile()->GetName() != current_run_file)
+	if (eventdata->GetFile()->GetName() != current_run_file)
 	{
 		// Update tree reference of booked variables
 		TChain *newRunData = new TChain("Runs");
-		newRunData->Add(eventdata.GetFile()->GetName());
+		newRunData->Add(eventdata->GetFile()->GetName());
 		for (std::map<std::string, BranchHolder*>::iterator it = run_branches.begin(); it != run_branches.end(); ++it)
 			it->second->UpdateTree(newRunData);
 		if (rundata)
@@ -197,6 +203,6 @@ void FileInterface2::GetRunEntry(run_id run)
 		}
 		rundata->GetEntry(0);
 		assert(rundata->GetEntries() == 1);
-		current_run_file = eventdata.GetFile()->GetName();
+		current_run_file = eventdata->GetFile()->GetName();
 	}
 }

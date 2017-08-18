@@ -48,16 +48,15 @@ public:
 	template<typename T>
 	inline T *Get(KEventInfo *meta_event);
 
-	TChain eventdata;
-
 protected:
-	TChain *lumidata;
-	TChain *rundata;
+	TChain* lumidata = nullptr;
+	TChain* rundata = nullptr;
 	std::string current_file;
 	std::string current_run_file;
 	std::map<std::string, BranchHolder*> meta_branches;
 	std::map<std::string, BranchHolder*> run_branches;
 	std::map<std::pair<run_id, lumi_id>, size_t> lumiIdxMap;
+	std::map<run_id, size_t> runIdxMap;
 };
 
 #include "FileInterface2.hxx"

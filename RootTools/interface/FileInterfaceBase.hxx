@@ -22,7 +22,7 @@ T *FileInterfaceBase::Get(const std::string &name, const bool check, const bool 
 template<typename T>
 std::vector<std::string> FileInterfaceBase::GetNames(bool inherited)
 {
-	return TreeObjects(*eventdata, TypeName<T>::name(), inherited);
+	return TreeObjects(eventdata, TypeName<T>::name(), inherited);
 }
 
 template<typename T>
