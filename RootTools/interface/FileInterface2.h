@@ -21,17 +21,7 @@ class FileInterface2 : public FileInterfaceBase
 public:
 	FileInterface2(std::vector<std::string> files, class RunLumiSelector *rls = nullptr,
 		bool shuffle = false, int verbose = 2, class ScaleServiceFactory *ss = nullptr, std::string reportFn = "");
-	~FileInterface2()
-	{
-		for (std::map<std::string, BranchHolder*>::iterator it = meta_branches.begin(); it != meta_branches.end(); ++it)
-			delete it->second;
-		meta_branches.clear();
-		for (std::map<std::string, BranchHolder*>::iterator it = run_branches.begin(); it != run_branches.end(); ++it)
-			delete it->second;
-		run_branches.clear();
-		ClearCache();
-		delete lumidata;
-	}
+	~FileInterface2();
 	using FileInterfaceBase::Get;
 
 	// Functions for accessing metadata objects

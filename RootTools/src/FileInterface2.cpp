@@ -121,6 +121,17 @@ FileInterface2::FileInterface2(std::vector<std::string> files, RunLumiSelector *
 	}
 }
 
+FileInterface2::~FileInterface2()
+{
+	for (std::map<std::string, BranchHolder*>::iterator it = meta_branches.begin(); it != meta_branches.end(); ++it)
+		delete it->second;
+	meta_branches.clear();
+	for (std::map<std::string, BranchHolder*>::iterator it = run_branches.begin(); it != run_branches.end(); ++it)
+		delete it->second;
+	run_branches.clear();
+	ClearCache();
+}
+
 void FileInterface2::GetMetaEntry()
 {
 	GetMetaEntry(current_event->nRun, current_event->nLumi);

@@ -44,6 +44,11 @@ FileInterface::FileInterface(vector<string> files, bool shuffle, int verbose) :
 	}
 }
 
+FileInterface::~FileInterface()
+{
+	ClearCache();
+}
+
 template<typename T>
 inline bool isCompatible(const std::map<std::pair<run_id, lumi_id>, T> &lumimap, unsigned int minRun, unsigned int maxRun)
 {

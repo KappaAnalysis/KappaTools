@@ -16,10 +16,7 @@ class FileInterface : public FileInterfaceBase
 {
 public:
 	FileInterface(std::vector<std::string> files, bool shuffle = false, int verbose = 2);
-	~FileInterface()
-	{
-		ClearCache();
-	}
+	~FileInterface();
 	using FileInterfaceBase::Get;
 
 	// Functions for getting metadata objects
