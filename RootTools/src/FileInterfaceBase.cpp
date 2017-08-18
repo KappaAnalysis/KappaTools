@@ -9,16 +9,16 @@
 using namespace std;
 
 FileInterfaceBase::FileInterfaceBase(int verbose) :
-	lumiInfoType(STD), eventchain(0), verbosity(verbose)
+	lumiInfoType(STD), eventdata(0), verbosity(verbose)
 {
 }
 
-void FileInterfaceBase::Init(TChain *_eventchain, FileInterfaceBase::DataType _lumiInfoType)
+void FileInterfaceBase::Init(TChain *_eventdata, FileInterfaceBase::DataType _lumiInfoType)
 {
-	eventchain = _eventchain;
+	eventdata = _eventdata;
 	lumiInfoType = _lumiInfoType;
 	current_event = Get<KEventInfo>("eventInfo", false);
-	assert((current_event != 0) || (eventchain->GetEntries() == 0));
+	assert((current_event != 0) || (eventdata->GetEntries() == 0));
 	switch (lumiInfoType)
 	{
 		case GEN:
@@ -35,8 +35,8 @@ void FileInterfaceBase::Init(TChain *_eventchain, FileInterfaceBase::DataType _l
 void FileInterfaceBase::SpeedupTree(long cache)
 {
 	if (cache > 0)
-		eventchain->SetCacheSize(cache);
-	TObjArray *branches = eventchain->GetListOfBranches();
+		eventdata->SetCacheSize(cache);
+	TObjArray *branches = eventdata->GetListOfBranches();
 	if (branches != 0)
 	{
 		for (int i = 0; i < branches->GetEntries(); ++i)
@@ -51,14 +51,14 @@ void FileInterfaceBase::SpeedupTree(long cache)
 					bname = string(b->GetName()) + ".*";
 				else
 					bname = b->GetName();
-				eventchain->SetBranchStatus(bname.c_str(), 0, &found);
+				eventdata->SetBranchStatus(bname.c_str(), 0, &found);
 			}
 			else
 				if (cache > 0)
-					eventchain->AddBranchToCache(b); // TODO: still needed?
+					eventdata->AddBranchToCache(b); // TODO: still needed?
 		}
 	}
-	eventchain->AddBranchToCache("*", true);
+	eventdata->AddBranchToCache("*", true);
 	gEnv->SetValue("TFile.AsyncPrefetching", 1);
 }
 

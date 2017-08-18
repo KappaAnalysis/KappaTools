@@ -24,18 +24,18 @@ public:
 			delete it->second;
 		branches.clear();
 	}
-	void Init(TChain *_eventchain, DataType _lumiInfoType);
+	void Init(TChain *_eventdata, DataType _lumiInfoType);
 
 	void SpeedupTree(long cache = 0);
-	TChain *eventchain;
+	TChain *eventdata;
 
 	inline long long GetEntries()
 	{
-		return eventchain->GetEntries();
+		return eventdata->GetEntries();
 	}
 	inline void GetEntry(long long entry)
 	{
-		eventchain->GetEntry(entry);
+		eventdata->GetEntry(entry);
 	}
 
 	// Functions for getting metadata objects
