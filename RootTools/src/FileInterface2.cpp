@@ -147,26 +147,34 @@ void FileInterface2::GetLumiEntry(run_id run, lumi_id lumi)
 {
 	if (eventdata->GetFile()->GetName() != currentLumiFile)
 	{
-		lumiIdxMap.clear();
+		currentLumiFile = eventdata->GetFile()->GetName();
+		
 		// Update tree reference of booked variables
 		TChain *newLumiData = new TChain("Lumis");
-		newLumiData->Add(eventdata->GetFile()->GetName());
+		newLumiData->Add(currentLumiFile.c_str());
 		for (std::map<std::string, BranchHolder*>::iterator it = lumiBranches.begin(); it != lumiBranches.end(); ++it)
+		{
 			it->second->UpdateTree(newLumiData);
-		if (lumidata)
-			delete lumidata;
+		}
+		
+		if (lumidata) delete lumidata;
 		lumidata = newLumiData;
+		
 		// Rebuild lumi index map
 		KLumiInfo *info_lumi = GetLumi<KLumiInfo>("lumiInfo", false, false);
-		for (int i = 0; i < lumidata->GetEntries(); ++i)
+		
+		lumiIdxMap.clear();
+		for (long long lumiEntry = 0; lumiEntry < lumidata->GetEntries(); ++lumiEntry)
 		{
-			lumidata->GetEntry(i);
-			lumiIdxMap[make_pair(info_lumi->nRun, info_lumi->nLumi)] = i;
+			lumidata->GetEntry(lumiEntry);
+			lumiIdxMap[make_pair(info_lumi->nRun, info_lumi->nLumi)] = lumiEntry;
 		}
-		currentLumiFile = eventdata->GetFile()->GetName();
+		
 	}
 	if (lumiIdxMap.count(make_pair(run, lumi)) == 1)
+	{
 		lumidata->GetEntry(lumiIdxMap[make_pair(run, lumi)]);
+	}
 	else if (eventdata->GetEntries() > 0)
 	{
 		std::cerr << "Lumi section " << run << ":" << lumi << " not found or unique!" << std::endl;
@@ -174,7 +182,6 @@ void FileInterface2::GetLumiEntry(run_id run, lumi_id lumi)
 		std::cerr << lumiIdxMap << endl;
 		exit(1);
 	}
-	// Check consistency of getMetaNames between files!
 }
 
 void FileInterface2::GetRunEntry()
@@ -186,23 +193,39 @@ void FileInterface2::GetRunEntry(run_id run)
 {
 	if (eventdata->GetFile()->GetName() != currentRunFile)
 	{
+		currentRunFile = eventdata->GetFile()->GetName();
+		
 		// Update tree reference of booked variables
 		TChain *newRunData = new TChain("Runs");
-		newRunData->Add(eventdata->GetFile()->GetName());
+		newRunData->Add(currentRunFile.c_str());
 		for (std::map<std::string, BranchHolder*>::iterator it = runBranches.begin(); it != runBranches.end(); ++it)
-			it->second->UpdateTree(newRunData);
-		if (rundata)
-			delete rundata;
-		rundata = newRunData;
-		// Always get first entry. The Run tree is currently only used to store generator information, on MC there is only run "1".
-		auto array = rundata->GetListOfBranches();
-		for( auto entry: *array)
 		{
-			if (std::string(entry->GetName()) == "runInfo")
-				GetRun<KGenRunInfo>("runInfo", false, false);
+			it->second->UpdateTree(newRunData);
 		}
-		rundata->GetEntry(0);
-		assert(rundata->GetEntries() == 1);
-		currentRunFile = eventdata->GetFile()->GetName();
+		
+		if (rundata) delete rundata;
+		rundata = newRunData;
+		
+		// Rebuild run index map
+		KRunInfo *info_run = GetRun<KRunInfo>("runInfo", false, false);
+		
+		runIdxMap.clear();
+		for (long long runEntry = 0; runEntry < rundata->GetEntries(); ++runEntry)
+		{
+			rundata->GetEntry(runEntry);
+			runIdxMap[info_run->nRun] = runEntry;
+		}
+		
+	}
+	if (runIdxMap.count(run) == 1)
+	{
+		rundata->GetEntry(runIdxMap[run]);
+	}
+	else if (eventdata->GetEntries() > 0)
+	{
+		std::cerr << "Run " << run << " not found or unique!" << std::endl;
+		std::cerr << eventdata->GetFile() << " " << eventdata->GetFileNumber() << " " << currentRunFile << std::endl;
+		std::cerr << runIdxMap << endl;
+		exit(1);
 	}
 }
