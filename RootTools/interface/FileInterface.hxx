@@ -5,18 +5,18 @@
 
 // Get lumi metadata objects
 template<typename T>
-T *FileInterface::Get(run_id run, lumi_id lumi)
+T *FileInterface::GetEvent(run_id run, lumi_id lumi)
 {
 	std::cerr << "Unsupported lumi metadata type: " << TypeName<T>::name() << std::endl;
 	return 0;
 }
 
 template<>
-KLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
+KLumiInfo *FileInterface::GetEvent(run_id run, lumi_id lumi);
 template<>
-KGenLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
+KGenRunInfo *FileInterface::GetEvent(run_id run, lumi_id lumi);
 template<>
-KDataLumiInfo *FileInterface::Get(run_id run, lumi_id lumi);
+KDataLumiInfo *FileInterface::GetEvent(run_id run, lumi_id lumi);
 
 template<typename T>
 std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
@@ -75,7 +75,7 @@ std::map<std::pair<run_id, lumi_id>, T> FileInterface::GetLumis()
 }
 
 template<typename T>
-inline T *FileInterface::Get(KEventInfo *info_event)
+inline T *FileInterface::GetEvent(KEventInfo *info_event)
 {
-	return this->Get<T>(info_event->nRun, info_event->nLumi);
+	return this->GetEvent<T>(info_event->nRun, info_event->nLumi);
 }

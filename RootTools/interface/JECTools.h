@@ -114,8 +114,8 @@ class JECService
 public:
 	JECService(FileInterfaceBase &fi, const std::string prefix, const std::vector<std::string> &level, const double R, const int jeuDir = 0, std::string const &pu_density_branch = "KT6Area")
 		: area(M_PI * sqr(R)), jeuType(jec_center), JEC(nullptr), JEU(nullptr),
-			vs(fi.Get<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
-			ja(fi.Get<KPileupDensity>(pu_density_branch, true, true))
+			vs(fi.GetEvent<KVertexSummary>("offlinePrimaryVerticesSummary", false)),
+			ja(fi.GetEvent<KPileupDensity>(pu_density_branch, true, true))
 	{
 		if (R < 0)
 			area = -1;

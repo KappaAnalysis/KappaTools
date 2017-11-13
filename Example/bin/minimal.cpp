@@ -22,13 +22,13 @@ int main(int argc, char **argv)
 
 	FileInterface2Adv fi(files);
 
-	std::vector<std::string> names = fi.GetNames<KBasicJets>();
+	std::vector<std::string> names = fi.GetEventNames<KBasicJets>();
 	cout << "Available PF Jets: " << names << endl;
 
 	// Retrieve first PFJet collection and per event / per lumi metadata
-	KBasicJets *jets = fi.Get<KBasicJets>(names[0]);
-	KEventInfo *meta_event = fi.Get<KEventInfo>();
-	//KLumiInfo *meta_lumi = fi.GetMeta<KLumiInfo>("KLumiInfo");
+	KBasicJets *jets = fi.GetEvent<KBasicJets>(names[0]);
+	KEventInfo *meta_event = fi.GetEvent<KEventInfo>();
+	//KLumiInfo *meta_lumi = fi.GetLumi<KLumiInfo>("KLumiInfo");
 
 	// Interface for output / booking histograms
 	PlotInterface pi("output.root", PlotInterface::reset);
@@ -36,20 +36,20 @@ int main(int argc, char **argv)
 	TH1D *pt_spec_inc = pi.book<TH1D>("pt_spec", "dN/dp_{T} - inclusive",
 		Variable(LogBinning(30, 10, 3000), "p_{T} [GeV]"));
 
-	long long nEvents = fi.eventdata.GetEntries();
+	long long nEvents = fi.eventdata->GetEntries();
 	cout << "Processing " << nEvents << " events" << endl;
 	ProgressMonitor pm(nEvents);
 	fi.SpeedupTree();
 	for (long long iEvent = 0; iEvent < nEvents; ++iEvent)
 	{
 		if (!pm.Update()) break;
-		fi.eventdata.GetEntry(iEvent);
+		fi.eventdata->GetEntry(iEvent);
 
 		static LSWatcher lsWatcher;
 		if (lsWatcher.Changed(meta_event))
 		{
 //			cout << "Reading new lumi metadata!" << endl;
-			fi.GetMetaEntry();
+			fi.GetLumiEntry();
 //			cout << "Lumi metadata: " << *meta_lumi << endl;
 		}
 

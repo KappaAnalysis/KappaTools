@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	{
 		run_id run = lumis[l].first;
 		lumi_id lumi = lumis[l].second;
-		xsec += fi.Get<KGenLumiInfo>(run, lumi)->xSectionInt;
+		xsec += fi.GetEvent<KGenRunInfo>(run, lumi)->xSectionInt;
 	}
 	cout << "Average xsec: " << xsec / lumis.size() << endl;
 

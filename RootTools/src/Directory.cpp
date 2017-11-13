@@ -25,10 +25,10 @@ std::map<std::string, TObject*> GetDirObjectsMap(TDirectory *dir)
 	return result;
 }
 
-std::vector<std::string> TreeObjects(TTree &chain, const std::string cname, const bool inherited)
+std::vector<std::string> TreeObjects(TTree* chain, const std::string cname, const bool inherited)
 {
 	std::vector<std::string> result;
-	TObjArray *branches = chain.GetListOfBranches();
+	TObjArray *branches = chain->GetListOfBranches();
 	if (branches == 0)
 		return result;
 	TClass *req = TClass::GetClass(cname.c_str());

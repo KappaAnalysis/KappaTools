@@ -5,7 +5,7 @@
 #include "../interface/DisplayTools.h"
 #include <bitset>
 
-void displayWeight(KGenLumiInfo *infoLumi, KGenEventInfo *infoEvent)
+void displayWeight(KGenRunInfo *infoLumi, KGenEventInfo *infoEvent)
 {
 	std::cout << "Ext: " << infoLumi->xSectionExt << " Int: " << infoLumi->xSectionInt
 		<< " W: " << infoEvent->weight << std::endl;
